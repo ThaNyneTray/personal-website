@@ -1,7 +1,7 @@
 baseurl = "/"
 languageCode = "en-us"
 title = "A Hugo website"
-theme = "hugo-theme-nix"
+theme = "hugo-coder"
 googleAnalytics = ""
 disqusShortname = ""
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
