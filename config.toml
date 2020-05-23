@@ -3,7 +3,7 @@ languageCode = "en-us"
 title = "Desmond Tuiyot"
 theme = "hugo-erblog"
 googleAnalytics = ""
-disqusShortname = ""
+disqusShortname = "thanynetray"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [permalinks]
@@ -20,8 +20,13 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     url = "https://twitter.com/ThaNyneTray"
 
 [params]
-    description = "A website built through Hugo and blogdown."
-
+    author = "Desmond Tuiyot"
+    portrait = "image/desmond.png"
+    description = "Aspiring Software Engineer/Data Analyst"
+    bio = '''Hi. I'm a recent Computer Science graduate at Colgate University,
+            with an interest in Software Engineering and Data Analysis. 
+            I intend to document my projects and anything I learn in this blog'''
+    
     # options for highlight.js (version, additional languages, and theme)
     highlightjsVersion = "9.12.0"
     highlightjsCDN = "//cdnjs.cloudflare.com/ajax/libs"
@@ -32,11 +37,14 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     MathJaxVersion = "2.7.5"
 
     # path to the favicon, under "static"
-    favicon = "favicon.ico"
+    favicon = "image/desmond.png"
 
     [params.logo]
     url = "logo.png"
     width = 50
     height = 50
     alt = "Logo"
+    
+    
+    
 
