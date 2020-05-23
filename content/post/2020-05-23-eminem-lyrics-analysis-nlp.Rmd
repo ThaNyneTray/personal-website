@@ -1,0 +1,192 @@
+---
+title: "An Analysis of Eminem Lyrics - NLP"
+author: "Desmond Tuiyot"
+date: '2020-05-23'
+slug: eminem-lyrics-analysis-nlp
+tags:
+- R
+- NLP
+- tf_idf
+- data analysis
+- exploratory data analysis
+- ggplot2
+- dplyr
+- tidy text mining
+categories:
+- R
+- NLP
+---
+
+```{r include=FALSE}
+knitr::opts_chunk$set(warning=FALSE, message=FALSE)
+```
+
+## This is a test post for my incoming blog, and a sneak peek to my first post. Given that it's a test post, though, I reserve the right to write terribly.
+
+Eminem has been a phenomenon since The Slim Shady LP caught Dr. Dre's ears. Throughout his career, Eminem has filled the airwaves with his thoughts and emotions. Here we perform  an analysis on his lyrics in 2 parts.  
+
+1. **Text Mining and Exploratory Analysis**  
+2. **Sentiment Analysis and Topic Modeling**
+
+## Some r code
+First, let's load the libraries we'll need.
+```{r}
+library(dplyr)
+library(tidyr)
+library(tidytext)
+library(ggplot2)
+library(geniusr)
+library(stringr)
+library(Rspotify)
+library(readr)
+library(forcats)
+library(purrr)
+library(broom)
+library(wordcloud2)
+library(lubridate)
+```
+
+The first step is to get the lyrics. Here I used the Spotify API to get a list of Eminem's albums and then utilized the Genius API to get the lyrics. Finally, I saved the original lyrics data set to a csv file for future access. The code is as below
+
+```{r eval=FALSE}
+#### specify authorization key ###################################################
+keys<-spotifyOAuth(app_id="EvolutionOfHipHop",
+                   client_id="fb596ca0990a475fa1203b3dec8370a9",
+                   client_secret="a94a49dc86cf42e087dd68a30178fd5c")
+
+# we get the album list from  Spotify - genius API lacks this feature
+id<-searchArtist("Eminem", keys)$id[1]
+albums<-getAlbums(artist_id=id, token=keys)
+albums<-unique(albums$name)
+albums<-albums[c(1,2,3,5,6,8,11,12,14,16)]
+
+track_list<-NULL
+for (i in 1:length(albums)){
+  tracks<-get_album_tracklist_search("Eminem", albums[i])
+  tracks$album<-albums[i]
+  track_list<-rbind(track_list, tracks)
+}
+track_list
+
+#
+# # save the track_list data to a csv
+write.csv(track_list, file="../../static/data/track_list_data.csv", row.names=F)
+
+## load the track_list data frame if needed later
+track_list<-read.csv("../../static/data/track_list_data.csv", stringsAsFactors=F)
+
+
+# get lyrics for the entire tracklist, and combine them into a data frame
+lyrics<-c()
+for (i in 1:nrow(track_list)){
+  album_lyric<-get_lyrics_url(track_list$song_lyrics_url[i]) %>%
+    mutate(album=track_list$album[i],
+           track_number=track_list$song_number[i])
+  lyrics<-rbind(lyrics, album_lyric)
+}
+
+# add album years as well
+album_year<-c("01-17-2020","08-31-2018","12-15-2017","11-5-2013","06-18-2010",
+              "05-15-2009","11-12-2004","05-26-2002","05-23-2000","02-23-1999")
+album_year<-mdy(album_year)
+
+album_dates<-tibble(album=albums,album_year=album_year)
+#
+# # add dates to the lyrics. THese are album dates. Useful later on
+lyrics<-lyrics %>%
+  inner_join(album_dates, by=c("album"))
+#
+lyrics
+#
+# # save the original lyric data
+write_csv(lyrics, "../../static/data/original_lyrics.csv")
+
+original_lyrics <- read_csv("../../static/data/original_lyrics.csv")
+```
+
+Next, I performed some preliminary cleaning of the data. First, I wanted to look at Eminem's lyrics only; the lyrics data set returned by Genius API has a section artist section, which makes it easy. The exception is the song **Arose** from his album **Revival**. Here, the verses are labeled in parts, so the section artists also are labeled this way. 
+
+```{r}
+
+original_lyrics <- read_csv("../../static/data/original_lyrics.csv")
+
+lyrics<-original_lyrics %>%
+  filter(str_detect(section_artist, "Eminem")|
+         section_artist=="Arose"|
+         section_artist=="Castle Extended") %>%
+  rename(lyric=line, track_n=track_number) %>%
+  group_by(song_name) %>%
+  mutate(line=cumsum(song_name==song_name)) %>%
+  select(lyric, line, album, track_n, song_name, album_year)
+
+# # save data to csv file for future access
+write_csv(lyrics, path="../../static/data/lyrics_by_lines.csv")
+# 
+# # load lyrics data
+lyrics<-read_csv(file="../../static/data/lyrics_by_lines.csv")
+
+lyrics
+
+```
+
+Finally, I explored contractions in this data set and came up with a list of contractions and their corrections. I defined a function to expand these contractions. After this, I removed any non alphanumeric characters from the data set. 
+
+```{r}
+
+fix_contractions<-function(dat){
+  # as in the article, this could be a possesive or is/has
+  dat<-str_replace_all(dat, "'s", "")
+  dat<-str_replace_all(dat, "'m", " am")
+  # this one could be had or would, but I decide to replace with would
+  # barring analysis of tense, which I don't intend to do, this probably has no effect
+  dat<-str_replace_all(dat, "'d", " would")
+  # special cases of the n't contraction - won't and can't
+  dat<-str_replace_all(dat, "can't", "cannot")
+  dat<-str_replace_all(dat, "won't", "will not")
+  dat<-str_replace_all(dat, "don'tchu", "don't you")
+  # ain't is a special case.
+  dat<-str_replace_all(dat, "ain't", "aint")
+  dat<-str_replace_all(dat, "n't", " not")
+  dat<-str_replace_all(dat, "'re", " are")
+  dat<-str_replace_all(dat, "'ve", " have")
+  dat<-str_replace_all(dat, "'ll", " will")
+  dat<-str_replace_all(dat, "y'all", "you all")
+  dat<-str_replace_all(dat, "e'ry", "every")
+  dat<-str_replace_all(dat, "'da", " would have")
+  dat<-str_replace_all(dat, "a'ight", "all right")
+  dat<-str_replace_all(dat, "prob'ly", "probably")
+  dat<-str_replace_all(dat, "'em", "them")
+  # gerund contractions
+  dat<-str_replace_all(dat, "in'\\s", "ing  ")
+  # finna, wanna, gonna
+  dat<-str_replace_all(dat, "gonna", "going to")
+  dat<-str_replace_all(dat, "finna", "going to")
+  dat<-str_replace_all(dat, "wanna", "want to")
+  dat
+}
+# # 
+lyrics$lyric<-tolower(lyrics$lyric)
+lyrics$lyric<-fix_contractions(lyrics$lyric)
+lyrics %>%
+  filter(str_detect(lyric, "ing"))
+
+# here then let's clean out  the rest of the lyrics. Remove
+# non-alphanumeric characters
+lyrics$lyric <- str_replace_all(lyrics$lyric, "[^a-zA-Z0-9 ]", " ")
+sum(str_detect(lyrics$lyric, "[^a-zA-Z0-9 ]")) # we goodie
+
+# save cleaned data to csv file for future access
+write_csv(lyrics, "../../static/data/lyrics_by_lines.csv")
+
+ 
+# load lyrics data
+lyrics<-read_csv(file="../../static/data/lyrics_by_lines.csv")
+
+lyrics
+
+```
+
+
+
+
+
