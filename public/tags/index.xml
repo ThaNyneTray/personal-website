@@ -6,44 +6,53 @@
     <description>Recent content in Tags on Desmond Tuiyot</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 23 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 24 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>data analysis</title>
+      <title>Data Analysis</title>
       <link>/tags/data-analysis/</link>
-      <pubDate>Sat, 23 May 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 24 May 2020 00:00:00 +0000</pubDate>
       
       <guid>/tags/data-analysis/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>dplyr</title>
-      <link>/tags/dplyr/</link>
-      <pubDate>Sat, 23 May 2020 00:00:00 +0000</pubDate>
+      <title>Notes</title>
+      <link>/tags/notes/</link>
+      <pubDate>Sun, 24 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/dplyr/</guid>
+      <guid>/tags/notes/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>exploratory data analysis</title>
-      <link>/tags/exploratory-data-analysis/</link>
-      <pubDate>Sat, 23 May 2020 00:00:00 +0000</pubDate>
+      <title>R</title>
+      <link>/tags/r/</link>
+      <pubDate>Sun, 24 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/exploratory-data-analysis/</guid>
+      <guid>/tags/r/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>ggplot2</title>
-      <link>/tags/ggplot2/</link>
+      <title>Random</title>
+      <link>/tags/random/</link>
+      <pubDate>Sun, 24 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/random/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Eminem</title>
+      <link>/tags/eminem/</link>
       <pubDate>Sat, 23 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/ggplot2/</guid>
+      <guid>/tags/eminem/</guid>
       <description></description>
     </item>
     
@@ -57,25 +66,7 @@
     </item>
     
     <item>
-      <title>R</title>
-      <link>/tags/r/</link>
-      <pubDate>Sat, 23 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/r/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>tf_idf</title>
-      <link>/tags/tf_idf/</link>
-      <pubDate>Sat, 23 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/tf_idf/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>tidy text mining</title>
+      <title>Tidy Text Mining</title>
       <link>/tags/tidy-text-mining/</link>
       <pubDate>Sat, 23 May 2020 00:00:00 +0000</pubDate>
       

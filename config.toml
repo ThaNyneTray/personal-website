@@ -14,10 +14,13 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     url = "/about/"
 [[menu.main]]
     name = "GitHub"
-    url = "https://github.com/ThaNyneTray"
+    url = "https://github.com/desmond-tuiyot"
 [[menu.main]]
     name = "Twitter"
-    url = "https://twitter.com/ThaNyneTray"
+    url = "https://twitter.com/desmond_tuiyot"
+[[menu.main]]
+    name = "LinkedIn"
+    url = "https://linkedin.com/desmond-tuiyot"
 
 [params]
     author = "Desmond Tuiyot"
@@ -25,7 +28,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     description = "Aspiring Software Engineer/Data Analyst"
     bio = '''Hi. I'm a recent Computer Science graduate at Colgate University,
             with an interest in Software Engineering and Data Analysis. 
-            I intend to document my projects and anything I learn in this blog'''
+            I intend to document my projects and anything I learn in this blog.'''
     
     # options for highlight.js (version, additional languages, and theme)
     highlightjsVersion = "9.12.0"
@@ -37,14 +40,10 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     MathJaxVersion = "2.7.5"
 
     # path to the favicon, under "static"
-    favicon = "image/desmond.png"
-
-    [params.logo]
-    url = "logo.png"
-    width = 50
-    height = 50
-    alt = "Logo"
+    favicon = "image/favicon.ico"
+    #[params.logo]
+    #    url = "image/desmond.png"
+    #    width = 50
+    #    height = 50
+    #    alt = "Logo"
     
-    
-    
-

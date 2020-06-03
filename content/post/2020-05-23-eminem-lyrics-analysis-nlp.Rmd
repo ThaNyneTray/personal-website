@@ -6,110 +6,71 @@ slug: eminem-lyrics-analysis-nlp
 tags:
 - R
 - NLP
-- tf_idf
-- data analysis
-- exploratory data analysis
-- ggplot2
-- dplyr
-- tidy text mining
+- Eminem
+- Tidy Text Mining
 categories:
 - R
 - NLP
+bibliography: ref.bib
+# csl: style.csl 
 ---
 
 ```{r include=FALSE}
 knitr::opts_chunk$set(warning=FALSE, message=FALSE)
 ```
+<!-- ### Disclaimer -->
+<!-- I am still testing out this site, so I don't expect anyone to read this. Yet if you do find your way here, I reserve the right to dirty and incomplete writing. Nevertheless, this is a sneak peek of what's to come, so check back in a couple of weeks. -->
 
-## This is a test post for my incoming blog, and a sneak peek to my first post. Given that it's a test post, though, I reserve the right to write terribly.
+### Introduction  
+I happen to be a huge Eminem fan, so his recent tweets highlighting the anniversary of his [Relapse](https://twitter.com/Eminem/status/1261345913777336320) albums and organizing a Spotify listening party for his prolific [The Marshall Mathers LP](https://twitter.com/Eminem/status/1264232431554646016) got me rightfully excited. Being relatively new to text mining, I decided to dive into and explore his lyrics as a means to learn and apply various text mining techniques. This post is the first of a two-part analysis; stay tuned for the second one. The two posts will cover:
 
-Eminem has been a phenomenon since The Slim Shady LP caught Dr. Dre's ears. Throughout his career, Eminem has filled the airwaves with his thoughts and emotions. Here we perform  an analysis on his lyrics in 2 parts.  
+1. **Text Mining and Exploratory Analysis**
 
-1. **Text Mining and Exploratory Analysis**  
 2. **Sentiment Analysis and Topic Modeling**
 
-## Some r code
-First, let's load the libraries we'll need.
+### Pre-requisites  
+I will make heavy use of the dplyr [@dplyr], tidytext [@tidytext], an ggplot2 [@ggplot2] in this analysis. In particular, my introduction to text mining was through the book [Tidy Text Mining](https://www.tidytextmining.com/) by [David Robinson](https://twitter.com/drob) and [Julia Silge's](https://twitter.com/juliasilge) book. It's a free resource that covers text mining, sentiment analysis, and topic modeling. Seeing as you are reading this post, you likely have interest in the subject, so I encourage you to read through this. In addition, I took a lot of inspiration from Debbie Liske's [post](https://www.datacamp.com/community/tutorials/R-nlp-machine-learning) on DataCamp, which is a must-read.
+
+### 1. Library Imports  
+First, we import the libraries we'll need for this analysis. 
 ```{r}
-library(dplyr)
-library(tidyr)
-library(tidytext)
-library(ggplot2)
-library(geniusr)
-library(stringr)
-library(Rspotify)
-library(readr)
-library(forcats)
-library(purrr)
-library(broom)
-library(wordcloud2)
-library(lubridate)
+library(tidyverse)  # for data manipulation, transformation, plotting
+library(tidytext)   # text mining package that handles tidy text data
+library(geniusr)    # interfaces with Genius API to get lyrics
+library(Rspotify)   # interfaces with Spotify API to get album tracklist
+library(wordcloud2) # visualizing wordclouds, letterclouds
+library(lubridate)  # handling date type data
 ```
-
-The first step is to get the lyrics. Here I used the Spotify API to get a list of Eminem's albums and then utilized the Genius API to get the lyrics. Finally, I saved the original lyrics data set to a csv file for future access. The code is as below
-
-```{r eval=FALSE}
-#### specify authorization key ###################################################
-keys<-spotifyOAuth(app_id="EvolutionOfHipHop",
-                   client_id="fb596ca0990a475fa1203b3dec8370a9",
-                   client_secret="a94a49dc86cf42e087dd68a30178fd5c")
-
-# we get the album list from  Spotify - genius API lacks this feature
-id<-searchArtist("Eminem", keys)$id[1]
-albums<-getAlbums(artist_id=id, token=keys)
-albums<-unique(albums$name)
-albums<-albums[c(1,2,3,5,6,8,11,12,14,16)]
-
-track_list<-NULL
-for (i in 1:length(albums)){
-  tracks<-get_album_tracklist_search("Eminem", albums[i])
-  tracks$album<-albums[i]
-  track_list<-rbind(track_list, tracks)
-}
-track_list
-
-#
-# # save the track_list data to a csv
-write.csv(track_list, file="../../static/data/track_list_data.csv", row.names=F)
-
-## load the track_list data frame if needed later
-track_list<-read.csv("../../static/data/track_list_data.csv", stringsAsFactors=F)
-
-
-# get lyrics for the entire tracklist, and combine them into a data frame
-lyrics<-c()
-for (i in 1:nrow(track_list)){
-  album_lyric<-get_lyrics_url(track_list$song_lyrics_url[i]) %>%
-    mutate(album=track_list$album[i],
-           track_number=track_list$song_number[i])
-  lyrics<-rbind(lyrics, album_lyric)
-}
-
-# add album years as well
-album_year<-c("01-17-2020","08-31-2018","12-15-2017","11-5-2013","06-18-2010",
-              "05-15-2009","11-12-2004","05-26-2002","05-23-2000","02-23-1999")
-album_year<-mdy(album_year)
-
-album_dates<-tibble(album=albums,album_year=album_year)
-#
-# # add dates to the lyrics. THese are album dates. Useful later on
-lyrics<-lyrics %>%
-  inner_join(album_dates, by=c("album"))
-#
-lyrics
-#
-# # save the original lyric data
-write_csv(lyrics, "../../static/data/original_lyrics.csv")
-
-original_lyrics <- read_csv("../../static/data/original_lyrics.csv")
-```
-
-Next, I performed some preliminary cleaning of the data. First, I wanted to look at Eminem's lyrics only; the lyrics data set returned by Genius API has a section artist section, which makes it easy. The exception is the song **Arose** from his album **Revival**. Here, the verses are labeled in parts, so the section artists also are labeled this way. 
+### 2. Data Collection
+For this, I used a combination of two packages. First, I used the Rspotify [@Rspotify] package to get Eminem's album list and then got a tracklist and lyrics for each album using the geniusr [@geniusr] package; these packages interface with the [Spotify API](https://developer.spotify.com/documentation/web-api/quick-start/) and [Genius API](https://docs.genius.com/) respectively. I used the  The Spotify API here for two reasons. The Genius API package does not currently have a method for retrieving an artist's album list. In addition, the Spotify API offers various musical features for each song in the Spotify database, which could be useful in any potential predictive analysis I perform, especially when used in conjunction with lyrics data. Therefore, I would like to maintain a consistent dataset of songs.    
+You can find the code for data collection [here](https://github.com/desmond-tuiyot/Eminem_Lyrics_Analysis/blob/master/rcode/analysis.R) if you are interested. I saved the lyrics dataset [here]("https://raw.githubusercontent.com/desmond-tuiyot/Eminem_Lyrics_Analysis/master/data/original_lyrics.csv"), which we import below.
 
 ```{r}
+original_lyrics<-read_csv("https://raw.githubusercontent.com/desmond-tuiyot/Eminem_Lyrics_Analysis/master/data/original_lyrics.csv")
+glimpse(original_lyrics)
+```
+We have `9` variables and `16,523`. The observations here represent individual lines in for each song in Eminem's discrography. Importantly, the dataset is not currently in tidy text format. As described in the book [Tidy Text Mining](https://www.tidytextmining.com/), tidy text data format is such that each *variable* has its own column, and each *token* has its own row. A token here is a meaningful unit of text; in this analysis, we use a single word as a token.
 
-original_lyrics <- read_csv("../../static/data/original_lyrics.csv")
+### 3. Data Cleaning
+We want to perform some basic data cleaning before moving on to analysis. Data cleaning is not necessarily a straightforward process. There are some standard pre-processing steps for text data, like changing case, stemming, lemmatization, and so on. On the other hand, some of the pre-processing steps I perform below came about after some data exploration.  
+The steps I took in pre-processing are:  
+1. Filtering out non-Eminem lyrics  
+2. Converting the lyrics to lowercase  
+3. Expanding contractions  
+4. Removing any non-alphanumeric characters  
+5. Filtering out any skits/intros/interludes    
+6. Lemmatization  
 
+We first copy the original dataset into a new data frame, in case we need the original later in the analysis. We also change the `album` variable to a factor.
+```{r}
+lyrics<-original_lyrics
+lyrics$album<-as.factor(lyrics$album)
+```
+
+#### Filtering out non-Eminem lyrics {#filtering_non_eminem}  
+Since we are doing an analysis on Eminem lyrics, we remove any lyrics performed by other artists. These are guest features performing intros, outros, choruses, hooks, or verses. This process is made easy since the lyrics data returned by the geniusr package also includes a `section_name` and `section_artist` variable. These are based on how [Genius](https://genius.com/) labels song sections. Importantly, the `section_artist` for the song `Arose` is wrong, so we have to handle it separately from the other songs. The code for this process is shown below:
+```{r}
+# Filter out lines whose section artists do not include Eminem
 lyrics<-original_lyrics %>%
   filter(str_detect(section_artist, "Eminem")|
          section_artist=="Arose"|
@@ -117,22 +78,18 @@ lyrics<-original_lyrics %>%
   rename(lyric=line, track_n=track_number) %>%
   group_by(song_name) %>%
   mutate(line=cumsum(song_name==song_name)) %>%
-  select(lyric, line, album, track_n, song_name, album_year)
-
-# # save data to csv file for future access
-write_csv(lyrics, path="../../static/data/lyrics_by_lines.csv")
-# 
-# # load lyrics data
-lyrics<-read_csv(file="../../static/data/lyrics_by_lines.csv")
-
-lyrics
-
+  select(lyric, line, album, track_n, song_name, album_year) %>%
+  ungroup()
 ```
 
-Finally, I explored contractions in this data set and came up with a list of contractions and their corrections. I defined a function to expand these contractions. After this, I removed any non alphanumeric characters from the data set. 
-
+#### Fixing contractions {#expand_contractions}
+Contractions are commonplace in lyrics, so we have to expand as many as we can find. I define a function `fix_contractions` that replaces various contractions with their expanded forms. These include common contractions in English as well as some special ones I found after exploring the data. 
 ```{r}
+# first change to lowercase to for consistency
+lyrics$lyric<-tolower(lyrics$lyric)
 
+# this is a function to fix contractions. These are contractions I identified
+# after exploring the data for some time.
 fix_contractions<-function(dat){
   # as in the article, this could be a possesive or is/has
   dat<-str_replace_all(dat, "'s", "")
@@ -164,27 +121,510 @@ fix_contractions<-function(dat){
   dat<-str_replace_all(dat, "wanna", "want to")
   dat
 }
-# # 
-lyrics$lyric<-tolower(lyrics$lyric)
 lyrics$lyric<-fix_contractions(lyrics$lyric)
-lyrics %>%
-  filter(str_detect(lyric, "ing"))
+```
 
-# here then let's clean out  the rest of the lyrics. Remove
-# non-alphanumeric characters
+#### Removing alphanumeric characters
+Here we want to make sure that we drop any punctuation marks or any other special characters. For this analysis, we want to focus on only text.
+```{r}
+# remove alphanumeric characters
 lyrics$lyric <- str_replace_all(lyrics$lyric, "[^a-zA-Z0-9 ]", " ")
-sum(str_detect(lyrics$lyric, "[^a-zA-Z0-9 ]")) # we goodie
+```
 
-# save cleaned data to csv file for future access
-write_csv(lyrics, "../../static/data/lyrics_by_lines.csv")
+#### Filtering out any skits/intros/interludes. 
+Here we filter out any shorter Eminem verses, which turn out to be mostly skits, intros, outros, and interludes. 
+```{r}
+# removeing skits, intros, outros, interludes
+line_count<-lyrics %>%
+  group_by(album, song_name) %>%
+  count() %>%
+  ungroup() %>%
+  arrange(n)
 
- 
-# load lyrics data
-lyrics<-read_csv(file="../../static/data/lyrics_by_lines.csv")
+short_titles<-subset(line_count, n<15)$song_name
 
+lyrics<-lyrics%>%
+  filter(!str_detect(song_name, "Skit"),
+         !str_detect(song_name, "skit"),
+         !song_name %in% short_titles)
+```
+
+#### Lemmatization
+Lemmatization is the process of resolving words to their dictionary form. For example, any words in their gerund form (e.g. rapping) will be reduced to their dictionary form (rap). Skipping this process might affect the results of our analysis.
+```{r}
+lyrics<-lyrics %>%
+  mutate(lyric=textstem::lemmatize_strings(lyric))
 lyrics
+```
+
+<!-- 
+#### Lines vs No of Words? 
+Fewer lyrics might suggest that Eminem has less of a contribution overall, but it's misleading. If he raps faster, then he definitely fits more words per line. Let's explore this.  
+
+##### number of lines in each song, grouped by album
+```{r}
+line_counts<-lyrics %>% 
+  count(album, song_name) %>%
+  arrange(-n)
+```
+
+##### number of words in each song, grouped by album
+```{r}
+word_counts<-lyrics %>%
+  count(album, song_name, wt=str_length(lyric)) %>%
+  arrange(-n)
+```
+
+##### Plot these
+```{r}
+line_counts %>%
+  ggplot(aes(x=album, y=n, color=album))+
+  geom_point(show.legend=FALSE, size=4)+
+  coord_flip()+
+  theme_bw() 
 
 ```
+```{r}
+word_counts %>%
+  ggplot(aes(x=album, y=n, color=album))+
+  geom_point(show.legend=FALSE, size=4)+
+  coord_flip()+
+  theme_bw() 
+```
+
+```{r}
+word_line_df<-line_counts %>%
+  inner_join(word_counts, by=c("song_name", "album")) %>%
+  rename(total_lines = n.x, total_words = n.y)
+
+word_line_df %>%
+  ggplot(aes(x=total_lines, y=total_words)) +
+  geom_point(size=1) +
+  theme_bw()
+
+```
+More lines meant more words. I'm defaeted
+-->
+### 4. Analysis
+
+#### Word Frequencies
+Depending on the analysis, there might be additional cleaning steps we might want to take. We often find that words such as `a`, `an`, `the`, and `I`, among others, are common across many documents in natural language data and are used with very high frequency. These are called **stop words** and they offer little insight into describing or classifying documents; therefore, they often removed prior to certain types of analysis. In the case of analyzing word frequencies, we want to remove stop words from our data set. 
+The tidytext [@tidytext] package offers a set of stop words that we can import and use. First, we use `unnest_tokens` to convert our data frame to tidy text format; recall that the original data set had each line occupying a row. This function converts this so that each word occupies its on row. Next we remove stop words using an `anti_join` operation. The code is as below:
+```{r}
+data("stop_words")
+
+lyrics_filtered<-lyrics %>%
+  unnest_tokens(word, lyric) %>%
+  anti_join(stop_words) %>%
+  ungroup()
+
+words_total<-lyrics_filtered %>%
+  count(word) %>%
+  arrange(-n)
+
+words_total
+```
+To no one's surprise, Eminem curses a lot. His most used words are `fuck` and `shit`, and at number 4 we have `bitch` as well. This might generate interesting insights in case we compare it to other rappers. But on its own, I doubt its usefulness. There are other 'non-useful words' that I have identified through manual exploration of the data set. Throughout any analysis, you will have to deal with uncertainty and make micro decisions like this along the way. It is possible that removing these words will affect other parts of the analysis significantly. For now, we remove these words. 
+
+```{r}
+unnecessary_words <- c("fuck", "ah", "yeah", "aint", "shit","ass", "la", 
+                       "yah", "ah", "bitch", "ama", "ha", "yo", "ah", "cum",
+                       "dick", "ho", "erra", "gotta", "tryna", "gon", "dum",
+                       "uh", "hey", "whoa", "til", "chka", "ta", "tahh")
+
+lyrics_filtered <- lyrics_filtered %>%
+  filter(!word %in% unnecessary_words)
+
+words_total<-lyrics_filtered %>%
+  count(word) %>%
+  arrange(-n)
+
+words_total
+```
+
+Eminem uses the words `love` and `feel` frequently, so we get the idea that some major topics in Eminem's songs are about love, emotions, and maybe relationships. Eminem has had many songs about relationships, although in most of them he portrays himself as being involved in a somewhat dysfunctional relationship. (See [Love The Way You Lie](https://www.youtube.com/watch?v=uelHwf8o7_U) and [Good Guy](https://www.youtube.com/watch?v=X-TkrWpO75k)). Eminem also uses `shady` frequently, so he is more likely to talks about his supposedly evil and unhinged alter-ego, Slim Shady.  
+We might be interested in the differences in word frequency across albums. Here we want to look at proportions, since absolute frequencies can lead to misleading conclusions.
+
+```{r}
+freq<-lyrics_filtered %>%
+  count(album, word) %>%
+  group_by(album) %>%
+  mutate(total=sum(n)) %>%
+  mutate(freq=n/total) %>%
+  ungroup() %>%
+  arrange(-freq)
+
+top10_freq<-freq %>%
+  group_by(album) %>%
+  top_n(8, freq) %>%
+  ungroup() %>%
+  arrange(album, freq) %>%
+  mutate(row = row_number())
+  
+top10_freq %>%
+  ggplot(aes(row, freq, fill=album)) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~album, ncol=4, scales="free") +
+  scale_x_continuous(breaks=top10_freq$row, 
+                     labels=top10_freq$word) + 
+  coord_flip() +
+  theme_bw()
+```
+Here are some things we can note from this graph:  
+
+* Many of the frequently occurring words in these albums are simply those repeated in hooks and choruses. For example, in the album `Recovery`, we have `cold` and `blow`, which most likely comes from the song `Cold Wind Blows`. In the album `The Eminem Show`, we have `goodbye`, `hollywood` from `Say Goodbye Hollywood` and `superman` from, well, `Superman`. 
+* Time is a re-occuring theme. At this moment, however, I cannot say anything definitive about its significance.  
+* His first 2 albums feature a lot of use of `slim` and `shady`, which makes sense as this was when he introduced himself and his `alter-ego` to the world. It could also be as a result of the words being repeated in choruses some songs in the albums.
+* Notice the lack of *Hailie*, his daughter, or *Kim*, his wife. One of the major reoccuring themes in Eminem's music has been his love for his daughter and his hate for his wife. Contrary to my expectations, these words do not appear among the most frequently used words. 
+* Another major theme which lacks representation in the above graph is drugs. A probable reason for this is that Eminem namedrops many different drugs across his discography, which means that the word count for this theme is distributed across many different words. 
+
+##### **Aside:** Hailie, Kim, and Drugs
+As an aside, we can check how often he mentions `Hailie` and `Kim`below.
+```{r}
+words_total %>%
+  filter(word %in% c("hailie", "kim"))
+```
+
+To explore the drug theme a little more, I got a list of all the drugs that eminem has mentioned in his career from a post by user *Sas* in [this forum post](https://forum.sectioneighty.com/every-prescription-drug-eminem-ever-mentioned.t29686). Granted these are mentions from songs that are not in our data set, because I used his studio albums in this analysis. This list was last updated in 2015; Eminem has released 3 albums since then. In time, I will compile a list for these three newer albums and update this post. For now, we will work with the list below.
+```{r}
+drugs<-c("Ambie", "Amoxicilline", "Coke", "Crack", "Codeïne", "Hydrocodone",
+         "Klonopin", "Lean", "LSD", "Methadone", "Marijuana", "Mollie",
+         "Mushrooms", "NoDoz", "Nurofen", "NyQuil", "Percocets", "Purple Haze",
+         "Seroquel", "Smack", "Valium", "Vicodin", "Xanax", "Methamphetamine")
+drugs<-str_to_lower(drugs)
+
+words_total %>% 
+  filter(word %in% c(drugs, "pill", "drug")) %>%
+  count(wt=n)
+```
+Here we combine all the names of the drugs with the words `drug` and `pill` and get the total count, which turns out to be `217`. This displaces `leave` at the number 4 spot, with a count of `212`.
+
+#### Zipf's law 
+In simple terms, this law states that given a corpus of natural language utterances, the frequency of each word is inversely proportional to its rank (rank measured in frequency). That implies that rank 1, the most used word, is used roughly twice as much as the rank 2 word, and 4 times as much as the rank 3 word, et cetera. See [this Wikipedia post](https://en.wikipedia.org/wiki/Zipf%27s_law) and [Chapter 3](https://www.tidytextmining.com/tfidf.html#zipfs-law) of Tidy Text Mining for a more in-depth explanation of this law. We can explore this concept with our word count data as well.
+First, let's check the distribution of words in our data set. In this case, we stick to the unfiltered lyrics (lyrics with `stop_words` and `unnecessary_words` present).
+
+```{r}
+unfiltered_total<-lyrics %>%
+  ungroup() %>% # previously grouped
+  unnest_tokens(word, lyric) %>%
+  count(word, sort=TRUE)
+  
+unfiltered_total %>%
+  ggplot(aes(x=n)) +
+  geom_histogram(bins=40, color="black", fill="lightblue")+
+  geom_hline(yintercept=0)+
+  theme_bw() + xlab("total word count") + ylab("frequency of word count") +
+  xlim(0, 50)
+```
+
+To the left of the distribution, we have a few popular words that are used most frequently by Eminem. The long right tail of the distribution in turn shows that there are many words that are used much less frequently.      
+A way to test whether a natural language dataset conforms to Zipf's law is to plot a rank-frequency graph, on a log-log scale. In this case, the plotted line should have a negative slope and, ideally, should be a straight line.  
+In this case, I want to see if different albums conform to zipfs law
+
+```{r}
+albums_total<-lyrics %>%
+  unnest_tokens(word, lyric) %>%
+  count(album, word, sort=T) %>%
+  group_by(album) %>%
+  mutate(total = sum(n))
+
+albums_total
+
+# we get frequency by rank
+freq_by_rank <- albums_total %>%
+  group_by(album) %>%
+  mutate(rank = row_number(),
+         `term frequency` = n/total)
+
+freq_by_rank
+
+freq_by_rank %>%
+  ggplot(aes(rank, `term frequency`, color=album))+
+  geom_line(size=1.1, alpha=0.8, show.legend=FALSE)+
+  scale_x_log10() +
+  scale_y_log10() +
+  theme_bw()
+```
+The lines are not straight and have a slight curve, showing greater deviation towards the its extremes. Regardless, we see the inverse relationship between the rank of a term and its frequency. 
+
+#### Word correlation plots
+Since I can only have a bivariate plot as far as correlations go, I wrote a function that takes in 2 album
+names and the frequency data frame, and returns a plot. Furthermore, in order to plot these two against each other, I would have to spread the data frame into a wide format - currently, we have `album` as one column, but we want a column for each album. We use `tidyr` spread for that.
+```{r}
+wide_freq<-freq %>%
+  select(album, word, freq) %>%
+  spread(album, freq, fill=0)
+```
+
+```{r}
+albums_corplot<-function(album1, album2, freq){
+  album1<-enquo(album1)
+  album2<-enquo(album2)
+  
+  freq<-freq %>%
+    select(word, !!album1, !!album2) %>%
+    filter(!(!!album1==0) & !(!!album2==0))
+  print(album1)
+  print(album2)
+  ggplot(freq, aes(!!album1, !!album2)) +
+    geom_jitter(alpha=0.1, size=2.5, width=0.25, height=0.25)+
+    geom_text(aes(label=word), check_overlap=TRUE, vjust=1.5) +
+    scale_x_log10(labels=scales::percent_format())+
+    scale_y_log10(labels=scales::percent_format())+
+    geom_abline(color="red") +
+    theme_bw()
+}
+```
+So we can call this function like so
+```{r}
+albums_corplot(`The Slim Shady LP`, Revival, wide_freq)
+```
+Instead of checking all the different albums (we'll have 90 pairwise combinations), we can check pairs which we might find interesting. 
+
+* MMLP2 was meant to be a sequel of sorts to MMLP. We should expect similarities to an extent
+```{r}
+albums_corplot(`The Marshall Mathers LP`, `The Marshall Mathers LP2`, wide_freq)
+
+```
+
+* Kamikaze was a response to all the hate Revival
+```{r}
+albums_corplot(Kamikaze, Revival, wide_freq)
+```
+
+Recovery was a sober song, disavowing his drug plagued past. OTOH, Encore was his last album before his hiatus
+```{r}
+albums_corplot(Recovery, Encore, wide_freq)
+
+```
+
+#### Some wordclouds fun
+Here 
+```{r}
+# let's get a wordcloud for top 300 words
+wordcloud2(words_total[1:300,], size=.5)
+```
+
+Let's also try out letter clouds
+```{r}
+letterCloud(words_total[1:300,], word="EMINEM", size=2)
+```
+Or maybe not, since nothing's showing up.
+
+#### Word length
+Word length is also an interesting one to look at. 
+```{r}
+word_lengths<-lyrics %>%
+  unnest_tokens(word, lyric) %>%
+  select(song_name, album, word) %>%
+  group_by(song_name, album) %>%
+  distinct() %>%
+  mutate(word_length=nchar(word)) %>%
+  ungroup() %>%
+  arrange(-word_length)
+
+word_lengths
+```
+
+```{r}
+summary(word_lengths)
+
+word_lengths %>%
+  count(word_length, sort=TRUE) %>%
+  ggplot(aes(x=word_length, y=n)) +
+  geom_col(show.legend=F, fill="lightblue", 
+           color="black") +
+  xlab("word length") + ylab("word count") +
+  ggtitle("word length distribution")+
+  theme_bw()
+
+```
+
+Here we see that 4 letter words are highest used. The distribution has a slightly long right tail and an outlier which is the 28 letter word, disestablishmenteranism (or sth like that).  
+We can create word clouds for this as well. 
+
+```{r}
+# wordlength word cloud
+wl_wc<-word_lengths %>%
+  ungroup() %>%
+  select(word, word_length) %>%
+  distinct() %>%
+  arrange(-word_length)
+
+wordcloud2(wl_wc[1:300,],
+           size=.15, minSize=.0005,
+           ellipticity=0.3, rotateRatio=1,
+           fontWeight="bold")
+
+```
+
+#### Lexical diversity and density
+An [article](https://consequenceofsound.net/2014/05/which-rapper-has-the-biggest-vocabulary/), touched on this topic. In the first 35k words, Eminem used 4,480 unique words. Let's see if this holds across his 10 albums.
+```{r}
+lyrics %>%
+  unnest_tokens(word, lyric) %>%
+  summarise(unique=n_distinct(word))
+```
+We got 7915 unique words. This is not including non-studio album songs. Let's see how this trends across albums
+```{r}
+
+lexical_diversity_per_album<-lyrics %>%
+  unnest_tokens(word, lyric) %>%
+  group_by(song_name, album, album_year) %>%
+  summarize(lex_diversity=n_distinct(word)) %>%
+  # mutate(album=reorder(album, album_year)) %>%
+  arrange(-lex_diversity) %>%
+  ungroup()
+
+# lex diversity plot
+lexical_diversity_per_album %>%
+  ggplot(aes(album_year, lex_diversity)) +
+  geom_point(color="red", size=4, alpha=.4) +
+  stat_smooth(color="black", se=TRUE, method="lm") +
+  geom_smooth(aes(x=album_year, y=lex_diversity), se=FALSE, color="blue", lwd=2) +
+  ggtitle("Lexical diversity") +
+  ylab("") + xlab("") +
+  theme_bw()
+```
+There's a slight increase in lexical diversity across album time. Surprisingly, his latest album Music To Be Murdered By as a lower lexical diversity than his previus two. MMLP2, Kamikaze, and Revival have the highest ones.  
+
+To contrast, we can also check lexical density. How many unique words he uses 
+```{r}
+## LEXICAL DENSITY
+lexical_density_per_album <- lyrics %>%
+  unnest_tokens(word, lyric) %>%
+  group_by(song_name, album, album_year) %>%
+  summarize(lex_density=n_distinct(word)/n()) %>%
+  arrange(-lex_density) %>%
+  ungroup()
+
+lexical_density_per_album
+
+# plot 
+lexical_density_per_album %>%
+  ggplot(aes(album_year, lex_density)) +
+  geom_point(color="green", alpha=0.4, size=4, position="jitter") +
+  stat_smooth(color="black", se=FALSE, method="lm") +
+  geom_smooth(se=FALSE, color="blue", lwd=2) +
+  ggtitle("Lexical density") + xlab("") + ylab("") +
+  theme_bw()
+```
+Lexical density shows a slightly higher increase over time. The latest album is also up there as well. Which makes me wonder, what are the total number of words per album
+
+```{r}
+lyrics %>%
+  unnest_tokens(word, lyric) %>%
+  group_by(album) %>%
+  count() %>%
+  arrange(-n)
+```
+
+#### tf-idf
+Here we use tidytext's bind_tf_idf function in a neat way to find the tf-idf for each of these words - tf-idf is a measure of how important a word is to a particular document. If a word is used frequently across all albums, then it's not indicative of any particular album. But if a word is used in only one album relatively frequently, then we can think of this word as of significance to that album.
+```{r}
+lyrics_tf_idf <- lyrics %>%
+  unnest_tokens(word, lyric) %>%
+  distinct() %>%
+  count(album, word, sort=TRUE) %>%
+  ungroup() %>%
+  bind_tf_idf(word, album, n) %>%
+  arrange(-tf_idf)
+lyrics_tf_idf
+```
+Let's get the words with top tf-idf
+
+```{r}
+top_tf_idf <- lyrics_tf_idf %>%
+  arrange(-tf_idf) %>%
+  mutate(word = factor(word, levels = rev(unique(word)))) %>%
+  group_by(album) %>%
+  slice(seq_len(8)) %>%
+  ungroup() %>%
+  arrange(album, tf_idf) %>%
+  mutate(row=row_number())
+  
+top_tf_idf
+```
+Let's plot this to visualize it.
+```{r}
+top_tf_idf %>%
+  ggplot(aes(x=row, y=tf_idf, fill=album)) +
+  geom_col(show.legend=FALSE) +
+  labs(x=NULL, y="TF-IDF") +
+  ggtitle("Most important words using tf-idf by album") +
+  theme_bw() +
+  facet_wrap(~album, scales="free", ncol=3) +
+  scale_x_continuous(breaks=top_tf_idf$row,
+                     labels=top_tf_idf$word) +
+  coord_flip()
+```
+
+#### Comparing word usage
+Here I'm trying to find out which albums show up in which albums. We do this using log odds ratio. We wrap that process in a function.
+
+```{r}
+get_log_odds<-function(dat, album1, album2){
+  album1<-enquo(album1)
+  album2<-enquo(album2)
+  
+  word_ratios<-dat %>%
+    count(word, album) %>%
+    group_by(word) %>%
+    filter(sum(n)>10) %>%
+    ungroup() %>%
+    spread(album, n, fill=0) %>%
+    mutate_if(is.numeric, list(~(. + 1)/(sum(.)+1))) %>%
+    mutate(logratio=log(!!album1/!!album2)) %>%
+    arrange(desc(logratio)) %>%
+    select(word, !!album1, !!album2, logratio)
+  
+  word_ratios
+}
+
+word_ratios<-get_log_odds(lyrics_filtered, `The Marshall Mathers LP`, `The Marshall Mathers LP2`)
+```
+
+```{r}
+plot_log_odds<-function(word_ratios, album1, album2){
+  # album1<-enquo(album1)
+  # album2<-enquo(album2)
+  
+  word_ratios %>%
+    group_by(logratio<0) %>%
+    top_n(15, abs(logratio)) %>%
+    ungroup() %>%
+    mutate(word = reorder(word, logratio)) %>%
+    ggplot(aes(word, logratio, fill=logratio<0)) +
+    geom_col(show.legend = FALSE) +
+    coord_flip() + theme_bw() +
+    ylab(paste0("log odds ratio (", album1,"/", album2,")" )) +
+    scale_fill_discrete(name="", labels=c(album1, album2))
+}
+```
+
+```{r}
+plot_log_odds<-function(word_ratios, album1, album2){
+  # album1<-enquo(album1)
+  # album2<-enquo(album2)
+  
+  word_ratios %>%
+    group_by(logratio<0) %>%
+    top_n(15, abs(logratio)) %>%
+    ungroup() %>%
+    mutate(word = reorder(word, logratio)) %>%
+    ggplot(aes(word, logratio, fill=logratio<0)) +
+    geom_col(show.legend = FALSE) +
+    coord_flip() + theme_bw() +
+    ylab(paste0("log odds ratio (", album1,"/", album2,")" )) +
+    scale_fill_discrete(name="", labels=c(album1, album2))
+}
+plot_log_odds(word_ratios, "The Marshall Mathers LP", "The Marshall Mathers LP2")
+
+```
+
+### References
+
+
 
 
 

@@ -1,0 +1,68 @@
+baseurl = "/"
+languageCode = "en-us"
+title = "Notes On Things I've Done"
+theme = "hugo-coder"
+googleAnalytics = ""
+disqusShortname = "https-desmondtuiyot-com"
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+
+[permalinks]
+    post = "/:year/:month/:day/:slug/"
+
+[[menu.main]]
+    name = "About"
+    url = "/about/"
+
+[[menu.main]]
+    name = "Blog"
+    url  = "/post/"
+
+[params]
+    author = "Desmond Tuiyot"
+    avatarurl = "image/desmond.png"
+    info = "Aspiring Software Engineer/Data Analyst"
+    description = "My personal website and blog"
+    keywords = "blog, developer, data analyst, personal"
+    favicon_32 = "/image/icons/favicon-32x32.png"
+    favicon_16 = "/image/icons/favicon-16x16.png"
+    math = true
+    
+    # options for highlight.js (version, additional languages, and theme)
+    highlightjsVersion = "9.12.0"
+    highlightjsCDN = "//cdnjs.cloudflare.com/ajax/libs"
+    highlightjsLang = ["r", "yaml"]
+    highlightjsTheme = "github"
+    
+    MathJaxCDN = "//cdnjs.cloudflare.com/ajax/libs"
+    MathJaxVersion = "2.7.5"
+
+    # path to the favicon, under "static"
+    favicon = "image/favicon.ico"
+    #[params.logo]
+    #    url = "image/desmond.png"
+    #    width = 50
+    #    height = 50
+    #    alt = "Logo"
+
+    
+# Social links
+[[params.social]]
+    name = "Github"
+    icon = "fab fa-github fa-2x"
+    weight = 1
+    url = "https://github.com/desmond-tuiyot/"
+[[params.social]]
+    name = "Twitter"
+    icon = "fab fa-twitter fa-2x"
+    weight = 1
+    url = "https://twitter.com/desmond_tuiyot/"
+[[params.social]]
+    name = "Linkedin"
+    icon = "fab fa-linkedin fa-2x"
+    weight = 1
+    url = "https://www.linkedin.com/in/desmond-tuiyot/"
+
+
+    
+    
+

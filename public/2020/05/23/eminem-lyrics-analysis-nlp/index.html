@@ -6,13 +6,13 @@
     <title>Desmond Tuiyot - An Analysis of Eminem Lyrics - NLP </title>
     
     
-    <meta content="R, NLP, tf_idf, data analysis, exploratory data analysis, ggplot2, dplyr, tidy text mining" name="keywords">
+    <meta content="R, NLP, Eminem, Tidy Text Mining" name="keywords">
     
-    <meta content="Desmond Tuiyot - This is a test post for my incoming blog, and a sneak peek to my first post. Given that it’s a test post, though, I reserve the right to write terribly.Eminem has been a phenomenon since The Slim Shady LP caught Dr. Dre’s ears. Throughout his career, Eminem has filled the airwaves with his thoughts and emotions. Here we perform an analysis on his lyrics in 2 parts." name="description">
+    <meta content="Desmond Tuiyot - IntroductionI happen to be a huge Eminem fan, so his recent tweets highlighting the anniversary of his Relapse albums and organizing a Spotify listening party for his prolific The Marshall Mathers LP got me rightfully excited. Being relatively new to text mining, I decided to dive into and explore his lyrics as a means to learn and apply various text mining techniques. This post is the first of a two-part analysis; stay tuned for the second one." name="description">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     
-        <link rel="icon" href="/image/desmond.png">
+        <link rel="icon" href="/image/favicon.ico">
     
 
     
@@ -42,8 +42,6 @@
     <header class="layui-header layui-bg-cyan">
 
     
-        <a href=""><img src="#ZgotmplZ" class="layui-nav-img" style="margin-left:10px;margin-top:-10px"></a>
-    
     
     <a class="nav-self-logo" href="/">
         Desmond Tuiyot
@@ -59,9 +57,11 @@
             
                 <li class="layui-nav-item" id="nav_big"><a href="/about/">About</a></li>
             
-                <li class="layui-nav-item" id="nav_big"><a href="https://github.com/ThaNyneTray">GitHub</a></li>
+                <li class="layui-nav-item" id="nav_big"><a href="https://github.com/desmond-tuiyot">GitHub</a></li>
             
-                <li class="layui-nav-item" id="nav_big"><a href="https://twitter.com/ThaNyneTray">Twitter</a></li>
+                <li class="layui-nav-item" id="nav_big"><a href="https://linkedin.com/desmond-tuiyot">LinkedIn</a></li>
+            
+                <li class="layui-nav-item" id="nav_big"><a href="https://twitter.com/desmond_tuiyot">Twitter</a></li>
             
         
 
@@ -80,9 +80,11 @@
                     
                         <dd><a href="/about/">About</a></dd>
                     
-                        <dd><a href="https://github.com/ThaNyneTray">GitHub</a></dd>
+                        <dd><a href="https://github.com/desmond-tuiyot">GitHub</a></dd>
                     
-                        <dd><a href="https://twitter.com/ThaNyneTray">Twitter</a></dd>
+                        <dd><a href="https://linkedin.com/desmond-tuiyot">LinkedIn</a></dd>
+                    
+                        <dd><a href="https://twitter.com/desmond_tuiyot">Twitter</a></dd>
                     
                 
             </dl>
@@ -136,28 +138,12 @@ layui.use('element', function(){
             <span class="layui-badge " style="vertical-align: 2px;">NLP</span>
         </a>
     
-        <a href="/tags/tf_idf/">
-            <span class="layui-badge " style="vertical-align: 2px;">tf_idf</span>
-        </a>
-    
-        <a href="/tags/data-analysis/">
-            <span class="layui-badge " style="vertical-align: 2px;">data analysis</span>
-        </a>
-    
-        <a href="/tags/exploratory-data-analysis/">
-            <span class="layui-badge " style="vertical-align: 2px;">exploratory data analysis</span>
-        </a>
-    
-        <a href="/tags/ggplot2/">
-            <span class="layui-badge " style="vertical-align: 2px;">ggplot2</span>
-        </a>
-    
-        <a href="/tags/dplyr/">
-            <span class="layui-badge " style="vertical-align: 2px;">dplyr</span>
+        <a href="/tags/eminem/">
+            <span class="layui-badge " style="vertical-align: 2px;">Eminem</span>
         </a>
     
         <a href="/tags/tidy-text-mining/">
-            <span class="layui-badge " style="vertical-align: 2px;">tidy text mining</span>
+            <span class="layui-badge " style="vertical-align: 2px;">Tidy Text Mining</span>
         </a>
     
     
@@ -166,90 +152,73 @@ layui.use('element', function(){
                 <div class="layui-card-body markdown-body single-content">
                     
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<link href="/rmarkdown-libs/wordcloud2/wordcloud.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/wordcloud2/wordcloud2-all.js"></script>
+<script src="/rmarkdown-libs/wordcloud2/hover.js"></script>
+<script src="/rmarkdown-libs/wordcloud2-binding/wordcloud2.js"></script>
 
 
-<div id="this-is-a-test-post-for-my-incoming-blog-and-a-sneak-peek-to-my-first-post.-given-that-its-a-test-post-though-i-reserve-the-right-to-write-terribly." class="section level2">
-<h2>This is a test post for my incoming blog, and a sneak peek to my first post. Given that it’s a test post, though, I reserve the right to write terribly.</h2>
-<p>Eminem has been a phenomenon since The Slim Shady LP caught Dr. Dre’s ears. Throughout his career, Eminem has filled the airwaves with his thoughts and emotions. Here we perform an analysis on his lyrics in 2 parts.</p>
+<!-- ### Disclaimer -->
+<!-- I am still testing out this site, so I don't expect anyone to read this. Yet if you do find your way here, I reserve the right to dirty and incomplete writing. Nevertheless, this is a sneak peek of what's to come, so check back in a couple of weeks. -->
+<div id="introduction" class="section level3">
+<h3>Introduction</h3>
+<p>I happen to be a huge Eminem fan, so his recent tweets highlighting the anniversary of his <a href="https://twitter.com/Eminem/status/1261345913777336320">Relapse</a> albums and organizing a Spotify listening party for his prolific <a href="https://twitter.com/Eminem/status/1264232431554646016">The Marshall Mathers LP</a> got me rightfully excited. Being relatively new to text mining, I decided to dive into and explore his lyrics as a means to learn and apply various text mining techniques. This post is the first of a two-part analysis; stay tuned for the second one. The two posts will cover:</p>
 <ol style="list-style-type: decimal">
-<li><strong>Text Mining and Exploratory Analysis</strong><br />
-</li>
-<li><strong>Sentiment Analysis and Topic Modeling</strong></li>
+<li><p><strong>Text Mining and Exploratory Analysis</strong></p></li>
+<li><p><strong>Sentiment Analysis and Topic Modeling</strong></p></li>
 </ol>
 </div>
-<div id="some-r-code" class="section level2">
-<h2>Some r code</h2>
-<p>First, let’s load the libraries we’ll need.</p>
-<pre class="r"><code>library(dplyr)
-library(tidyr)
-library(tidytext)
-library(ggplot2)
-library(geniusr)
-library(stringr)
-library(Rspotify)
-library(readr)
-library(forcats)
-library(purrr)
-library(broom)
-library(wordcloud2)
-library(lubridate)</code></pre>
-<p>The first step is to get the lyrics. Here I used the Spotify API to get a list of Eminem’s albums and then utilized the Genius API to get the lyrics. Finally, I saved the original lyrics data set to a csv file for future access. The code is as below</p>
-<pre class="r"><code>#### specify authorization key ###################################################
-keys&lt;-spotifyOAuth(app_id=&quot;EvolutionOfHipHop&quot;,
-                   client_id=&quot;fb596ca0990a475fa1203b3dec8370a9&quot;,
-                   client_secret=&quot;a94a49dc86cf42e087dd68a30178fd5c&quot;)
-
-# we get the album list from  Spotify - genius API lacks this feature
-id&lt;-searchArtist(&quot;Eminem&quot;, keys)$id[1]
-albums&lt;-getAlbums(artist_id=id, token=keys)
-albums&lt;-unique(albums$name)
-albums&lt;-albums[c(1,2,3,5,6,8,11,12,14,16)]
-
-track_list&lt;-NULL
-for (i in 1:length(albums)){
-  tracks&lt;-get_album_tracklist_search(&quot;Eminem&quot;, albums[i])
-  tracks$album&lt;-albums[i]
-  track_list&lt;-rbind(track_list, tracks)
-}
-track_list
-
-#
-# # save the track_list data to a csv
-write.csv(track_list, file=&quot;../../static/data/track_list_data.csv&quot;, row.names=F)
-
-## load the track_list data frame if needed later
-track_list&lt;-read.csv(&quot;../../static/data/track_list_data.csv&quot;, stringsAsFactors=F)
-
-
-# get lyrics for the entire tracklist, and combine them into a data frame
-lyrics&lt;-c()
-for (i in 1:nrow(track_list)){
-  album_lyric&lt;-get_lyrics_url(track_list$song_lyrics_url[i]) %&gt;%
-    mutate(album=track_list$album[i],
-           track_number=track_list$song_number[i])
-  lyrics&lt;-rbind(lyrics, album_lyric)
-}
-
-# add album years as well
-album_year&lt;-c(&quot;01-17-2020&quot;,&quot;08-31-2018&quot;,&quot;12-15-2017&quot;,&quot;11-5-2013&quot;,&quot;06-18-2010&quot;,
-              &quot;05-15-2009&quot;,&quot;11-12-2004&quot;,&quot;05-26-2002&quot;,&quot;05-23-2000&quot;,&quot;02-23-1999&quot;)
-album_year&lt;-mdy(album_year)
-
-album_dates&lt;-tibble(album=albums,album_year=album_year)
-#
-# # add dates to the lyrics. THese are album dates. Useful later on
-lyrics&lt;-lyrics %&gt;%
-  inner_join(album_dates, by=c(&quot;album&quot;))
-#
-lyrics
-#
-# # save the original lyric data
-write_csv(lyrics, &quot;../../static/data/original_lyrics.csv&quot;)
-
-original_lyrics &lt;- read_csv(&quot;../../static/data/original_lyrics.csv&quot;)</code></pre>
-<p>Next, I performed some preliminary cleaning of the data. First, I wanted to look at Eminem’s lyrics only; the lyrics data set returned by Genius API has a section artist section, which makes it easy. The exception is the song <strong>Arose</strong> from his album <strong>Revival</strong>. Here, the verses are labeled in parts, so the section artists also are labeled this way.</p>
-<pre class="r"><code>original_lyrics &lt;- read_csv(&quot;../../static/data/original_lyrics.csv&quot;)
-
+<div id="pre-requisites" class="section level3">
+<h3>Pre-requisites</h3>
+<p>I will make heavy use of the dplyr <span class="citation">(Wickham et al. 2020)</span>, tidytext <span class="citation">(Silge and Robinson 2016)</span>, an ggplot2 <span class="citation">(Wickham 2016)</span> in this analysis. In particular, my introduction to text mining was through the book <a href="https://www.tidytextmining.com/">Tidy Text Mining</a> by <a href="https://twitter.com/drob">David Robinson</a> and <a href="https://twitter.com/juliasilge">Julia Silge’s</a> book. It’s a free resource that covers text mining, sentiment analysis, and topic modeling. Seeing as you are reading this post, you likely have interest in the subject, so I encourage you to read through this. In addition, I took a lot of inspiration from Debbie Liske’s <a href="https://www.datacamp.com/community/tutorials/R-nlp-machine-learning">post</a> on DataCamp, which is a must-read.</p>
+</div>
+<div id="library-imports" class="section level3">
+<h3>1. Library Imports</h3>
+<p>First, we import the libraries we’ll need for this analysis.</p>
+<pre class="r"><code>library(tidyverse)  # for data manipulation, transformation, plotting
+library(tidytext)   # text mining package that handles tidy text data
+library(geniusr)    # interfaces with Genius API to get lyrics
+library(Rspotify)   # interfaces with Spotify API to get album tracklist
+library(wordcloud2) # visualizing wordclouds, letterclouds
+library(lubridate)  # handling date type data</code></pre>
+</div>
+<div id="data-collection" class="section level3">
+<h3>2. Data Collection</h3>
+<p>For this, I used a combination of two packages. First, I used the Rspotify <span class="citation">(Dantas 2018)</span> package to get Eminem’s album list and then got a tracklist and lyrics for each album using the geniusr <span class="citation">(Henderson 2020)</span> package; these packages interface with the <a href="https://developer.spotify.com/documentation/web-api/quick-start/">Spotify API</a> and <a href="https://docs.genius.com/">Genius API</a> respectively. I used the The Spotify API here for two reasons. The Genius API package does not currently have a method for retrieving an artist’s album list. In addition, the Spotify API offers various musical features for each song in the Spotify database, which could be useful in any potential predictive analysis I perform, especially when used in conjunction with lyrics data. Therefore, I would like to maintain a consistent dataset of songs.<br />
+You can find the code for data collection <a href="https://github.com/desmond-tuiyot/Eminem_Lyrics_Analysis/blob/master/rcode/analysis.R">here</a> if you are interested. I saved the lyrics dataset <a href="%22https://raw.githubusercontent.com/desmond-tuiyot/Eminem_Lyrics_Analysis/master/data/original_lyrics.csv%22">here</a>, which we import below.</p>
+<pre class="r"><code>original_lyrics&lt;-read_csv(&quot;https://raw.githubusercontent.com/desmond-tuiyot/Eminem_Lyrics_Analysis/master/data/original_lyrics.csv&quot;)
+glimpse(original_lyrics)</code></pre>
+<pre><code>## Rows: 16,523
+## Columns: 9
+## $ line            &lt;chr&gt; &quot;Yeah&quot;, &quot;So I guess this is what it is, huh?&quot;, &quot;Thi...
+## $ section_name    &lt;chr&gt; &quot;Intro&quot;, &quot;Intro&quot;, &quot;Intro&quot;, &quot;Intro&quot;, &quot;Intro&quot;, &quot;Intro...
+## $ section_artist  &lt;chr&gt; &quot;Eminem&quot;, &quot;Eminem&quot;, &quot;Eminem&quot;, &quot;Eminem&quot;, &quot;Eminem&quot;, &quot;...
+## $ song_name       &lt;chr&gt; &quot;Premonition (Intro)&quot;, &quot;Premonition (Intro)&quot;, &quot;Prem...
+## $ artist_name     &lt;chr&gt; &quot;Eminem&quot;, &quot;Eminem&quot;, &quot;Eminem&quot;, &quot;Eminem&quot;, &quot;Eminem&quot;, &quot;...
+## $ song_lyrics_url &lt;chr&gt; &quot;https://genius.com/Eminem-premonition-intro-lyrics...
+## $ album           &lt;chr&gt; &quot;Music To Be Murdered By&quot;, &quot;Music To Be Murdered By...
+## $ track_number    &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+## $ album_year      &lt;date&gt; 2020-01-17, 2020-01-17, 2020-01-17, 2020-01-17, 20...</code></pre>
+<p>We have <code>9</code> variables and <code>16,523</code>. The observations here represent individual lines in for each song in Eminem’s discrography. Importantly, the dataset is not currently in tidy text format. As described in the book <a href="https://www.tidytextmining.com/">Tidy Text Mining</a>, tidy text data format is such that each <em>variable</em> has its own column, and each <em>token</em> has its own row. A token here is a meaningful unit of text; in this analysis, we use a single word as a token.</p>
+</div>
+<div id="data-cleaning" class="section level3">
+<h3>3. Data Cleaning</h3>
+<p>We want to perform some basic data cleaning before moving on to analysis. Data cleaning is not necessarily a straightforward process. There are some standard pre-processing steps for text data, like changing case, stemming, lemmatization, and so on. On the other hand, some of the pre-processing steps I perform below came about after some data exploration.<br />
+The steps I took in pre-processing are:<br />
+1. Filtering out non-Eminem lyrics<br />
+2. Converting the lyrics to lowercase<br />
+3. Expanding contractions<br />
+4. Removing any non-alphanumeric characters<br />
+5. Filtering out any skits/intros/interludes<br />
+6. Lemmatization</p>
+<p>We first copy the original dataset into a new data frame, in case we need the original later in the analysis. We also change the <code>album</code> variable to a factor.</p>
+<pre class="r"><code>lyrics&lt;-original_lyrics
+lyrics$album&lt;-as.factor(lyrics$album)</code></pre>
+<div id="filtering_non_eminem" class="section level4">
+<h4>Filtering out non-Eminem lyrics</h4>
+<p>Since we are doing an analysis on Eminem lyrics, we remove any lyrics performed by other artists. These are guest features performing intros, outros, choruses, hooks, or verses. This process is made easy since the lyrics data returned by the geniusr package also includes a <code>section_name</code> and <code>section_artist</code> variable. These are based on how <a href="https://genius.com/">Genius</a> labels song sections. Importantly, the <code>section_artist</code> for the song <code>Arose</code> is wrong, so we have to handle it separately from the other songs. The code for this process is shown below:</p>
+<pre class="r"><code># Filter out lines whose section artists do not include Eminem
 lyrics&lt;-original_lyrics %&gt;%
   filter(str_detect(section_artist, &quot;Eminem&quot;)|
          section_artist==&quot;Arose&quot;|
@@ -257,31 +226,18 @@ lyrics&lt;-original_lyrics %&gt;%
   rename(lyric=line, track_n=track_number) %&gt;%
   group_by(song_name) %&gt;%
   mutate(line=cumsum(song_name==song_name)) %&gt;%
-  select(lyric, line, album, track_n, song_name, album_year)
+  select(lyric, line, album, track_n, song_name, album_year) %&gt;%
+  ungroup()</code></pre>
+</div>
+<div id="expand_contractions" class="section level4">
+<h4>Fixing contractions</h4>
+<p>Contractions are commonplace in lyrics, so we have to expand as many as we can find. I define a function <code>fix_contractions</code> that replaces various contractions with their expanded forms. These include common contractions in English as well as some special ones I found after exploring the data.</p>
+<pre class="r"><code># first change to lowercase to for consistency
+lyrics$lyric&lt;-tolower(lyrics$lyric)
 
-# # save data to csv file for future access
-write_csv(lyrics, path=&quot;../../static/data/lyrics_by_lines.csv&quot;)
-# 
-# # load lyrics data
-lyrics&lt;-read_csv(file=&quot;../../static/data/lyrics_by_lines.csv&quot;)
-
-lyrics</code></pre>
-<pre><code>## # A tibble: 14,862 x 6
-##    lyric                    line album          track_n song_name     album_year
-##    &lt;chr&gt;                   &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;         &lt;date&gt;    
-##  1 Yeah                        1 Music To Be M~       1 Premonition ~ 2020-01-17
-##  2 So I guess this is wha~     2 Music To Be M~       1 Premonition ~ 2020-01-17
-##  3 Think it&#39;s obvious          3 Music To Be M~       1 Premonition ~ 2020-01-17
-##  4 We ain&#39;t never gonna s~     4 Music To Be M~       1 Premonition ~ 2020-01-17
-##  5 But it&#39;s funny              5 Music To Be M~       1 Premonition ~ 2020-01-17
-##  6 As much as I hate you       6 Music To Be M~       1 Premonition ~ 2020-01-17
-##  7 I need you                  7 Music To Be M~       1 Premonition ~ 2020-01-17
-##  8 This is music to be mu~     8 Music To Be M~       1 Premonition ~ 2020-01-17
-##  9 They said my last albu~     9 Music To Be M~       1 Premonition ~ 2020-01-17
-## 10 No, I sound like a spi~    10 Music To Be M~       1 Premonition ~ 2020-01-17
-## # ... with 14,852 more rows</code></pre>
-<p>Finally, I explored contractions in this data set and came up with a list of contractions and their corrections. I defined a function to expand these contractions. After this, I removed any non alphanumeric characters from the data set.</p>
-<pre class="r"><code>fix_contractions&lt;-function(dat){
+# this is a function to fix contractions. These are contractions I identified
+# after exploring the data for some time.
+fix_contractions&lt;-function(dat){
   # as in the article, this could be a possesive or is/has
   dat&lt;-str_replace_all(dat, &quot;&#39;s&quot;, &quot;&quot;)
   dat&lt;-str_replace_all(dat, &quot;&#39;m&quot;, &quot; am&quot;)
@@ -312,52 +268,665 @@ lyrics</code></pre>
   dat&lt;-str_replace_all(dat, &quot;wanna&quot;, &quot;want to&quot;)
   dat
 }
-# # 
-lyrics$lyric&lt;-tolower(lyrics$lyric)
-lyrics$lyric&lt;-fix_contractions(lyrics$lyric)
-lyrics %&gt;%
-  filter(str_detect(lyric, &quot;ing&quot;))</code></pre>
-<pre><code>## # A tibble: 3,625 x 6
-##    lyric                        line album       track_n song_name    album_year
-##    &lt;chr&gt;                       &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;        &lt;date&gt;    
-##  1 we aint never going to see~     4 Music To B~       1 Premonition~ 2020-01-17
-##  2 then i woulda quit a long ~    18 Music To B~       1 Premonition~ 2020-01-17
-##  3 looking at them plaques, c~    23 Music To B~       1 Premonition~ 2020-01-17
-##  4 but rolling stone stars, i~    27 Music To B~       1 Premonition~ 2020-01-17
-##  5 they said i am lyrically a~    40 Music To B~       1 Premonition~ 2020-01-17
-##  6 but i have nothing to say      41 Music To B~       1 Premonition~ 2020-01-17
-##  7 but then when i put out re~    42 Music To B~       1 Premonition~ 2020-01-17
-##  8 fans keep on pulling me on~    48 Music To B~       1 Premonition~ 2020-01-17
-##  9 i was not dissing  tech, t~    58 Music To B~       1 Premonition~ 2020-01-17
-## 10 instead of us being credit~    60 Music To B~       1 Premonition~ 2020-01-17
-## # ... with 3,615 more rows</code></pre>
-<pre class="r"><code># here then let&#39;s clean out  the rest of the lyrics. Remove
-# non-alphanumeric characters
-lyrics$lyric &lt;- str_replace_all(lyrics$lyric, &quot;[^a-zA-Z0-9 ]&quot;, &quot; &quot;)
-sum(str_detect(lyrics$lyric, &quot;[^a-zA-Z0-9 ]&quot;)) # we goodie</code></pre>
-<pre><code>## [1] 0</code></pre>
-<pre class="r"><code># save cleaned data to csv file for future access
-write_csv(lyrics, &quot;../../static/data/lyrics_by_lines.csv&quot;)
+lyrics$lyric&lt;-fix_contractions(lyrics$lyric)</code></pre>
+</div>
+<div id="removing-alphanumeric-characters" class="section level4">
+<h4>Removing alphanumeric characters</h4>
+<p>Here we want to make sure that we drop any punctuation marks or any other special characters. For this analysis, we want to focus on only text.</p>
+<pre class="r"><code># remove alphanumeric characters
+lyrics$lyric &lt;- str_replace_all(lyrics$lyric, &quot;[^a-zA-Z0-9 ]&quot;, &quot; &quot;)</code></pre>
+</div>
+<div id="filtering-out-any-skitsintrosinterludes." class="section level4">
+<h4>Filtering out any skits/intros/interludes.</h4>
+<p>Here we filter out any shorter Eminem verses, which turn out to be mostly skits, intros, outros, and interludes.</p>
+<pre class="r"><code># removeing skits, intros, outros, interludes
+line_count&lt;-lyrics %&gt;%
+  group_by(album, song_name) %&gt;%
+  count() %&gt;%
+  ungroup() %&gt;%
+  arrange(n)
 
- 
-# load lyrics data
-lyrics&lt;-read_csv(file=&quot;../../static/data/lyrics_by_lines.csv&quot;)
+short_titles&lt;-subset(line_count, n&lt;15)$song_name
 
+lyrics&lt;-lyrics%&gt;%
+  filter(!str_detect(song_name, &quot;Skit&quot;),
+         !str_detect(song_name, &quot;skit&quot;),
+         !song_name %in% short_titles)</code></pre>
+</div>
+<div id="lemmatization" class="section level4">
+<h4>Lemmatization</h4>
+<p>Lemmatization is the process of resolving words to their dictionary form. For example, any words in their gerund form (e.g. rapping) will be reduced to their dictionary form (rap). Skipping this process might affect the results of our analysis.</p>
+<pre class="r"><code>lyrics&lt;-lyrics %&gt;%
+  mutate(lyric=textstem::lemmatize_strings(lyric))
 lyrics</code></pre>
-<pre><code>## # A tibble: 14,862 x 6
-##    lyric                    line album          track_n song_name     album_year
-##    &lt;chr&gt;                   &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;         &lt;date&gt;    
-##  1 yeah                        1 Music To Be M~       1 Premonition ~ 2020-01-17
-##  2 so i guess this is wha~     2 Music To Be M~       1 Premonition ~ 2020-01-17
-##  3 think it obvious            3 Music To Be M~       1 Premonition ~ 2020-01-17
-##  4 we aint never going to~     4 Music To Be M~       1 Premonition ~ 2020-01-17
-##  5 but it funny                5 Music To Be M~       1 Premonition ~ 2020-01-17
-##  6 as much as i hate you       6 Music To Be M~       1 Premonition ~ 2020-01-17
-##  7 i need you                  7 Music To Be M~       1 Premonition ~ 2020-01-17
-##  8 this is music to be mu~     8 Music To Be M~       1 Premonition ~ 2020-01-17
-##  9 they said my last albu~     9 Music To Be M~       1 Premonition ~ 2020-01-17
-## 10 no  i sound like a spi~    10 Music To Be M~       1 Premonition ~ 2020-01-17
-## # ... with 14,852 more rows</code></pre>
+<pre><code>## # A tibble: 14,455 x 6
+##    lyric                   line album          track_n song_name      album_year
+##    &lt;chr&gt;                  &lt;int&gt; &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;          &lt;date&gt;    
+##  1 yes                        1 Music To Be M~       1 Premonition (~ 2020-01-17
+##  2 so i guess this be wh~     2 Music To Be M~       1 Premonition (~ 2020-01-17
+##  3 think it obvious           3 Music To Be M~       1 Premonition (~ 2020-01-17
+##  4 we aint never go to s~     4 Music To Be M~       1 Premonition (~ 2020-01-17
+##  5 but it funny               5 Music To Be M~       1 Premonition (~ 2020-01-17
+##  6 as much as i hate you      6 Music To Be M~       1 Premonition (~ 2020-01-17
+##  7 i need you                 7 Music To Be M~       1 Premonition (~ 2020-01-17
+##  8 this be music to be m~     8 Music To Be M~       1 Premonition (~ 2020-01-17
+##  9 they say my last albu~     9 Music To Be M~       1 Premonition (~ 2020-01-17
+## 10 no i sound like a spi~    10 Music To Be M~       1 Premonition (~ 2020-01-17
+## # ... with 14,445 more rows</code></pre>
+<!-- 
+#### Lines vs No of Words? 
+Fewer lyrics might suggest that Eminem has less of a contribution overall, but it's misleading. If he raps faster, then he definitely fits more words per line. Let's explore this.  
+
+##### number of lines in each song, grouped by album
+
+```r
+line_counts<-lyrics %>% 
+  count(album, song_name) %>%
+  arrange(-n)
+```
+
+##### number of words in each song, grouped by album
+
+```r
+word_counts<-lyrics %>%
+  count(album, song_name, wt=str_length(lyric)) %>%
+  arrange(-n)
+```
+
+##### Plot these
+
+```r
+line_counts %>%
+  ggplot(aes(x=album, y=n, color=album))+
+  geom_point(show.legend=FALSE, size=4)+
+  coord_flip()+
+  theme_bw() 
+```
+
+<img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+
+```r
+word_counts %>%
+  ggplot(aes(x=album, y=n, color=album))+
+  geom_point(show.legend=FALSE, size=4)+
+  coord_flip()+
+  theme_bw() 
+```
+
+<img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+
+
+```r
+word_line_df<-line_counts %>%
+  inner_join(word_counts, by=c("song_name", "album")) %>%
+  rename(total_lines = n.x, total_words = n.y)
+
+word_line_df %>%
+  ggplot(aes(x=total_lines, y=total_words)) +
+  geom_point(size=1) +
+  theme_bw()
+```
+
+<img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+More lines meant more words. I'm defaeted
+-->
+</div>
+</div>
+<div id="analysis" class="section level3">
+<h3>4. Analysis</h3>
+<div id="word-frequencies" class="section level4">
+<h4>Word Frequencies</h4>
+<p>Depending on the analysis, there might be additional cleaning steps we might want to take. We often find that words such as <code>a</code>, <code>an</code>, <code>the</code>, and <code>I</code>, among others, are common across many documents in natural language data and are used with very high frequency. These are called <strong>stop words</strong> and they offer little insight into describing or classifying documents; therefore, they often removed prior to certain types of analysis. In the case of analyzing word frequencies, we want to remove stop words from our data set.
+The tidytext <span class="citation">(Silge and Robinson 2016)</span> package offers a set of stop words that we can import and use. First, we use <code>unnest_tokens</code> to convert our data frame to tidy text format; recall that the original data set had each line occupying a row. This function converts this so that each word occupies its on row. Next we remove stop words using an <code>anti_join</code> operation. The code is as below:</p>
+<pre class="r"><code>data(&quot;stop_words&quot;)
+
+lyrics_filtered&lt;-lyrics %&gt;%
+  unnest_tokens(word, lyric) %&gt;%
+  anti_join(stop_words) %&gt;%
+  ungroup()
+
+words_total&lt;-lyrics_filtered %&gt;%
+  count(word) %&gt;%
+  arrange(-n)
+
+words_total</code></pre>
+<pre><code>## # A tibble: 7,529 x 2
+##    word      n
+##    &lt;chr&gt; &lt;int&gt;
+##  1 fuck    819
+##  2 shit    509
+##  3 aint    405
+##  4 time    343
+##  5 bitch   329
+##  6 feel    324
+##  7 love    263
+##  8 leave   212
+##  9 shady   190
+## 10 girl    181
+## # ... with 7,519 more rows</code></pre>
+<p>To no one’s surprise, Eminem curses a lot. His most used words are <code>fuck</code> and <code>shit</code>, and at number 4 we have <code>bitch</code> as well. This might generate interesting insights in case we compare it to other rappers. But on its own, I doubt its usefulness. There are other ‘non-useful words’ that I have identified through manual exploration of the data set. Throughout any analysis, you will have to deal with uncertainty and make micro decisions like this along the way. It is possible that removing these words will affect other parts of the analysis significantly. For now, we remove these words.</p>
+<pre class="r"><code>unnecessary_words &lt;- c(&quot;fuck&quot;, &quot;ah&quot;, &quot;yeah&quot;, &quot;aint&quot;, &quot;shit&quot;,&quot;ass&quot;, &quot;la&quot;, 
+                       &quot;yah&quot;, &quot;ah&quot;, &quot;bitch&quot;, &quot;ama&quot;, &quot;ha&quot;, &quot;yo&quot;, &quot;ah&quot;, &quot;cum&quot;,
+                       &quot;dick&quot;, &quot;ho&quot;, &quot;erra&quot;, &quot;gotta&quot;, &quot;tryna&quot;, &quot;gon&quot;, &quot;dum&quot;,
+                       &quot;uh&quot;, &quot;hey&quot;, &quot;whoa&quot;, &quot;til&quot;, &quot;chka&quot;, &quot;ta&quot;, &quot;tahh&quot;)
+
+lyrics_filtered &lt;- lyrics_filtered %&gt;%
+  filter(!word %in% unnecessary_words)
+
+words_total&lt;-lyrics_filtered %&gt;%
+  count(word) %&gt;%
+  arrange(-n)
+
+words_total</code></pre>
+<pre><code>## # A tibble: 7,503 x 2
+##    word      n
+##    &lt;chr&gt; &lt;int&gt;
+##  1 time    343
+##  2 feel    324
+##  3 love    263
+##  4 leave   212
+##  5 shady   190
+##  6 girl    181
+##  7 day     173
+##  8 call    170
+##  9 baby    168
+## 10 world   158
+## # ... with 7,493 more rows</code></pre>
+<p>Eminem uses the words <code>love</code> and <code>feel</code> frequently, so we get the idea that some major topics in Eminem’s songs are about love, emotions, and maybe relationships. Eminem has had many songs about relationships, although in most of them he portrays himself as being involved in a somewhat dysfunctional relationship. (See <a href="https://www.youtube.com/watch?v=uelHwf8o7_U">Love The Way You Lie</a> and <a href="https://www.youtube.com/watch?v=X-TkrWpO75k">Good Guy</a>). Eminem also uses <code>shady</code> frequently, so he is more likely to talks about his supposedly evil and unhinged alter-ego, Slim Shady.<br />
+We might be interested in the differences in word frequency across albums. Here we want to look at proportions, since absolute frequencies can lead to misleading conclusions.</p>
+<pre class="r"><code>freq&lt;-lyrics_filtered %&gt;%
+  count(album, word) %&gt;%
+  group_by(album) %&gt;%
+  mutate(total=sum(n)) %&gt;%
+  mutate(freq=n/total) %&gt;%
+  ungroup() %&gt;%
+  arrange(-freq)
+
+top10_freq&lt;-freq %&gt;%
+  group_by(album) %&gt;%
+  top_n(8, freq) %&gt;%
+  ungroup() %&gt;%
+  arrange(album, freq) %&gt;%
+  mutate(row = row_number())
+  
+top10_freq %&gt;%
+  ggplot(aes(row, freq, fill=album)) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~album, ncol=4, scales=&quot;free&quot;) +
+  scale_x_continuous(breaks=top10_freq$row, 
+                     labels=top10_freq$word) + 
+  coord_flip() +
+  theme_bw()</code></pre>
+<p><img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+Here are some things we can note from this graph:</p>
+<ul>
+<li>Many of the frequently occurring words in these albums are simply those repeated in hooks and choruses. For example, in the album <code>Recovery</code>, we have <code>cold</code> and <code>blow</code>, which most likely comes from the song <code>Cold Wind Blows</code>. In the album <code>The Eminem Show</code>, we have <code>goodbye</code>, <code>hollywood</code> from <code>Say Goodbye Hollywood</code> and <code>superman</code> from, well, <code>Superman</code>.</li>
+<li>Time is a re-occuring theme. At this moment, however, I cannot say anything definitive about its significance.<br />
+</li>
+<li>His first 2 albums feature a lot of use of <code>slim</code> and <code>shady</code>, which makes sense as this was when he introduced himself and his <code>alter-ego</code> to the world. It could also be as a result of the words being repeated in choruses some songs in the albums.</li>
+<li>Notice the lack of <em>Hailie</em>, his daughter, or <em>Kim</em>, his wife. One of the major reoccuring themes in Eminem’s music has been his love for his daughter and his hate for his wife. Contrary to my expectations, these words do not appear among the most frequently used words.</li>
+<li>Another major theme which lacks representation in the above graph is drugs. A probable reason for this is that Eminem namedrops many different drugs across his discography, which means that the word count for this theme is distributed across many different words.</li>
+</ul>
+<div id="aside-hailie-kim-and-drugs" class="section level5">
+<h5><strong>Aside:</strong> Hailie, Kim, and Drugs</h5>
+<p>As an aside, we can check how often he mentions <code>Hailie</code> and <code>Kim</code>below.</p>
+<pre class="r"><code>words_total %&gt;%
+  filter(word %in% c(&quot;hailie&quot;, &quot;kim&quot;))</code></pre>
+<pre><code>## # A tibble: 2 x 2
+##   word       n
+##   &lt;chr&gt;  &lt;int&gt;
+## 1 hailie    37
+## 2 kim       26</code></pre>
+<p>To explore the drug theme a little more, I got a list of all the drugs that eminem has mentioned in his career from a post by user <em>Sas</em> in <a href="https://forum.sectioneighty.com/every-prescription-drug-eminem-ever-mentioned.t29686">this forum post</a>. Granted these are mentions from songs that are not in our data set, because I used his studio albums in this analysis. This list was last updated in 2015; Eminem has released 3 albums since then. In time, I will compile a list for these three newer albums and update this post. For now, we will work with the list below.</p>
+<pre class="r"><code>drugs&lt;-c(&quot;Ambie&quot;, &quot;Amoxicilline&quot;, &quot;Coke&quot;, &quot;Crack&quot;, &quot;Codeïne&quot;, &quot;Hydrocodone&quot;,
+         &quot;Klonopin&quot;, &quot;Lean&quot;, &quot;LSD&quot;, &quot;Methadone&quot;, &quot;Marijuana&quot;, &quot;Mollie&quot;,
+         &quot;Mushrooms&quot;, &quot;NoDoz&quot;, &quot;Nurofen&quot;, &quot;NyQuil&quot;, &quot;Percocets&quot;, &quot;Purple Haze&quot;,
+         &quot;Seroquel&quot;, &quot;Smack&quot;, &quot;Valium&quot;, &quot;Vicodin&quot;, &quot;Xanax&quot;, &quot;Methamphetamine&quot;)
+drugs&lt;-str_to_lower(drugs)
+
+words_total %&gt;% 
+  filter(word %in% c(drugs, &quot;pill&quot;, &quot;drug&quot;)) %&gt;%
+  count(wt=n)</code></pre>
+<pre><code>## # A tibble: 1 x 1
+##       n
+##   &lt;int&gt;
+## 1   217</code></pre>
+<p>Here we combine all the names of the drugs with the words <code>drug</code> and <code>pill</code> and get the total count, which turns out to be <code>217</code>. This displaces <code>leave</code> at the number 4 spot, with a count of <code>212</code>.</p>
+</div>
+</div>
+<div id="zipfs-law" class="section level4">
+<h4>Zipf’s law</h4>
+<p>In simple terms, this law states that given a corpus of natural language utterances, the frequency of each word is inversely proportional to its rank (rank measured in frequency). That implies that rank 1, the most used word, is used roughly twice as much as the rank 2 word, and 4 times as much as the rank 3 word, et cetera. See <a href="https://en.wikipedia.org/wiki/Zipf%27s_law">this Wikipedia post</a> and <a href="https://www.tidytextmining.com/tfidf.html#zipfs-law">Chapter 3</a> of Tidy Text Mining for a more in-depth explanation of this law. We can explore this concept with our word count data as well.
+First, let’s check the distribution of words in our data set. In this case, we stick to the unfiltered lyrics (lyrics with <code>stop_words</code> and <code>unnecessary_words</code> present).</p>
+<pre class="r"><code>unfiltered_total&lt;-lyrics %&gt;%
+  ungroup() %&gt;% # previously grouped
+  unnest_tokens(word, lyric) %&gt;%
+  count(word, sort=TRUE)
+  
+unfiltered_total %&gt;%
+  ggplot(aes(x=n)) +
+  geom_histogram(bins=40, color=&quot;black&quot;, fill=&quot;lightblue&quot;)+
+  geom_hline(yintercept=0)+
+  theme_bw() + xlab(&quot;total word count&quot;) + ylab(&quot;frequency of word count&quot;) +
+  xlim(0, 50)</code></pre>
+<p><img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>To the left of the distribution, we have a few popular words that are used most frequently by Eminem. The long right tail of the distribution in turn shows that there are many words that are used much less frequently.<br />
+A way to test whether a natural language dataset conforms to Zipf’s law is to plot a rank-frequency graph, on a log-log scale. In this case, the plotted line should have a negative slope and, ideally, should be a straight line.<br />
+In this case, I want to see if different albums conform to zipfs law</p>
+<pre class="r"><code>albums_total&lt;-lyrics %&gt;%
+  unnest_tokens(word, lyric) %&gt;%
+  count(album, word, sort=T) %&gt;%
+  group_by(album) %&gt;%
+  mutate(total = sum(n))
+
+albums_total</code></pre>
+<pre><code>## # A tibble: 20,414 x 4
+## # Groups:   album [10]
+##    album                    word      n total
+##    &lt;chr&gt;                    &lt;chr&gt; &lt;int&gt; &lt;int&gt;
+##  1 The Marshall Mathers LP2 i      1075 19918
+##  2 Recovery                 i       901 15649
+##  3 The Marshall Mathers LP2 be      877 19918
+##  4 The Marshall Mathers LP  i       778 11996
+##  5 Music To Be Murdered By  i       714 11888
+##  6 Revival                  i       705 13244
+##  7 Relapse                  i       684 14669
+##  8 Encore                   i       678 15173
+##  9 Recovery                 you     672 15649
+## 10 The Marshall Mathers LP2 the     652 19918
+## # ... with 20,404 more rows</code></pre>
+<pre class="r"><code># we get frequency by rank
+freq_by_rank &lt;- albums_total %&gt;%
+  group_by(album) %&gt;%
+  mutate(rank = row_number(),
+         `term frequency` = n/total)
+
+freq_by_rank</code></pre>
+<pre><code>## # A tibble: 20,414 x 6
+## # Groups:   album [10]
+##    album                    word      n total  rank `term frequency`
+##    &lt;chr&gt;                    &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;            &lt;dbl&gt;
+##  1 The Marshall Mathers LP2 i      1075 19918     1           0.0540
+##  2 Recovery                 i       901 15649     1           0.0576
+##  3 The Marshall Mathers LP2 be      877 19918     2           0.0440
+##  4 The Marshall Mathers LP  i       778 11996     1           0.0649
+##  5 Music To Be Murdered By  i       714 11888     1           0.0601
+##  6 Revival                  i       705 13244     1           0.0532
+##  7 Relapse                  i       684 14669     1           0.0466
+##  8 Encore                   i       678 15173     1           0.0447
+##  9 Recovery                 you     672 15649     2           0.0429
+## 10 The Marshall Mathers LP2 the     652 19918     3           0.0327
+## # ... with 20,404 more rows</code></pre>
+<pre class="r"><code>freq_by_rank %&gt;%
+  ggplot(aes(rank, `term frequency`, color=album))+
+  geom_line(size=1.1, alpha=0.8, show.legend=FALSE)+
+  scale_x_log10() +
+  scale_y_log10() +
+  theme_bw()</code></pre>
+<p><img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+The lines are not straight and have a slight curve, showing greater deviation towards the its extremes. Regardless, we see the inverse relationship between the rank of a term and its frequency.</p>
+</div>
+<div id="word-correlation-plots" class="section level4">
+<h4>Word correlation plots</h4>
+<p>Since I can only have a bivariate plot as far as correlations go, I wrote a function that takes in 2 album
+names and the frequency data frame, and returns a plot. Furthermore, in order to plot these two against each other, I would have to spread the data frame into a wide format - currently, we have <code>album</code> as one column, but we want a column for each album. We use <code>tidyr</code> spread for that.</p>
+<pre class="r"><code>wide_freq&lt;-freq %&gt;%
+  select(album, word, freq) %&gt;%
+  spread(album, freq, fill=0)</code></pre>
+<pre class="r"><code>albums_corplot&lt;-function(album1, album2, freq){
+  album1&lt;-enquo(album1)
+  album2&lt;-enquo(album2)
+  
+  freq&lt;-freq %&gt;%
+    select(word, !!album1, !!album2) %&gt;%
+    filter(!(!!album1==0) &amp; !(!!album2==0))
+  print(album1)
+  print(album2)
+  ggplot(freq, aes(!!album1, !!album2)) +
+    geom_jitter(alpha=0.1, size=2.5, width=0.25, height=0.25)+
+    geom_text(aes(label=word), check_overlap=TRUE, vjust=1.5) +
+    scale_x_log10(labels=scales::percent_format())+
+    scale_y_log10(labels=scales::percent_format())+
+    geom_abline(color=&quot;red&quot;) +
+    theme_bw()
+}</code></pre>
+<p>So we can call this function like so</p>
+<pre class="r"><code>albums_corplot(`The Slim Shady LP`, Revival, wide_freq)</code></pre>
+<pre><code>## &lt;quosure&gt;
+## expr: ^`The Slim Shady LP`
+## env:  global
+## &lt;quosure&gt;
+## expr: ^Revival
+## env:  global</code></pre>
+<p><img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+Instead of checking all the different albums (we’ll have 90 pairwise combinations), we can check pairs which we might find interesting.</p>
+<ul>
+<li>MMLP2 was meant to be a sequel of sorts to MMLP. We should expect similarities to an extent</li>
+</ul>
+<pre class="r"><code>albums_corplot(`The Marshall Mathers LP`, `The Marshall Mathers LP2`, wide_freq)</code></pre>
+<pre><code>## &lt;quosure&gt;
+## expr: ^`The Marshall Mathers LP`
+## env:  global
+## &lt;quosure&gt;
+## expr: ^`The Marshall Mathers LP2`
+## env:  global</code></pre>
+<p><img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<ul>
+<li>Kamikaze was a response to all the hate Revival</li>
+</ul>
+<pre class="r"><code>albums_corplot(Kamikaze, Revival, wide_freq)</code></pre>
+<pre><code>## &lt;quosure&gt;
+## expr: ^Kamikaze
+## env:  global
+## &lt;quosure&gt;
+## expr: ^Revival
+## env:  global</code></pre>
+<p><img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p>Recovery was a sober song, disavowing his drug plagued past. OTOH, Encore was his last album before his hiatus</p>
+<pre class="r"><code>albums_corplot(Recovery, Encore, wide_freq)</code></pre>
+<pre><code>## &lt;quosure&gt;
+## expr: ^Recovery
+## env:  global
+## &lt;quosure&gt;
+## expr: ^Encore
+## env:  global</code></pre>
+<p><img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+</div>
+<div id="some-wordclouds-fun" class="section level4">
+<h4>Some wordclouds fun</h4>
+<p>Here</p>
+<pre class="r"><code># let&#39;s get a wordcloud for top 300 words
+wordcloud2(words_total[1:300,], size=.5)</code></pre>
+<div id="htmlwidget-1" style="width:672px;height:480px;" class="wordcloud2 html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"word":["time","feel","love","leave","shady","girl","day","call","baby","world","life","kill","bad","hit","run","start","head","hear","blow","stop","guess","slim","people","word","rap","kid","stand","hate","walk","beat","boy","break","shoot","white","play","crazy","throw","fall","talk","dre","lose","pull","hold","wait","die","goodbye","song","god","mom","stick","brain","game","sit","superman","eat","mind","hand","friend","grow","lie","bout","hope","rhyme","tonight","live","write","drop","home","eye","hell","meet","sick","sing","fire","huh","night","scream","spit","bite","cold","hurt","body","dad","dead","door","evil","kick","half","real","ball","catch","damn","dance","fight","inside","black","suck","house","stay","act","cut","eminem","happen","heart","tire","bring","floor","marshall","remember","cry","guy","hard","drug","line","change","minute","motherfucking","party","forget","jump","pop","rock","begin","grab","mad","smoke","step","late","light","lot","murder","drive","piss","top","wake","watch","flip","school","set","sound","car","close","straight","mine","music","quit","drink","gun","hair","nut","daddy","follow","front","knock","mic","mouth","wrong","fan","hop","listen","pen","sleep","bed","bottom","fly","hollywood","miss","momma","shut","pill","road","sell","slut","chance","flow","hailie","woman","fack","fore","move","pick","tear","2","america","crack","father","pee","reason","shoe","check","couple","don","foot","kiss","matter","million","roll","scratch","sign","blood","care","dream","record","soul","trash","window","bottle","fault","goddamn","lady","mathers","mother","ready","save","soldier","true","woulda","darkness","grind","homie","ill","nah","nice","ooh","outta","round","swear","tape","wall","buy","club","corner","money","motherfucker","rain","raise","street","suppose","bet","fast","fun","hip","pain","send","air","bear","cop","da","dog","hang","happy","insane","lay","mama","shot","woo","bye","dark","devil","finger","hot","knife","moment","picture","rappers","remind","ride","slap","throat","track","wee","album","alright","burn","chase","chick","cock","haha","kim","leg","park","rest","shake","single","son","touch","verse","win","block","cool","criminal","darling","doc","empty","excuse","goin","monster","neck","offend","pay"],"freq":[343,324,263,212,190,181,173,170,168,158,144,143,141,141,138,134,132,130,129,129,126,125,123,114,113,112,108,107,107,105,103,101,101,100,97,93,92,91,91,87,87,87,86,86,85,85,84,80,80,80,79,79,79,79,77,77,76,75,75,74,73,73,73,73,72,72,71,71,70,70,70,70,70,69,69,68,68,68,66,66,65,64,64,64,64,64,63,62,61,60,60,60,60,60,60,59,59,58,56,55,55,55,55,55,55,54,54,54,54,53,53,53,52,52,51,51,51,51,50,50,50,50,49,49,49,49,49,48,48,48,48,46,46,46,46,46,45,45,45,45,44,44,44,43,43,43,42,42,42,42,41,41,41,41,41,41,41,40,40,40,40,40,39,39,39,39,39,39,39,38,38,38,38,37,37,37,37,36,36,36,36,36,35,35,35,35,35,35,35,34,34,34,34,34,34,34,34,34,34,33,33,33,33,33,33,33,32,32,32,32,32,32,32,32,32,32,32,31,31,31,31,31,31,31,31,31,31,31,31,30,30,30,30,30,30,30,30,30,29,29,29,29,29,29,28,28,28,28,28,28,28,28,28,28,28,28,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,25,25,25,25,25,25,25,25,25,25,25,25],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0,"weightFactor":0.262390670553936,"backgroundColor":"white","gridSize":0,"minRotation":-0.785398163397448,"maxRotation":0.785398163397448,"shuffle":true,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":[]}</script>
+<p>Let’s also try out letter clouds</p>
+<pre class="r"><code>letterCloud(words_total[1:300,], word=&quot;EMINEM&quot;, size=2)</code></pre>
+<p><div id="htmlwidget-2" style="width:672px;height:480px;" class="wordcloud2 html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"word":["time","feel","love","leave","shady","girl","day","call","baby","world","life","kill","bad","hit","run","start","head","hear","blow","stop","guess","slim","people","word","rap","kid","stand","hate","walk","beat","boy","break","shoot","white","play","crazy","throw","fall","talk","dre","lose","pull","hold","wait","die","goodbye","song","god","mom","stick","brain","game","sit","superman","eat","mind","hand","friend","grow","lie","bout","hope","rhyme","tonight","live","write","drop","home","eye","hell","meet","sick","sing","fire","huh","night","scream","spit","bite","cold","hurt","body","dad","dead","door","evil","kick","half","real","ball","catch","damn","dance","fight","inside","black","suck","house","stay","act","cut","eminem","happen","heart","tire","bring","floor","marshall","remember","cry","guy","hard","drug","line","change","minute","motherfucking","party","forget","jump","pop","rock","begin","grab","mad","smoke","step","late","light","lot","murder","drive","piss","top","wake","watch","flip","school","set","sound","car","close","straight","mine","music","quit","drink","gun","hair","nut","daddy","follow","front","knock","mic","mouth","wrong","fan","hop","listen","pen","sleep","bed","bottom","fly","hollywood","miss","momma","shut","pill","road","sell","slut","chance","flow","hailie","woman","fack","fore","move","pick","tear","2","america","crack","father","pee","reason","shoe","check","couple","don","foot","kiss","matter","million","roll","scratch","sign","blood","care","dream","record","soul","trash","window","bottle","fault","goddamn","lady","mathers","mother","ready","save","soldier","true","woulda","darkness","grind","homie","ill","nah","nice","ooh","outta","round","swear","tape","wall","buy","club","corner","money","motherfucker","rain","raise","street","suppose","bet","fast","fun","hip","pain","send","air","bear","cop","da","dog","hang","happy","insane","lay","mama","shot","woo","bye","dark","devil","finger","hot","knife","moment","picture","rappers","remind","ride","slap","throat","track","wee","album","alright","burn","chase","chick","cock","haha","kim","leg","park","rest","shake","single","son","touch","verse","win","block","cool","criminal","darling","doc","empty","excuse","goin","monster","neck","offend","pay"],"freq":[343,324,263,212,190,181,173,170,168,158,144,143,141,141,138,134,132,130,129,129,126,125,123,114,113,112,108,107,107,105,103,101,101,100,97,93,92,91,91,87,87,87,86,86,85,85,84,80,80,80,79,79,79,79,77,77,76,75,75,74,73,73,73,73,72,72,71,71,70,70,70,70,70,69,69,68,68,68,66,66,65,64,64,64,64,64,63,62,61,60,60,60,60,60,60,59,59,58,56,55,55,55,55,55,55,54,54,54,54,53,53,53,52,52,51,51,51,51,50,50,50,50,49,49,49,49,49,48,48,48,48,46,46,46,46,46,45,45,45,45,44,44,44,43,43,43,42,42,42,42,41,41,41,41,41,41,41,40,40,40,40,40,39,39,39,39,39,39,39,38,38,38,38,37,37,37,37,36,36,36,36,36,35,35,35,35,35,35,35,34,34,34,34,34,34,34,34,34,34,33,33,33,33,33,33,33,32,32,32,32,32,32,32,32,32,32,32,31,31,31,31,31,31,31,31,31,31,31,31,30,30,30,30,30,30,30,30,30,29,29,29,29,29,29,28,28,28,28,28,28,28,28,28,28,28,28,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,25,25,25,25,25,25,25,25,25,25,25,25],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0,"weightFactor":1.04956268221574,"backgroundColor":"white","gridSize":0,"minRotation":-0.785398163397448,"maxRotation":0.785398163397448,"shuffle":true,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":"data:image/png;base64,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Y4hlciCxv16fxzMDqRV9RiA7hlhGB3K+v55tr28XSGwgQwLZMMRyORD4JREIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCIT/A4kIwQks/x40AAAAAElFTkSuQmCC","hover":null},"evals":[],"jsHooks":[]}</script>
+Or maybe not, since nothing’s showing up.</p>
+</div>
+<div id="word-length" class="section level4">
+<h4>Word length</h4>
+<p>Word length is also an interesting one to look at.</p>
+<pre class="r"><code>word_lengths&lt;-lyrics %&gt;%
+  unnest_tokens(word, lyric) %&gt;%
+  select(song_name, album, word) %&gt;%
+  group_by(song_name, album) %&gt;%
+  distinct() %&gt;%
+  mutate(word_length=nchar(word)) %&gt;%
+  ungroup() %&gt;%
+  arrange(-word_length)
+
+word_lengths</code></pre>
+<pre><code>## # A tibble: 47,496 x 4
+##    song_name       album                  word                       word_length
+##    &lt;chr&gt;           &lt;chr&gt;                  &lt;chr&gt;                            &lt;int&gt;
+##  1 Almost Famous   Recovery               antidisestablishmentarian~          28
+##  2 Marsh           Music To Be Murdered ~ extraterrestrial                    16
+##  3 My Name Is      The Slim Shady LP      extraterrestrial                    16
+##  4 Unaccommodating Music To Be Murdered ~ unaccommodating                     15
+##  5 Farewell        Music To Be Murdered ~ unconditionally                     15
+##  6 Lucky You       Kamikaze               methamphetamine                     15
+##  7 Like Home       Revival                charlottesville                     15
+##  8 The Monster     The Marshall Mathers ~ interventionist                     15
+##  9 The Monster     The Marshall Mathers ~ rumpelstiltskin                     15
+## 10 Desperation     The Marshall Mathers ~ roethlissplurge                     15
+## # ... with 47,486 more rows</code></pre>
+<pre class="r"><code>summary(word_lengths)</code></pre>
+<pre><code>##   song_name            album               word            word_length    
+##  Length:47496       Length:47496       Length:47496       Min.   : 1.000  
+##  Class :character   Class :character   Class :character   1st Qu.: 3.000  
+##  Mode  :character   Mode  :character   Mode  :character   Median : 4.000  
+##                                                           Mean   : 4.642  
+##                                                           3rd Qu.: 6.000  
+##                                                           Max.   :28.000</code></pre>
+<pre class="r"><code>word_lengths %&gt;%
+  count(word_length, sort=TRUE) %&gt;%
+  ggplot(aes(x=word_length, y=n)) +
+  geom_col(show.legend=F, fill=&quot;lightblue&quot;, 
+           color=&quot;black&quot;) +
+  xlab(&quot;word length&quot;) + ylab(&quot;word count&quot;) +
+  ggtitle(&quot;word length distribution&quot;)+
+  theme_bw()</code></pre>
+<p><img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p>Here we see that 4 letter words are highest used. The distribution has a slightly long right tail and an outlier which is the 28 letter word, disestablishmenteranism (or sth like that).<br />
+We can create word clouds for this as well.</p>
+<pre class="r"><code># wordlength word cloud
+wl_wc&lt;-word_lengths %&gt;%
+  ungroup() %&gt;%
+  select(word, word_length) %&gt;%
+  distinct() %&gt;%
+  arrange(-word_length)
+
+wordcloud2(wl_wc[1:300,],
+           size=.15, minSize=.0005,
+           ellipticity=0.3, rotateRatio=1,
+           fontWeight=&quot;bold&quot;)</code></pre>
+<div id="htmlwidget-3" style="width:672px;height:480px;" class="wordcloud2 html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3">{"x":{"word":["antidisestablishmentarianism","extraterrestrial","unaccommodating","unconditionally","methamphetamine","charlottesville","interventionist","rumpelstiltskin","roethlissplurge","blblblblblblblb","alphabetically","subconsciously","benzodiazepine","slaughterhouse","responsibility","disappointment","understandable","discrimination","straightjacket","metaphorically","roethlisberger","pharmaceutical","worcestershire","administration","schwarzenegger","schottenheimer","motherfucking","motherfuckers","butterfingers","uncomfortable","acetaminophen","unpredictable","disrespectful","collaborative","mitochondrial","inconvenience","entertainment","reprehensible","consideration","inadvertently","inappropriate","misunderstand","superstitious","encouragement","mothafreaking","psychological","differentiate","unfashionable","chronological","unfortunately","predominantly","schizophrenic","embarrassment","confrontation","metamorphosis","intentionally","hypochondriac","irresponsible","promethazine","mythological","motherfucker","surveillance","gynecologist","accidentally","backstabbing","relationship","mispronounce","indefensible","frankenstein","mothafucking","circumstance","neighborhood","subconscious","irreversible","recollection","thoroughbred","narcissistic","streetrunner","michelangelo","noncompliant","psychologist","carheartless","disastrously","motherfuckin","encyclopedia","rekcufrehtom","chloraseptic","conversation","sledgehammer","individually","specifically","thunderstorm","subliminally","bloodsucking","helplessness","bloodstained","hallucinogen","manslaughter","stomachaches","thanksgiving","heterosexual","intervention","prescription","refrigerator","unbelievable","scissorhands","straitjacket","imprisonment","occasionally","receptionist","resurrection","entrepreneur","buttersworth","mouseketeers","knuckleheads","discriminate","misinterpret","registration","heterophobic","malnourished","pathological","intelligence","collaboratin","contemplate","abracadabra","responsible","everythings","courvoisier","blockbuster","undebatable","unavoidable","californian","emotionally","empowerment","counterfeit","descriptive","disgruntled","cunnilingus","inseparable","combination","contingency","unholstered","misconstrue","porterhouse","charlamagne","recognition","terrestrial","immediately","bulletproof","trainwrecks","freestyling","concentrate","competition","translation","rectangular","expectation","firecracker","incorporate","improvement","unrealistic","instinctive","destruction","springsteen","untouchable","financially","environment","unconscious","sacrificial","dangerfield","appropriate","transgender","wherewithal","mockingbird","backstabbed","personality","destructive","disassemble","implication","insinuation","speedometer","convenience","arraignment","chainsawing","description","interracial","opportunity","mothafucker","flirtatious","arrivederci","explanation","appointment","spectacular","acknowledge","entertainin","controversy","millionaire","screwdriver","differently","backhanding","shakespeare","attractable","uncrackable","masterfully","masterpiece","immortality","underground","demonstrate","sympathetic","imagination","predicament","independent","reupholster","anniversary","bittersweet","vanvonderen","sleepwalkin","plasticware","inspiration","playstation","subdivision","symptomatic","storytellin","grandbabies","deteriorate","nightmarish","treacherous","desperation","certificate","supervision","proposition","cocksucking","discouragin","bloodthirst","bomboclaats","familiarize","conditionin","indigestion","catchphrase","reintroduce","complicatin","undoubtably","cocksuckers","technically","cinderfella","perfectness","unfortunate","defenseless","frankfurter","resuscitate","rotisseried","clairvoyant","participate","pandemonium","reciprocate","unstoppable","acupuncture","equilibrium","nickelodeon","sentimental","practically","christopher","intercourse","temperature","thermometer","hydrocodone","suppository","speculation","credibility","vanglorious","publication","indivisible","blasphemous","quarterback","resemblance","molestation","jackrabbits","coincidence","centerpiece","beautifully","catastrophe","kirkpatrick","suspenseful","religiously","fingerprint","entertainer","amoxicillin","afghanistan","sensational","babysitting","accountable","consequence","backstabbin","grandmother","chickenhawk","deformative","alternative","connecticut","unfurnished","comfortable","spontaneous"],"freq":[28,16,15,15,15,15,15,15,15,15,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0.0005,"weightFactor":0.964285714285714,"backgroundColor":"white","gridSize":0,"minRotation":-0.785398163397448,"maxRotation":0.785398163397448,"shuffle":true,"rotateRatio":1,"shape":"circle","ellipticity":0.3,"figBase64":null,"hover":null},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="lexical-diversity-and-density" class="section level4">
+<h4>Lexical diversity and density</h4>
+<p>An <a href="https://consequenceofsound.net/2014/05/which-rapper-has-the-biggest-vocabulary/">article</a>, touched on this topic. In the first 35k words, Eminem used 4,480 unique words. Let’s see if this holds across his 10 albums.</p>
+<pre class="r"><code>lyrics %&gt;%
+  unnest_tokens(word, lyric) %&gt;%
+  summarise(unique=n_distinct(word))</code></pre>
+<pre><code>## # A tibble: 1 x 1
+##   unique
+##    &lt;int&gt;
+## 1   7915</code></pre>
+<p>We got 7915 unique words. This is not including non-studio album songs. Let’s see how this trends across albums</p>
+<pre class="r"><code>lexical_diversity_per_album&lt;-lyrics %&gt;%
+  unnest_tokens(word, lyric) %&gt;%
+  group_by(song_name, album, album_year) %&gt;%
+  summarize(lex_diversity=n_distinct(word)) %&gt;%
+  # mutate(album=reorder(album, album_year)) %&gt;%
+  arrange(-lex_diversity) %&gt;%
+  ungroup()
+
+# lex diversity plot
+lexical_diversity_per_album %&gt;%
+  ggplot(aes(album_year, lex_diversity)) +
+  geom_point(color=&quot;red&quot;, size=4, alpha=.4) +
+  stat_smooth(color=&quot;black&quot;, se=TRUE, method=&quot;lm&quot;) +
+  geom_smooth(aes(x=album_year, y=lex_diversity), se=FALSE, color=&quot;blue&quot;, lwd=2) +
+  ggtitle(&quot;Lexical diversity&quot;) +
+  ylab(&quot;&quot;) + xlab(&quot;&quot;) +
+  theme_bw()</code></pre>
+<p><img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-34-1.png" width="672" />
+There’s a slight increase in lexical diversity across album time. Surprisingly, his latest album Music To Be Murdered By as a lower lexical diversity than his previus two. MMLP2, Kamikaze, and Revival have the highest ones.</p>
+<p>To contrast, we can also check lexical density. How many unique words he uses</p>
+<pre class="r"><code>## LEXICAL DENSITY
+lexical_density_per_album &lt;- lyrics %&gt;%
+  unnest_tokens(word, lyric) %&gt;%
+  group_by(song_name, album, album_year) %&gt;%
+  summarize(lex_density=n_distinct(word)/n()) %&gt;%
+  arrange(-lex_density) %&gt;%
+  ungroup()
+
+lexical_density_per_album</code></pre>
+<pre><code>## # A tibble: 164 x 4
+##    song_name            album                   album_year lex_density
+##    &lt;chr&gt;                &lt;chr&gt;                   &lt;date&gt;           &lt;dbl&gt;
+##  1 Session One          Recovery                2010-06-18       0.585
+##  2 When the Music Stops The Eminem Show         2002-05-26       0.548
+##  3 Yah Yah              Music To Be Murdered By 2020-01-17       0.538
+##  4 Remember Me?         The Marshall Mathers LP 2000-05-23       0.528
+##  5 Good Guy             Kamikaze                2018-08-31       0.527
+##  6 Nice Guy             Kamikaze                2018-08-31       0.503
+##  7 Bad Meets Evil       The Slim Shady LP       1999-02-23       0.490
+##  8 Bitch Please II      The Marshall Mathers LP 2000-05-23       0.482
+##  9 You Gon’ Learn       Music To Be Murdered By 2020-01-17       0.481
+## 10 Lock It Up           Music To Be Murdered By 2020-01-17       0.477
+## # ... with 154 more rows</code></pre>
+<pre class="r"><code># plot 
+lexical_density_per_album %&gt;%
+  ggplot(aes(album_year, lex_density)) +
+  geom_point(color=&quot;green&quot;, alpha=0.4, size=4, position=&quot;jitter&quot;) +
+  stat_smooth(color=&quot;black&quot;, se=FALSE, method=&quot;lm&quot;) +
+  geom_smooth(se=FALSE, color=&quot;blue&quot;, lwd=2) +
+  ggtitle(&quot;Lexical density&quot;) + xlab(&quot;&quot;) + ylab(&quot;&quot;) +
+  theme_bw()</code></pre>
+<p><img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-35-1.png" width="672" />
+Lexical density shows a slightly higher increase over time. The latest album is also up there as well. Which makes me wonder, what are the total number of words per album</p>
+<pre class="r"><code>lyrics %&gt;%
+  unnest_tokens(word, lyric) %&gt;%
+  group_by(album) %&gt;%
+  count() %&gt;%
+  arrange(-n)</code></pre>
+<pre><code>## # A tibble: 10 x 2
+## # Groups:   album [10]
+##    album                        n
+##    &lt;chr&gt;                    &lt;int&gt;
+##  1 The Marshall Mathers LP2 19918
+##  2 Recovery                 15649
+##  3 Encore                   15173
+##  4 Relapse                  14669
+##  5 Revival                  13244
+##  6 The Marshall Mathers LP  11996
+##  7 Music To Be Murdered By  11888
+##  8 The Eminem Show          11871
+##  9 The Slim Shady LP        11169
+## 10 Kamikaze                  9251</code></pre>
+</div>
+<div id="tf-idf" class="section level4">
+<h4>tf-idf</h4>
+<p>Here we use tidytext’s bind_tf_idf function in a neat way to find the tf-idf for each of these words - tf-idf is a measure of how important a word is to a particular document. If a word is used frequently across all albums, then it’s not indicative of any particular album. But if a word is used in only one album relatively frequently, then we can think of this word as of significance to that album.</p>
+<pre class="r"><code>lyrics_tf_idf &lt;- lyrics %&gt;%
+  unnest_tokens(word, lyric) %&gt;%
+  distinct() %&gt;%
+  count(album, word, sort=TRUE) %&gt;%
+  ungroup() %&gt;%
+  bind_tf_idf(word, album, n) %&gt;%
+  arrange(-tf_idf)
+lyrics_tf_idf</code></pre>
+<pre><code>## # A tibble: 20,414 x 6
+##    album                   word          n      tf   idf  tf_idf
+##    &lt;chr&gt;                   &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+##  1 The Eminem Show         hollywood    39 0.00363  2.30 0.00836
+##  2 Kamikaze                fack         18 0.00208  1.61 0.00335
+##  3 The Slim Shady LP       dada         14 0.00135  2.30 0.00311
+##  4 Recovery                seduction    18 0.00125  2.30 0.00288
+##  5 Music To Be Murdered By darkness     26 0.00235  1.20 0.00283
+##  6 The Marshall Mathers LP dum          13 0.00120  2.30 0.00276
+##  7 Encore                  erra         16 0.00117  2.30 0.00269
+##  8 The Slim Shady LP       mushroom     12 0.00116  2.30 0.00266
+##  9 Relapse                 darling      21 0.00156  1.61 0.00250
+## 10 The Slim Shady LP       chka         16 0.00154  1.61 0.00248
+## # ... with 20,404 more rows</code></pre>
+<p>Let’s get the words with top tf-idf</p>
+<pre class="r"><code>top_tf_idf &lt;- lyrics_tf_idf %&gt;%
+  arrange(-tf_idf) %&gt;%
+  mutate(word = factor(word, levels = rev(unique(word)))) %&gt;%
+  group_by(album) %&gt;%
+  slice(seq_len(8)) %&gt;%
+  ungroup() %&gt;%
+  arrange(album, tf_idf) %&gt;%
+  mutate(row=row_number())
+  
+top_tf_idf</code></pre>
+<pre><code>## # A tibble: 80 x 7
+##    album    word        n       tf   idf   tf_idf   row
+##    &lt;chr&gt;    &lt;fct&gt;   &lt;int&gt;    &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;
+##  1 Encore   provide     5 0.000365 2.30  0.000841     1
+##  2 Encore   journey     6 0.000438 2.30  0.00101      2
+##  3 Encore   nifty       6 0.000438 2.30  0.00101      3
+##  4 Encore   ah         29 0.00212  0.511 0.00108      4
+##  5 Encore   episode     7 0.000511 2.30  0.00118      5
+##  6 Encore   mosh        8 0.000584 2.30  0.00134      6
+##  7 Encore   weenie      8 0.000584 2.30  0.00134      7
+##  8 Encore   erra       16 0.00117  2.30  0.00269      8
+##  9 Kamikaze amend       3 0.000347 2.30  0.000798     9
+## 10 Kamikaze feature     3 0.000347 2.30  0.000798    10
+## # ... with 70 more rows</code></pre>
+<p>Let’s plot this to visualize it.</p>
+<pre class="r"><code>top_tf_idf %&gt;%
+  ggplot(aes(x=row, y=tf_idf, fill=album)) +
+  geom_col(show.legend=FALSE) +
+  labs(x=NULL, y=&quot;TF-IDF&quot;) +
+  ggtitle(&quot;Most important words using tf-idf by album&quot;) +
+  theme_bw() +
+  facet_wrap(~album, scales=&quot;free&quot;, ncol=3) +
+  scale_x_continuous(breaks=top_tf_idf$row,
+                     labels=top_tf_idf$word) +
+  coord_flip()</code></pre>
+<p><img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+</div>
+<div id="comparing-word-usage" class="section level4">
+<h4>Comparing word usage</h4>
+<p>Here I’m trying to find out which albums show up in which albums. We do this using log odds ratio. We wrap that process in a function.</p>
+<pre class="r"><code>get_log_odds&lt;-function(dat, album1, album2){
+  album1&lt;-enquo(album1)
+  album2&lt;-enquo(album2)
+  
+  word_ratios&lt;-dat %&gt;%
+    count(word, album) %&gt;%
+    group_by(word) %&gt;%
+    filter(sum(n)&gt;10) %&gt;%
+    ungroup() %&gt;%
+    spread(album, n, fill=0) %&gt;%
+    mutate_if(is.numeric, list(~(. + 1)/(sum(.)+1))) %&gt;%
+    mutate(logratio=log(!!album1/!!album2)) %&gt;%
+    arrange(desc(logratio)) %&gt;%
+    select(word, !!album1, !!album2, logratio)
+  
+  word_ratios
+}
+
+word_ratios&lt;-get_log_odds(lyrics_filtered, `The Marshall Mathers LP`, `The Marshall Mathers LP2`)</code></pre>
+<pre class="r"><code>plot_log_odds&lt;-function(word_ratios, album1, album2){
+  # album1&lt;-enquo(album1)
+  # album2&lt;-enquo(album2)
+  
+  word_ratios %&gt;%
+    group_by(logratio&lt;0) %&gt;%
+    top_n(15, abs(logratio)) %&gt;%
+    ungroup() %&gt;%
+    mutate(word = reorder(word, logratio)) %&gt;%
+    ggplot(aes(word, logratio, fill=logratio&lt;0)) +
+    geom_col(show.legend = FALSE) +
+    coord_flip() + theme_bw() +
+    ylab(paste0(&quot;log odds ratio (&quot;, album1,&quot;/&quot;, album2,&quot;)&quot; )) +
+    scale_fill_discrete(name=&quot;&quot;, labels=c(album1, album2))
+}</code></pre>
+<pre class="r"><code>plot_log_odds&lt;-function(word_ratios, album1, album2){
+  # album1&lt;-enquo(album1)
+  # album2&lt;-enquo(album2)
+  
+  word_ratios %&gt;%
+    group_by(logratio&lt;0) %&gt;%
+    top_n(15, abs(logratio)) %&gt;%
+    ungroup() %&gt;%
+    mutate(word = reorder(word, logratio)) %&gt;%
+    ggplot(aes(word, logratio, fill=logratio&lt;0)) +
+    geom_col(show.legend = FALSE) +
+    coord_flip() + theme_bw() +
+    ylab(paste0(&quot;log odds ratio (&quot;, album1,&quot;/&quot;, album2,&quot;)&quot; )) +
+    scale_fill_discrete(name=&quot;&quot;, labels=c(album1, album2))
+}
+plot_log_odds(word_ratios, &quot;The Marshall Mathers LP&quot;, &quot;The Marshall Mathers LP2&quot;)</code></pre>
+<p><img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+</div>
+</div>
+<div id="references" class="section level3 unnumbered">
+<h3>References</h3>
+<div id="refs" class="references hanging-indent">
+<div id="ref-Rspotify">
+<p>Dantas, Tiago Mendes. 2018. <em>Rspotify: Access to Spotify Api</em>. <a href="https://CRAN.R-project.org/package=Rspotify">https://CRAN.R-project.org/package=Rspotify</a>.</p>
+</div>
+<div id="ref-geniusr">
+<p>Henderson, Ewen. 2020. <em>Geniusr: Tools for Working with the ’Genius’ Api</em>. <a href="https://CRAN.R-project.org/package=geniusr">https://CRAN.R-project.org/package=geniusr</a>.</p>
+</div>
+<div id="ref-tidytext">
+<p>Silge, Julia, and David Robinson. 2016. “Tidytext: Text Mining and Analysis Using Tidy Data Principles in R.” <em>JOSS</em> 1 (3). <a href="https://doi.org/10.21105/joss.00037">https://doi.org/10.21105/joss.00037</a>.</p>
+</div>
+<div id="ref-ggplot2">
+<p>Wickham, Hadley. 2016. <em>Ggplot2: Elegant Graphics for Data Analysis</em>. Springer-Verlag New York. <a href="https://ggplot2.tidyverse.org">https://ggplot2.tidyverse.org</a>.</p>
+</div>
+<div id="ref-dplyr">
+<p>Wickham, Hadley, Romain François, Lionel Henry, and Kirill Müller. 2020. <em>Dplyr: A Grammar of Data Manipulation</em>. <a href="https://CRAN.R-project.org/package=dplyr">https://CRAN.R-project.org/package=dplyr</a>.</p>
+</div>
+</div>
 </div>
 <div id="disqus_thread"></div>
 <script type="application/javascript">

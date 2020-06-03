@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Notes on Desmond Tuiyot</title>
+    <link>/tags/notes/</link>
+    <description>Recent content in Notes on Desmond Tuiyot</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 24 May 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/notes/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Notes On Everything</title>
+      <link>/2020/05/24/notes-on-everything/</link>
+      <pubDate>Sun, 24 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/05/24/notes-on-everything/</guid>
+      <description>StatisticsProbabilityMachine LearningAlgorithms &amp;amp; Data StructuresPythonRShinyInputs &amp;amp; OutputsInputstextInput()
+sliderInput()
+selectInput()
+numericalInput()
+dateRangeInput()
+all inputs have the format
+__input(&amp;quot;inputId&amp;quot;,&amp;quot;label&amp;quot;,unique_param1, unique_param2, ...)Render FunctionsRender functions are used to built outputs in the server based oninputs and possibly other stuff
+renderText()renderTable()renderImage()renderPlot()Output FunctionsOutput functions are used in the ui to display the result built byrender functions in the server</description>
+    </item>
+    
+  </channel>
+</rss>

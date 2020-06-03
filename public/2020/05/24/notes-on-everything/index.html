@@ -1,0 +1,288 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Desmond Tuiyot - Notes On Everything </title>
+    
+    
+    <meta content="Data Analysis, Notes, Random, Statistics, Personal Notes" name="keywords">
+    
+    <meta content="Desmond Tuiyot - StatisticsProbabilityMachine LearningAlgorithms &amp; Data StructuresPythonRShinyInputs &amp; OutputsInputstextInput()
+sliderInput()
+selectInput()
+numericalInput()
+dateRangeInput()
+all inputs have the format
+__input(&quot;inputId&quot;,&quot;label&quot;,unique_param1, unique_param2, ...)Render FunctionsRender functions are used to built outputs in the server based oninputs and possibly other stuff
+renderText()renderTable()renderImage()renderPlot()Output FunctionsOutput functions are used in the ui to display the result built byrender functions in the server" name="description">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    
+        <link rel="icon" href="/image/favicon.ico">
+    
+
+    
+
+    
+
+    
+    
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+    
+
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <link rel="stylesheet" href="/self/css/default.css">
+    <script async src="/layui/layui.js"></script>
+
+    <link rel="stylesheet" async href="/self/css/markdown.min.css">
+    <link rel="stylesheet" async href="/self/css/gallery.css">
+    
+    
+    
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
+    <script async src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.0/lazysizes.min.js" integrity="sha256-h2tMEmhemR2IN4wbbdNjj9LaDIjzwk2hralQwfJmBOE=" crossorigin="anonymous"></script></head>
+
+<body>
+    
+    <header class="layui-header layui-bg-cyan">
+
+    
+    
+    <a class="nav-self-logo" href="/">
+        Desmond Tuiyot
+    </a>
+
+    <ul class="layui-nav layui-layout-right layui-bg-cyan" lay-filter="">
+        
+        
+        <li class="layui-nav-item" id="nav_big"><a href="/post/">Posts</a></li>
+        
+
+        
+            
+                <li class="layui-nav-item" id="nav_big"><a href="/about/">About</a></li>
+            
+                <li class="layui-nav-item" id="nav_big"><a href="https://github.com/desmond-tuiyot">GitHub</a></li>
+            
+                <li class="layui-nav-item" id="nav_big"><a href="https://linkedin.com/desmond-tuiyot">LinkedIn</a></li>
+            
+                <li class="layui-nav-item" id="nav_big"><a href="https://twitter.com/desmond_tuiyot">Twitter</a></li>
+            
+        
+
+        
+        <li class="layui-nav-item" id="nav_small">
+            <a href="javascript:;">
+                <i class="layui-icon layui-icon-app" style="font-size: 24px;"></i>
+            </a>
+
+            <dl class="layui-nav-child">
+                
+                <dd><a href="/post/">Posts</a></dd>
+                
+
+                
+                    
+                        <dd><a href="/about/">About</a></dd>
+                    
+                        <dd><a href="https://github.com/desmond-tuiyot">GitHub</a></dd>
+                    
+                        <dd><a href="https://linkedin.com/desmond-tuiyot">LinkedIn</a></dd>
+                    
+                        <dd><a href="https://twitter.com/desmond_tuiyot">Twitter</a></dd>
+                    
+                
+            </dl>
+        </li>
+    </ul>
+</header>
+
+<script>
+layui.use('element', function(){
+  var element = layui.element;
+});
+</script>
+        <div id="content" style="min-height:80%">
+<div class="layui-container" style="margin-bottom: 10px">
+    
+
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md12 layui-col-sm12 layui-col-xs12">
+            <div class="layui-card single-card">
+                <br />
+                <blockquote class="self-elem-quote  markdown-body single-title" >
+                    <h1>Notes On Everything</h1>
+                    <h3 style="margin-top:10px; margin-bottom:10px"> 
+    <i class="layui-icon layui-icon-date" style="font-size: 28px; vertical-align: -2px;"></i>
+    <span>2020-05-24</span>
+
+    
+     
+    <i class="layui-icon layui-icon-list" style="font-size: 32px; vertical-align: -3px;"></i>
+    
+
+    
+        <a href="/categories/statistics/">
+            <span class="layui-badge " style="vertical-align: 2px;">Statistics</span>
+        </a>
+    
+        <a href="/categories/personal-notes/">
+            <span class="layui-badge " style="vertical-align: 2px;">Personal Notes</span>
+        </a>
+    
+
+    
+    <i class="layui-icon layui-icon-tabs" style="font-size: 22px; vertical-align: 1px;"></i>
+    
+    
+        <a href="/tags/data-analysis/">
+            <span class="layui-badge " style="vertical-align: 2px;">Data Analysis</span>
+        </a>
+    
+        <a href="/tags/notes/">
+            <span class="layui-badge " style="vertical-align: 2px;">Notes</span>
+        </a>
+    
+        <a href="/tags/random/">
+            <span class="layui-badge " style="vertical-align: 2px;">Random</span>
+        </a>
+    
+    
+</h3>
+                </blockquote>
+                <div class="layui-card-body markdown-body single-content">
+                    
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="statistics" class="section level2">
+<h2>Statistics</h2>
+</div>
+<div id="probability" class="section level2">
+<h2>Probability</h2>
+</div>
+<div id="machine_learning" class="section level2">
+<h2>Machine Learning</h2>
+</div>
+<div id="algos_data_structures" class="section level2">
+<h2>Algorithms &amp; Data Structures</h2>
+</div>
+<div id="python" class="section level2">
+<h2>Python</h2>
+</div>
+<div id="rshiny" class="section level2">
+<h2>RShiny</h2>
+<div id="inputs-outputs" class="section level3">
+<h3>Inputs &amp; Outputs</h3>
+<div id="inputs" class="section level4">
+<h4>Inputs</h4>
+<p>textInput()<br />
+sliderInput()<br />
+selectInput()<br />
+numericalInput()<br />
+dateRangeInput()<br />
+all inputs have the format</p>
+<pre class="r"><code>__input(&quot;inputId&quot;,
+        &quot;label&quot;,
+        unique_param1, unique_param2, ...)</code></pre>
+</div>
+<div id="render-functions" class="section level4">
+<h4>Render Functions</h4>
+<p>Render functions are used to built outputs in the server based on
+inputs and possibly other stuff</p>
+<pre class="r"><code>renderText()
+renderTable()
+renderImage()
+renderPlot()</code></pre>
+</div>
+<div id="output-functions" class="section level4">
+<h4>Output Functions</h4>
+<p>Output functions are used in the ui to display the result built by
+render functions in the server</p>
+<pre class="r"><code>textOutput()
+plotOutput()
+tableOutput() or dataTableOutput()
+imageOutput()</code></pre>
+<div id="non-shiny-output-and-render-functions" class="section level5">
+<h5>Non-shiny output and render functions</h5>
+<p>DT, leaflet, and plotly -&gt; interactive data tables, maps, and plots as Shiny outputs<br />
+In order to add an output to a Shiny app, we need to:<br />
+1. Create the output -&gt; could be a plot, table, string, etc
+2. Render the output in the <code>server</code> function using appropriate <code>Render___</code> function.
+3. Assign this render to a variable name prefixed with <code>output$___</code>
+3. Use the corresponding <code>___Output</code> and pass in the variable name
+### Layouts and Themes
+#### Layouts
+1. Sidebar layouts</p>
+<pre class="r"><code>sidebarLayout(
+  sidebarPanel(insert input/output here),
+  mainPanel(insert input/output here)
+)</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Tab layouts</li>
+</ol>
+<pre class="r"><code>sidebarLayout(
+  sidebarPanel(insert input/output here),
+  mainPanel(
+    
+    tabsetPanel(
+      tabPanel(),
+      tabPanel()
+    )
+  )
+)</code></pre>
+</div>
+</div>
+<div id="themes" class="section level4">
+<h4>Themes</h4>
+<p>Add a theme selector to your Ui</p>
+<pre class="r"><code>shinythemes::themeSelector()</code></pre>
+<p>Then you can add it to your U<br />
+### Building The App: A Process<br />
+1. Add inputs to the <code>ui()</code>
+2. Add outputs to the <code>ui()</code>/<code>server()</code>
+3. Modify the app layout in the <code>ui()</code>
+4. Update the output in the <code>server()</code> to incorporate the input<br />
+## References {#references}</p>
+</div>
+</div>
+</div>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "https-desmondtuiyot-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></div>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+
+        </div><footer>
+    
+    
+    <div class="layui-container">
+        <p class="copyright">&copy; All rights reserved. Powered by <a href='https://gohugo.io' style='color:#FFFFFF'>Hugo</a> and <a href='https://github.com/ertuil/erblog' style='color:#FFFFFF'>Erblog</a>.</p>
+    </div>
+</footer>
+</body>
+</html>

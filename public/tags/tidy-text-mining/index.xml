@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>tidy text mining on Desmond Tuiyot</title>
+    <title>Tidy Text Mining on Desmond Tuiyot</title>
     <link>/tags/tidy-text-mining/</link>
-    <description>Recent content in tidy text mining on Desmond Tuiyot</description>
+    <description>Recent content in Tidy Text Mining on Desmond Tuiyot</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 23 May 2020 00:00:00 +0000</lastBuildDate>
@@ -17,7 +17,7 @@
       <pubDate>Sat, 23 May 2020 00:00:00 +0000</pubDate>
       
       <guid>/2020/05/23/eminem-lyrics-analysis-nlp/</guid>
-      <description>This is a test post for my incoming blog, and a sneak peek to my first post. Given that it’s a test post, though, I reserve the right to write terribly.Eminem has been a phenomenon since The Slim Shady LP caught Dr. Dre’s ears. Throughout his career, Eminem has filled the airwaves with his thoughts and emotions. Here we perform an analysis on his lyrics in 2 parts.</description>
+      <description>IntroductionI happen to be a huge Eminem fan, so his recent tweets highlighting the anniversary of his Relapse albums and organizing a Spotify listening party for his prolific The Marshall Mathers LP got me rightfully excited. Being relatively new to text mining, I decided to dive into and explore his lyrics as a means to learn and apply various text mining techniques. This post is the first of a two-part analysis; stay tuned for the second one.</description>
     </item>
     
   </channel>
