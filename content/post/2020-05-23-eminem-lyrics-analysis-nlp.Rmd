@@ -49,6 +49,7 @@ You can find the code for data collection [here](https://github.com/desmond-tuiy
 original_lyrics<-read_csv("https://raw.githubusercontent.com/desmond-tuiyot/Eminem_Lyrics_Analysis/master/data/original_lyrics.csv")
 glimpse(original_lyrics)
 ```
+
 We have `9` variables and `16,523`. The observations here represent individual lines in for each song in Eminem's discrography. Importantly, the dataset is not currently in tidy text format. As described in the book [Tidy Text Mining](https://www.tidytextmining.com/), tidy text data format is such that each *variable* has its own column, and each *token* has its own row. A token here is a meaningful unit of text; in this analysis, we use a single word as a token.
 
 ### 3. Data Cleaning
@@ -224,6 +225,7 @@ words_total<-lyrics_filtered %>%
 
 words_total
 ```
+
 To no one's surprise, Eminem curses a lot. His most used words are `fuck` and `shit`, and at number 4 we have `bitch` as well. This might generate interesting insights in case we compare it to other rappers. But on its own, I doubt its usefulness. There are other 'non-useful words' that I have identified through manual exploration of the data set. Throughout any analysis, you will have to deal with uncertainty and make micro decisions like this along the way. It is possible that removing these words will affect other parts of the analysis significantly. For now, we remove these words. 
 
 ```{r}
@@ -245,7 +247,7 @@ words_total
 Eminem uses the words `love` and `feel` frequently, so we get the idea that some major topics in Eminem's songs are about love, emotions, and maybe relationships. Eminem has had many songs about relationships, although in most of them he portrays himself as being involved in a somewhat dysfunctional relationship. (See [Love The Way You Lie](https://www.youtube.com/watch?v=uelHwf8o7_U) and [Good Guy](https://www.youtube.com/watch?v=X-TkrWpO75k)). Eminem also uses `shady` frequently, so he is more likely to talks about his supposedly evil and unhinged alter-ego, Slim Shady.  
 We might be interested in the differences in word frequency across albums. Here we want to look at proportions, since absolute frequencies can lead to misleading conclusions.
 
-```{r}
+```{r }
 freq<-lyrics_filtered %>%
   count(album, word) %>%
   group_by(album) %>%
@@ -260,16 +262,18 @@ top10_freq<-freq %>%
   ungroup() %>%
   arrange(album, freq) %>%
   mutate(row = row_number())
-  
+```
+```{r fig.align="center", fig.height=8}
 top10_freq %>%
   ggplot(aes(row, freq, fill=album)) +
   geom_col(show.legend = FALSE) +
-  facet_wrap(~album, ncol=4, scales="free") +
+  facet_wrap(~album, ncol=3, scales="free") +
   scale_x_continuous(breaks=top10_freq$row, 
                      labels=top10_freq$word) + 
   coord_flip() +
   theme_bw()
 ```
+
 Here are some things we can note from this graph:  
 
 * Many of the frequently occurring words in these albums are simply those repeated in hooks and choruses. For example, in the album `Recovery`, we have `cold` and `blow`, which most likely comes from the song `Cold Wind Blows`. In the album `The Eminem Show`, we have `goodbye`, `hollywood` from `Say Goodbye Hollywood` and `superman` from, well, `Superman`. 
@@ -297,13 +301,14 @@ words_total %>%
   filter(word %in% c(drugs, "pill", "drug")) %>%
   count(wt=n)
 ```
+
 Here we combine all the names of the drugs with the words `drug` and `pill` and get the total count, which turns out to be `217`. This displaces `leave` at the number 4 spot, with a count of `212`.
 
 #### Zipf's law 
 In simple terms, this law states that given a corpus of natural language utterances, the frequency of each word is inversely proportional to its rank (rank measured in frequency). That implies that rank 1, the most used word, is used roughly twice as much as the rank 2 word, and 4 times as much as the rank 3 word, et cetera. See [this Wikipedia post](https://en.wikipedia.org/wiki/Zipf%27s_law) and [Chapter 3](https://www.tidytextmining.com/tfidf.html#zipfs-law) of Tidy Text Mining for a more in-depth explanation of this law. We can explore this concept with our word count data as well.
 First, let's check the distribution of words in our data set. In this case, we stick to the unfiltered lyrics (lyrics with `stop_words` and `unnecessary_words` present).
 
-```{r}
+```{r fig.align="center"}
 unfiltered_total<-lyrics %>%
   ungroup() %>% # previously grouped
   unnest_tokens(word, lyric) %>%
@@ -321,7 +326,7 @@ To the left of the distribution, we have a few popular words that are used most 
 A way to test whether a natural language dataset conforms to Zipf's law is to plot a rank-frequency graph, on a log-log scale. In this case, the plotted line should have a negative slope and, ideally, should be a straight line.  
 In this case, I want to see if different albums conform to zipfs law
 
-```{r}
+```{r fig.align="center"}
 albums_total<-lyrics %>%
   unnest_tokens(word, lyric) %>%
   count(album, word, sort=T) %>%
@@ -345,9 +350,11 @@ freq_by_rank %>%
   scale_y_log10() +
   theme_bw()
 ```
+
 The lines are not straight and have a slight curve, showing greater deviation towards the its extremes. Regardless, we see the inverse relationship between the rank of a term and its frequency. 
 
-#### Word correlation plots
+<!--
+#### Word correlation plots 
 Since I can only have a bivariate plot as far as correlations go, I wrote a function that takes in 2 album
 names and the frequency data frame, and returns a plot. Furthermore, in order to plot these two against each other, I would have to spread the data frame into a wide format - currently, we have `album` as one column, but we want a column for each album. We use `tidyr` spread for that.
 ```{r}
@@ -376,13 +383,13 @@ albums_corplot<-function(album1, album2, freq){
 }
 ```
 So we can call this function like so
-```{r}
+```{r fig.align="center"}
 albums_corplot(`The Slim Shady LP`, Revival, wide_freq)
 ```
 Instead of checking all the different albums (we'll have 90 pairwise combinations), we can check pairs which we might find interesting. 
 
 * MMLP2 was meant to be a sequel of sorts to MMLP. We should expect similarities to an extent
-```{r}
+```{r fig.align="center"}
 albums_corplot(`The Marshall Mathers LP`, `The Marshall Mathers LP2`, wide_freq)
 
 ```
@@ -457,7 +464,7 @@ wordcloud2(wl_wc[1:300,],
            fontWeight="bold")
 
 ```
-
+-->
 #### Lexical diversity and density
 An [article](https://consequenceofsound.net/2014/05/which-rapper-has-the-biggest-vocabulary/), touched on this topic. In the first 35k words, Eminem used 4,480 unique words. Let's see if this holds across his 10 albums.
 ```{r}
@@ -466,7 +473,7 @@ lyrics %>%
   summarise(unique=n_distinct(word))
 ```
 We got 7915 unique words. This is not including non-studio album songs. Let's see how this trends across albums
-```{r}
+```{r fig.align="center"}
 
 lexical_diversity_per_album<-lyrics %>%
   unnest_tokens(word, lyric) %>%
@@ -486,10 +493,11 @@ lexical_diversity_per_album %>%
   ylab("") + xlab("") +
   theme_bw()
 ```
+
 There's a slight increase in lexical diversity across album time. Surprisingly, his latest album Music To Be Murdered By as a lower lexical diversity than his previus two. MMLP2, Kamikaze, and Revival have the highest ones.  
 
 To contrast, we can also check lexical density. How many unique words he uses 
-```{r}
+```{r fig.align="center"}
 ## LEXICAL DENSITY
 lexical_density_per_album <- lyrics %>%
   unnest_tokens(word, lyric) %>%
@@ -509,6 +517,7 @@ lexical_density_per_album %>%
   ggtitle("Lexical density") + xlab("") + ylab("") +
   theme_bw()
 ```
+
 Lexical density shows a slightly higher increase over time. The latest album is also up there as well. Which makes me wonder, what are the total number of words per album
 
 ```{r}
@@ -531,7 +540,8 @@ lyrics_tf_idf <- lyrics %>%
   arrange(-tf_idf)
 lyrics_tf_idf
 ```
-Let's get the words with top tf-idf
+
+Let's get the words with top tf-idf, then plot and visualize it.
 
 ```{r}
 top_tf_idf <- lyrics_tf_idf %>%
@@ -542,11 +552,9 @@ top_tf_idf <- lyrics_tf_idf %>%
   ungroup() %>%
   arrange(album, tf_idf) %>%
   mutate(row=row_number())
-  
-top_tf_idf
 ```
-Let's plot this to visualize it.
-```{r}
+
+```{r fig.height=8, fig.align="center"}
 top_tf_idf %>%
   ggplot(aes(x=row, y=tf_idf, fill=album)) +
   geom_col(show.legend=FALSE) +
@@ -618,8 +626,9 @@ plot_log_odds<-function(word_ratios, album1, album2){
     ylab(paste0("log odds ratio (", album1,"/", album2,")" )) +
     scale_fill_discrete(name="", labels=c(album1, album2))
 }
+```
+```{r fig.align="center"}
 plot_log_odds(word_ratios, "The Marshall Mathers LP", "The Marshall Mathers LP2")
-
 ```
 
 ### References
