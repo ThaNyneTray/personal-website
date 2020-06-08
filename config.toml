@@ -1,10 +1,19 @@
 baseurl = "/"
 languageCode = "en-us"
+defaultcontentlanguage = "en"
 title = "Desmond Tuiyot"
-theme = "hugo-erblog"
+theme = "hugo-coder"
 googleAnalytics = ""
-disqusShortname = "https-desmondtuiyot-com"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+
+paginate = 20
+canonifyurls = true
+
+pygmentsstyle = "b2"
+pygmentscodefences = true
+pygmentscodefencesguesssyntax = true
+
+disqusShortname = "https-desmondtuiyot-com"
 
 [permalinks]
     post = "/:year/:month/:day/:slug/"
@@ -12,38 +21,70 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 [[menu.main]]
     name = "About"
     url = "/about/"
-[[menu.main]]
-    name = "GitHub"
-    url = "https://github.com/desmond-tuiyot"
-[[menu.main]]
-    name = "Twitter"
-    url = "https://twitter.com/desmond_tuiyot"
-[[menu.main]]
-    name = "LinkedIn"
-    url = "https://linkedin.com/desmond-tuiyot"
 
+[[menu.main]]
+    name = "Blog"
+    url  = "/post/"
+
+[[menu.main]]
+    name = "Projects"
+    url  = "/projects/"
+    
+    
 [params]
     author = "Desmond Tuiyot"
-    portrait = "image/desmond.png"
-    description = "Aspiring Software Engineer/Data Analyst"
-    bio = '''Hi. I'm a recent Computer Science graduate at Colgate University,
+    avatarurl = "image/desmond.png"
+    keywords = "blog, developer, personal, data analyst"
+    info = "Aspiring Software Engineer/Data Analyst"
+    #description = "My personal website and blog"
+    description = '''Hi. I'm a recent Computer Science graduate at Colgate University,
             with an interest in Software Engineering and Data Analysis. 
             I intend to document my projects and anything I learn in this blog.'''
+    
+    # footercontent = "Enter a text here."
+    
+    favicon_32 = "/image/icons/favicon-32x32.png"
+    favicon_16 = "/image/icons/favicon-16x16.png"
+    math = true
+    
+    dateformat = "January 2, 2006"
+
+    hideFooter = false
+    hideCredits = false
+    hideCopyright = false
+    since = 2020
     
     # options for highlight.js (version, additional languages, and theme)
     highlightjsVersion = "9.12.0"
     highlightjsCDN = "//cdnjs.cloudflare.com/ajax/libs"
     highlightjsLang = ["r", "yaml"]
     highlightjsTheme = "github"
-
+    
     MathJaxCDN = "//cdnjs.cloudflare.com/ajax/libs"
     MathJaxVersion = "2.7.5"
 
     # path to the favicon, under "static"
     favicon = "image/favicon.ico"
-    #[params.logo]
-    #    url = "image/desmond.png"
-    #    width = 50
-    #    height = 50
-    #    alt = "Logo"
+
     
+# Social links
+[[params.social]]
+    name = "Github"
+    icon = "fab fa-github fa-2x"
+    weight = 1
+    url = "https://github.com/desmond-tuiyot/"
+[[params.social]]
+    name = "Twitter"
+    icon = "fab fa-twitter fa-2x"
+    weight = 1
+    url = "https://twitter.com/desmond_tuiyot/"
+[[params.social]]
+    name = "Linkedin"
+    icon = "fab fa-linkedin fa-2x"
+    weight = 1
+    url = "https://www.linkedin.com/in/desmond-tuiyot/"
+
+
+    
+    
+

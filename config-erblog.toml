@@ -13,14 +13,17 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     name = "About"
     url = "/about/"
 [[menu.main]]
-    name = "GitHub"
-    url = "https://github.com/desmond-tuiyot"
+    name = "Projects"
+    url = "/projects/"
 [[menu.main]]
-    name = "Twitter"
-    url = "https://twitter.com/desmond_tuiyot"
+    name = "GitHub"
+    url = "https://www.github.com/desmond-tuiyot"
+# [[menu.main]]
+#    name = "Twitter"
+#    url = "https://twitter.com/desmond_tuiyot" 
 [[menu.main]]
     name = "LinkedIn"
-    url = "https://linkedin.com/desmond-tuiyot"
+    url = "https://www.linkedin.com/in/desmond-tuiyot/"
 
 [params]
     author = "Desmond Tuiyot"
@@ -47,7 +50,3 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     #    height = 50
     #    alt = "Logo"
     
-    
-    
-    
-

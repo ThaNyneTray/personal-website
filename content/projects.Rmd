@@ -1,0 +1,30 @@
+---
+title: Projects
+author: Desmond Tuiyot
+date: '2020-06-08'
+slug: projects
+categories: []
+tags: []
+description: ''
+---
+Here are some of the projects I've been working on.
+
+### Content Aggregator  
+***[Go to Project](https://github.com/desmond-tuiyot/ContentAggregator)***  
+This is a content aggregator web application to collect data science and computer science resources and present them to readers. I use `Scrapy` to crawl these resources and `Flask` to develop a clean, simple web application. I deployed the app on linode servers, but have not decided on a domain name yet. I will provide the link here as soon as I do that.  
+The home page shows a list of article titles, links, and their sources, sorted by they date posted. The web app paginated to 20 pages per page. The sidebar allows you to select whatever sourcce you prefer. I'll include account support soon so that you can log in and save posts you've seen. I'll also include a tag system for articles that include tags.   
+<p align="center">
+  <img src="/./projects_files/home page.jpg" style="width:80%">
+</p>
+
+### Sudoku App
+***[Go to Project](https://github.com/desmond-tuiyot/Sudoku)***  
+This is a desktop application made using `PyQt5`. It's a basic Sudoku GUI app that allows you to enter possible numbers. The numbers you enter are colored differently from the original board numbers to easily distinguish between them. Mistakes are, optionally, highlighted in red. I also implement a solver that solves the puzzle for you.
+
+new board | valid placement
+--------- | --------------
+![](/./projects_files/sudoku_main.jpg) | ![](/./projects_files/sudoku_valid.jpg)
+
+invalid placement | solved board
+--------- | --------------
+![](/./projects_files/sudoku_invalid.jpg) | ![](/./projects_files/sudoku_solved.jpg)
