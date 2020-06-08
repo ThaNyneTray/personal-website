@@ -418,7 +418,9 @@ letterCloud(words_total[1:300,], word="EMINEM", size=2)
 Or maybe not, since nothing's showing up.
 -->
 #### Word length
-Hip hop music places emphasis on a rapper's ability to rhyme. In addition, there is also the basic requirement that the artist should rap on beat. However, Eminem is known to easily pull off multi-syllabic rhymes. Even in his earliest album, `Infinite`, he was already pushing his boundaries lyrically. Furthermore, he is also able to rap fast, which means he can fit more words into a line and still remain on beat. Therefore, even though longer words are probably harder to rhyme and fit into a line, Eminem is theoretically able to overcome this limitation with ease. 
+Hip hop music places emphasis on a rapper's ability to rhyme. In addition, there is also the basic requirement that the artist should rap on beat. However, Eminem is known to easily pull off multi-syllabic rhymes. The image below shows a section of his song `Stay Wide Awake` where the words he's rhyming are highlighted. 
+![Stay Wide Awake rhyme scheme](/post/2020-05-23-eminem-lyrics-analysis-nlp_files/rhyme.png)
+Furthermore, he is also able to rap fast, which means he can fit more words into a line and still remain on beat. Therefore, even though longer words are probably harder to rhyme and fit into a line, Eminem is theoretically able to overcome this limitation with ease. 
 In any case, words lengths are an interesting measure to explore.
 ```{r}
 word_lengths<-lyrics %>%

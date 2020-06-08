@@ -536,7 +536,9 @@ Or maybe not, since nothing's showing up.
 </div>
 <div id="word-length" class="section level4">
 <h4>Word length</h4>
-<p>Hip hop music places emphasis on a rapper’s ability to rhyme. In addition, there is also the basic requirement that the artist should rap on beat. However, Eminem is known to easily pull off multi-syllabic rhymes. Even in his earliest album, <code>Infinite</code>, he was already pushing his boundaries lyrically. Furthermore, he is also able to rap fast, which means he can fit more words into a line and still remain on beat. Therefore, even though longer words are probably harder to rhyme and fit into a line, Eminem is theoretically able to overcome this limitation with ease.
+<p>Hip hop music places emphasis on a rapper’s ability to rhyme. In addition, there is also the basic requirement that the artist should rap on beat. However, Eminem is known to easily pull off multi-syllabic rhymes. The image below shows a section of his song <code>Stay Wide Awake</code> where the words he’s rhyming are highlighted.
+<img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/rhyme.png" alt="Stay Wide Awake rhyme scheme" />
+Furthermore, he is also able to rap fast, which means he can fit more words into a line and still remain on beat. Therefore, even though longer words are probably harder to rhyme and fit into a line, Eminem is theoretically able to overcome this limitation with ease.
 In any case, words lengths are an interesting measure to explore.</p>
 <pre class="r"><code>word_lengths&lt;-lyrics %&gt;%
   unnest_tokens(word, lyric) %&gt;%
