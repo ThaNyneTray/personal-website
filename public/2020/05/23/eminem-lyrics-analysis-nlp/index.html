@@ -495,7 +495,7 @@ words_total %&gt;%
 </div>
 <div id="zipfs-law" class="section level4">
 <h4>Zipf’s law</h4>
-<p>In simple terms, this law states that given a corpus of natural language utterances, the frequency of each word is inversely proportional to its rank (rank measured in frequency). That implies that rank 1, the most used word, is used roughly twice as much as the rank 2 word, and 4 times as much as the rank 3 word, et cetera. See <a href="https://en.wikipedia.org/wiki/Zipf%27s_law">this Wikipedia post</a> and <a href="https://www.tidytextmining.com/tfidf.html#zipfs-law">Chapter 3</a> of Tidy Text Mining for a more in-depth explanation of this law. We can explore this concept with our word count data as well.
+<p>In simple terms, this law states that given a list of terms from an arbitrary document/book, the frequency of each word is inversely proportional to its rank (rank measured in frequency). That implies that rank 1, the most used word, is used roughly twice as much as the rank 2 word, and 4 times as much as the rank 3 word, et cetera. See <a href="https://en.wikipedia.org/wiki/Zipf%27s_law">this Wikipedia post</a> and <a href="https://www.tidytextmining.com/tfidf.html#zipfs-law">Chapter 3</a> of Tidy Text Mining for a more in-depth explanation of this law. We can explore this concept with our word count data as well.
 First, let’s check the distribution of words in our data set. In this case, we stick to the unfiltered lyrics (lyrics with <code>stop_words</code> and <code>unnecessary_words</code> present).</p>
 <pre class="r"><code>unfiltered_total&lt;-lyrics %&gt;%
   ungroup() %&gt;% # previously grouped
@@ -508,9 +508,10 @@ unfiltered_total %&gt;%
   geom_hline(yintercept=0)+
   theme_bw() + xlab(&quot;total word count&quot;) + ylab(&quot;frequency of word count&quot;) +
   xlim(0, 50)</code></pre>
-<p><img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>To the left of the distribution, we have a few popular words that are used most frequently by Eminem. The long right tail of the distribution in turn shows that there are many words that are used much less frequently.<br />
-A way to test whether a natural language dataset conforms to Zipf’s law is to plot a rank-frequency graph, on a log-log scale. In this case, the plotted line should have a negative slope and, ideally, should be a straight line.<br />
+<p><img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" />
+This distribution is known as the <a href="https://www.statisticshowto.com/zeta-distribution-zipf/">zeta distribution</a> and comes about as a result of Zipf’s law, but it’s applications extend beyond modeling the relationship between the rank-frequency of words in natural language.<br />
+To the left of the distribution, we have a few popular words that are used most frequently by Eminem. The long right tail of the distribution in turn shows that there are many words that are used much less frequently.<br />
+A way to test whether a natural language dataset conforms to Zipf’s law is to plot a rank-frequency graph, on a log-log scale. In this case, the plotted line should have a negative slope and a linear relationship.
 In this case, I want to see if different albums conform to zipfs law</p>
 <pre class="r"><code>albums_total&lt;-lyrics %&gt;%
   unnest_tokens(word, lyric) %&gt;%
@@ -538,32 +539,16 @@ albums_total</code></pre>
 freq_by_rank &lt;- albums_total %&gt;%
   group_by(album) %&gt;%
   mutate(rank = row_number(),
-         `term frequency` = n/total)
-
-freq_by_rank</code></pre>
-<pre><code>## # A tibble: 20,414 x 6
-## # Groups:   album [10]
-##    album                    word      n total  rank `term frequency`
-##    &lt;chr&gt;                    &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;            &lt;dbl&gt;
-##  1 The Marshall Mathers LP2 i      1075 19918     1           0.0540
-##  2 Recovery                 i       901 15649     1           0.0576
-##  3 The Marshall Mathers LP2 be      877 19918     2           0.0440
-##  4 The Marshall Mathers LP  i       778 11996     1           0.0649
-##  5 Music To Be Murdered By  i       714 11888     1           0.0601
-##  6 Revival                  i       705 13244     1           0.0532
-##  7 Relapse                  i       684 14669     1           0.0466
-##  8 Encore                   i       678 15173     1           0.0447
-##  9 Recovery                 you     672 15649     2           0.0429
-## 10 The Marshall Mathers LP2 the     652 19918     3           0.0327
-## # ... with 20,404 more rows</code></pre>
-<pre class="r"><code>freq_by_rank %&gt;%
+         `term frequency` = n/total)</code></pre>
+<pre class="r"><code># plot rank-frequency
+freq_by_rank %&gt;%
   ggplot(aes(rank, `term frequency`, color=album))+
   geom_line(size=1.1, alpha=0.8, show.legend=FALSE)+
   scale_x_log10() +
   scale_y_log10() +
   theme_bw()</code></pre>
-<p><img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>The lines are not straight and have a slight curve, showing greater deviation towards the its extremes. Regardless, we see the inverse relationship between the rank of a term and its frequency.</p>
+<p><img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-23-1.png" width="672" style="display: block; margin: auto;" />
+Intuitively, Zipf’s law suggests that the frequency of a word decreases rapidly with rank. We see that in this plot as well. The lines have slight curve and show greater deviation towards the its extremes; the relationship is thus not perfectly linear. Regardless, we can see the inverse relationship between the rank of a term and its frequency.</p>
 <!--
 #### Word correlation plots 
 Since I can only have a bivariate plot as far as correlations go, I wrote a function that takes in 2 album
@@ -610,7 +595,7 @@ albums_corplot(`The Slim Shady LP`, Revival, wide_freq)
 ## env:  global
 ```
 
-<img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-25-1.png" width="672" style="display: block; margin: auto;" />
+<img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;" />
 Instead of checking all the different albums (we'll have 90 pairwise combinations), we can check pairs which we might find interesting. 
 
 * MMLP2 was meant to be a sequel of sorts to MMLP. We should expect similarities to an extent
@@ -628,7 +613,7 @@ albums_corplot(`The Marshall Mathers LP`, `The Marshall Mathers LP2`, wide_freq)
 ## env:  global
 ```
 
-<img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;" />
+<img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-27-1.png" width="672" style="display: block; margin: auto;" />
 
 * Kamikaze was a response to all the hate Revival
 
@@ -645,7 +630,7 @@ albums_corplot(Kamikaze, Revival, wide_freq)
 ## env:  global
 ```
 
-<img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-27-1.png" width="672" />
+<img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-28-1.png" width="672" />
 
 Recovery was a sober song, disavowing his drug plagued past. OTOH, Encore was his last album before his hiatus
 
@@ -662,19 +647,18 @@ albums_corplot(Recovery, Encore, wide_freq)
 ## env:  global
 ```
 
-<img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-28-1.png" width="672" />
-
-#### Some wordclouds fun
-Here 
+<img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-29-1.png" width="672" />
+#### Wordclouds
+Wordclouds are a visually appealing way to visualize the relative frequencies of words. One advantage of them is that the most frequent words pop out and are easily noticeable.
 
 ```r
 # let's get a wordcloud for top 300 words
-wordcloud2(words_total[1:300,], size=.5)
+wordcloud2(words_total[1:250,], size=.5)
 ```
 
 <div id="htmlwidget-1" style="width:672px;height:480px;" class="wordcloud2 html-widget"></div>
-<script type="application/json" data-for="htmlwidget-1">{"x":{"word":["time","feel","love","leave","shady","girl","day","call","baby","world","life","kill","bad","hit","run","start","head","hear","blow","stop","guess","slim","people","word","rap","kid","stand","hate","walk","beat","boy","break","shoot","white","play","crazy","throw","fall","talk","dre","lose","pull","hold","wait","die","goodbye","song","god","mom","stick","brain","game","sit","superman","eat","mind","hand","friend","grow","lie","bout","hope","rhyme","tonight","live","write","drop","home","eye","hell","meet","sick","sing","fire","huh","night","scream","spit","bite","cold","hurt","body","dad","dead","door","evil","kick","half","real","ball","catch","damn","dance","fight","inside","black","suck","house","stay","act","cut","eminem","happen","heart","tire","bring","floor","marshall","remember","cry","guy","hard","drug","line","change","minute","motherfucking","party","forget","jump","pop","rock","begin","grab","mad","smoke","step","late","light","lot","murder","drive","piss","top","wake","watch","flip","school","set","sound","car","close","straight","mine","music","quit","drink","gun","hair","nut","daddy","follow","front","knock","mic","mouth","wrong","fan","hop","listen","pen","sleep","bed","bottom","fly","hollywood","miss","momma","shut","pill","road","sell","slut","chance","flow","hailie","woman","fack","fore","move","pick","tear","2","america","crack","father","pee","reason","shoe","check","couple","don","foot","kiss","matter","million","roll","scratch","sign","blood","care","dream","record","soul","trash","window","bottle","fault","goddamn","lady","mathers","mother","ready","save","soldier","true","woulda","darkness","grind","homie","ill","nah","nice","ooh","outta","round","swear","tape","wall","buy","club","corner","money","motherfucker","rain","raise","street","suppose","bet","fast","fun","hip","pain","send","air","bear","cop","da","dog","hang","happy","insane","lay","mama","shot","woo","bye","dark","devil","finger","hot","knife","moment","picture","rappers","remind","ride","slap","throat","track","wee","album","alright","burn","chase","chick","cock","haha","kim","leg","park","rest","shake","single","son","touch","verse","win","block","cool","criminal","darling","doc","empty","excuse","goin","monster","neck","offend","pay"],"freq":[343,324,263,212,190,181,173,170,168,158,144,143,141,141,138,134,132,130,129,129,126,125,123,114,113,112,108,107,107,105,103,101,101,100,97,93,92,91,91,87,87,87,86,86,85,85,84,80,80,80,79,79,79,79,77,77,76,75,75,74,73,73,73,73,72,72,71,71,70,70,70,70,70,69,69,68,68,68,66,66,65,64,64,64,64,64,63,62,61,60,60,60,60,60,60,59,59,58,56,55,55,55,55,55,55,54,54,54,54,53,53,53,52,52,51,51,51,51,50,50,50,50,49,49,49,49,49,48,48,48,48,46,46,46,46,46,45,45,45,45,44,44,44,43,43,43,42,42,42,42,41,41,41,41,41,41,41,40,40,40,40,40,39,39,39,39,39,39,39,38,38,38,38,37,37,37,37,36,36,36,36,36,35,35,35,35,35,35,35,34,34,34,34,34,34,34,34,34,34,33,33,33,33,33,33,33,32,32,32,32,32,32,32,32,32,32,32,31,31,31,31,31,31,31,31,31,31,31,31,30,30,30,30,30,30,30,30,30,29,29,29,29,29,29,28,28,28,28,28,28,28,28,28,28,28,28,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,25,25,25,25,25,25,25,25,25,25,25,25],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0,"weightFactor":0.262390670553936,"backgroundColor":"white","gridSize":0,"minRotation":-0.785398163397448,"maxRotation":0.785398163397448,"shuffle":true,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":[]}</script>
-
+<script type="application/json" data-for="htmlwidget-1">{"x":{"word":["time","feel","love","leave","shady","girl","day","call","baby","world","life","kill","bad","hit","run","start","head","hear","blow","stop","guess","slim","people","word","rap","kid","stand","hate","walk","beat","boy","break","shoot","white","play","crazy","throw","fall","talk","dre","lose","pull","hold","wait","die","goodbye","song","god","mom","stick","brain","game","sit","superman","eat","mind","hand","friend","grow","lie","bout","hope","rhyme","tonight","live","write","drop","home","eye","hell","meet","sick","sing","fire","huh","night","scream","spit","bite","cold","hurt","body","dad","dead","door","evil","kick","half","real","ball","catch","damn","dance","fight","inside","black","suck","house","stay","act","cut","eminem","happen","heart","tire","bring","floor","marshall","remember","cry","guy","hard","drug","line","change","minute","motherfucking","party","forget","jump","pop","rock","begin","grab","mad","smoke","step","late","light","lot","murder","drive","piss","top","wake","watch","flip","school","set","sound","car","close","straight","mine","music","quit","drink","gun","hair","nut","daddy","follow","front","knock","mic","mouth","wrong","fan","hop","listen","pen","sleep","bed","bottom","fly","hollywood","miss","momma","shut","pill","road","sell","slut","chance","flow","hailie","woman","fack","fore","move","pick","tear","2","america","crack","father","pee","reason","shoe","check","couple","don","foot","kiss","matter","million","roll","scratch","sign","blood","care","dream","record","soul","trash","window","bottle","fault","goddamn","lady","mathers","mother","ready","save","soldier","true","woulda","darkness","grind","homie","ill","nah","nice","ooh","outta","round","swear","tape","wall","buy","club","corner","money","motherfucker","rain","raise","street","suppose","bet","fast","fun","hip","pain","send","air","bear","cop","da","dog","hang"],"freq":[343,324,263,212,190,181,173,170,168,158,144,143,141,141,138,134,132,130,129,129,126,125,123,114,113,112,108,107,107,105,103,101,101,100,97,93,92,91,91,87,87,87,86,86,85,85,84,80,80,80,79,79,79,79,77,77,76,75,75,74,73,73,73,73,72,72,71,71,70,70,70,70,70,69,69,68,68,68,66,66,65,64,64,64,64,64,63,62,61,60,60,60,60,60,60,59,59,58,56,55,55,55,55,55,55,54,54,54,54,53,53,53,52,52,51,51,51,51,50,50,50,50,49,49,49,49,49,48,48,48,48,46,46,46,46,46,45,45,45,45,44,44,44,43,43,43,42,42,42,42,41,41,41,41,41,41,41,40,40,40,40,40,39,39,39,39,39,39,39,38,38,38,38,37,37,37,37,36,36,36,36,36,35,35,35,35,35,35,35,34,34,34,34,34,34,34,34,34,34,33,33,33,33,33,33,33,32,32,32,32,32,32,32,32,32,32,32,31,31,31,31,31,31,31,31,31,31,31,31,30,30,30,30,30,30,30,30,30,29,29,29,29,29,29,28,28,28,28,28,28],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0,"weightFactor":0.262390670553936,"backgroundColor":"white","gridSize":0,"minRotation":-0.785398163397448,"maxRotation":0.785398163397448,"shuffle":true,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":[]}</script>
+<!--
 Let's also try out letter clouds
 
 ```r
@@ -684,93 +668,50 @@ letterCloud(words_total[1:300,], word="EMINEM", size=2)
 <div id="htmlwidget-2" style="width:672px;height:480px;" class="wordcloud2 html-widget"></div>
 <script type="application/json" data-for="htmlwidget-2">{"x":{"word":["time","feel","love","leave","shady","girl","day","call","baby","world","life","kill","bad","hit","run","start","head","hear","blow","stop","guess","slim","people","word","rap","kid","stand","hate","walk","beat","boy","break","shoot","white","play","crazy","throw","fall","talk","dre","lose","pull","hold","wait","die","goodbye","song","god","mom","stick","brain","game","sit","superman","eat","mind","hand","friend","grow","lie","bout","hope","rhyme","tonight","live","write","drop","home","eye","hell","meet","sick","sing","fire","huh","night","scream","spit","bite","cold","hurt","body","dad","dead","door","evil","kick","half","real","ball","catch","damn","dance","fight","inside","black","suck","house","stay","act","cut","eminem","happen","heart","tire","bring","floor","marshall","remember","cry","guy","hard","drug","line","change","minute","motherfucking","party","forget","jump","pop","rock","begin","grab","mad","smoke","step","late","light","lot","murder","drive","piss","top","wake","watch","flip","school","set","sound","car","close","straight","mine","music","quit","drink","gun","hair","nut","daddy","follow","front","knock","mic","mouth","wrong","fan","hop","listen","pen","sleep","bed","bottom","fly","hollywood","miss","momma","shut","pill","road","sell","slut","chance","flow","hailie","woman","fack","fore","move","pick","tear","2","america","crack","father","pee","reason","shoe","check","couple","don","foot","kiss","matter","million","roll","scratch","sign","blood","care","dream","record","soul","trash","window","bottle","fault","goddamn","lady","mathers","mother","ready","save","soldier","true","woulda","darkness","grind","homie","ill","nah","nice","ooh","outta","round","swear","tape","wall","buy","club","corner","money","motherfucker","rain","raise","street","suppose","bet","fast","fun","hip","pain","send","air","bear","cop","da","dog","hang","happy","insane","lay","mama","shot","woo","bye","dark","devil","finger","hot","knife","moment","picture","rappers","remind","ride","slap","throat","track","wee","album","alright","burn","chase","chick","cock","haha","kim","leg","park","rest","shake","single","son","touch","verse","win","block","cool","criminal","darling","doc","empty","excuse","goin","monster","neck","offend","pay"],"freq":[343,324,263,212,190,181,173,170,168,158,144,143,141,141,138,134,132,130,129,129,126,125,123,114,113,112,108,107,107,105,103,101,101,100,97,93,92,91,91,87,87,87,86,86,85,85,84,80,80,80,79,79,79,79,77,77,76,75,75,74,73,73,73,73,72,72,71,71,70,70,70,70,70,69,69,68,68,68,66,66,65,64,64,64,64,64,63,62,61,60,60,60,60,60,60,59,59,58,56,55,55,55,55,55,55,54,54,54,54,53,53,53,52,52,51,51,51,51,50,50,50,50,49,49,49,49,49,48,48,48,48,46,46,46,46,46,45,45,45,45,44,44,44,43,43,43,42,42,42,42,41,41,41,41,41,41,41,40,40,40,40,40,39,39,39,39,39,39,39,38,38,38,38,37,37,37,37,36,36,36,36,36,35,35,35,35,35,35,35,34,34,34,34,34,34,34,34,34,34,33,33,33,33,33,33,33,32,32,32,32,32,32,32,32,32,32,32,31,31,31,31,31,31,31,31,31,31,31,31,30,30,30,30,30,30,30,30,30,29,29,29,29,29,29,28,28,28,28,28,28,28,28,28,28,28,28,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,25,25,25,25,25,25,25,25,25,25,25,25],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0,"weightFactor":1.04956268221574,"backgroundColor":"white","gridSize":0,"minRotation":-0.785398163397448,"maxRotation":0.785398163397448,"shuffle":true,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":"data:image/png;base64,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Y4hlciCxv16fxzMDqRV9RiA7hlhGB3K+v55tr28XSGwgQwLZMMRyORD4JREIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCASBQBAIBIFAEAgEgUAQCIT/A4kIwQks/x40AAAAAElFTkSuQmCC","hover":null},"evals":[],"jsHooks":[]}</script>
 Or maybe not, since nothing's showing up.
-
-#### Word length
-Word length is also an interesting one to look at. 
-
-```r
-word_lengths<-lyrics %>%
-  unnest_tokens(word, lyric) %>%
-  select(song_name, album, word) %>%
-  group_by(song_name, album) %>%
-  distinct() %>%
-  mutate(word_length=nchar(word)) %>%
-  ungroup() %>%
+-->
+</div>
+<div id="word-length" class="section level4">
+<h4>Word length</h4>
+<p>Hip hop music places emphasis on a rapper’s ability to rhyme. In addition, there is also the basic requirement that the artist should rap on beat. However, Eminem is known to easily pull off multi-syllabic rhymes. Even in his earliest album, <code>Infinite</code>, he was already pushing his boundaries lyrically. Furthermore, he is also able to rap fast, which means he can fit more words into a line and still remain on beat. Therefore, even though longer words are probably harder to rhyme and fit into a line, Eminem is theoretically able to overcome this limitation with ease.
+In any case, words lengths are an interesting measure to explore.</p>
+<pre class="r"><code>word_lengths&lt;-lyrics %&gt;%
+  unnest_tokens(word, lyric) %&gt;%
+  select(song_name, album, word) %&gt;%
+  group_by(song_name, album) %&gt;%
+  distinct() %&gt;%
+  mutate(word_length=nchar(word)) %&gt;%
+  ungroup() %&gt;%
   arrange(-word_length)
-
-word_lengths
-```
-
-```
-## # A tibble: 47,496 x 4
-##    song_name       album                  word                       word_length
-##    <chr>           <chr>                  <chr>                            <int>
-##  1 Almost Famous   Recovery               antidisestablishmentarian~          28
-##  2 Marsh           Music To Be Murdered ~ extraterrestrial                    16
-##  3 My Name Is      The Slim Shady LP      extraterrestrial                    16
-##  4 Unaccommodating Music To Be Murdered ~ unaccommodating                     15
-##  5 Farewell        Music To Be Murdered ~ unconditionally                     15
-##  6 Lucky You       Kamikaze               methamphetamine                     15
-##  7 Like Home       Revival                charlottesville                     15
-##  8 The Monster     The Marshall Mathers ~ interventionist                     15
-##  9 The Monster     The Marshall Mathers ~ rumpelstiltskin                     15
-## 10 Desperation     The Marshall Mathers ~ roethlissplurge                     15
-## # ... with 47,486 more rows
-```
-
-
-```r
-summary(word_lengths)
-```
-
-```
-##   song_name            album               word            word_length    
-##  Length:47496       Length:47496       Length:47496       Min.   : 1.000  
-##  Class :character   Class :character   Class :character   1st Qu.: 3.000  
-##  Mode  :character   Mode  :character   Mode  :character   Median : 4.000  
-##                                                           Mean   : 4.642  
-##                                                           3rd Qu.: 6.000  
-##                                                           Max.   :28.000
-```
-
-```r
-word_lengths %>%
-  count(word_length, sort=TRUE) %>%
+# summary(word_lengths)</code></pre>
+<pre class="r"><code># plot it
+word_lengths %&gt;%
+  count(word_length, sort=TRUE) %&gt;%
   ggplot(aes(x=word_length, y=n)) +
-  geom_col(show.legend=F, fill="lightblue", 
-           color="black") +
-  xlab("word length") + ylab("word count") +
-  ggtitle("word length distribution")+
-  theme_bw()
-```
-
-<img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-32-1.png" width="672" />
-
-Here we see that 4 letter words are highest used. The distribution has a slightly long right tail and an outlier which is the 28 letter word, disestablishmenteranism (or sth like that).  
-We can create word clouds for this as well. 
-
-
-```r
-# wordlength word cloud
-wl_wc<-word_lengths %>%
-  ungroup() %>%
-  select(word, word_length) %>%
-  distinct() %>%
+  geom_col(show.legend=F, fill=&quot;lightblue&quot;, 
+           color=&quot;black&quot;) +
+  xlab(&quot;word length&quot;) + ylab(&quot;word count&quot;) +
+  ggtitle(&quot;word length distribution&quot;)+
+  theme_bw()</code></pre>
+<p><img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-33-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>The most frequently used words are 3-5 letters long. The distribution has a slightly long right tail and an outlier which is the 28 letter word, <code>antidisestablishmentarianism</code>. This analysis would probably be more interesting if we compare Eminem to other artists.<br />
+We can create word clouds based on length to visualize the word lengths.</p>
+<pre class="r"><code># wordlength word cloud
+wl_wc&lt;-word_lengths %&gt;%
+  ungroup() %&gt;%
+  select(word, word_length) %&gt;%
+  distinct() %&gt;%
   arrange(-word_length)
 
 wordcloud2(wl_wc[1:300,],
            size=.15, minSize=.0005,
            ellipticity=0.3, rotateRatio=1,
-           fontWeight="bold")
-```
-
+           fontWeight=&quot;bold&quot;)</code></pre>
 <div id="htmlwidget-3" style="width:672px;height:480px;" class="wordcloud2 html-widget"></div>
 <script type="application/json" data-for="htmlwidget-3">{"x":{"word":["antidisestablishmentarianism","extraterrestrial","unaccommodating","unconditionally","methamphetamine","charlottesville","interventionist","rumpelstiltskin","roethlissplurge","blblblblblblblb","alphabetically","subconsciously","benzodiazepine","slaughterhouse","responsibility","disappointment","understandable","discrimination","straightjacket","metaphorically","roethlisberger","pharmaceutical","worcestershire","administration","schwarzenegger","schottenheimer","motherfucking","motherfuckers","butterfingers","uncomfortable","acetaminophen","unpredictable","disrespectful","collaborative","mitochondrial","inconvenience","entertainment","reprehensible","consideration","inadvertently","inappropriate","misunderstand","superstitious","encouragement","mothafreaking","psychological","differentiate","unfashionable","chronological","unfortunately","predominantly","schizophrenic","embarrassment","confrontation","metamorphosis","intentionally","hypochondriac","irresponsible","promethazine","mythological","motherfucker","surveillance","gynecologist","accidentally","backstabbing","relationship","mispronounce","indefensible","frankenstein","mothafucking","circumstance","neighborhood","subconscious","irreversible","recollection","thoroughbred","narcissistic","streetrunner","michelangelo","noncompliant","psychologist","carheartless","disastrously","motherfuckin","encyclopedia","rekcufrehtom","chloraseptic","conversation","sledgehammer","individually","specifically","thunderstorm","subliminally","bloodsucking","helplessness","bloodstained","hallucinogen","manslaughter","stomachaches","thanksgiving","heterosexual","intervention","prescription","refrigerator","unbelievable","scissorhands","straitjacket","imprisonment","occasionally","receptionist","resurrection","entrepreneur","buttersworth","mouseketeers","knuckleheads","discriminate","misinterpret","registration","heterophobic","malnourished","pathological","intelligence","collaboratin","contemplate","abracadabra","responsible","everythings","courvoisier","blockbuster","undebatable","unavoidable","californian","emotionally","empowerment","counterfeit","descriptive","disgruntled","cunnilingus","inseparable","combination","contingency","unholstered","misconstrue","porterhouse","charlamagne","recognition","terrestrial","immediately","bulletproof","trainwrecks","freestyling","concentrate","competition","translation","rectangular","expectation","firecracker","incorporate","improvement","unrealistic","instinctive","destruction","springsteen","untouchable","financially","environment","unconscious","sacrificial","dangerfield","appropriate","transgender","wherewithal","mockingbird","backstabbed","personality","destructive","disassemble","implication","insinuation","speedometer","convenience","arraignment","chainsawing","description","interracial","opportunity","mothafucker","flirtatious","arrivederci","explanation","appointment","spectacular","acknowledge","entertainin","controversy","millionaire","screwdriver","differently","backhanding","shakespeare","attractable","uncrackable","masterfully","masterpiece","immortality","underground","demonstrate","sympathetic","imagination","predicament","independent","reupholster","anniversary","bittersweet","vanvonderen","sleepwalkin","plasticware","inspiration","playstation","subdivision","symptomatic","storytellin","grandbabies","deteriorate","nightmarish","treacherous","desperation","certificate","supervision","proposition","cocksucking","discouragin","bloodthirst","bomboclaats","familiarize","conditionin","indigestion","catchphrase","reintroduce","complicatin","undoubtably","cocksuckers","technically","cinderfella","perfectness","unfortunate","defenseless","frankfurter","resuscitate","rotisseried","clairvoyant","participate","pandemonium","reciprocate","unstoppable","acupuncture","equilibrium","nickelodeon","sentimental","practically","christopher","intercourse","temperature","thermometer","hydrocodone","suppository","speculation","credibility","vanglorious","publication","indivisible","blasphemous","quarterback","resemblance","molestation","jackrabbits","coincidence","centerpiece","beautifully","catastrophe","kirkpatrick","suspenseful","religiously","fingerprint","entertainer","amoxicillin","afghanistan","sensational","babysitting","accountable","consequence","backstabbin","grandmother","chickenhawk","deformative","alternative","connecticut","unfurnished","comfortable","spontaneous"],"freq":[28,16,15,15,15,15,15,15,15,15,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-dark","minSize":0.0005,"weightFactor":0.964285714285714,"backgroundColor":"white","gridSize":0,"minRotation":-0.785398163397448,"maxRotation":0.785398163397448,"shuffle":true,"rotateRatio":1,"shape":"circle","ellipticity":0.3,"figBase64":null,"hover":null},"evals":[],"jsHooks":[]}</script>
--->
 </div>
 <div id="lexical-diversity-and-density" class="section level4">
 <h4>Lexical diversity and density</h4>
-<p>An <a href="https://consequenceofsound.net/2014/05/which-rapper-has-the-biggest-vocabulary/">article</a>, touched on this topic. In the first 35k words, Eminem used 4,480 unique words. Let’s see if this holds across his 10 albums.</p>
+<p>An <a href="https://consequenceofsound.net/2014/05/which-rapper-has-the-biggest-vocabulary/">article</a>, attempted to determine which rapper has the largest vocabulary by counting the number of unique words in the first 35,000 by different artists. I extend this analysis by looking at the number of unique words used by Eminem across his 10 albums (lexical diversity). I also look at the number of unique words divided by the total number of words for each album (lexical density).</p>
 <pre class="r"><code>lyrics %&gt;%
   unnest_tokens(word, lyric) %&gt;%
   summarise(unique=n_distinct(word))</code></pre>
@@ -778,16 +719,15 @@ wordcloud2(wl_wc[1:300,],
 ##   unique
 ##    &lt;int&gt;
 ## 1   7915</code></pre>
-<p>We got 7915 unique words. This is not including non-studio album songs. Let’s see how this trends across albums</p>
+<p>We got 7884 unique words. Remember that our data set only includes lyrics from his studio albums. Let’s analyze lexical diversity across his albums.</p>
 <pre class="r"><code>lexical_diversity_per_album&lt;-lyrics %&gt;%
   unnest_tokens(word, lyric) %&gt;%
   group_by(song_name, album, album_year) %&gt;%
   summarize(lex_diversity=n_distinct(word)) %&gt;%
   # mutate(album=reorder(album, album_year)) %&gt;%
   arrange(-lex_diversity) %&gt;%
-  ungroup()
-
-# lex diversity plot
+  ungroup()</code></pre>
+<pre class="r"><code># lex diversity plot
 lexical_diversity_per_album %&gt;%
   ggplot(aes(album_year, lex_diversity)) +
   geom_point(color=&quot;red&quot;, size=4, alpha=.4) +
@@ -796,9 +736,9 @@ lexical_diversity_per_album %&gt;%
   ggtitle(&quot;Lexical diversity&quot;) +
   ylab(&quot;&quot;) + xlab(&quot;&quot;) +
   theme_bw()</code></pre>
-<p><img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-35-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>There’s a slight increase in lexical diversity across album time. Surprisingly, his latest album Music To Be Murdered By as a lower lexical diversity than his previus two. MMLP2, Kamikaze, and Revival have the highest ones.</p>
-<p>To contrast, we can also check lexical density. How many unique words he uses</p>
+<p><img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-37-1.png" width="672" style="display: block; margin: auto;" />
+There’s a slight increase in lexical diversity across album time. Surprisingly, his latest album, Music To Be Murdered By, has a lower lexical diversity than his previous two. MMLP2, Kamikaze, and Revival have the highest lexical diversities.</p>
+<p>To contrast, we can also explore lexical density.</p>
 <pre class="r"><code>## LEXICAL DENSITY
 lexical_density_per_album &lt;- lyrics %&gt;%
   unnest_tokens(word, lyric) %&gt;%
@@ -830,17 +770,23 @@ lexical_density_per_album %&gt;%
   geom_smooth(se=FALSE, color=&quot;blue&quot;, lwd=2) +
   ggtitle(&quot;Lexical density&quot;) + xlab(&quot;&quot;) + ylab(&quot;&quot;) +
   theme_bw()</code></pre>
-<p><img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-36-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>Lexical density shows a slightly higher increase over time. The latest album is also up there as well. Which makes me wonder, what are the total number of words per album</p>
-<pre class="r"><code>lyrics %&gt;%
-  unnest_tokens(word, lyric) %&gt;%
-  group_by(album) %&gt;%
-  count() %&gt;%
-  arrange(-n)</code></pre>
-<pre><code>## # A tibble: 10 x 2
+<p><img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-39-1.png" width="672" style="display: block; margin: auto;" />
+Here we see an increase in lexical density over time, indicating a decrease in repetition with each new album he puts out.
+<!--
+
+```r
+lyrics %>%
+  unnest_tokens(word, lyric) %>%
+  group_by(album) %>%
+  count() %>%
+  arrange(-n)
+```
+
+```
+## # A tibble: 10 x 2
 ## # Groups:   album [10]
 ##    album                        n
-##    &lt;chr&gt;                    &lt;int&gt;
+##    <chr>                    <int>
 ##  1 The Marshall Mathers LP2 19918
 ##  2 Recovery                 15649
 ##  3 Encore                   15173
@@ -850,11 +796,13 @@ lexical_density_per_album %&gt;%
 ##  7 Music To Be Murdered By  11888
 ##  8 The Eminem Show          11871
 ##  9 The Slim Shady LP        11169
-## 10 Kamikaze                  9251</code></pre>
+## 10 Kamikaze                  9251
+```
+--></p>
 </div>
 <div id="tf-idf" class="section level4">
 <h4>tf-idf</h4>
-<p>Here we use tidytext’s bind_tf_idf function in a neat way to find the tf-idf for each of these words - tf-idf is a measure of how important a word is to a particular document. If a word is used frequently across all albums, then it’s not indicative of any particular album. But if a word is used in only one album relatively frequently, then we can think of this word as of significance to that album.</p>
+<p>Here we use tidytext’s <code>bind_tf_idf</code> function in a neat way to find the tf-idf for each of these words - tf-idf is a measure of how important a word is to a particular document. If a word is used frequently across all albums, then it’s not indicative of or significant to any particular album. But if a word is used in only one album relatively frequently, then we can think of this word as of significance to that album.</p>
 <pre class="r"><code>lyrics_tf_idf &lt;- lyrics %&gt;%
   unnest_tokens(word, lyric) %&gt;%
   distinct() %&gt;%
@@ -862,23 +810,9 @@ lexical_density_per_album %&gt;%
   ungroup() %&gt;%
   bind_tf_idf(word, album, n) %&gt;%
   arrange(-tf_idf)
-lyrics_tf_idf</code></pre>
-<pre><code>## # A tibble: 20,414 x 6
-##    album                   word          n      tf   idf  tf_idf
-##    &lt;chr&gt;                   &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
-##  1 The Eminem Show         hollywood    39 0.00363  2.30 0.00836
-##  2 Kamikaze                fack         18 0.00208  1.61 0.00335
-##  3 The Slim Shady LP       dada         14 0.00135  2.30 0.00311
-##  4 Recovery                seduction    18 0.00125  2.30 0.00288
-##  5 Music To Be Murdered By darkness     26 0.00235  1.20 0.00283
-##  6 The Marshall Mathers LP dum          13 0.00120  2.30 0.00276
-##  7 Encore                  erra         16 0.00117  2.30 0.00269
-##  8 The Slim Shady LP       mushroom     12 0.00116  2.30 0.00266
-##  9 Relapse                 darling      21 0.00156  1.61 0.00250
-## 10 The Slim Shady LP       chka         16 0.00154  1.61 0.00248
-## # ... with 20,404 more rows</code></pre>
-<p>Let’s get the words with top tf-idf, then plot and visualize it.</p>
-<pre class="r"><code>top_tf_idf &lt;- lyrics_tf_idf %&gt;%
+
+# plot the top tf-idf
+top_tf_idf &lt;- lyrics_tf_idf %&gt;%
   arrange(-tf_idf) %&gt;%
   mutate(word = factor(word, levels = rev(unique(word)))) %&gt;%
   group_by(album) %&gt;%
@@ -896,63 +830,87 @@ lyrics_tf_idf</code></pre>
   scale_x_continuous(breaks=top_tf_idf$row,
                      labels=top_tf_idf$word) +
   coord_flip()</code></pre>
-<p><img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-40-1.png" width="672" style="display: block; margin: auto;" /></p>
-</div>
-<div id="comparing-word-usage" class="section level4">
-<h4>Comparing word usage</h4>
-<p>Here I’m trying to find out which albums show up in which albums. We do this using log odds ratio. We wrap that process in a function.</p>
-<pre class="r"><code>get_log_odds&lt;-function(dat, album1, album2){
-  album1&lt;-enquo(album1)
-  album2&lt;-enquo(album2)
+<p><img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-42-1.png" width="672" style="display: block; margin: auto;" />
+We can get some insights if we compare this to the word frequency plot we did earlier; I have placed it here again for ease of comparison.
+<img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-43-1.png" width="672" style="display: block; margin: auto;" />
+Recall that in that plot, the words <code>feel</code>, <code>time</code>, and <code>love</code> appeared frequently in almost all of the albums. Therefore, these words cannot be used to distinguish between albums. On the other hand, the words <code>goodbye</code>, <code>hollywood</code>, and <code>superman</code> which we saw corresponded to specific songs also have appear in the set of words with the highest tf-idf’s. These terms are indicative of particular songs, which then helps distinguish albums from each other. Many of the top tf-idf terms correspond to song titles that are also repeated in choruses and hooks. To some extent, we can get a sense of the topics of songs included in each particular album.
+<!--
+#### Comparing word usage
+Here I'm trying to find out which albums show up in which albums. We do this using log odds ratio. We wrap that process in a function.
+
+
+```r
+get_log_odds<-function(dat, album1, album2){
+  album1<-enquo(album1)
+  album2<-enquo(album2)
   
-  word_ratios&lt;-dat %&gt;%
-    count(word, album) %&gt;%
-    group_by(word) %&gt;%
-    filter(sum(n)&gt;10) %&gt;%
-    ungroup() %&gt;%
-    spread(album, n, fill=0) %&gt;%
-    mutate_if(is.numeric, list(~(. + 1)/(sum(.)+1))) %&gt;%
-    mutate(logratio=log(!!album1/!!album2)) %&gt;%
-    arrange(desc(logratio)) %&gt;%
+  word_ratios<-dat %>%
+    count(word, album) %>%
+    group_by(word) %>%
+    filter(sum(n)>10) %>%
+    ungroup() %>%
+    spread(album, n, fill=0) %>%
+    mutate_if(is.numeric, list(~(. + 1)/(sum(.)+1))) %>%
+    mutate(logratio=log(!!album1/!!album2)) %>%
+    arrange(desc(logratio)) %>%
     select(word, !!album1, !!album2, logratio)
   
   word_ratios
 }
 
-word_ratios&lt;-get_log_odds(lyrics_filtered, `The Marshall Mathers LP`, `The Marshall Mathers LP2`)</code></pre>
-<pre class="r"><code>plot_log_odds&lt;-function(word_ratios, album1, album2){
-  # album1&lt;-enquo(album1)
-  # album2&lt;-enquo(album2)
+word_ratios<-get_log_odds(lyrics_filtered, `The Marshall Mathers LP`, `The Marshall Mathers LP2`)
+```
+
+
+```r
+plot_log_odds<-function(word_ratios, album1, album2){
+  # album1<-enquo(album1)
+  # album2<-enquo(album2)
   
-  word_ratios %&gt;%
-    group_by(logratio&lt;0) %&gt;%
-    top_n(15, abs(logratio)) %&gt;%
-    ungroup() %&gt;%
-    mutate(word = reorder(word, logratio)) %&gt;%
-    ggplot(aes(word, logratio, fill=logratio&lt;0)) +
+  word_ratios %>%
+    group_by(logratio<0) %>%
+    top_n(15, abs(logratio)) %>%
+    ungroup() %>%
+    mutate(word = reorder(word, logratio)) %>%
+    ggplot(aes(word, logratio, fill=logratio<0)) +
     geom_col(show.legend = FALSE) +
     coord_flip() + theme_bw() +
-    ylab(paste0(&quot;log odds ratio (&quot;, album1,&quot;/&quot;, album2,&quot;)&quot; )) +
-    scale_fill_discrete(name=&quot;&quot;, labels=c(album1, album2))
-}</code></pre>
-<pre class="r"><code>plot_log_odds&lt;-function(word_ratios, album1, album2){
-  # album1&lt;-enquo(album1)
-  # album2&lt;-enquo(album2)
+    ylab(paste0("log odds ratio (", album1,"/", album2,")" )) +
+    scale_fill_discrete(name="", labels=c(album1, album2))
+}
+```
+
+
+```r
+plot_log_odds<-function(word_ratios, album1, album2){
+  # album1<-enquo(album1)
+  # album2<-enquo(album2)
   
-  word_ratios %&gt;%
-    group_by(logratio&lt;0) %&gt;%
-    top_n(15, abs(logratio)) %&gt;%
-    ungroup() %&gt;%
-    mutate(word = reorder(word, logratio)) %&gt;%
-    ggplot(aes(word, logratio, fill=logratio&lt;0)) +
+  word_ratios %>%
+    group_by(logratio<0) %>%
+    top_n(15, abs(logratio)) %>%
+    ungroup() %>%
+    mutate(word = reorder(word, logratio)) %>%
+    ggplot(aes(word, logratio, fill=logratio<0)) +
     geom_col(show.legend = FALSE) +
     coord_flip() + theme_bw() +
-    ylab(paste0(&quot;log odds ratio (&quot;, album1,&quot;/&quot;, album2,&quot;)&quot; )) +
-    scale_fill_discrete(name=&quot;&quot;, labels=c(album1, album2))
-}</code></pre>
-<pre class="r"><code>plot_log_odds(word_ratios, &quot;The Marshall Mathers LP&quot;, &quot;The Marshall Mathers LP2&quot;)</code></pre>
-<p><img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-44-1.png" width="672" style="display: block; margin: auto;" /></p>
+    ylab(paste0("log odds ratio (", album1,"/", album2,")" )) +
+    scale_fill_discrete(name="", labels=c(album1, album2))
+}
+```
+
+```r
+plot_log_odds(word_ratios, "The Marshall Mathers LP", "The Marshall Mathers LP2")
+```
+
+<img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-47-1.png" width="672" style="display: block; margin: auto;" />
+--></p>
 </div>
+</div>
+<div id="conclusion" class="section level3">
+<h3>Conclusion</h3>
+<p>In this article, I have explored Eminem’s lyrics by looking at word frequencies, rank-frequency distributions, word lengths, lexical diversity, and lexical density. I will post the next article soon, which will cover sentiment analysis and topic modeling of Eminem’s lyrics. Many of the observations we’ve made here will be useful in that context as well.<br />
+Let me know what you think in the comments.</p>
 </div>
 <div id="references" class="section level3 unnumbered">
 <h3>References</h3>

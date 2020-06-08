@@ -305,10 +305,10 @@ words_total %>%
 Here we combine all the names of the drugs with the words `drug` and `pill` and get the total count, which turns out to be `217`. This displaces `leave` at the number 4 spot, with a count of `212`.
 
 #### Zipf's law 
-In simple terms, this law states that given a corpus of natural language utterances, the frequency of each word is inversely proportional to its rank (rank measured in frequency). That implies that rank 1, the most used word, is used roughly twice as much as the rank 2 word, and 4 times as much as the rank 3 word, et cetera. See [this Wikipedia post](https://en.wikipedia.org/wiki/Zipf%27s_law) and [Chapter 3](https://www.tidytextmining.com/tfidf.html#zipfs-law) of Tidy Text Mining for a more in-depth explanation of this law. We can explore this concept with our word count data as well.
+In simple terms, this law states that given a list of terms from an arbitrary document/book, the frequency of each word is inversely proportional to its rank (rank measured in frequency). That implies that rank 1, the most used word, is used roughly twice as much as the rank 2 word, and 4 times as much as the rank 3 word, et cetera. See [this Wikipedia post](https://en.wikipedia.org/wiki/Zipf%27s_law) and [Chapter 3](https://www.tidytextmining.com/tfidf.html#zipfs-law) of Tidy Text Mining for a more in-depth explanation of this law. We can explore this concept with our word count data as well.
 First, let's check the distribution of words in our data set. In this case, we stick to the unfiltered lyrics (lyrics with `stop_words` and `unnecessary_words` present).
 
-```{r fig.align="center"}
+```{r fig.align='center'}
 unfiltered_total<-lyrics %>%
   ungroup() %>% # previously grouped
   unnest_tokens(word, lyric) %>%
@@ -321,12 +321,12 @@ unfiltered_total %>%
   theme_bw() + xlab("total word count") + ylab("frequency of word count") +
   xlim(0, 50)
 ```
-
+This distribution is known as the [zeta distribution](https://www.statisticshowto.com/zeta-distribution-zipf/) and comes about as a result of Zipf's law, but it's applications extend beyond modeling the relationship between the rank-frequency of words in natural language.  
 To the left of the distribution, we have a few popular words that are used most frequently by Eminem. The long right tail of the distribution in turn shows that there are many words that are used much less frequently.      
-A way to test whether a natural language dataset conforms to Zipf's law is to plot a rank-frequency graph, on a log-log scale. In this case, the plotted line should have a negative slope and, ideally, should be a straight line.  
+A way to test whether a natural language dataset conforms to Zipf's law is to plot a rank-frequency graph, on a log-log scale. In this case, the plotted line should have a negative slope and a linear relationship.
 In this case, I want to see if different albums conform to zipfs law
 
-```{r fig.align="center"}
+```{r}
 albums_total<-lyrics %>%
   unnest_tokens(word, lyric) %>%
   count(album, word, sort=T) %>%
@@ -341,8 +341,9 @@ freq_by_rank <- albums_total %>%
   mutate(rank = row_number(),
          `term frequency` = n/total)
 
-freq_by_rank
-
+```
+```{r fig.align='center'}
+# plot rank-frequency
 freq_by_rank %>%
   ggplot(aes(rank, `term frequency`, color=album))+
   geom_line(size=1.1, alpha=0.8, show.legend=FALSE)+
@@ -350,8 +351,7 @@ freq_by_rank %>%
   scale_y_log10() +
   theme_bw()
 ```
-
-The lines are not straight and have a slight curve, showing greater deviation towards the its extremes. Regardless, we see the inverse relationship between the rank of a term and its frequency. 
+Intuitively, Zipf's law suggests that the frequency of a word decreases rapidly with rank. We see that in this plot as well. The lines have slight curve and show greater deviation towards the its extremes; the relationship is thus not perfectly linear. Regardless, we can see the inverse relationship between the rank of a term and its frequency. 
 
 <!--
 #### Word correlation plots 
@@ -404,22 +404,22 @@ Recovery was a sober song, disavowing his drug plagued past. OTOH, Encore was hi
 albums_corplot(Recovery, Encore, wide_freq)
 
 ```
-
-#### Some wordclouds fun
-Here 
+#### Wordclouds
+Wordclouds are a visually appealing way to visualize the relative frequencies of words. One advantage of them is that the most frequent words pop out and are easily noticeable.
 ```{r}
 # let's get a wordcloud for top 300 words
-wordcloud2(words_total[1:300,], size=.5)
+wordcloud2(words_total[1:250,], size=.5)
 ```
-
+<!--
 Let's also try out letter clouds
 ```{r}
 letterCloud(words_total[1:300,], word="EMINEM", size=2)
 ```
 Or maybe not, since nothing's showing up.
-
+-->
 #### Word length
-Word length is also an interesting one to look at. 
+Hip hop music places emphasis on a rapper's ability to rhyme. In addition, there is also the basic requirement that the artist should rap on beat. However, Eminem is known to easily pull off multi-syllabic rhymes. Even in his earliest album, `Infinite`, he was already pushing his boundaries lyrically. Furthermore, he is also able to rap fast, which means he can fit more words into a line and still remain on beat. Therefore, even though longer words are probably harder to rhyme and fit into a line, Eminem is theoretically able to overcome this limitation with ease. 
+In any case, words lengths are an interesting measure to explore.
 ```{r}
 word_lengths<-lyrics %>%
   unnest_tokens(word, lyric) %>%
@@ -429,13 +429,10 @@ word_lengths<-lyrics %>%
   mutate(word_length=nchar(word)) %>%
   ungroup() %>%
   arrange(-word_length)
-
-word_lengths
+# summary(word_lengths)
 ```
-
-```{r}
-summary(word_lengths)
-
+```{r fig.align='center'}
+# plot it
 word_lengths %>%
   count(word_length, sort=TRUE) %>%
   ggplot(aes(x=word_length, y=n)) +
@@ -444,13 +441,11 @@ word_lengths %>%
   xlab("word length") + ylab("word count") +
   ggtitle("word length distribution")+
   theme_bw()
-
 ```
 
-Here we see that 4 letter words are highest used. The distribution has a slightly long right tail and an outlier which is the 28 letter word, disestablishmenteranism (or sth like that).  
-We can create word clouds for this as well. 
-
-```{r}
+The most frequently used words are 3-5 letters long. The distribution has a slightly long right tail and an outlier which is the 28 letter word, `antidisestablishmentarianism`. This analysis would probably be more interesting if we compare Eminem to other artists.  
+We can create word clouds based on length to visualize the word lengths. 
+```{r fig.align='center'}
 # wordlength word cloud
 wl_wc<-word_lengths %>%
   ungroup() %>%
@@ -464,17 +459,16 @@ wordcloud2(wl_wc[1:300,],
            fontWeight="bold")
 
 ```
--->
+
 #### Lexical diversity and density
-An [article](https://consequenceofsound.net/2014/05/which-rapper-has-the-biggest-vocabulary/), touched on this topic. In the first 35k words, Eminem used 4,480 unique words. Let's see if this holds across his 10 albums.
+An [article](https://consequenceofsound.net/2014/05/which-rapper-has-the-biggest-vocabulary/), attempted to determine which rapper has the largest vocabulary by counting the number of unique words in the first 35,000 by different artists. I extend this analysis by looking at the number of unique words used by Eminem across his 10 albums (lexical diversity). I also look at the number of unique words divided by the total number of words for each album (lexical density). 
 ```{r}
 lyrics %>%
   unnest_tokens(word, lyric) %>%
   summarise(unique=n_distinct(word))
 ```
-We got 7915 unique words. This is not including non-studio album songs. Let's see how this trends across albums
-```{r fig.align="center"}
-
+We got 7884 unique words. Remember that our data set only includes lyrics from his studio albums. Let's analyze lexical diversity across his albums.
+```{r}
 lexical_diversity_per_album<-lyrics %>%
   unnest_tokens(word, lyric) %>%
   group_by(song_name, album, album_year) %>%
@@ -482,7 +476,8 @@ lexical_diversity_per_album<-lyrics %>%
   # mutate(album=reorder(album, album_year)) %>%
   arrange(-lex_diversity) %>%
   ungroup()
-
+```
+```{r fig.align='center', fig.height=8}
 # lex diversity plot
 lexical_diversity_per_album %>%
   ggplot(aes(album_year, lex_diversity)) +
@@ -493,11 +488,10 @@ lexical_diversity_per_album %>%
   ylab("") + xlab("") +
   theme_bw()
 ```
+There's a slight increase in lexical diversity across album time. Surprisingly, his latest album, Music To Be Murdered By, has a lower lexical diversity than his previous two. MMLP2, Kamikaze, and Revival have the highest lexical diversities.  
 
-There's a slight increase in lexical diversity across album time. Surprisingly, his latest album Music To Be Murdered By as a lower lexical diversity than his previus two. MMLP2, Kamikaze, and Revival have the highest ones.  
-
-To contrast, we can also check lexical density. How many unique words he uses 
-```{r fig.align="center"}
+To contrast, we can also explore lexical density.
+```{r}
 ## LEXICAL DENSITY
 lexical_density_per_album <- lyrics %>%
   unnest_tokens(word, lyric) %>%
@@ -507,7 +501,8 @@ lexical_density_per_album <- lyrics %>%
   ungroup()
 
 lexical_density_per_album
-
+```
+```{r fig.align='center', fig.height=8}
 # plot 
 lexical_density_per_album %>%
   ggplot(aes(album_year, lex_density)) +
@@ -517,9 +512,8 @@ lexical_density_per_album %>%
   ggtitle("Lexical density") + xlab("") + ylab("") +
   theme_bw()
 ```
-
-Lexical density shows a slightly higher increase over time. The latest album is also up there as well. Which makes me wonder, what are the total number of words per album
-
+Here we see an increase in lexical density over time, indicating a decrease in repetition with each new album he puts out.
+<!--
 ```{r}
 lyrics %>%
   unnest_tokens(word, lyric) %>%
@@ -527,9 +521,10 @@ lyrics %>%
   count() %>%
   arrange(-n)
 ```
+-->
 
 #### tf-idf
-Here we use tidytext's bind_tf_idf function in a neat way to find the tf-idf for each of these words - tf-idf is a measure of how important a word is to a particular document. If a word is used frequently across all albums, then it's not indicative of any particular album. But if a word is used in only one album relatively frequently, then we can think of this word as of significance to that album.
+Here we use tidytext's `bind_tf_idf` function in a neat way to find the tf-idf for each of these words - tf-idf is a measure of how important a word is to a particular document. If a word is used frequently across all albums, then it's not indicative of or significant to any particular album. But if a word is used in only one album relatively frequently, then we can think of this word as of significance to that album.
 ```{r}
 lyrics_tf_idf <- lyrics %>%
   unnest_tokens(word, lyric) %>%
@@ -538,12 +533,8 @@ lyrics_tf_idf <- lyrics %>%
   ungroup() %>%
   bind_tf_idf(word, album, n) %>%
   arrange(-tf_idf)
-lyrics_tf_idf
-```
 
-Let's get the words with top tf-idf, then plot and visualize it.
-
-```{r}
+# plot the top tf-idf
 top_tf_idf <- lyrics_tf_idf %>%
   arrange(-tf_idf) %>%
   mutate(word = factor(word, levels = rev(unique(word)))) %>%
@@ -553,8 +544,7 @@ top_tf_idf <- lyrics_tf_idf %>%
   arrange(album, tf_idf) %>%
   mutate(row=row_number())
 ```
-
-```{r fig.height=8, fig.align="center"}
+```{r fig.align='center', fig.height=8}
 top_tf_idf %>%
   ggplot(aes(x=row, y=tf_idf, fill=album)) +
   geom_col(show.legend=FALSE) +
@@ -566,7 +556,19 @@ top_tf_idf %>%
                      labels=top_tf_idf$word) +
   coord_flip()
 ```
-
+We can get some insights if we compare this to the word frequency plot we did earlier; I have placed it here again for ease of comparison.
+```{r echo=FALSE, fig.align='center', fig.height=8}
+top10_freq %>%
+  ggplot(aes(row, freq, fill=album)) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~album, ncol=4, scales="free") +
+  scale_x_continuous(breaks=top10_freq$row, 
+                     labels=top10_freq$word) + 
+  coord_flip() +
+  theme_bw()
+```
+Recall that in that plot, the words `feel`, `time`, and `love` appeared frequently in almost all of the albums. Therefore, these words cannot be used to distinguish between albums. On the other hand, the words `goodbye`, `hollywood`, and `superman` which we saw corresponded to specific songs also have appear in the set of words with the highest tf-idf's. These terms are indicative of particular songs, which then helps distinguish albums from each other. Many of the top tf-idf terms correspond to song titles that are also repeated in choruses and hooks. To some extent, we can get a sense of the topics of songs included in each particular album. 
+<!--
 #### Comparing word usage
 Here I'm trying to find out which albums show up in which albums. We do this using log odds ratio. We wrap that process in a function.
 
@@ -630,6 +632,11 @@ plot_log_odds<-function(word_ratios, album1, album2){
 ```{r fig.align="center"}
 plot_log_odds(word_ratios, "The Marshall Mathers LP", "The Marshall Mathers LP2")
 ```
+-->
+
+### Conclusion
+In this article, I have explored Eminem's lyrics by looking at word frequencies, rank-frequency distributions, word lengths, lexical diversity, and lexical density. I will post the next article soon, which will cover sentiment analysis and topic modeling of Eminem's lyrics. Many of the observations we've made here will be useful in that context as well.  
+Let me know what you think in the comments.
 
 ### References
 
