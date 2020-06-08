@@ -536,9 +536,12 @@ Or maybe not, since nothing's showing up.
 </div>
 <div id="word-length" class="section level4">
 <h4>Word length</h4>
-<p>Hip hop music places emphasis on a rapper’s ability to rhyme. In addition, there is also the basic requirement that the artist should rap on beat. However, Eminem is known to easily pull off multi-syllabic rhymes. The image below shows a section of his song <code>Stay Wide Awake</code> where the words he’s rhyming are highlighted.
-<img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/rhyme.png" alt="Stay Wide Awake rhyme scheme" />
-Furthermore, he is also able to rap fast, which means he can fit more words into a line and still remain on beat. Therefore, even though longer words are probably harder to rhyme and fit into a line, Eminem is theoretically able to overcome this limitation with ease.
+<p>Hip hop music places emphasis on a rapper’s ability to rhyme. In addition, there is also the basic requirement that the artist should rap on beat. However, Eminem is known to easily pull off multi-syllabic rhymes. The image below shows a section of his song <code>Stay Wide Awake</code> where the words he’s rhyming are highlighted.</p>
+<div class="figure">
+<img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/rhyme.png" alt="" />
+<p class="caption">Stay Wide Awake rhyme scheme</p>
+</div>
+<p>Furthermore, he is also able to rap fast, which means he can fit more words into a line and still remain on beat. Therefore, even though longer words are probably harder to rhyme and fit into a line, Eminem is theoretically able to overcome this limitation with ease.
 In any case, words lengths are an interesting measure to explore.</p>
 <pre class="r"><code>word_lengths&lt;-lyrics %&gt;%
   unnest_tokens(word, lyric) %&gt;%
@@ -566,9 +569,8 @@ wl_wc&lt;-word_lengths %&gt;%
   ungroup() %&gt;%
   select(word, word_length) %&gt;%
   distinct() %&gt;%
-  arrange(-word_length)
-
-wordcloud2(wl_wc[1:300,],
+  arrange(-word_length)</code></pre>
+<pre class="r"><code>wordcloud2(wl_wc[1:300,],
            size=.15, minSize=.0005,
            ellipticity=0.3, rotateRatio=1,
            fontWeight=&quot;bold&quot;)</code></pre>
@@ -602,7 +604,7 @@ lexical_diversity_per_album %&gt;%
   ggtitle(&quot;Lexical diversity&quot;) +
   ylab(&quot;&quot;) + xlab(&quot;&quot;) +
   theme_bw()</code></pre>
-<p><img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-37-1.png" width="672" style="display: block; margin: auto;" />
+<p><img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-38-1.png" width="672" style="display: block; margin: auto;" />
 There’s a slight increase in lexical diversity across album time. Surprisingly, his latest album, Music To Be Murdered By, has a lower lexical diversity than his previous two. MMLP2, Kamikaze, and Revival have the highest lexical diversities.</p>
 <p>To contrast, we can also explore lexical density.</p>
 <pre class="r"><code>## LEXICAL DENSITY
@@ -636,7 +638,7 @@ lexical_density_per_album %&gt;%
   geom_smooth(se=FALSE, color=&quot;blue&quot;, lwd=2) +
   ggtitle(&quot;Lexical density&quot;) + xlab(&quot;&quot;) + ylab(&quot;&quot;) +
   theme_bw()</code></pre>
-<p><img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-39-1.png" width="672" style="display: block; margin: auto;" />
+<p><img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-40-1.png" width="672" style="display: block; margin: auto;" />
 Here we see an increase in lexical density over time, indicating a decrease in repetition with each new album he puts out.
 <!--
 
@@ -696,9 +698,9 @@ top_tf_idf &lt;- lyrics_tf_idf %&gt;%
   scale_x_continuous(breaks=top_tf_idf$row,
                      labels=top_tf_idf$word) +
   coord_flip()</code></pre>
-<p><img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-42-1.png" width="672" style="display: block; margin: auto;" />
+<p><img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-43-1.png" width="672" style="display: block; margin: auto;" />
 We can get some insights if we compare this to the word frequency plot we did earlier; I have placed it here again for ease of comparison.
-<img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-43-1.png" width="672" style="display: block; margin: auto;" />
+<img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-44-1.png" width="672" style="display: block; margin: auto;" />
 Recall that in that plot, the words <code>feel</code>, <code>time</code>, and <code>love</code> appeared frequently in almost all of the albums. Therefore, these words cannot be used to distinguish between albums. On the other hand, the words <code>goodbye</code>, <code>hollywood</code>, and <code>superman</code> which we saw corresponded to specific songs also have appear in the set of words with the highest tf-idf’s. These terms are indicative of particular songs, which then helps distinguish albums from each other. Many of the top tf-idf terms correspond to song titles that are also repeated in choruses and hooks. To some extent, we can get a sense of the topics of songs included in each particular album.
 <!--
 #### Comparing word usage
@@ -769,7 +771,7 @@ plot_log_odds<-function(word_ratios, album1, album2){
 plot_log_odds(word_ratios, "The Marshall Mathers LP", "The Marshall Mathers LP2")
 ```
 
-<img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-47-1.png" width="672" style="display: block; margin: auto;" />
+<img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/figure-html/unnamed-chunk-48-1.png" width="672" style="display: block; margin: auto;" />
 --></p>
 </div>
 </div>

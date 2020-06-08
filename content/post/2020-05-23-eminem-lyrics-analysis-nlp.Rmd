@@ -418,8 +418,10 @@ letterCloud(words_total[1:300,], word="EMINEM", size=2)
 Or maybe not, since nothing's showing up.
 -->
 #### Word length
-Hip hop music places emphasis on a rapper's ability to rhyme. In addition, there is also the basic requirement that the artist should rap on beat. However, Eminem is known to easily pull off multi-syllabic rhymes. The image below shows a section of his song `Stay Wide Awake` where the words he's rhyming are highlighted. 
+Hip hop music places emphasis on a rapper's ability to rhyme. In addition, there is also the basic requirement that the artist should rap on beat. However, Eminem is known to easily pull off multi-syllabic rhymes. The image below shows a section of his song `Stay Wide Awake` where the words he's rhyming are highlighted.
+
 ![Stay Wide Awake rhyme scheme](/post/2020-05-23-eminem-lyrics-analysis-nlp_files/rhyme.png)
+
 Furthermore, he is also able to rap fast, which means he can fit more words into a line and still remain on beat. Therefore, even though longer words are probably harder to rhyme and fit into a line, Eminem is theoretically able to overcome this limitation with ease. 
 In any case, words lengths are an interesting measure to explore.
 ```{r}
@@ -447,14 +449,15 @@ word_lengths %>%
 
 The most frequently used words are 3-5 letters long. The distribution has a slightly long right tail and an outlier which is the 28 letter word, `antidisestablishmentarianism`. This analysis would probably be more interesting if we compare Eminem to other artists.  
 We can create word clouds based on length to visualize the word lengths. 
-```{r fig.align='center'}
+```{r}
 # wordlength word cloud
 wl_wc<-word_lengths %>%
   ungroup() %>%
   select(word, word_length) %>%
   distinct() %>%
   arrange(-word_length)
-
+```
+```{r fig.align='center'}
 wordcloud2(wl_wc[1:300,],
            size=.15, minSize=.0005,
            ellipticity=0.3, rotateRatio=1,
