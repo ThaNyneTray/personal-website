@@ -420,7 +420,9 @@ Or maybe not, since nothing's showing up.
 #### Word length
 Hip hop music places emphasis on a rapper's ability to rhyme. In addition, there is also the basic requirement that the artist should rap on beat. However, Eminem is known to easily pull off multi-syllabic rhymes. The image below shows a section of his song `Stay Wide Awake` where the words he's rhyming are highlighted.
 
-![Stay Wide Awake rhyme scheme](/post/2020-05-23-eminem-lyrics-analysis-nlp_files/rhyme.png)
+<p align="center">
+  <img src="/post/2020-05-23-eminem-lyrics-analysis-nlp_files/rhyme.png">
+</p>
 
 Furthermore, he is also able to rap fast, which means he can fit more words into a line and still remain on beat. Therefore, even though longer words are probably harder to rhyme and fit into a line, Eminem is theoretically able to overcome this limitation with ease. 
 In any case, words lengths are an interesting measure to explore.
@@ -449,6 +451,7 @@ word_lengths %>%
 
 The most frequently used words are 3-5 letters long. The distribution has a slightly long right tail and an outlier which is the 28 letter word, `antidisestablishmentarianism`. This analysis would probably be more interesting if we compare Eminem to other artists.  
 We can create word clouds based on length to visualize the word lengths. 
+<!-- <p align="center"> -->
 ```{r}
 # wordlength word cloud
 wl_wc<-word_lengths %>%
@@ -457,13 +460,13 @@ wl_wc<-word_lengths %>%
   distinct() %>%
   arrange(-word_length)
 ```
-```{r fig.align='center'}
+```{r fig.align="center"}
 wordcloud2(wl_wc[1:300,],
            size=.15, minSize=.0005,
            ellipticity=0.3, rotateRatio=1,
            fontWeight="bold")
-
 ```
+<!-- </p> -->
 
 #### Lexical diversity and density
 An [article](https://consequenceofsound.net/2014/05/which-rapper-has-the-biggest-vocabulary/), attempted to determine which rapper has the largest vocabulary by counting the number of unique words in the first 35,000 by different artists. I extend this analysis by looking at the number of unique words used by Eminem across his 10 albums (lexical diversity). I also look at the number of unique words divided by the total number of words for each album (lexical density). 
