@@ -1,7 +1,7 @@
 ---
 title: "An Analysis of Eminem Lyrics - NLP"
 author: "Desmond Tuiyot"
-date: '2020-05-23'
+date: '2020-06-06'
 slug: eminem-lyrics-analysis-nlp
 tags:
 - R
@@ -29,7 +29,7 @@ I happen to be a huge Eminem fan, so his recent tweets highlighting the annivers
 2. **Sentiment Analysis and Topic Modeling**
 
 ### Pre-requisites  
-I will make heavy use of the dplyr [@dplyr], tidytext [@tidytext], an ggplot2 [@ggplot2] in this analysis. In particular, my introduction to text mining was through the book [Tidy Text Mining](https://www.tidytextmining.com/) by [David Robinson](https://twitter.com/drob) and [Julia Silge's](https://twitter.com/juliasilge) book. It's a free resource that covers text mining, sentiment analysis, and topic modeling. Seeing as you are reading this post, you likely have interest in the subject, so I encourage you to read through this. In addition, I took a lot of inspiration from Debbie Liske's [post](https://www.datacamp.com/community/tutorials/R-nlp-machine-learning) on DataCamp, which is a must-read.
+I will make heavy use of the dplyr [@dplyr], tidytext [@tidytext], an ggplot2 [@ggplot2] in this analysis. In particular, my introduction to text mining was through the book [Tidy Text Mining](https://www.tidytextmining.com/) by [David Robinson](https://twitter.com/drob) and [Julia Silge](https://twitter.com/juliasilge). It's a free resource that covers text mining, sentiment analysis, and topic modeling. Seeing as you are reading this post, you likely have interest in the subject, so I encourage you to read through this. In addition, I took a lot of inspiration from Debbie Liske's [post](https://www.datacamp.com/community/tutorials/R-nlp-machine-learning) on DataCamp, which is a must-read.
 
 ### 1. Library Imports  
 First, we import the libraries we'll need for this analysis. 
@@ -43,7 +43,7 @@ library(lubridate)  # handling date type data
 ```
 ### 2. Data Collection
 For this, I used a combination of two packages. First, I used the Rspotify [@Rspotify] package to get Eminem's album list and then got a tracklist and lyrics for each album using the geniusr [@geniusr] package; these packages interface with the [Spotify API](https://developer.spotify.com/documentation/web-api/quick-start/) and [Genius API](https://docs.genius.com/) respectively. I used the  The Spotify API here for two reasons. The Genius API package does not currently have a method for retrieving an artist's album list. In addition, the Spotify API offers various musical features for each song in the Spotify database, which could be useful in any potential predictive analysis I perform, especially when used in conjunction with lyrics data. Therefore, I would like to maintain a consistent dataset of songs.    
-You can find the code for data collection [here](https://github.com/desmond-tuiyot/Eminem_Lyrics_Analysis/blob/master/rcode/analysis.R) if you are interested. I saved the lyrics dataset [here]("https://raw.githubusercontent.com/desmond-tuiyot/Eminem_Lyrics_Analysis/master/data/original_lyrics.csv"), which we import below.
+You can find the code for data collection [here](https://github.com/desmond-tuiyot/Eminem_Lyrics_Analysis/blob/master/rcode/import.R) if you are interested. I saved the lyrics dataset [here](https://raw.githubusercontent.com/desmond-tuiyot/Eminem_Lyrics_Analysis/master/data/original_lyrics.csv), which we import below.
 
 ```{r}
 original_lyrics<-read_csv("https://raw.githubusercontent.com/desmond-tuiyot/Eminem_Lyrics_Analysis/master/data/original_lyrics.csv")
