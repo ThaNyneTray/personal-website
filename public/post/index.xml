@@ -1,40 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Posts on Desmond Tuiyot</title>
-    <link>/post/</link>
-    <description>Recent content in Posts on Desmond Tuiyot</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sun, 24 May 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Notes On Everything</title>
-      <link>/2020/05/24/notes-on-everything/</link>
-      <pubDate>Sun, 24 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/2020/05/24/notes-on-everything/</guid>
-      <description>StatisticsProbabilityMachine LearningAlgorithms &amp;amp; Data StructuresPythonRShinyInputs &amp;amp; OutputsInputstextInput()
-sliderInput()
-selectInput()
-numericalInput()
-dateRangeInput()
-all inputs have the format
-__input(&amp;quot;inputId&amp;quot;,&amp;quot;label&amp;quot;,unique_param1, unique_param2, ...)Render FunctionsRender functions are used to built outputs in the server based oninputs and possibly other stuff
-renderText()renderTable()renderImage()renderPlot()Output FunctionsOutput functions are used in the ui to display the result built byrender functions in the server</description>
-    </item>
-    
-    <item>
-      <title>An Analysis of Eminem Lyrics - NLP</title>
-      <link>/2020/05/23/eminem-lyrics-analysis-nlp/</link>
-      <pubDate>Sat, 23 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/2020/05/23/eminem-lyrics-analysis-nlp/</guid>
-      <description>IntroductionI happen to be a huge Eminem fan, so his recent tweets highlighting the anniversary of his Relapse albums and organizing a Spotify listening party for his prolific The Marshall Mathers LP got me rightfully excited. Being relatively new to text mining, I decided to dive into and explore his lyrics as a means to learn and apply various text mining techniques. This post is the first of a two-part analysis; stay tuned for the second one.</description>
-    </item>
-    
-  </channel>
-</rss>

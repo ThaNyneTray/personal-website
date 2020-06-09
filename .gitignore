@@ -2,3 +2,8 @@
 .Rhistory
 .RData
 .Ruserdata
+public/
+previous content/
+config-coder.toml
+config-erblog.toml
+config-sugoi.toml

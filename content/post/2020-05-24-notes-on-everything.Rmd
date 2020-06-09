@@ -1,0 +1,119 @@
+---
+title: Notes On Everything
+author: Desmond Tuiyot
+date: '2020-05-24'
+slug: notes-on-everything
+categories:
+  - Statistics
+  - Personal Notes
+tags:
+  - Data Analysis
+  - Notes
+  - Random
+bibliography: ref.bib
+# csl: style.csl 
+---
+
+```{r include=FALSE}
+knitr::opts_chunk$set(warning=FALSE, message=FALSE)
+```
+## Disclaimer:  
+These are my personal notes on things I learn. They are neither extensive nor comprehensive and will probably not be useful to you. There may be a lot of mistakes and errors because this space represents my attempts at understanding the things I learn.
+
+## Statistics {#statistics}
+
+## Probability {#probability}
+
+## Machine Learning {#machine_learning}
+
+## Algorithms & Data Structures {#algos_data_structures}
+### Dynamic Programming - Patterns  
+1. Minimum/Maximum path to reach a target  
+These are straightforward optimization questions. You have a target to reach and at each step, you have some number of possible paths to take. The approach:
+  + The subproblem is the minimum/maximum path to step `i`, where `0<=i<=n`
+  + Choose the minimum/maximum path amongst all possible paths to reach the current state. Then add the value for the current state. 
+  + Generate optimal solutions for all values leading up to and including the target, then return the value for the target. 
+For each problem, I have to first think about the base cases, which I use to build the solution once I start iterating.  
+The subproblem in this family of problems seem to be primarily prefixes - At subproblem `DP(i)`, I'm assuming that all the subproblems `DP(i)` depends on are already solved. 
+
+## Python
+
+## RShiny
+
+### Inputs & Outputs
+#### Inputs
+textInput()  
+sliderInput()  
+selectInput()  
+numericalInput()  
+dateRangeInput()  
+all inputs have the format
+```{r echo=FALSE, eval=FALSE}
+library(shiny)
+library(dplyr)
+library(tidyr)
+```
+``` {r eval=FALSE}
+__input("inputId",
+        "label",
+        unique_param1, unique_param2, ...)
+```
+#### Render Functions
+Render functions are used to built outputs in the server based on
+inputs and possibly other stuff
+```{r eval=FALSE}
+renderText()
+renderTable()
+renderImage()
+renderPlot()
+```
+#### Output Functions
+Output functions are used in the ui to display the result built by 
+render functions in the server
+```{r eval=FALSE}
+textOutput()
+plotOutput()
+tableOutput() or dataTableOutput()
+imageOutput()
+```
+##### Non-shiny output and render functions
+DT, leaflet, and plotly -> interactive data tables, maps, and plots as Shiny outputs  
+In order to add an output to a Shiny app, we need to:  
+1. Create the output -> could be a plot, table, string, etc
+2. Render the output in the `server` function using appropriate `Render___` function.
+3. Assign this render to a variable name prefixed with `output$___`
+3. Use the corresponding `___Output` and pass in the variable name
+### Layouts and Themes
+#### Layouts
+1. Sidebar layouts
+```{r eval = FALSE}
+sidebarLayout(
+  sidebarPanel(insert input/output here),
+  mainPanel(insert input/output here)
+)
+```
+2. Tab layouts
+```{r eval=FALSE}
+sidebarLayout(
+  sidebarPanel(insert input/output here),
+  mainPanel(
+    
+    tabsetPanel(
+      tabPanel(),
+      tabPanel()
+    )
+  )
+)
+```
+#### Themes
+Add a theme selector to your Ui
+```{r eval=FALSE}
+shinythemes::themeSelector()
+```
+Then you can add it to your U  
+### Building The App: A Process  
+1. Add inputs to the `ui()`
+2. Add outputs to the `ui()`/`server()`
+3. Modify the app layout in the `ui()`
+4. Update the output in the `server()` to incorporate the input  
+## References {#references}
