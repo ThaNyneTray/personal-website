@@ -1,0 +1,129 @@
+---
+title: Notes On Everything
+author: Desmond Tuiyot
+date: '2020-05-24'
+slug: notes-on-everything
+categories:
+  - Statistics
+  - Personal Notes
+tags:
+  - Data Analysis
+  - Notes
+  - Random
+bibliography: ref.bib
+# csl: style.csl 
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="disclaimer" class="section level2">
+<h2>Disclaimer:</h2>
+<p>These are my personal notes on things I learn. They are neither extensive nor comprehensive and will probably not be useful to you. There may be a lot of mistakes and errors because this space represents my attempts at understanding the things I learn.</p>
+</div>
+<div id="statistics" class="section level2">
+<h2>Statistics</h2>
+</div>
+<div id="probability" class="section level2">
+<h2>Probability</h2>
+</div>
+<div id="machine_learning" class="section level2">
+<h2>Machine Learning</h2>
+</div>
+<div id="algos_data_structures" class="section level2">
+<h2>Algorithms &amp; Data Structures</h2>
+<div id="dynamic-programming---patterns" class="section level3">
+<h3>Dynamic Programming - Patterns</h3>
+<ol style="list-style-type: decimal">
+<li>Minimum/Maximum path to reach a target<br />
+These are straightforward optimization questions. You have a target to reach and at each step, you have some number of possible paths to take. The approach:</li>
+</ol>
+<ul>
+<li>The subproblem is the minimum/maximum path to step <code>i</code>, where <code>0&lt;=i&lt;=n</code></li>
+<li>Choose the minimum/maximum path amongst all possible paths to reach the current state. Then add the value for the current state.</li>
+<li>Generate optimal solutions for all values leading up to and including the target, then return the value for the target.
+For each problem, I have to first think about the base cases, which I use to build the solution once I start iterating.<br />
+The subproblem in this family of problems seem to be primarily prefixes - At subproblem <code>DP(i)</code>, I’m assuming that all the subproblems <code>DP(i)</code> depends on are already solved.</li>
+</ul>
+</div>
+</div>
+<div id="python" class="section level2">
+<h2>Python</h2>
+</div>
+<div id="rshiny" class="section level2">
+<h2>RShiny</h2>
+<div id="inputs-outputs" class="section level3">
+<h3>Inputs &amp; Outputs</h3>
+<div id="inputs" class="section level4">
+<h4>Inputs</h4>
+<p>textInput()<br />
+sliderInput()<br />
+selectInput()<br />
+numericalInput()<br />
+dateRangeInput()<br />
+all inputs have the format</p>
+<pre class="r"><code>__input(&quot;inputId&quot;,
+        &quot;label&quot;,
+        unique_param1, unique_param2, ...)</code></pre>
+</div>
+<div id="render-functions" class="section level4">
+<h4>Render Functions</h4>
+<p>Render functions are used to built outputs in the server based on
+inputs and possibly other stuff</p>
+<pre class="r"><code>renderText()
+renderTable()
+renderImage()
+renderPlot()</code></pre>
+</div>
+<div id="output-functions" class="section level4">
+<h4>Output Functions</h4>
+<p>Output functions are used in the ui to display the result built by
+render functions in the server</p>
+<pre class="r"><code>textOutput()
+plotOutput()
+tableOutput() or dataTableOutput()
+imageOutput()</code></pre>
+<div id="non-shiny-output-and-render-functions" class="section level5">
+<h5>Non-shiny output and render functions</h5>
+<p>DT, leaflet, and plotly -&gt; interactive data tables, maps, and plots as Shiny outputs<br />
+In order to add an output to a Shiny app, we need to:<br />
+1. Create the output -&gt; could be a plot, table, string, etc
+2. Render the output in the <code>server</code> function using appropriate <code>Render___</code> function.
+3. Assign this render to a variable name prefixed with <code>output$___</code>
+3. Use the corresponding <code>___Output</code> and pass in the variable name
+### Layouts and Themes
+#### Layouts
+1. Sidebar layouts</p>
+<pre class="r"><code>sidebarLayout(
+  sidebarPanel(insert input/output here),
+  mainPanel(insert input/output here)
+)</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Tab layouts</li>
+</ol>
+<pre class="r"><code>sidebarLayout(
+  sidebarPanel(insert input/output here),
+  mainPanel(
+    
+    tabsetPanel(
+      tabPanel(),
+      tabPanel()
+    )
+  )
+)</code></pre>
+</div>
+</div>
+<div id="themes" class="section level4">
+<h4>Themes</h4>
+<p>Add a theme selector to your Ui</p>
+<pre class="r"><code>shinythemes::themeSelector()</code></pre>
+<p>Then you can add it to your U<br />
+### Building The App: A Process<br />
+1. Add inputs to the <code>ui()</code>
+2. Add outputs to the <code>ui()</code>/<code>server()</code>
+3. Modify the app layout in the <code>ui()</code>
+4. Update the output in the <code>server()</code> to incorporate the input<br />
+## References {#references}</p>
+</div>
+</div>
+</div>
