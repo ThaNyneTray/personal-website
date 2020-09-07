@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>rest api on Desmond Tuiyot</title>
+    <link>/tags/rest-api/</link>
+    <description>Recent content in rest api on Desmond Tuiyot</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 16 Jul 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/rest-api/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>REST APIs - Theory</title>
+      <link>/notes/rest-apis-theory/</link>
+      <pubDate>Thu, 16 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/rest-apis-theory/</guid>
+      <description>RESTful Service Best PracticesWhat is REST?REST Quick TipsDefinitionsIdempotentAn idempotent operation is one which produces the same result if executed one or multiple times.In the case of methods and subroutine calls, it could mean that they have no side effects (see Safety definition below)For those that have side effects, idempotence means that once the method is called initially and state changes, that modified state remains the same over repeated calls to itIn the context of RESTful services, clients can make the same call repeatedly, producing the same results/side effects.</description>
+    </item>
+    
+  </channel>
+</rss>

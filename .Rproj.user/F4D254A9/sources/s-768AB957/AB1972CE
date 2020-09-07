@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1598885174922.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "AB1972CE",
+    "lastKnownWriteTime" : 1598930185,
+    "last_content_update" : 1598930185664,
+    "path" : "~/DataScience/Personal Website/content/notes/2020-07-18-javascript-fundamentals.Rmd",
+    "project_path" : "content/notes/2020-07-18-javascript-fundamentals.Rmd",
+    "properties" : {
+        "cursorPosition" : "1440,43",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

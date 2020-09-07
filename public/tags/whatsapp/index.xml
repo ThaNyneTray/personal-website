@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>whatsapp on Desmond Tuiyot</title>
+    <link>/tags/whatsapp/</link>
+    <description>Recent content in whatsapp on Desmond Tuiyot</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 04 Aug 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/whatsapp/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>The Twilio API for WhatsApp</title>
+      <link>/notes/twilio-whatsapp-api/</link>
+      <pubDate>Tue, 04 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/twilio-whatsapp-api/</guid>
+      <description>Twilio API for WhatsApp Python QuickstartWe want to send and receive messages with WhatsApp using the Twilio API for WhatsAppWe’ll be usingTwilio Sandbox for WhatsAppPythonThe Twilio Python Twilio Helper LibraryFlaskSign Up for Twilio and Activate the SandboxFirst, sign up for a twilio account hereNext, sign into your account and activate the Twilio Sandbox for WhatsAppIn order to send messages in production, you have to wait for WhatsApp to approve your account.</description>
+    </item>
+    
+  </channel>
+</rss>

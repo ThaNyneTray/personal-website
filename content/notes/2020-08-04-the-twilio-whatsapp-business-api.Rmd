@@ -1,0 +1,97 @@
+---
+title: The Twilio API for WhatsApp
+author: Desmond Tuiyot
+date: '2020-08-04'
+slug: twilio-whatsapp-api
+categories: []
+tags:
+  - api
+  - whatsapp
+  - twilio
+---
+
+# Twilio API for WhatsApp Python Quickstart
+
+* We want to send and receive messages with WhatsApp using the *Twilio API for WhatsApp*
+* We'll be using
+  * Twilio Sandbox for WhatsApp
+  * Python
+  * The Twilio Python Twilio Helper Library
+  * Flask
+
+1. **Sign Up for Twilio and Activate the Sandbox**
+  * First, sign up for a twilio account [here](https://www.twilio.com/try-twilio)
+  * Next, sign into your account and activate the [Twilio Sandbox for WhatsApp](https://www.twilio.com/console/sms/whatsapp/learn)
+    * In order to send messages in production, you have to wait for WhatsApp to approve your account. The sandbox allows you to start developing and using a shared phone number, without having to wait for a dedicated one.
+    * My shared number - **+1(415)523-8886**
+    * To send one-way outbound messages, we use certain pre-approved templates from WhatsApp
+      * Appointment Reminders
+      * Order Notifications
+      * Verification Codes
+    * When a user replies to that message, a 24 hour, two-way conversation window is created where you can freely converse with the customer without using templates. Do I want this?
+2. **Gather your Twilio credentials**
+  * Here I need **Account SID** and **Auth Token** to authenticate REST API requests. I can find this on my Twilio Console.
+    * Account SID - ACb3cc59265b6eefe39b3d14a0123b40e7
+    * Auth Token - ###
+  * 
+3. **Send a Message with WhatsApp in Python**
+  * First, you have to opt in to your sandbox by sending a message to your Sandbox number -  `join <your sandbox name>`
+  * Once you join, you can only receive messages from that sandbox
+  * You can invite others to your sandbox by sending them a url in this form - `whatsapp://send?phone=<Your Sandbox Number>&text=<your URL-encoded sandbox keyword>` or ask them to send a message to the same message `join <your sandbox keyword>` to the sandbox number
+  * Use the following code template to send a message - this is pulled from the Twilio WhatsApp API quickstart page.
+    ```{python eval=F}
+    # Download the helper library from https://www.twilio.com/docs/python/install
+    from twilio.rest import Client
+    
+    
+    # Your Account Sid and Auth Token from twilio.com/console
+    # DANGER! This is insecure. See http://twil.io/secure
+    account_sid = 'ACb3cc59265b6eefe39b3d14a0123b40e7'
+    auth_token = 'your_auth_token'
+    client = Client(account_sid, auth_token)
+    
+    message = client.messages.create(
+                                  body='Hello there!',
+                                  from_='whatsapp:+14155238886',
+                                  to='whatsapp:+15005550006'
+                              )
+    
+    print(message.sid)
+    ```
+4. Receiving WhatsApp Messages
+  * When you receive a whatsapp message, you will receive a webhook request from Twilio
+  * You can configure webhooks by connecting your Sandbox to an app that's built to handle incoming message requests - or just build one
+  * To handle the request, I'd need to set up a web application and expose it to the internet
+
+# Key Concepts and Terms for the WhatsApp Business API with Twilio
+
+WhatsApp is a highly regulated channel, and using it requires documentation and approval from Facebook.
+Some key concepts:
+
+**The "24-hour window" or "24-hour session"**
+  * Essentially, an inbound message to your Business number from an end-user kicks off a 24 hour window where you can communicate with the end user and send *free-form messages*
+  * If outside of that window, you can only send *template messages*
+**WhatsApp Notification Templates**
+  * As mentioned before, you can only send pre-approved template messages outside of the 24 hour window of communication.
+  * When you first get started out, you can submit templates for approval by WhatsApp
+  * Besides that, Twilio has some templates available (3 of them) that you can use in the Sandbox before your Twilio number and your templates get approved.
+**WhatsApp Business Account (WABA)**
+  * This is an account for sending and receiving messages to and from your end users/clients.
+  * If connecting using Twilio (which I will?), Twilio is responsible for creating and maintaining a WABA on my behalf
+**Facebook Business Manager (FB BM)**
+  * You need a Facebook Business Manager account in order to get a WABA -  FB BM is a tool that you can use to manage and organize your business within the Facebook ecosystem
+  * Facebook uses your FB BM to verify the business.
+  * Twilio needs our FB BM id in order to create a WABA for us
+
+
+
+# Appendices
+## Appendix 1: Python Setup
+
+* Installed postgresql
+* Installed python venv
+* Installed wheel - `pip install wheel`
+* Error installing gnureadline - `sudo apt-get install libncurses5-dev`
+  * `sudo apt-get install libncurses5-dev libffi-dev`
+* ERROR: Failed building wheel for psycopg2
+* d [psql problems](https://medium.com/@stephanedmonson/solution-for-connecting-postgresql-via-wsl-windows-subsystem-for-linux-ubuntu18-c79940fa5742)

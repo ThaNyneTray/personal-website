@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>rails on Desmond Tuiyot</title>
+    <link>/tags/rails/</link>
+    <description>Recent content in rails on Desmond Tuiyot</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 23 Jul 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/rails/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SaaS - An Agile Approach to Cloud Computing</title>
+      <link>/notes/saas/</link>
+      <pubDate>Thu, 23 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/saas/</guid>
+      <description>1. Introduction to SaaS and Agile Development1.1 IntroductionProductivity mechanismsClarity via concisenessSynthesisReuseAutomation &amp;amp; Tools1.4 Service Oriented Architecture (SOA)The success of Agile is proven for mainly smaller projects. This success can be replicated for larger projects by using a software architecture designed to make composible services - SOASOA means that components of an application act as interoperable services, and can be used independently and recombined in different applications.</description>
+    </item>
+    
+  </channel>
+</rss>

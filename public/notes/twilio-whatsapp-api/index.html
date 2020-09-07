@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+
+    <meta name="author" content="Desmond Tuiyot">
+    <meta name="description" content="Twilio API for WhatsApp Python QuickstartWe want to send and receive messages with WhatsApp using the Twilio API for WhatsAppWe’ll be usingTwilio Sandbox for WhatsAppPythonThe Twilio Python Twilio Helper LibraryFlaskSign Up for Twilio and Activate the SandboxFirst, sign up for a twilio account hereNext, sign into your account and activate the Twilio Sandbox for WhatsAppIn order to send messages in production, you have to wait for WhatsApp to approve your account.">
+    <meta name="keywords" content="blog, developer, personal, data analyst">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="The Twilio API for WhatsApp"/>
+<meta name="twitter:description" content="Twilio API for WhatsApp Python QuickstartWe want to send and receive messages with WhatsApp using the Twilio API for WhatsAppWe’ll be usingTwilio Sandbox for WhatsAppPythonThe Twilio Python Twilio Helper LibraryFlaskSign Up for Twilio and Activate the SandboxFirst, sign up for a twilio account hereNext, sign into your account and activate the Twilio Sandbox for WhatsAppIn order to send messages in production, you have to wait for WhatsApp to approve your account."/>
+
+    <meta property="og:title" content="The Twilio API for WhatsApp" />
+<meta property="og:description" content="Twilio API for WhatsApp Python QuickstartWe want to send and receive messages with WhatsApp using the Twilio API for WhatsAppWe’ll be usingTwilio Sandbox for WhatsAppPythonThe Twilio Python Twilio Helper LibraryFlaskSign Up for Twilio and Activate the SandboxFirst, sign up for a twilio account hereNext, sign into your account and activate the Twilio Sandbox for WhatsAppIn order to send messages in production, you have to wait for WhatsApp to approve your account." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/notes/twilio-whatsapp-api/" />
+<meta property="article:published_time" content="2020-08-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-08-04T00:00:00+00:00" />
+
+
+    
+      <base href="/notes/twilio-whatsapp-api/">
+    
+    <title>
+  The Twilio API for WhatsApp · Desmond Tuiyot
+</title>
+
+    
+      <link rel="canonical" href="/notes/twilio-whatsapp-api/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/image/icons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/image/icons/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.72.0" />
+  </head>
+
+  
+  
+  <body class="colorscheme-light">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Desmond Tuiyot
+    </a>
+    
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/post/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/notes/">Notes On Everything</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/projects/">Projects</a>
+          </li>
+        
+      
+      
+    </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container page">
+  <article>
+    <header>
+      <h1>The Twilio API for WhatsApp</h1>
+    </header>
+
+    
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="twilio-api-for-whatsapp-python-quickstart" class="section level1">
+<h1>Twilio API for WhatsApp Python Quickstart</h1>
+<ul>
+<li>We want to send and receive messages with WhatsApp using the <em>Twilio API for WhatsApp</em></li>
+<li>We’ll be using
+<ul>
+<li>Twilio Sandbox for WhatsApp</li>
+<li>Python</li>
+<li>The Twilio Python Twilio Helper Library</li>
+<li>Flask</li>
+</ul></li>
+</ul>
+<ol style="list-style-type: decimal">
+<li><strong>Sign Up for Twilio and Activate the Sandbox</strong></li>
+</ol>
+<ul>
+<li>First, sign up for a twilio account <a href="https://www.twilio.com/try-twilio">here</a></li>
+<li>Next, sign into your account and activate the <a href="https://www.twilio.com/console/sms/whatsapp/learn">Twilio Sandbox for WhatsApp</a>
+<ul>
+<li>In order to send messages in production, you have to wait for WhatsApp to approve your account. The sandbox allows you to start developing and using a shared phone number, without having to wait for a dedicated one.</li>
+<li>My shared number - <strong>+1(415)523-8886</strong></li>
+<li>To send one-way outbound messages, we use certain pre-approved templates from WhatsApp
+<ul>
+<li>Appointment Reminders</li>
+<li>Order Notifications</li>
+<li>Verification Codes</li>
+</ul></li>
+<li>When a user replies to that message, a 24 hour, two-way conversation window is created where you can freely converse with the customer without using templates. Do I want this?</li>
+</ul></li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>Gather your Twilio credentials</strong></li>
+</ol>
+<ul>
+<li>Here I need <strong>Account SID</strong> and <strong>Auth Token</strong> to authenticate REST API requests. I can find this on my Twilio Console.
+<ul>
+<li>Account SID - ACb3cc59265b6eefe39b3d14a0123b40e7</li>
+<li>Auth Token - ###</li>
+</ul></li>
+<li></li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>Send a Message with WhatsApp in Python</strong></li>
+</ol>
+<ul>
+<li><p>First, you have to opt in to your sandbox by sending a message to your Sandbox number - <code>join &lt;your sandbox name&gt;</code></p></li>
+<li><p>Once you join, you can only receive messages from that sandbox</p></li>
+<li><p>You can invite others to your sandbox by sending them a url in this form - <code>whatsapp://send?phone=&lt;Your Sandbox Number&gt;&amp;text=&lt;your URL-encoded sandbox keyword&gt;</code> or ask them to send a message to the same message <code>join &lt;your sandbox keyword&gt;</code> to the sandbox number</p></li>
+<li><p>Use the following code template to send a message - this is pulled from the Twilio WhatsApp API quickstart page.</p>
+<pre class="python"><code># Download the helper library from https://www.twilio.com/docs/python/install
+from twilio.rest import Client
+
+
+# Your Account Sid and Auth Token from twilio.com/console
+# DANGER! This is insecure. See http://twil.io/secure
+account_sid = &#39;ACb3cc59265b6eefe39b3d14a0123b40e7&#39;
+auth_token = &#39;your_auth_token&#39;
+client = Client(account_sid, auth_token)
+
+message = client.messages.create(
+                              body=&#39;Hello there!&#39;,
+                              from_=&#39;whatsapp:+14155238886&#39;,
+                              to=&#39;whatsapp:+15005550006&#39;
+                          )
+
+print(message.sid)</code></pre></li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
+<li>Receiving WhatsApp Messages</li>
+</ol>
+<ul>
+<li>When you receive a whatsapp message, you will receive a webhook request from Twilio</li>
+<li>You can configure webhooks by connecting your Sandbox to an app that’s built to handle incoming message requests - or just build one</li>
+<li>To handle the request, I’d need to set up a web application and expose it to the internet</li>
+</ul>
+</div>
+<div id="key-concepts-and-terms-for-the-whatsapp-business-api-with-twilio" class="section level1">
+<h1>Key Concepts and Terms for the WhatsApp Business API with Twilio</h1>
+<p>WhatsApp is a highly regulated channel, and using it requires documentation and approval from Facebook.
+Some key concepts:</p>
+<p><strong>The “24-hour window” or “24-hour session”</strong>
+* Essentially, an inbound message to your Business number from an end-user kicks off a 24 hour window where you can communicate with the end user and send <em>free-form messages</em>
+* If outside of that window, you can only send <em>template messages</em>
+<strong>WhatsApp Notification Templates</strong>
+* As mentioned before, you can only send pre-approved template messages outside of the 24 hour window of communication.
+* When you first get started out, you can submit templates for approval by WhatsApp
+* Besides that, Twilio has some templates available (3 of them) that you can use in the Sandbox before your Twilio number and your templates get approved.
+<strong>WhatsApp Business Account (WABA)</strong>
+* This is an account for sending and receiving messages to and from your end users/clients.
+* If connecting using Twilio (which I will?), Twilio is responsible for creating and maintaining a WABA on my behalf
+<strong>Facebook Business Manager (FB BM)</strong>
+* You need a Facebook Business Manager account in order to get a WABA - FB BM is a tool that you can use to manage and organize your business within the Facebook ecosystem
+* Facebook uses your FB BM to verify the business.
+* Twilio needs our FB BM id in order to create a WABA for us</p>
+</div>
+<div id="appendices" class="section level1">
+<h1>Appendices</h1>
+<div id="appendix-1-python-setup" class="section level2">
+<h2>Appendix 1: Python Setup</h2>
+<ul>
+<li>Installed postgresql</li>
+<li>Installed python venv</li>
+<li>Installed wheel - <code>pip install wheel</code></li>
+<li>Error installing gnureadline - <code>sudo apt-get install libncurses5-dev</code>
+<ul>
+<li><code>sudo apt-get install libncurses5-dev libffi-dev</code></li>
+</ul></li>
+<li>ERROR: Failed building wheel for psycopg2</li>
+<li>d <a href="https://medium.com/@stephanedmonson/solution-for-connecting-postgresql-via-wsl-windows-subsystem-for-linux-ubuntu18-c79940fa5742">psql problems</a></li>
+</ul>
+</div>
+</div>
+
+  </article>
+</section>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js" id="MathJax-script"></script>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [
+          ['$', '$'], ['\\(', '\\)']
+        ],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+      
+        ©
+        
+        2020
+         Desmond Tuiyot 
+      
+      
+         · 
+        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+      
+      
+    </section>
+  </footer>
+
+    </main>
+
+    
+
+    
+
+    
+
+  </body>
+
+</html>

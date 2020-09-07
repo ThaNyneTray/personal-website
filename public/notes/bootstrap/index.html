@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+
+    <meta name="author" content="Desmond Tuiyot">
+    <meta name="description" content="Forms  Start with a form tag. In it, you wanna have div tags representing each form control and its label. &lt;div class=&#34;form-group&#34;&gt; &lt;label for=&#34;inputEmail&#34;&gt;Email&lt;/label&gt; &lt;input type=&#34;email&#34; class=&#34;form-control&#34; id=&#34;inputEmail&#34; placeholder=&#34;Email&#34;&gt; &lt;/div&gt;  form-control is required for general styling and also sets the form controls to 100% width. For file inputs swap out form-control for form-control-file  To change width or use them inline, use predefined grid classes   For a button - this doesn&rsquo;t need to be nested inside a div &lt;button type=&#34;submit&#34; class=&#34;btn btn-primary&#34;&gt;Submit&lt;/buttom&gt;    For horizontal forms - i.">
+    <meta name="keywords" content="blog, developer, personal, data analyst">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Bootstrap"/>
+<meta name="twitter:description" content="Forms  Start with a form tag. In it, you wanna have div tags representing each form control and its label. &lt;div class=&#34;form-group&#34;&gt; &lt;label for=&#34;inputEmail&#34;&gt;Email&lt;/label&gt; &lt;input type=&#34;email&#34; class=&#34;form-control&#34; id=&#34;inputEmail&#34; placeholder=&#34;Email&#34;&gt; &lt;/div&gt;  form-control is required for general styling and also sets the form controls to 100% width. For file inputs swap out form-control for form-control-file  To change width or use them inline, use predefined grid classes   For a button - this doesn&rsquo;t need to be nested inside a div &lt;button type=&#34;submit&#34; class=&#34;btn btn-primary&#34;&gt;Submit&lt;/buttom&gt;    For horizontal forms - i."/>
+
+    <meta property="og:title" content="Bootstrap" />
+<meta property="og:description" content="Forms  Start with a form tag. In it, you wanna have div tags representing each form control and its label. &lt;div class=&#34;form-group&#34;&gt; &lt;label for=&#34;inputEmail&#34;&gt;Email&lt;/label&gt; &lt;input type=&#34;email&#34; class=&#34;form-control&#34; id=&#34;inputEmail&#34; placeholder=&#34;Email&#34;&gt; &lt;/div&gt;  form-control is required for general styling and also sets the form controls to 100% width. For file inputs swap out form-control for form-control-file  To change width or use them inline, use predefined grid classes   For a button - this doesn&rsquo;t need to be nested inside a div &lt;button type=&#34;submit&#34; class=&#34;btn btn-primary&#34;&gt;Submit&lt;/buttom&gt;    For horizontal forms - i." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/notes/bootstrap/" />
+<meta property="article:published_time" content="2020-08-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-08-23T00:00:00+00:00" />
+
+
+    
+      <base href="/notes/bootstrap/">
+    
+    <title>
+  Bootstrap · Desmond Tuiyot
+</title>
+
+    
+      <link rel="canonical" href="/notes/bootstrap/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/image/icons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/image/icons/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.72.0" />
+  </head>
+
+  
+  
+  <body class="colorscheme-light">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Desmond Tuiyot
+    </a>
+    
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/post/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/notes/">Notes On Everything</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/projects/">Projects</a>
+          </li>
+        
+      
+      
+    </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container page">
+  <article>
+    <header>
+      <h1>Bootstrap</h1>
+    </header>
+
+    <h2 id="forms">Forms</h2>
+<ul>
+<li>Start with a <code>form</code> tag. In it, you wanna have <code>div</code> tags representing each form control and its label.
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;div class=&#34;form-group&#34;&gt;
+  &lt;label for=&#34;inputEmail&#34;&gt;Email&lt;/label&gt;
+  &lt;input type=&#34;email&#34; class=&#34;form-control&#34; id=&#34;inputEmail&#34; placeholder=&#34;Email&#34;&gt;
+&lt;/div&gt;
+</code></pre></div><ul>
+<li><code>form-control</code> is required for general styling and also sets the form controls to 100% width. For <em>file inputs</em> swap out <code>form-control</code> for <code>form-control-file</code>
+<ul>
+<li>To change width or use them inline, use predefined grid classes</li>
+</ul>
+</li>
+<li>For a button - this doesn&rsquo;t need to be nested inside a <code>div</code>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;button type=&#34;submit&#34; class=&#34;btn btn-primary&#34;&gt;Submit&lt;/buttom&gt;
+</code></pre></div></li>
+</ul>
+</li>
+<li>For horizontal forms - i.e. each form label and control are on one line, side by side
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;div class=&#34;form-group row&#34;&gt;
+  &lt;label for=&#34;inputEmail&#34; class=&#34;col-sm-2 col-form-label&#34;&gt;Email&lt;/label&gt;
+  &lt;div class=&#34;col-sm-10&#34;&gt;
+    &lt;input type=&#34;email&#34; class=&#34;form-control&#34; id=&#34;inputEmail&#34; &gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></div><ul>
+<li>The <code>col-form-label</code> vettically centers the label to its corresponding form control</li>
+</ul>
+</li>
+</ul>
+
+  </article>
+</section>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js" id="MathJax-script"></script>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [
+          ['$', '$'], ['\\(', '\\)']
+        ],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+      
+        ©
+        
+        2020
+         Desmond Tuiyot 
+      
+      
+         · 
+        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+      
+      
+    </section>
+  </footer>
+
+    </main>
+
+    
+
+    
+
+    
+
+  </body>
+
+</html>

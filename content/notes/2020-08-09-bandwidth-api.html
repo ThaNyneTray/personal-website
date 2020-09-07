@@ -1,0 +1,208 @@
+---
+title: Bandwidth API
+author: Desmond Tuiyot
+date: '2020-08-09'
+slug: bandwidth-api
+categories: []
+tags:
+  - bandwidth
+  - company-specific
+  - api
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="messaging-101" class="section level2">
+<h2>Messaging 101</h2>
+<p><strong>About Bandwidth</strong></p>
+<ul>
+<li>It is a <strong>CPaaS</strong> provider - this is short for <strong>Communications Platforms as a Service</strong> - and it is the only CPaaS provider with its own national <strong><em>CLEC??</em></strong> network</li>
+<li>Billions of messages every month and 52m numbers on their network</li>
+</ul>
+<p><strong>What is a text message?</strong></p>
+<ul>
+<li>It’s not any of those received from WhatsApp, GroupMe, or Messenger, or any other app like that.</li>
+<li>They are <strong>Over-The-Top (OTT)</strong> apps where both you and the recipient have to be using the same app in order to communicate
+<ul>
+<li>These services send the messages as data packets over the internet</li>
+</ul></li>
+<li>For <strong>SMS</strong>, on the other hand, you can send one to any cellular device all around the world.</li>
+</ul>
+<p><strong>Problem: How do Businesses Send and Receive Text Messages?</strong></p>
+<ul>
+<li>How should they leverage text messages for profit?</li>
+<li>Most businesses use software called <strong>CRM</strong> to manage customer experience, while customers simply receive texts as usual.</li>
+<li>To achieve this business-to-customer texting, APIs are used.
+<ul>
+<li><strong>build vs buy argument</strong> - invoking APIs to add functionality to your software</li>
+</ul></li>
+<li>Software teams can easily connect to wireless carrier networks via APIs to easily send and receive texts but often times, this can be tedious since different carriers have their own structure and rules</li>
+<li>These teams only need to connect bandwidth’s API to be connected to many different carrier networks</li>
+</ul>
+<p><strong>Choosing the Right Product for Your Use Case</strong></p>
+<ul>
+<li><em>Dedicated Short Codes</em></li>
+<li><em>Toll Free SMS</em></li>
+<li><em>Local Numbers</em></li>
+</ul>
+<p><strong>Text Messaging Requirements and What They Mean to Businesses</strong></p>
+<ul>
+<li>Are there rules for businesses? <strong>Yes</strong></li>
+<li><strong>ctia</strong> represents the US wireless communications industry put out a guideline called <em>Messaging Principles and Best Practices</em> which help businesses understand when spam is being sent through their network
+<ul>
+<li>They help carriers identify what kind of traffic is being sent over their network and protects users from unwanted texts.</li>
+</ul></li>
+<li><strong>Two Types of Messaging Traffic</strong>
+<ul>
+<li><strong>P2P - Person to Person</strong> - texting between individuals</li>
+<li><strong>A2P - Application to Person</strong> - this is business messaging. Not only businesses that have an application on one end sending texts via an API, but any texting where a business is involved at any point in time.</li>
+</ul></li>
+<li>So how do we differentiate the two? Well, P2P looks like this:
+<ul>
+<li><strong>Throughput</strong> of no more than 15-60 messages per minute</li>
+<li><strong>Volume</strong> of no more than 1000 messages per day</li>
+<li><strong>Unique Sender</strong> with only one number assigned to one consumer</li>
+<li><strong>Unique Recipients</strong> with no more than 100 distinct numbers per message</li>
+<li><strong>Balance</strong> of 1:1 for incoming:outgoing messages per number</li>
+<li><strong>Repetition</strong> of 25 or more <strong>(i think it’s less)</strong> substantially repetitive messages</li>
+</ul></li>
+<li>And A2P is just everything else.</li>
+</ul>
+<p><strong>Opt-In Rules</strong></p>
+<ul>
+<li><strong>Conversational Messaging</strong>
+<ul>
+<li>This is messaging that is initiated by the consumer, and no explicit consent is required.</li>
+<li>However, you should only message the consumer within the bounds of their original query/question and within the bounds of the opt-in. Beyond responding to them you should leave them alone.</li>
+</ul></li>
+<li><strong>Informational Messaging</strong>
+<ul>
+<li>This requires express consent from the consumer</li>
+<li>The consumer opts in via forms on a website, via text, or even verbally and gives the business their phone number asking to be notified of account updates, appointments etc</li>
+</ul></li>
+<li><strong>Promotional Messaging</strong>
+<ul>
+<li>Any messaging that promotes or markets a business in any way</li>
+<li>This is the most regulated type</li>
+<li>Express written permission is required before a consumer receives any texts either via a checkbox on a website, a signed form, or other form that is continually tracked or managed.</li>
+</ul></li>
+</ul>
+<p><strong>Next: What Happens After You Hit Send?</strong></p>
+<ul>
+<li><strong>Definition of SMS</strong>
+<ul>
+<li><strong>SMS n.</strong> - Short Messaging Service; a 160 character text message to be sent between mobile phones</li>
+<li><strong>SMS v.</strong> - Making sending 160 characters of text as complex as possible</li>
+</ul></li>
+<li>This message is exactly 160 characters because that’s the original capacity of T-Mobile’s message service back when intercarrier messaging was being negotiated</li>
+<li><strong>What about longer messages?</strong> Messages are broken down into 160 character chunks during sending and these chunks are concatenated once delivered so that they read as one message.</li>
+<li><strong>A Text Message’s Journey</strong>
+<ol style="list-style-type: decimal">
+<li>An SMS/MMS is sent from the business to the Bandwidth network.</li>
+<li>Here it goes through a set of spam filters, a process known as the <strong>Inter-carrier SPAM fingerprint scanning</strong></li>
+</ol>
+<ul>
+<li>The message goes through Bandwidth’s own spam filters which have their own rules for what is acceptable</li>
+<li>Next, it goes through either the P2P or A2P route, which also have different rules, as discussed before.</li>
+<li>If all goes well, the message is sent to the intended carrier, which probably has its own set of filters.</li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>If a message passes through all these filters, then it is sent to the recipient</li>
+</ol></li>
+<li><strong>How do I know if my messages were delivered?</strong>
+<ul>
+<li>These days, we get a message callback showing whether the message was delivered, which gives you a lot of information about why your message wasn’t delivered.</li>
+</ul></li>
+<li><strong>Delivery Receipts (DLRS)</strong>
+<ul>
+<li>There are 2 levels of DLRS: <em>carrier DLR</em> and <em>handset DLR</em></li>
+<li><strong>Carrier DLR</strong> - This happens between bandwidth and carriers: a intermediate delivery receipt is delivered to Bandwidth to let them know that that message was delivered to the carrier.<br />
+</li>
+<li><strong>Handset DLR</strong> - This happens between the carrier and the handset: a delivery receipt is sent to the carrier and to Bandwidth to let them know that the message was delivered.
+<ul>
+<li>Importantly, Handset DLRS do not currently apply for Local A2P type messages.</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>Now What?</strong></p>
+<ul>
+<li><strong>Messaging Plan Of Action</strong>
+<ol style="list-style-type: decimal">
+<li>Determine if your use case is P2P or A2P</li>
+<li>Pick the right type of number - local, toll-free, dedicated short codes</li>
+</ol>
+<ul>
+<li>Do you want delivery receipts?</li>
+<li>Do you care that the customers see a local number/</li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>Dig in and understand developer docs for the message provider</li>
+<li>Implement, and don’t forget your error code callbacks</li>
+<li><strong>PROFIT!</strong></li>
+</ol></li>
+</ul>
+<p><strong>Questions</strong></p>
+<ul>
+<li>Reasons for specific content to get blocked?
+<ul>
+<li>Usually specific keywords that might denote <strong>shocked/shacked?</strong> content or keywords that might denote it being sent to the wrong channel</li>
+<li>Traffic that is supposed to be sent A2P</li>
+<li>What about religious information and other types of similar, possibly controversial content?
+<ul>
+<li>Depends a lot on the country</li>
+</ul></li>
+</ul></li>
+<li>Why can’t you text on an airplane?
+<ul>
+<li>SMS and calls happen over cellular networks, which are radio signals and could potentially interfere with the plane’s radio signals.</li>
+<li>For public good reasons as well - it’ll be really annoying if you’re stuck with someone who’s on the phone the entire time</li>
+</ul></li>
+</ul>
+</div>
+<div id="voice-101" class="section level2">
+<h2>Voice 101</h2>
+<p><strong>Vocab</strong></p>
+<ul>
+<li><strong>PSTN/TDM</strong>
+<ul>
+<li><strong>Public Switch Telephone Network</strong> is the network of the world’s public circuit-switched telephone networks. Simply put, it allows telephones communicate with each other</li>
+<li><strong>Time Division Multiplexing</strong> is the traditional method of achieving PSTN connectivity through physical circuits over a single transmission - it’s the old copper wire telecom infrastructure that runs in the ground</li>
+</ul></li>
+<li><strong>DIDs/TNs</strong>
+<ul>
+<li><strong>Direct Inward Dialing / Telephone Number</strong> - another way of talking about a phone number
+<ul>
+<li>A service provided by a <em>local exchange carrier</em> that allows a phone call to ring to a direct line rather than passing through a phone tree or menu before being routed to its end location.</li>
+</ul></li>
+<li><strong>NPA-NXX</strong> - stands for <strong>Number Planning Area</strong> aka <strong>Area Code</strong> - the 3 digit number at the start of a phone number that indicates the telephone service region.
+<ul>
+<li>It is possible for one NPA to represent more than one rate center <strong>(what is a rate center?)</strong></li>
+</ul></li>
+</ul></li>
+<li><strong>LATA/Rate Center</strong> - <strong>Local Access &amp; Transport Area</strong> - this is a 3-digit code (5 in Florida) that labels a particular geographical market to which a call is routed?
+<ul>
+<li><strong>LEC/ILEC/CLEC</strong> - <strong>Local Exchange Carriers</strong>, or sometimes <strong>Incumbent Local Exchange Carriers</strong> traditionally provided the phone service of delivering physical copper wire to each residence from their <strong>central office</strong></li>
+<li><strong>Central Office</strong></li>
+<li><strong>LERG</strong></li>
+</ul></li>
+<li><strong>Origination-Inbound</strong></li>
+<li><strong>Termination-Outbound</strong>
+<ul>
+<li><strong>LCR - Least Cost Routing</strong></li>
+</ul></li>
+<li><strong>Toll Free Origination</strong>
+<ul>
+<li><strong>Somos</strong></li>
+</ul></li>
+<li><strong>SIP &amp; VoIP</strong></li>
+<li><strong>API`</strong></li>
+</ul>
+<p><strong>How are inbound and outbound calls connected?</strong></p>
+<p><strong>How are toll-free calls connected?</strong></p>
+<p><strong>What’s a voice API call?</strong></p>
+<p><strong>What are some good use cases?</strong></p>
+</div>
+<div id="references" class="section level2">
+<h2>References</h2>
+</div>

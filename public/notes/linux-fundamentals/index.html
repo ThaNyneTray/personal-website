@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+
+    <meta name="author" content="Desmond Tuiyot">
+    <meta name="description" content="Getting Started w/ the Linux Command Line Working w/ Linux Command Line: Basics Using Linux Help Resources
+ man wget is a command that takes another command as a parameter and displays a well organized reference showing its syntax, usage patterns, and command line arguments wget is a command that takes a link and downloads the file being identified by that url apt - I assume apt is just a command to install packages, and sudo allows privileged users to run single programs with admin privileges without running the whole shell session as root.">
+    <meta name="keywords" content="blog, developer, personal, data analyst">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Linux Fundamentals"/>
+<meta name="twitter:description" content="Getting Started w/ the Linux Command Line Working w/ Linux Command Line: Basics Using Linux Help Resources
+ man wget is a command that takes another command as a parameter and displays a well organized reference showing its syntax, usage patterns, and command line arguments wget is a command that takes a link and downloads the file being identified by that url apt - I assume apt is just a command to install packages, and sudo allows privileged users to run single programs with admin privileges without running the whole shell session as root."/>
+
+    <meta property="og:title" content="Linux Fundamentals" />
+<meta property="og:description" content="Getting Started w/ the Linux Command Line Working w/ Linux Command Line: Basics Using Linux Help Resources
+ man wget is a command that takes another command as a parameter and displays a well organized reference showing its syntax, usage patterns, and command line arguments wget is a command that takes a link and downloads the file being identified by that url apt - I assume apt is just a command to install packages, and sudo allows privileged users to run single programs with admin privileges without running the whole shell session as root." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/notes/linux-fundamentals/" />
+<meta property="article:published_time" content="2020-08-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-08-07T00:00:00+00:00" />
+
+
+    
+      <base href="/notes/linux-fundamentals/">
+    
+    <title>
+  Linux Fundamentals · Desmond Tuiyot
+</title>
+
+    
+      <link rel="canonical" href="/notes/linux-fundamentals/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/image/icons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/image/icons/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.72.0" />
+  </head>
+
+  
+  
+  <body class="colorscheme-light">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Desmond Tuiyot
+    </a>
+    
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/post/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/notes/">Notes On Everything</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/projects/">Projects</a>
+          </li>
+        
+      
+      
+    </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container page">
+  <article>
+    <header>
+      <h1>Linux Fundamentals</h1>
+    </header>
+
+    <h2 id="getting-started-w-the-linux-command-line">Getting Started w/ the Linux Command Line</h2>
+<h3 id="working-w-linux-command-line-basics">Working w/ Linux Command Line: Basics</h3>
+<p><strong>Using Linux Help Resources</strong></p>
+<ul>
+<li><strong>man wget</strong> is a command that takes another command as a parameter and displays a well organized reference showing its syntax, usage patterns, and command line arguments</li>
+<li><strong>wget</strong> is a command that takes a link and downloads the file being identified by that url</li>
+<li><strong>apt</strong> - I assume apt is just a command to install packages, and <strong>sudo</strong> allows privileged users to run single programs with admin privileges without running the whole shell session as root.</li>
+<li><strong>sudo apt update</strong> - this makes sure that <em>apt</em> knows all about the latest packages</li>
+<li><strong>sudo apt upgrade</strong> - upgrades packages with newer versions</li>
+<li><strong>info</strong> - this command lists out a menu of major topics including a list of installed programs</li>
+<li><strong>/</strong> - the forward slash allows you to search</li>
+<li><strong>/usr/share/doc/wget</strong> - many commands keep documentation and sample configuration files in this directory</li>
+<li><strong>less README</strong> - this command opens the given file for viewing</li>
+<li><strong>wget &ndash;help | less</strong> - this outputs the help text of that command to the less text reader?</li>
+<li><strong>type wget</strong> - this command tells us how <em>wget</em> will be interpreted by bash</li>
+</ul>
+<p><strong>The Linux Terminal</strong></p>
+<ul>
+<li><strong>ls -a</strong> - it lists out all the files/folders in the current directory, including the hidden stuff</li>
+<li><strong>.bashrc</strong> - when you open the terminal, a new <em>shell session</em> is created with settings from this file called <em>.bashrc</em>
+<ul>
+<li>If you want to change the shell settings, this is one of the files to edit</li>
+<li>These settings will only be applied to non-login GUI sessions</li>
+</ul>
+</li>
+<li>When logging in through an <strong>ssh</strong>, for example, you get a <em>login session</em> which gets its settings and values from a bunch of different files including <strong>.profile</strong></li>
+</ul>
+<p><strong>Linux Command Syntax Patterns and Shortcuts</strong></p>
+<ul>
+<li><strong>Arguments</strong>
+<ul>
+<li>argument often have a short form, like <em>-a</em>, and have longer form equivalents like <strong>&ndash;all</strong></li>
+<li>there are some exceptions to the <em>dash</em> notation.
+<ul>
+<li><strong>ip addr</strong> or just <strong>ip a</strong> shows the ip addresses associated with my system&rsquo;s network interfaces.</li>
+</ul>
+</li>
+<li><strong>combining multiple short arguments</strong>
+<ul>
+<li><strong>ls -lht</strong><br>
+<strong>-l</strong> displays the directory&rsquo;s contents in long form, showing object permissions, ownership size, and age details<br>
+<strong>-h</strong> displays the size in human readable format<br>
+<strong>-t</strong> organizes the contents in descending chronological order</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Command Line Shortcuts</strong> - systems admins are profoundly lazy it seems
+<ul>
+<li>the <strong>Tab</strong> key for autocomplete</li>
+<li><strong>cd</strong> typing just this anywhere takes you back to the user home directory</li>
+<li><strong>arrow keys</strong> for cycling through command history</li>
+<li><strong>history</strong> displays the 1000 most recent commands, which is stored in hidden file in the user home dir called <strong>.bash_history</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="navigating-the-linux-file-system">Navigating the Linux File System</h2>
+<p><strong>Working w/ Files and Directories</strong></p>
+<ul>
+<li>Absolute paths vs relative paths - <strong>./</strong> and <strong>../</strong></li>
+<li><strong>pwd</strong> - prints out the current directory location</li>
+<li><strong>mkdir</strong> - creates a directory</li>
+<li><strong>nano file1</strong> - nano is a file editor. Calling it with a file name such as the one given either opens up a existing file or creates one if that file does not exist.</li>
+<li><strong>touch file1</strong> either creates a new file or updates the date timestamp if file exists</li>
+<li><strong>cp file1 newdir/</strong> - copies the file to the directory specified</li>
+<li><strong>mv file1 newdir/</strong> - moves the file to the directory specified</li>
+<li><strong>globbing</strong> - spreading an action across a global target
+<ul>
+<li><em><em>cp file</em> newdir/</em>* - this copies all the files that are prefixed with **file** into the specified directory - the * matches either 0 or more characters.</li>
+<li><strong>cp file? newdir/</strong> - like above but limits the number of characters after <strong>file</strong> to just 1. the ? matches exactly 1 character</li>
+</ul>
+</li>
+<li><strong>rm file</strong> deletes the specified file</li>
+<li>**rm * ** deletes everything inside that directory</li>
+<li><strong>rmdir dire</strong> deletes the specified directory</li>
+</ul>
+<p><strong>Searching the Linux File System</strong></p>
+<ul>
+<li><strong>etc directory</strong> - this is where most config files are kept</li>
+<li><strong>locate</strong> - this command locates and prints out the paths to the file specified
+<ul>
+<li>locate reads a pre-compiled index of all the files and directories in the system</li>
+<li>you can manually update that index using <strong>sudo updatedb</strong></li>
+</ul>
+</li>
+<li><strong>cat file1</strong> displays the contents of <em>file1</em>
+<ul>
+<li><strong>cat &gt;file2</strong> creates a new file called file2</li>
+</ul>
+</li>
+<li>Linux functionality is heavily dependent on text data, and therefore linux has a full set of <strong>text manipulation tools</strong> to read, transform, and redirect text
+<ul>
+<li><strong>|</strong> - the pipe operator. This allows for multiple manipulation/search commands to be executed on a piece of text to filter it</li>
+<li><strong>grep</strong> - tool for searching text and that matches a regular expression</li>
+<li><strong>&gt;</strong> - redirects text output to a new/existing file. If file exists, the text on there previously is overwritten</li>
+<li><strong>&raquo;</strong> - same as <strong>&gt;</strong> but if file exists, it appends to the file instead of overwriting it</li>
+<li><strong>head</strong> , <strong>tail</strong> - prints out the first/last 10 lines of a file</li>
+<li><strong>cut -d: -f3 some_file</strong> - cut splits each line of the output at the delimeter specified by <em>-d</em>.
+<ul>
+<li><strong>-f3</strong> specifies that we are only interested in processing the contents of the 3rd field</li>
+</ul>
+</li>
+<li><strong>sort -rn</strong> - <em>-n</em> sorts in ascending order and adding <em>-r</em> reverses that</li>
+<li><strong>wc some_file</strong> shows the number of lines, words, and characters in the specified file</li>
+</ul>
+</li>
+<li><strong>Standard Streams &amp; Redirects</strong>
+<ul>
+<li><strong>stdin</strong> - this accepts input from the keyboard through which it&rsquo;s made available to Bash.
+<ul>
+<li>A standard input redirect (symbol used is <strong>&lt;</strong>) would accept data from an alternate source</li>
+</ul>
+</li>
+<li><strong>stdout</strong> - by default, this would send data to the terminal
+<ul>
+<li><strong>&raquo;</strong>, <strong>&gt;</strong> - standard output redirects sends that output to a file</li>
+</ul>
+</li>
+<li><strong>stderr</strong> - writes any errors generated by a command to the terminal
+<ul>
+<li><strong>some_cmd_with_error 2&gt; some_file</strong> - the redirect is done using <strong>2&gt;</strong>. The number 2 is a designation for standard error.</li>
+</ul>
+</li>
+<li><strong>stderr</strong></li>
+</ul>
+</li>
+</ul>
+<p><strong>Working w/ Archives</strong></p>
+<ul>
+<li><strong>tar</strong> - this is the most common tool for compression and archiving. Used to stand for <em>tape archives</em></li>
+<li><strong>some_file.tar.gz</strong> - most archives in linux are compressed using those 2 tools- <em>tar</em> and <em>gzip</em></li>
+<li><strong>tar xzf file.tar.gz</strong> - this is a command to unzip an archive
+<ul>
+<li><strong>x</strong> specifies that we want to extract the archive</li>
+<li><strong>z</strong> specifies that the file is zipped</li>
+<li><strong>f</strong> indicates that the file name will follow immediately after</li>
+</ul>
+</li>
+<li><strong>tar czf newfile.tar.gz some_dir/</strong> - this command zips the specified folder into the archive specified. Really the only difference in this command is that we use <em>c</em> for <em>compress</em> vs <em>x</em> for <em>extract</em></li>
+<li><strong>gzip some_file</strong> - zips the file using the gzip algorithm. Use this if you forgot to add <em>z</em> it the tar command</li>
+<li><strong>bzip2</strong> - a different compression algorithm, similar to gzip.</li>
+<li><strong>unzip</strong> - some files come in <em>.zip</em> format. <em>unzip</em> is used when handling these.</li>
+<li>**zip newname.zip * ** - this command creates a new zip file containing all the files inside the current directory</li>
+</ul>
+<p><strong>Linux Kernel Modules and Peripherals</strong></p>
+<ul>
+<li>When troubleshooting peripherals, there&rsquo;s 2 main steps
+<ol>
+<li>Is the device recognized by Linux?</li>
+<li>Are there appropriate kernel modules loaded that&rsquo;ll allow Linux to communicate with the device and expose it to the user?</li>
+</ol>
+</li>
+<li>Commands to see what&rsquo;s available to the users
+<ul>
+<li><strong>lsusb</strong> - shows devices connected using USB port</li>
+<li><strong>lspci</strong> - shows those connected using PCI slots</li>
+<li><strong>lshw</strong> - shows the whole hardware range in one output. There&rsquo;s a ton of these.</li>
+</ul>
+</li>
+<li>If there&rsquo;s a device that isn&rsquo;t available to the users, it&rsquo;s possible that there&rsquo;s a missing kernel module/one that hasn&rsquo;t been loaded.
+<ul>
+<li>Most modules are stored in the directory <strong>/lib/modules/</strong></li>
+<li>However, what modules you want to load are dependent on the kernel version you&rsquo;re running at the moment.</li>
+<li>You find that using <strong>uname -r</strong></li>
+<li><strong>command substitution</strong> - Using backticks, it&rsquo;s possible to substitute the results of a particular command into the operation of another.</li>
+<li><strong>ls /lib/modules/<code>uname -r</code></strong></li>
+<li>Kernel modules usually have a <strong>.ko</strong> extension</li>
+<li><strong>lsmod</strong> lists out all the modules currently loaded</li>
+<li><strong>modprobe module_name</strong> this command loads the specified module</li>
+</ul>
+</li>
+</ul>
+
+  </article>
+</section>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js" id="MathJax-script"></script>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [
+          ['$', '$'], ['\\(', '\\)']
+        ],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+      
+        ©
+        
+        2020
+         Desmond Tuiyot 
+      
+      
+         · 
+        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+      
+      
+    </section>
+  </footer>
+
+    </main>
+
+    
+
+    
+
+    
+
+  </body>
+
+</html>

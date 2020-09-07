@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+
+    <meta name="author" content="Desmond Tuiyot">
+    <meta name="description" content="Introduction to SQLAlchemysQLAlchemyThere’s 3 ways of interacting with database data in SQLAlchemy:Raw SQLSQL Expression LanguageORMSQLAlchemy allows developers to use pure sql, unlike other ORMs.The SQL Expression API allows us to build sql queries using Python objects and operators - it is an abstraction over pure sql and abstracts away various implementation differences between databases.The SQLAlchemy ORM is built on SQL Expression Language and allows us to associate Python classes to database tables.">
+    <meta name="keywords" content="blog, developer, personal, data analyst">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="SQLAlchemy - the basics"/>
+<meta name="twitter:description" content="Introduction to SQLAlchemysQLAlchemyThere’s 3 ways of interacting with database data in SQLAlchemy:Raw SQLSQL Expression LanguageORMSQLAlchemy allows developers to use pure sql, unlike other ORMs.The SQL Expression API allows us to build sql queries using Python objects and operators - it is an abstraction over pure sql and abstracts away various implementation differences between databases.The SQLAlchemy ORM is built on SQL Expression Language and allows us to associate Python classes to database tables."/>
+
+    <meta property="og:title" content="SQLAlchemy - the basics" />
+<meta property="og:description" content="Introduction to SQLAlchemysQLAlchemyThere’s 3 ways of interacting with database data in SQLAlchemy:Raw SQLSQL Expression LanguageORMSQLAlchemy allows developers to use pure sql, unlike other ORMs.The SQL Expression API allows us to build sql queries using Python objects and operators - it is an abstraction over pure sql and abstracts away various implementation differences between databases.The SQLAlchemy ORM is built on SQL Expression Language and allows us to associate Python classes to database tables." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/2020/08/17/sqlalchemy-the-basics/" />
+<meta property="article:published_time" content="2020-08-17T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-08-17T00:00:00+00:00" />
+
+
+    
+      <base href="/2020/08/17/sqlalchemy-the-basics/">
+    
+    <title>
+  SQLAlchemy - the basics · Desmond Tuiyot
+</title>
+
+    
+      <link rel="canonical" href="/2020/08/17/sqlalchemy-the-basics/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/image/icons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/image/icons/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.72.0" />
+  </head>
+
+  
+  
+  <body class="colorscheme-light">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Desmond Tuiyot
+    </a>
+    
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/post/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/notes/">Notes On Everything</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/projects/">Projects</a>
+          </li>
+        
+      
+      
+    </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container page">
+  <article>
+    <header>
+      <h1>SQLAlchemy - the basics</h1>
+    </header>
+
+    
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="introduction-to-sqlalchemy" class="section level1">
+<h1>Introduction to SQLAlchemy</h1>
+<div id="sqlalchemy" class="section level2">
+<h2>sQLAlchemy</h2>
+<ul>
+<li>There’s 3 ways of interacting with database data in SQLAlchemy:
+<ol style="list-style-type: decimal">
+<li>Raw SQL</li>
+<li>SQL Expression Language</li>
+<li>ORM</li>
+</ol></li>
+<li>SQLAlchemy allows developers to use pure sql, unlike other ORMs.</li>
+<li>The SQL Expression API allows us to build sql queries using Python objects and operators - it is an abstraction over pure sql and abstracts away various implementation differences between databases.</li>
+<li>The SQLAlchemy ORM is built on SQL Expression Language and allows us to associate Python classes to database tables.</li>
+</ul>
+</div>
+<div id="sqlalchemy-components" class="section level2">
+<h2>SQLAlchemy Components</h2>
+<ul>
+<li><strong>Engine</strong> is the starting point of an SQLAlchemy application
+<ul>
+<li>It works with the <strong>Connection pool</strong> and the <strong>Dialect</strong> component to communicate SQL statements from SQLAlchemy to the database.</li>
+<li>It is created using <code>create_engine()</code> function and can used to directly interact with a database or can be passed to a <strong>Session</strong> object to work with an ORM</li>
+</ul></li>
+<li><strong>Dialect</strong> is the system SQLAlchemy uses to communicate with various DBAPI implementations and databases.
+<ul>
+<li>SQLAlchemy has dialects for many popular database systems - including PostgreSQL, which we use</li>
+</ul></li>
+<li><strong>MetaData</strong> are Python objects that decribes <code>Table</code>s, <code>Column</code>s, <code>ForeignKey</code>s, and other schema-level objects
+<ul>
+<li>They can be expressed by explicitly naming the various components (as above) and their properties.</li>
+<li>MetaData can be easily generated by SQLAlchemy through a process called <em>reflection</em>.</li>
+</ul></li>
+<li><strong>Session</strong> is the primary interface for persistence operations inside the ORM.
+<ul>
+<li>The Session object establishes all communication with the database and is a container for all objects loaded or associated with it throughout its lifespan</li>
+<li>It also provides an entry point into the <em>Query</em> object which allows you to run sql statements, where results are stored in the Session as Python objects.</li>
+</ul></li>
+</ul>
+</div>
+<div id="installations" class="section level2">
+<h2>Installations</h2>
+<ul>
+<li><p>Installing SQLAlchemy, as well as the DBAPI drivers for <em>postgreSQL</em> and <em>MySQL</em></p>
+<pre eval="F"><code>pip install sqlalchemy
+pip install psycopg2
+sudo apt-get install python-mysqldb</code></pre></li>
+<li><p>Installing the PostgreSQL and MySQL servers</p>
+<pre eval="F"><code>sudo apt-get install mysql_server
+sudo apt-get install postgresql</code></pre></li>
+<li><p>Install the <em>sqlite3</em> cli (sqlite module is distribute with Python)</p>
+<pre eval="F"><code>sudo apt-get install sqlite3</code></pre></li>
+</ul>
+</div>
+<div id="sqlalchemy-schema-definition-language" class="section level2">
+<h2>SQLAlchemy Schema Definition Language</h2>
+</div>
+<div id="sqlalchemy-expression-language" class="section level2">
+<h2>SQLAlchemy Expression Language</h2>
+</div>
+<div id="object-relational-mapper-in-sqlalchemy" class="section level2">
+<h2>Object Relational Mapper in SQLAlchemy</h2>
+<ul>
+<li><strong>Object Relational Mapping</strong>
+<ul>
+<li>This is, in a sense, a solution to a problem that emerges when you have to use Python and SQL together.</li>
+<li>While Python database APIs grant us full and direct access to databases, we end up mixing Python and SQL together: this makes it harder to test and maintain SQL statements</li>
+<li>It also goes against the idea of separation of concerns, where we want to separate <em>business logic</em> from <em>data access</em> and from the <em>presentation</em></li>
+<li>There is also the issue of <em>object-relational impedance mismatch</em>, which is a set of conceptual and technical difficulties that arise when a relational database is being used by an application that’s written in OOP style.
+<ul>
+<li>That is, python stores data in objects while SQL does so in tables: the conversion between those two ways of handling data presents a problem which isn’t even part of the original problem.</li>
+</ul></li>
+</ul></li>
+<li><strong>SQLAlchemy ORM</strong>
+<ul>
+<li>The SQLAlchemy OBject Relational Mapper maps
+<ol style="list-style-type: decimal">
+<li>Python classes to database tables</li>
+<li>Instance variables/attributes to table columns</li>
+<li>Instance objects to table rows</li>
+</ol></li>
+<li>In ORMs, the configurational process involves first describing the tables that we’ll be working with, and then creating classes that will be mapped to these tables.</li>
+<li>Modern SQLAlchemy uses a <em>Declarative</em> system to perform both these tasks together, by allowing us to create classes that contain directives to describe the database tables that they will be mapped to.</li>
+<li>These classes are defined in terms of a base class known as a <em>declarative base class</em> that maintains a catalog of the tables and classes relative to that base.</li>
+</ul></li>
+<li>After creating the configurations, we create a session. Remember that a <em>Session</em> component is the primary interface for persistence operations in the SQLAlchemy ORM.</li>
+</ul>
+</div>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+<ol style="list-style-type: decimal">
+<li><a href="http://zetcode.com/db/sqlalchemy/">Zetcode SQLAlchemy Tutorial</a></li>
+<li><a href="https://www.tutorialspoint.com/sqlalchemy/sqlalchemy_introduction.htm">TutorialsPoint SQLAlchemy Tutorial</a></li>
+</ol>
+</div>
+
+  </article>
+</section>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js" id="MathJax-script"></script>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [
+          ['$', '$'], ['\\(', '\\)']
+        ],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+      
+        ©
+        
+        2020
+         Desmond Tuiyot 
+      
+      
+         · 
+        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+      
+      
+    </section>
+  </footer>
+
+    </main>
+
+    
+
+    
+
+    
+
+  </body>
+
+</html>

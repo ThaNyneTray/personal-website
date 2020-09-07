@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+
+    <meta name="author" content="Desmond Tuiyot">
+    <meta name="description" content="1. Introduction to Ruby  Some characteristics of Ruby:  High level Interpreted - does not need a compiler to run Object-oriented Easy to use   Data Types: Numbers, Strings, Booleans - Things to note  Ruby is case sensitive Booleans are true, false (note capitalized) No line ending semi colons (or any other symbol for that matter)   Variables  Naming convention - snake_case, not camelCase like javascript.">
+    <meta name="keywords" content="blog, developer, personal, data analyst">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Ruby Fundamentals"/>
+<meta name="twitter:description" content="1. Introduction to Ruby  Some characteristics of Ruby:  High level Interpreted - does not need a compiler to run Object-oriented Easy to use   Data Types: Numbers, Strings, Booleans - Things to note  Ruby is case sensitive Booleans are true, false (note capitalized) No line ending semi colons (or any other symbol for that matter)   Variables  Naming convention - snake_case, not camelCase like javascript."/>
+
+    <meta property="og:title" content="Ruby Fundamentals" />
+<meta property="og:description" content="1. Introduction to Ruby  Some characteristics of Ruby:  High level Interpreted - does not need a compiler to run Object-oriented Easy to use   Data Types: Numbers, Strings, Booleans - Things to note  Ruby is case sensitive Booleans are true, false (note capitalized) No line ending semi colons (or any other symbol for that matter)   Variables  Naming convention - snake_case, not camelCase like javascript." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/notes/ruby-fundamentals/" />
+<meta property="article:published_time" content="2020-07-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-07-24T00:00:00+00:00" />
+
+
+    
+      <base href="/notes/ruby-fundamentals/">
+    
+    <title>
+  Ruby Fundamentals · Desmond Tuiyot
+</title>
+
+    
+      <link rel="canonical" href="/notes/ruby-fundamentals/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/image/icons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/image/icons/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.72.0" />
+  </head>
+
+  
+  
+  <body class="colorscheme-light">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Desmond Tuiyot
+    </a>
+    
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/post/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/notes/">Notes On Everything</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/projects/">Projects</a>
+          </li>
+        
+      
+      
+    </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container page">
+  <article>
+    <header>
+      <h1>Ruby Fundamentals</h1>
+    </header>
+
+    <h1 id="1-introduction-to-ruby">1. Introduction to Ruby</h1>
+<ul>
+<li>Some characteristics of Ruby:
+<ul>
+<li>High level</li>
+<li>Interpreted - does not need a compiler to run</li>
+<li>Object-oriented</li>
+<li>Easy to use</li>
+</ul>
+</li>
+<li><strong>Data Types: Numbers, Strings, Booleans</strong> -  Things to note
+<ul>
+<li>Ruby is case sensitive</li>
+<li>Booleans are <code>true</code>, <code>false</code> (note capitalized)</li>
+<li>No line ending semi colons (or any other symbol for that matter)</li>
+</ul>
+</li>
+<li><strong>Variables</strong>
+<ul>
+<li>Naming convention - snake_case, not camelCase like javascript.</li>
+</ul>
+</li>
+<li><strong>Operations</strong> -  the usual
+<ul>
+<li>including <code>+=</code> and <code>-=</code> notation</li>
+<li>Ruby doesn&rsquo;t have <code>++</code> or <code>--</code></li>
+</ul>
+</li>
+<li><strong><code>puts</code> and <code>print</code></strong>
+<ul>
+<li>no parenthesis needed</li>
+<li><code>print</code> simply prints out whatever value you specify. Can take multiple arguments</li>
+<li><code>puts</code> (put string) does the same but adds a newline after what you&rsquo;ve printed. Only takes one argument
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">print &#34;Desmond&#34;, 1, true
+puts &#34;Tuiyot&#34;
+</code></pre></div></li>
+</ul>
+</li>
+<li><strong>All things are objects</strong>
+<ul>
+<li>Becoming more and more a rule of the world</li>
+<li>Because everything is an object, they have methods
+<ul>
+<li>These method calls don&rsquo;t have parenthesis at the end of them? Confusing as hell</li>
+<li>Can chain method calls</li>
+</ul>
+</li>
+<li>The <em>interpreter</em> takes in the code you wrote, runs it, and shows the results (if any) on a console</li>
+</ul>
+</li>
+<li><strong>String methods</strong>
+<ul>
+<li>string<code>.length</code></li>
+<li>string<code>.reverse</code></li>
+<li>string<code>.upcase</code>, string<code>.downcase</code></li>
+<li>string.<code>.capitalize</code> - this capitalizes only the first letter and returns a new string</li>
+<li>string<code>.capitalize!</code> - same as <code>.capitalize</code> but modifies the string in place.</li>
+</ul>
+</li>
+<li><strong>Comments</strong>
+<ul>
+<li><em>single-line</em> - <code>#</code> symbole</li>
+<li><em>multi-line</em> -  anything in between <code>=begin</code> and <code>=end</code>. Remember, no space between <code>=</code> and <code>begin/end</code>.</li>
+</ul>
+</li>
+<li><strong>Naming conventions</strong>
+<ul>
+<li>As I&rsquo;d observed, use snake_case</li>
+<li>You can start with capital letters, <code>$</code>'s and <code>@</code>'s, but these mean different things (I bet)</li>
+</ul>
+</li>
+<li><strong>Getting User input</strong>
+<ul>
+<li><code>gets</code> - used to ask for user input.</li>
+<li><code>chomp</code> - Ruby automatically adds a new line after each bit of input. User <code>.chomp</code> to remove this newline</li>
+<li><code>gets.chomp</code></li>
+</ul>
+</li>
+<li><strong>String formatting</strong>
+<ul>
+<li>To perform <em>string interpolation</em>, use the syntax <code>&quot;... #{variable_name} ...&quot;</code>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">first_name = &#34;Desmond&#34;
+puts &#34;Hi, my name is #{first_name}&#34;
+</code></pre></div></li>
+</ul>
+</li>
+<li><strong>In place modification</strong>
+<ul>
+<li>Attach <code>!</code> at the end of the method call in order to do this.</li>
+<li><code>.capitalize!</code>, <code>.upcase!</code>, <code>downcase!</code></li>
+</ul>
+</li>
+</ul>
+<h1 id="2-control-flow-in-ruby">2. Control Flow in Ruby</h1>
+<ul>
+<li><strong>Basic syntax</strong>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">if expr1
+  # statement1
+elsif expr2
+  # statement2
+else
+  # statement3
+end
+</code></pre></div><ul>
+<li>Ruby doesn&rsquo;t care about whitespaces, so indentations are not necessary. However, it&rsquo;s good practice to indent if/elsif/else code blocks anyways. Use 2 spaces for indentation.</li>
+</ul>
+</li>
+<li><strong>String to integer conversion</strong>
+<ul>
+<li><code>Integer(some_var)</code></li>
+</ul>
+</li>
+<li><strong>Unless</strong>  - <em>(this is interesting)</em>
+<ul>
+<li>This is used to check if a condition is <em>false</em> rather than if it&rsquo;s true</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">hungry = true
+unless hungry
+  print &#34;Gonna write some code&#34;
+else
+  print &#34;Gotta eat fam!&#34;
+</code></pre></div></li>
+<li><strong>Comparators/Relational Operators</strong>
+<ul>
+<li><code>==</code> and <code>!=</code></li>
+<li><code>&lt;/&lt;=</code>, <code>&gt;/&gt;=</code></li>
+</ul>
+</li>
+<li><strong>Boolean/Logical operators</strong>
+<ul>
+<li><code>&amp;&amp;</code>, <code>||</code>, <code>!</code></li>
+</ul>
+</li>
+<li><strong>Check for substring in string</strong>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">if string_to_check.include? &#34;substring&#34;
+</code></pre></div><ul>
+<li>As a general rule, ruby methods that end with <code>?</code> evaluate to <code>true</code> or <code>false</code></li>
+</ul>
+</li>
+<li><strong>Replacing some string with another</strong>
+<ul>
+<li>use <code>gsub!</code> <em>(global substitution)</em>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">string_to_change.gsub!(/s/, &#34;th&#34;)
+</code></pre></div></li>
+<li>Why have the string in between slashes instead of quotes?</li>
+</ul>
+</li>
+</ul>
+<h1 id="3-looping-w-ruby">3. Looping w/ Ruby</h1>
+<ul>
+<li><strong>the <code>while</code> loop</strong>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">counter = 1
+while counter &lt; 11
+  puts counter
+  counter = counter + 1
+end
+</code></pre></div></li>
+<li><strong>the <code>until</code> loop</strong>
+<ul>
+<li>This is the complement of the <code>while</code> loop. It does the reverse of what <code>while</code> does.</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">counter = 1
+until counter &gt; 10
+  puts counter
+  counter += 1
+end
+</code></pre></div></li>
+<li><strong>the <code>for</code> loop</strong>
+<ul>
+<li>There are inclusive vs exclusive ranges.</li>
+<li>To exclude the last value in the range, use 3 dots <code>...</code>. Otherwise, use 2 dots <code>..</code>.</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">for num in 1...10
+  puts num
+end
+# prints out 1 to 9
+  
+for num in 1..10
+  puts num
+end
+# prints out 1 to 10
+</code></pre></div></li>
+<li><strong>the <code>loop</code> iterator</strong>
+<ul>
+<li>It&rsquo;s possible to repeat action using an <em>iterator</em> - Ruby method that repeatedly invokes a block of code.</li>
+<li><code>loop</code> is a basic iterator, the simplest, most basic one.</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">i = 0
+loop do
+  i += 1
+  print &#34;#{i}&#34;
+  break if i &gt; 5
+end
+</code></pre></div><ul>
+<li>In ruby, curly braces are essentially equivalent to keywords <code>do</code> (=<code>{</code>), and <code>end</code> (=<code>}</code>)</li>
+</ul>
+</li>
+<li><strong>the <code>next</code> keyword</strong>
+<ul>
+<li>works like Python <code>continue</code>.</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">for i in 1..5
+  next if i % 2 == 0
+  print i
+end
+</code></pre></div></li>
+<li><strong>the <code>array</code> data structure</strong>
+<ul>
+<li>basic declaration and initialization  - <code>my_array = [1,2,3,4,5]</code></li>
+</ul>
+</li>
+<li><strong>the <code>.each</code> iterator</strong>
+<ul>
+<li>This can apply an expression to each element in an object, one by one</li>
+<li>Basic syntax
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">object.each { |item| 
+  # Do something 
+}
+</code></pre></div></li>
+<li>Or, replacing the curly braces with keywords
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">object.each do |item| 
+  # Do something 
+end
+</code></pre></div></li>
+<li>those object elements can be accessed using <code>item</code></li>
+</ul>
+</li>
+<li><strong>the <code>.times</code> operator</strong>
+<ul>
+<li>It&rsquo;s like a compact <code>for</code> loop: it can perform a task on each item in an object a specified number of times.
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">10.times { print &#34;Chunky bacon!&#34; }
+</code></pre></div></li>
+</ul>
+</li>
+<li><strong>more string methods</strong>
+<ul>
+<li>text<code>.split</code> or  text<code>.split(delimeter)</code> - returns an array of strings</li>
+</ul>
+</li>
+</ul>
+<h1 id="4-arrays--hashes">4. Arrays &amp; Hashes</h1>
+<ul>
+<li><strong>Arrays</strong>
+<ul>
+<li><code>my_array = [...]</code></li>
+<li>access by index</li>
+<li>pushing to an array <code>my_array.push(4)</code></li>
+</ul>
+</li>
+<li><strong>Hashes</strong>
+<ul>
+<li>Hash <em>literal</em> initialization. (Called <em>literal</em> since I literally describe what I want inside the hash)
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">hash = {
+key1 =&gt; value1,
+key2 =&gt; value2,
+key3 =&gt; value3
+}
+</code></pre></div></li>
+<li>You can use <em><strong>ANY</strong></em> ruby object, including mutable ones like arrays</li>
+</ul>
+</li>
+<li><strong>Access</strong> involves
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">hash[key1]
+hash[key2]
+...
+</code></pre></div></li>
+<li>To create an empty hash
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">my_hash = Hash.new
+my_hash2 = Hash.new(0)
+</code></pre></div><ul>
+<li>With this, you can add a <em>default value</em> to the hash. Attempted access to a non existent <code>key</code> will return that default value.</li>
+<li><strong>Adding to empty hash</strong>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">pets = Hash.new
+pets[&#34;Beezus&#34;] = &#34;Dog&#34;
+</code></pre></div></li>
+</ul>
+</li>
+<li><strong>Iterating over a hash</strong>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">hash = {
+  key1 =&gt; value1,
+  key2 =&gt; value2,
+  key3 =&gt; value3
+  }
+  
+hash.each { |x| puts &#34;#{x}\n&#34; }
+hash.each { |x ,y| puts &#34;#{x}: #{y}&#34; }
+</code></pre></div></li>
+<li><strong>Iterating over multi-dimensional arrays</strong>
+<ul>
+<li>Loop within a loop
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">s = [[&#34;ham&#34;, &#34;swiss&#34;], [&#34;turkey&#34;, &#34;cheddar&#34;], [&#34;roast beef&#34;, &#34;gruyere&#34;]]
+
+s.each { |x| 
+  x.each { |y|
+  puts y
+  }
+}
+</code></pre></div></li>
+</ul>
+</li>
+<li><strong>More methods</strong>
+<ul>
+<li><strong>Sorting:</strong> I assume this works on any iterable, since it works on hashes as well</li>
+<li>This returns an array of arrays
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">colors = { 
+  &#34;blue&#34; =&gt; 3,
+  &#34;green&#34; =&gt; 1,
+  &#34;red&#34; =&gt; 2
+  }
+colors = colors.sort_by do |color, count|
+count
+end 
+</code></pre></div></li>
+<li><strong>Reversing an array or string</strong>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">colors.reverse!
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h1 id="5-methods-blocks-and-sorting">5. Methods, Blocks, and Sorting</h1>
+<ul>
+<li>There are no functions in Ruby</li>
+<li><strong>Methods Syntax</strong>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">def puts_1_to_10
+  (1..10).each { |i| puts i }
+end
+
+puts_1_to_10
+</code></pre></div></li>
+<li><strong>Parameters and Arguments</strong>
+<ul>
+<li><em>Argument</em> - what you put in the parenthesis when <em>calling</em> the method</li>
+<li><em>Parameter</em> - what you put in the parenthesis when <em>defining</em> the method</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">def square(n)
+  puts n ** 2
+end
+</code></pre></div><ul>
+<li>Parenthesis in Ruby are optional</li>
+</ul>
+</li>
+<li><strong>Splat arguments</strong>
+<ul>
+<li>These are preceded by <code>*</code>, and allows a function to take in a variable number of arguments.
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">def what_up(greeting, *friends)
+  friends.each { |friend| puts &#34;#{greeting}, #{friend}!&#34; }
+end
+
+what_up(&#34;What up&#34;, &#34;Ian&#34;, &#34;Zoe&#34;, &#34;Zenas&#34;, &#34;Eleanor&#34;)
+</code></pre></div></li>
+</ul>
+</li>
+<li><strong>return</strong> keyword - as per usual</li>
+<li><strong>methods that return a boolean</strong> - it&rsquo;s best practice to end them with a question mark</li>
+<li><strong>Blocks - nameless methods?</strong>
+<ul>
+<li>they are defined by the <code>do...end</code> or <code>{ ... }</code> duo and are not named
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">1.times do
+  puts &#34;I&#39;m a code block!&#34;
+end
+</code></pre></div></li>
+</ul>
+</li>
+<li><strong>Using code blocks</strong>
+<ul>
+<li>A method can take a block as a parameter - it&rsquo;s what <code>.each</code> has been doing</li>
+<li>Passing a block to a method is a great way of abstracting certain tasks from a method and defining those tasks when we call the method</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[1, 2, 3, 4, 5].each { |i| puts i }
+
+[1, 2, 3, 4, 5].each { |i| puts i*5 }
+</code></pre></div></li>
+<li><strong>Sorting</strong>
+<ul>
+<li><code>my_array.sort!</code></li>
+</ul>
+</li>
+<li><strong>the <em>combined comparison operator</em></strong>
+<ul>
+<li>a.k.a the <em>spaceship operator</em> is used to compare two values. <code>val1 &lt;=&gt; val2</code> returns -1, 0, or 1 if <code>val1</code> is less than, equal to, or greater than <code>val2</code></li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">book_1 = &#34;A Wrinkle in Time&#34;
+book_2 = &#34;A Brief History of Time&#34;
+
+puts book_1 &lt;=&gt; book_2   # returns 1
+</code></pre></div></li>
+<li><strong>specifying order</strong>
+<ul>
+<li>A block that&rsquo;s passed to a <code>sort</code> method must return 1, 0, or -1 appropriately</li>
+<li><code>sort</code> takes an optional argument that tells it how to compare two items
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">arr = [1,2,3,4]
+arr.sort! { |first, second| second &lt;=&gt; first }  
+# prints out [4, 3, 2, 1]
+</code></pre></div></li>
+</ul>
+</li>
+<li><strong>misc</strong>
+<ul>
+<li>the last evaluated value is returned implicitly</li>
+</ul>
+</li>
+</ul>
+<h1 id="6-hashes-and-symbols">6. Hashes and Symbols</h1>
+<ul>
+<li><strong>Nil: a formal introduction</strong>
+<ul>
+<li>When you try to access a non-existent key in a hash, you get the value <code>nil</code></li>
+<li>I get the feeling that this is just Ruby&rsquo;s <code>undefined</code> and <code>null</code> combined.</li>
+<li>Along with the boolean <code>false</code>, <code>nil</code> is one of two falsy values in Ruby - everything else is considered truthy</li>
+<li>Interesting - even integer <code>0</code> and the empty string are truthy</li>
+</ul>
+</li>
+<li><strong>Setting a hash default</strong>
+<ul>
+<li>Initializing a hash with <code>Hash.new</code> allows you to set a default value
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">no_nil_hash = Hash.new(&#34;this is the default&#34;)
+puts no_nil_hash[&#34;does not exist&#34;] # returns &#34;this is the default&#34;
+</code></pre></div></li>
+</ul>
+</li>
+<li><strong>The Rubyist key is a Symbol object</strong>
+<ul>
+<li>Symbols are a kind of name, but are different from strings. There syntax is as such - <code>:symbol_name</code></li>
+<li>Another difference is that while there can be multiple different strings all with the same value, there can only be one copy of a particular symbol at a time
+<ul>
+<li>The `.object_id&rsquo; method returns the id of an object and is probably what Ruby uses to determine if 2 objects are the same object.</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">s1 = :symbol
+s2 = :symbol
+s3 = :symbol
+puts &#34;#{s1.object_id}, #{s2.object_id}, #{s3.object_id}&#34;  
+# 802268, 802268, 802268
+</code></pre></div></li>
+</ul>
+</li>
+<li><strong>Symbol syntax rules</strong>
+<ul>
+<li>Always start with a colon, then either a letter or underscore, after which any combination of letters, underscores, and numbers is allowed.</li>
+</ul>
+</li>
+<li><strong>What are symbols used for?</strong>
+<ul>
+<li>Often used in Ruby: <code>(1)</code> as Hash keys or <code>(2)</code> to reference method names(??).</li>
+<li>Symbols make good hash keys for these reasons:
+<ol>
+<li>they are immutable once created</li>
+<li>they save memory since there can only be one copy of a symbol at a time</li>
+<li>symbols-as-keys are faster than strings-as-keys because of the above reasons</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><strong>Converting between symbols and strings</strong>
+<ul>
+<li>to string =&gt; <code>.to_s</code>, and to symbol =&gt; <code>.to_sym</code></li>
+<li><code>.intern</code> also converts a string to a symbol. It internalizes(??) the string into a symbol.</li>
+</ul>
+</li>
+<li><strong>the Hash rocket style</strong>
+<ul>
+<li>This refers essentially the syntax <code>=&gt;</code> we&rsquo;ve been using in hashes between the keys and their values - looks like a tiny rocket</li>
+<li>However, this changed in Ruby 1.9
+<ol>
+<li>the colon is now placed at the end of a symbol</li>
+<li>there is no need for the rocket anymore</li>
+</ol>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">old_hash {
+  :ahs =&gt; &#34;some series&#34;,
+  :itaewon =&gt; &#34;some other series&#34;
+}
+  
+new_hash {
+  ahs: &#34;some series&#34;,
+  itaewon: &#34;some other series&#34;
+}
+</code></pre></div><ul>
+<li>This change in syntax only applies in a hash.</li>
+</ul>
+</li>
+<li><strong>Comparing string-as-keys and symbols-as-keys</strong>
+<ul>
+<li><em>importing modules</em> - <code>require 'some_module'</code></li>
+<li><em>alphabetical ranges</em> - <code>(&quot;a&quot;..&quot;z&quot;)</code>, <code>(:a..:z)</code></li>
+<li><em>converting ranges to arrays</em> - <code>(1..26).to_a</code></li>
+<li><em>zip function</em> - <code>arr1.zip(arr2)</code></li>
+<li><em>testing runtime</em>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">require &#39;benchmark&#39;
+t = Benchmark.realtime do 
+  # code to be tested
+end
+</code></pre></div></li>
+<li><em>number readability</em> - you can have underscores in a number to enhance readability. <code>num = 900_000_000</code> is a valid statement</li>
+</ul>
+</li>
+<li><strong>Filtering your hash</strong>
+<ul>
+<li>Use <code>.select</code></li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">grades = { alice: 100,
+  bob: 92,
+  chris: 95,
+  dave: 97
+}
+
+grades.select { |name, grade| grade &lt;  97 }
+# ==&gt; { :bob =&gt; 92, :chris =&gt; 95 }
+
+grades.select { |k, v| k == :alice }
+# ==&gt; { :alice =&gt; 100 }
+</code></pre></div></li>
+<li><strong>Iterating over just keys or just values</strong>
+<ul>
+<li>use <code>each.key</code> or <code>each_value</code> respectively</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">my_hash = { one: 1, two: 2, three: 3 }
+
+my_hash.each_key { |k| print k, &#34; &#34; }
+# ==&gt; one two three
+
+my_hash.each_value { |v| print v, &#34; &#34; }
+# ==&gt; 1 2 3
+</code></pre></div></li>
+<li><strong>Case statement</strong>
+<ul>
+<li>Basic syntax</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">case language
+  when &#34;JS&#34;
+    puts &#34;Websites!&#34;
+  when &#34;Python&#34;
+    puts &#34;Science!&#34;
+  when &#34;Ruby&#34;
+    puts &#34;Web apps!&#34;
+  else
+    puts &#34;I don&#39;t know!&#34;
+end
+</code></pre></div></li>
+<li><strong>conversions, checking type</strong>
+<ul>
+<li><code>.nil?</code> checks if the value is nil</li>
+<li><code>.to_i</code> converts a string to integer</li>
+</ul>
+</li>
+<li><strong>deleting a key-value pair</strong>
+<ul>
+<li><code>my_hash.delete(key_to_delete)</code></li>
+</ul>
+</li>
+</ul>
+<h1 id="7-refactoring-the-zen-of-ruby">7. Refactoring: the Zen of Ruby</h1>
+<ul>
+<li><em>Ruby prioritizes programmer productivity over program optimization</em>
+<ul>
+<li>It might be slower, but it&rsquo;s a delight</li>
+</ul>
+</li>
+<li><strong>short-hand if/unless statement</strong> - use this when the if statement is short
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># expression if boolean
+puts &#34;an expression&#34; if true
+  
+# expression if boolean
+puts &#34;an expression&#34; unless true
+</code></pre></div></li>
+<li><strong>Ternary operator</strong>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># boolean ? do this if true: do this if false
+def eloquent?
+  return true
+end
+ruby_is = eloquent? ? &#34;eloquent&#34;: &#34;not eloquent&#34;
+  
+# prints out &#39;eloquent&#39;
+</code></pre></div></li>
+<li><strong>Ruby folded case</strong>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">case language
+  when &#34;JS&#34; then puts &#34;Websites!&#34;
+  when &#34;Python&#34; then puts &#34;Science!&#34;
+  when &#34;Ruby&#34; then puts &#34;Web apps!&#34;
+  else puts &#34;I don&#39;t know!&#34;
+end
+</code></pre></div></li>
+<li><strong>Conditional assignments</strong> - when we want to assign a value to a variable only when it hasn&rsquo;t been assigned
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">favorite_book ||= &#34;Cat&#39;s Cradle&#34;
+puts favorite_book    # Cat&#39;s Cradle
+
+favorite_book ||= &#34;Why&#39;s (Poignant) Guide to Ruby&#34;
+puts favorite_book    # Cat&#39;s Cradle
+</code></pre></div></li>
+<li><strong>Implicit Return</strong> - just like R in this sense. It returns the value of the last evaluated expression. I love it!</li>
+<li><strong>Short circuit evaluation</strong> is also a thing in Ruby.</li>
+<li><strong>The right tool for the job</strong> - instead of for loops use:
+<ul>
+<li><code>5.times { # some task  }</code> any time you want to perform a task a certain number of times</li>
+<li><code>[a1, a2, a3].each { |v| # some task involving v  }</code> any time you want to perform a task for each element in an array</li>
+</ul>
+</li>
+<li><strong>upto and downto for ranges</strong>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">95.upto(100) { |x| print x, &#34; &#34; } # 95 96 97 98 99 100
+100.downto(98) { |x| print x, &#34; &#34;  } # 100 99 88
+&#34;A&#34;.upto(&#34;D&#34;) { |c| print c, &#34; &#34; } # A B C D
+</code></pre></div><ul>
+<li>these work on alphabets as well (even the &hellip; notation)</li>
+</ul>
+</li>
+<li><strong>Call and response</strong> - this answers how symbols can be used to reference methods
+<ul>
+<li><em>getting the next integer (or letter, I assume)</em> - <code>1.next =&gt; 2</code>, <code>&quot;A&quot;.next =&gt; &quot;B</code></li>
+<li><code>.respond_to?</code> is a method that is called on an object/value and takes a symbol (the name of a method) then returns true if that symbol can be called on that object and false otherwise</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">puts 1.respond_to?(:next) # true
+puts [1,2,3].respond_to?(:push) # true
+puts [1,2,3].respond_to(:to_sym) # false
+</code></pre></div></li>
+<li><strong>pushing with a shovel</strong> - the <em>concatenation operator</em>, <code>&lt;&lt;</code> can be used as a substitute for <code>push</code> in arrays and <code>+</code> in strings
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">puts [1,2,3] &lt;&lt; 4 # [1,2,3,4]
+puts &#34;I am a &#34; &lt;&lt; &#34;god&#34;
+</code></pre></div></li>
+<li><strong>String interpolation</strong> - I been doing this
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">drink = &#34;alcohol&#34;
+age = 21
+puts &#34;I&#39;m #{age} now, and I love #{drink}!&#34;
+</code></pre></div><ul>
+<li>The longer route is pretty damn long
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&#34;I love &#34; + drink
+&#34;I am &#34; + age.to_s + &#34; years old&#34; 
+</code></pre></div></li>
+</ul>
+</li>
+<li><strong>Refactoring</strong>
+<ol>
+<li>Using single line <code>if's</code>, <code>unless's</code> and <code>ternary operators</code>.</li>
+</ol>
+<ul>
+<li><code>.is_a object_type</code> checks to see if attached object is of a specified object type</li>
+</ul>
+<ol start="2">
+<li>Eliminating return statements</li>
+</ol>
+</li>
+</ul>
+<h1 id="8-blocks-procs-and-lambdas">8. Blocks, Procs, and Lambdas</h1>
+<ul>
+<li><strong>Blocks</strong>
+<ul>
+<li>A <em>block</em> is a bit of code that can be executed. It&rsquo;s usually nested within <code>do ... end</code> or <code>{ ... }</code> and can be combined w/ methods like <code>.each</code> or <code>.times</code> to execute the code repeatedly.</li>
+</ul>
+</li>
+<li><strong>the <code>collect</code> method, also the <code>map</code> method</strong>
+<ul>
+<li>This method takes a block and applies the expression inside it to every element of the object it&rsquo;s called on, then returns it.
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">arr = [1,2,3,4]
+arr.collect { |x| x**2 } 
+# returns [1,4,9,16], but original doesn&#39;t change
+arr.collect! { |x| x**2 } # original changes
+</code></pre></div></li>
+<li><em>Aside:</em> <code>!</code> at the end of a method in ruby  means that the method could do something potentially dangerous or unexpected. In many cases, the method modifies the object it&rsquo;s called on in place.</li>
+</ul>
+</li>
+<li><strong>Learning to <code>yield</code></strong>
+<ul>
+<li>How are some methods able to accept blocks and others don&rsquo;t? Because those that do use <code>yield</code> to transfer control from the calling method to the block and back again. What does the following return?
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">def block_test
+  puts &#34;First line in code&#34;
+  puts &#34;still in block test&#34;
+  yield
+  puts &#34;back in block test&#34;
+end
+    
+block_test { puts &#34;in the damn block fam!&#34; }
+</code></pre></div></li>
+<li>You can pass parameters to <code>yield</code> - what does the code below return?
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">def yield_name(name)
+  yield(&#34;Kim&#34;)
+  yield(name)
+end
+    
+yield_name(&#34;Eric&#34;) { |n| puts &#34;My name is #{n}.&#34; }
+</code></pre></div></li>
+</ul>
+</li>
+<li><strong>Procs</strong>
+<ul>
+<li>Not everything in Ruby is an object - blocks are not objects and therefore cannot be saved to a variable and re-used</li>
+<li>For that, we need <em>Procs</em>. We declare a proc as below and pass it in to a method that would otherwise take a block.
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">multiples_of_3 = Proc.new do |n|
+  n % 3 == 0
+end
+    
+(1..100).to_a.select(&amp;multiples_of_3)
+# prints out multiples of 3 between 1 and 100
+</code></pre></div></li>
+<li>The <code>&amp;</code> converts the proc to a block, and we use that anytime we pass in a proc to a method that expects a block.</li>
+<li><code>collect!</code> and <code>map!</code> do the exact same thing.</li>
+<li>The <code>.floor</code> function does what it says</li>
+<li><em>Why Procs?</em>
+<ol>
+<li>They are objects, and therefore come with all the capabilities of one (which I don&rsquo;t know about)</li>
+<li>They can be called repeatedly without having to rewrite them. <strong>DRY</strong></li>
+</ol>
+</li>
+</ul>
+</li>
+<li><strong>calling procs</strong>
+<ul>
+<li>You can call procs directly using <code>.call</code> method
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">hi = Proc.new { puts &#34;Hey hey hello there!&#34; }
+hi.call
+# prints out &#34;Hey hey hello there!&#34;
+</code></pre></div></li>
+</ul>
+</li>
+<li><strong>Symbols and procs</strong>
+<ul>
+<li>One of the uses of symbols was to reference method names/pass methods around</li>
+<li>You can also convert symbols to procs; i.e. convert methods to procs.
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">numbers_array = [1, 2, 3, 4, 5, 6]
+strings_array = numbers_array.collect(&amp;:to_s)
+    
+puts strings_array
+# [&#34;1&#34;, &#34;2&#34;, &#34;3&#34;, &#34;4&#34;, &#34;5&#34;, &#34;6&#34;]
+</code></pre></div></li>
+</ul>
+</li>
+<li><strong>the Ruby <code>Lambda</code></strong>
+<ul>
+<li>Lambdas are objects, just like Procs.</li>
+<li>With the exception of some syntax and behavioral quirks, lambdas are quite identical to procs.</li>
+<li>Passing a lambda to a method works the same as procs too.</li>
+<li><em>Lambda syntax</em>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># lambda { |param| block }
+    
+lambda { |s| s.to_sym }
+lambda { puts &#34;Hello!&#34; }
+</code></pre></div></li>
+</ul>
+</li>
+<li><strong>Lambdas vs Procs</strong>
+<ol>
+<li>A lambda checks the number of arguments passed to it, while a proc does not.</li>
+</ol>
+<ul>
+<li>Thus, lambdas will return an error when the wrong number of arguments are passed, while procs will ignore unexpected warnings and assigns the missing arguments to <code>nil</code></li>
+</ul>
+<ol start="2">
+<li>When a lambda returns, it passes control over to the calling method, but when a proc returns it does so immediately without going into the calling method. What&rsquo;s the output of the code below?</li>
+</ol>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">def batman_ironman_proc
+  victor = Proc.new { return &#34;Batman will win!&#34; }
+  victor.call
+  &#34;Iron Man will win!&#34;
+end
+  
+puts batman_ironman_proc
+  
+def batman_ironman_lambda
+  victor = lambda { return &#34;Batman will win!&#34; }
+  victor.call
+  &#34;Iron Man will win!&#34;
+end
+  
+puts batman_ironman_lambda
+</code></pre></div></li>
+</ul>
+<h1 id="9-object-oriented-programming-i">9. Object Oriented Programming I</h1>
+<ul>
+<li><strong>Classes</strong>
+<ul>
+<li>Objects have <em>methods</em> and <em>attributes</em></li>
+<li>A <em>class</em> is a way of organizing and producing objects with similar attributes and methods</li>
+</ul>
+</li>
+<li><strong>Class syntax</strong>
+<ul>
+<li>The class name is CamelCased and the <code>__init__</code> function equivalent is called <code>initialize</code></li>
+<li>We specify <em>instance variables</em> by prefixing the variable name with <code>@</code> =&gt; <code>@name, @make</code></li>
+<li>A basic declaration looks like:
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">class Person
+ def initialize(name)
+   @name = name
+ end
+end
+</code></pre></div></li>
+<li>To instantiate a <code>Person</code> object
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">matz = Person.new(&#34;Yukihiro&#34;)
+</code></pre></div></li>
+</ul>
+</li>
+<li><strong>Scope</strong>
+<ul>
+<li>Inside a class, we can have:
+<ol>
+<li><em>global variables</em> accessible from anywhere</li>
+<li><em>local variables</em> only available within a method</li>
+<li><em>class variables</em> which belong to a specific class</li>
+<li><em>instance variables</em> which belong to a specific instance of a class</li>
+</ol>
+</li>
+<li>Instance and class variables are <code>nil</code> until assigned</li>
+<li>The same goes for methods as well - <em>global</em>, <em>class</em>, and <em>instance</em></li>
+<li>We use <code>$</code>, <code>@</code>, <code>@@</code> to indicate global, instance, and class variables respectively</li>
+<li>Global variables can also just be declared outside of any method or class as normal (without the <code>$</code>) - the sign is only used when defining a global variable from within a class or method.</li>
+<li>That said, global variables are generally not a good idea
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">class MyClass
+  $my_variable = &#34;Hello!&#34;
+end
+    
+puts $my_variable
+</code></pre></div></li>
+</ul>
+</li>
+<li><strong>Inheritance</strong>
+<ul>
+<li>The process by which one class takes on the attributes and methods of another.</li>
+<li>It describes an <code>is-a</code> relationship: <em>Fox <code>is-a</code>n Animal, Man <code>is-a</code> Human</em>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">class DerivedClass &lt; BaseClass
+  # class magicks
+end
+</code></pre></div></li>
+</ul>
+</li>
+<li><strong>Overriding methods</strong> - this is of course possible. Just define a method with the same name as one found in its parent</li>
+<li><strong>super</strong> - you can use the <code>super</code> keyword inside a method to access it&rsquo;s base/parent&rsquo;s class
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">class DerivedClass &lt; Base
+  def some_method
+    super(optional args)
+      # Some stuff
+    end
+  end
+end
+</code></pre></div><ul>
+<li>This code looks in the <em>superclass</em> of the current class for a method with the same name as the one in which <em>super</em> was called.</li>
+</ul>
+</li>
+<li><strong>Multiple Inheritance?</strong>
+<ul>
+<li>Ruby disallows this, unfortunately. It is possible, however, to incorporate data and behavior from different classes in one, through <em>mixins</em> (to be covered later)</li>
+<li><em>Aside:</em> you can use a semi colon <code>;</code> to end a statement w/out moving to a new line.</li>
+<li>What happens when you make one class inherit from multiple classes? You get a <code>superclass mismatch error</code>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">class Creature ... ; end
+    
+class Person ... ; end
+    
+class Dragon &lt; Creature; end
+class Dragon &lt; Person; end
+</code></pre></div></li>
+</ul>
+</li>
+<li><strong>Miscellaneous</strong>
+<ul>
+<li><em>Getting the current time</em>  -<code>time = Time.now</code></li>
+<li><em>Declaring a class method</em> -prefix it with the <code>ClassName</code> itself.
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">class Machine
+  def Machine.hello
+    puts &#34;Hello from the machine!&#34;
+  end
+end 
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h1 id="10-object-oriented-programming-ii">10. Object Oriented Programming II</h1>
+<ul>
+<li><strong>public vs private</strong>
+<ul>
+<li>Ruby allows you to specify if methods(what about attributes) are public or private.</li>
+<li>Just write either <code>public</code> or <code>private</code> on a single line and define all the appropriate methods below it.</li>
+<li><code>private</code> methods can only be called from inside the object in which it&rsquo;s defined.</li>
+<li>Specifically, these methods cannot be called with an <em>explicit receiver</em> (these are objects on which a method is called)</li>
+<li>If we wanna access private information, we can create public methods that return them.</li>
+<li><em>private implementation</em> vs <em>public interface</em>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">class ClassName
+  # Some class stuff
+    
+  public
+  # Public methods go here
+  def public_method; end
+    
+  private
+  # Private methods go here
+  def private_method; end
+end
+</code></pre></div></li>
+</ul>
+</li>
+<li><strong>getting and setting properties</strong>
+<ul>
+<li>Previously, in order to get or set instance attributes, we&rsquo;d need to define a public method that does so
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">def name
+  @name
+end
+    
+def name=(name)
+  @name = name
+end
+</code></pre></div><ul>
+<li>The <code>name=</code> notation is Ruby convention for specifying that the method is a setter. Just like we attach <code>?</code> at the end of a boolean returning method.</li>
+</ul>
+</li>
+<li>We don&rsquo;t have to create these methods anymore, but can use the notation <code>attr_reader</code> and <code>attr_writer</code> to perform the same functions. We pass in the instance variables as symbols to these two.</li>
+<li>In case we want to make one variable readable and writable, we can use <code>attr_accessor</code>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">attr_reader :name
+attr_writer :name
+    
+# or
+attr_accessor :name
+</code></pre></div></li>
+</ul>
+</li>
+<li><strong>Modules</strong>
+<ul>
+<li>What are they? A kind of toolbox that stores set methods and constants. They are like classes, but can&rsquo;t create instances nor have classes</li>
+<li><em>module syntax</em>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">module SomeModule
+  # stuff
+end
+</code></pre></div></li>
+<li>Modules usually hold either methods or constants (makes no sense to have variables). Constants are ALL_CAPS and separated by underscores in case there&rsquo;s more than one word.</li>
+<li>Ruby allows you to change the value of a constant once initialized, but it warns you when you do so.</li>
+</ul>
+</li>
+<li><strong>Namespacing and scope resolution</strong>
+<ul>
+<li>One of the main purposes of modules is <em><strong>namespacing</strong></em>, which means to separate methods and constants into different <em>name spaces</em>.</li>
+<li>We can use double colon notation <code>::</code> to tell Ruby where to look for certain methods or constants; this is called the <em><strong>scope resolution operator</strong></em>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">module MyLib
+  PI = 1.1111
+end
+puts MyLib::PI # = 1.1111
+puts Math::PI  # = 3.141592653589793 
+</code></pre></div></li>
+</ul>
+</li>
+<li><strong>Importing/Requiring modules</strong>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">require &#39;date&#39;
+</code></pre></div></li>
+<li><strong>Including modules</strong>
+<ul>
+<li>Any class that includes a certain module can use that module&rsquo;s methods and constants</li>
+<li>A nice consequence of this is that it&rsquo;s no longer necessary to prepend method and constant names with <code>Module::</code> in order to access it
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">class Angle
+  include Math
+  attr_accessor :radians
+      
+  def initialize(radians)
+    @radians = radians
+  end
+      
+  def cosine
+    cos(@radians)
+  end
+end
+    
+acute = Angle.new(1)
+acute.cosine
+</code></pre></div></li>
+</ul>
+</li>
+<li><strong>Marrying Modules and Classes</strong>
+<ul>
+<li>When a module is used to mix in additional behavior and info into a class, it&rsquo;s known as a <code>Mixin</code></li>
+<li><em>Mixins</em> allow us to customize a class without having to rewrite code</li>
+</ul>
+</li>
+<li><strong>Extending classes</strong>
+<ul>
+<li><em>Mixins</em> have allowed instances of a class to use a module&rsquo;s methods, <code>extends</code> allows classes themselves to use these modules&rsquo; methods.</li>
+</ul>
+</li>
+</ul>
+<h1 id="references">References</h1>
+
+  </article>
+</section>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js" id="MathJax-script"></script>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [
+          ['$', '$'], ['\\(', '\\)']
+        ],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+      
+        ©
+        
+        2020
+         Desmond Tuiyot 
+      
+      
+         · 
+        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+      
+      
+    </section>
+  </footer>
+
+    </main>
+
+    
+
+    
+
+    
+
+  </body>
+
+</html>

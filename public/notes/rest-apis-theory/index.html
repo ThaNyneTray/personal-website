@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+
+    <meta name="author" content="Desmond Tuiyot">
+    <meta name="description" content="RESTful Service Best PracticesWhat is REST?REST Quick TipsDefinitionsIdempotentAn idempotent operation is one which produces the same result if executed one or multiple times.In the case of methods and subroutine calls, it could mean that they have no side effects (see Safety definition below)For those that have side effects, idempotence means that once the method is called initially and state changes, that modified state remains the same over repeated calls to itIn the context of RESTful services, clients can make the same call repeatedly, producing the same results/side effects.">
+    <meta name="keywords" content="blog, developer, personal, data analyst">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="REST APIs - Theory"/>
+<meta name="twitter:description" content="RESTful Service Best PracticesWhat is REST?REST Quick TipsDefinitionsIdempotentAn idempotent operation is one which produces the same result if executed one or multiple times.In the case of methods and subroutine calls, it could mean that they have no side effects (see Safety definition below)For those that have side effects, idempotence means that once the method is called initially and state changes, that modified state remains the same over repeated calls to itIn the context of RESTful services, clients can make the same call repeatedly, producing the same results/side effects."/>
+
+    <meta property="og:title" content="REST APIs - Theory" />
+<meta property="og:description" content="RESTful Service Best PracticesWhat is REST?REST Quick TipsDefinitionsIdempotentAn idempotent operation is one which produces the same result if executed one or multiple times.In the case of methods and subroutine calls, it could mean that they have no side effects (see Safety definition below)For those that have side effects, idempotence means that once the method is called initially and state changes, that modified state remains the same over repeated calls to itIn the context of RESTful services, clients can make the same call repeatedly, producing the same results/side effects." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/notes/rest-apis-theory/" />
+<meta property="article:published_time" content="2020-07-16T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-07-16T00:00:00+00:00" />
+
+
+    
+      <base href="/notes/rest-apis-theory/">
+    
+    <title>
+  REST APIs - Theory · Desmond Tuiyot
+</title>
+
+    
+      <link rel="canonical" href="/notes/rest-apis-theory/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/image/icons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/image/icons/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.72.0" />
+  </head>
+
+  
+  
+  <body class="colorscheme-light">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Desmond Tuiyot
+    </a>
+    
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/post/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/notes/">Notes On Everything</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/projects/">Projects</a>
+          </li>
+        
+      
+      
+    </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container page">
+  <article>
+    <header>
+      <h1>REST APIs - Theory</h1>
+    </header>
+
+    
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="restful-service-best-practices" class="section level1">
+<h1>RESTful Service Best Practices</h1>
+<div id="what-is-rest" class="section level2">
+<h2>What is REST?</h2>
+</div>
+<div id="rest-quick-tips" class="section level2">
+<h2>REST Quick Tips</h2>
+</div>
+<div id="definitions" class="section level2">
+<h2>Definitions</h2>
+<div id="idempotent" class="section level3">
+<h3>Idempotent</h3>
+<ul>
+<li>An <code>idempotent</code> operation is one which produces the same result if executed one or multiple times.</li>
+<li>In the case of methods and subroutine calls, it could mean that they have no side effects (see <code>Safety</code> definition below)</li>
+<li>For those that have side effects, idempotence means that once the method is called initially and state changes, that modified state remains the same over repeated calls to it</li>
+<li>In the context of RESTful services, clients can make the same call repeatedly, producing the same results/side effects.</li>
+<li>Note that idempotence applies to server side effects, and does not guarantee that the response will always be the same. For example, a resource’s state might change in between request calls.</li>
+<li><em>PUT</em> &amp; <em>DELETE</em> are idempotent (caveat w.r.t. DELETE)</li>
+<li><em>GET</em>, <em>HEAD</em>, <em>OPTIONS</em>, <em>TRACE</em> are considered <code>safe</code> and therefore are idempotent.</li>
+</ul>
+</div>
+<div id="safety" class="section level3">
+<h3>Safety</h3>
+<ul>
+<li>A <code>safe</code> method is one that does not cause any side effects when called, so clients can repeatedly make safe calls without worrying about the side effects on the server.</li>
+<li>These methods are meant for information retrieval and should not change the state of the server beyond harmless effects like logging, caching, incrementing a web counter, serving of banner adverts.</li>
+<li>A RESTful API service must therefore adhere to the safety definitions of <em>GET</em>, <em>HEAD</em>, <em>OPTIONS</em>, and <em>TRACE</em>.</li>
+<li>If not, this can be confusing to the consumer as well as lead to unintended changes as a result of <strong>web caching</strong> (I don’t get this one), search engines, and other automated agents <strong>(?)</strong></li>
+<li>By definition, safe operations are always idempotent.</li>
+<li>However, this does not mean that they always result in the same response, as resource state can change between client requests.</li>
+</ul>
+</div>
+</div>
+<div id="http-verbs" class="section level2">
+<h2>HTTP Verbs</h2>
+<p>HTTP Verbs are an important part of the <code>uniform interface</code> constraint, providing the verb counter-part to our noun-based resources.<br />
+Remember, RESTful services are resource-based, and these resources are accessed using HTTP methods/verbs.<br />
+The mainly used verbs are <strong>POST</strong>, <strong>GET</strong>, <strong>PUT</strong>, and <strong>DELETE</strong>, which correspond to the CRUD acronym.<br />
+There are other less often used verbs, but among those, <strong>HEAD</strong> and <strong>OPTIONS</strong> are the more commonly used.</p>
+<div id="get" class="section level3">
+<h3><em>GET</em></h3>
+<ul>
+<li>This verb is used to retrieve representations of resources. When used, two thing could happen:
+<ol style="list-style-type: decimal">
+<li>The representation is returned in JSON or XML format (or some other format), along with a response code 200.</li>
+<li>An error occurs, in which an a response code of <strong>404 (NOT FOUND)</strong> or <strong>400 (BAD REQUEST)</strong> is most often returned.</li>
+</ol></li>
+<li>GET, along with HEAD are used to only read data, not change it, so they should be implemented as such.</li>
+<li>In that case, they are considered <em>safe</em> (no resource modification) and <em>idempotent</em> (same result)</li>
+</ul>
+</div>
+<div id="put" class="section level3">
+<h3><em>PUT</em></h3>
+<ul>
+<li>PUT is used primarily for updates. This involes PUTting to a known resource URI with the request body holding the updated representation.</li>
+<li>PUT can be used for resource creation when a non-existent resource URI is specified. However, this is not recommended.</li>
+<li>On success, return code 200, or 204 if not returning anything in the response body (201 in case it’s used for creation - <strong>Please don’t</strong>). A response body is optional - costs more bandwidth to provide one.</li>
+<li>PUT is not a safe operation, but it is idempotent.</li>
+<li>In case PUT modifies say a counter on the resource, then it is no longer idempotent.</li>
+</ul>
+</div>
+<div id="post" class="section level3">
+<h3><em>POST</em></h3>
+<ul>
+<li>POST is involved in the creation of new resources.</li>
+<li>Specifally, it’s involved in the creation of subordinate resources.</li>
+<li>Therefore, creating a new resource involves POST-ing to a parent resource, and the service should take care of creating a new child resource, associating it to the parent resource, and assigning a resource ID, among other things.</li>
+<li>On success, return HTTP status 201, along with a <em>Location</em> header containing a link to the newly created resource.</li>
+<li>POST is neither <em>safe</em> nor <em>idempotent</em>.</li>
+</ul>
+</div>
+<div id="put-vs-post-for-creation" class="section level3">
+<h3>PUT vs POST for Creation</h3>
+<ul>
+<li>In short, use POST for creation.</li>
+<li>Use PUT when the client is in charge of deciding which URI the new resource will have.</li>
+<li>Otherwise, use POST when the server is in charge of deciding the URI for the newly created resource</li>
+</ul>
+</div>
+<div id="delete" class="section level3">
+<h3>DELETE</h3>
+<ul>
+<li>DELETE is used to delete a resource identified by a URI</li>
+<li>On successful deletion either:
+<ol style="list-style-type: decimal">
+<li>Return HTTP status 200 (OK) along with a response body (too much bandwidth - not recommended), or a wrapped response (JSEND-style response - recommended).</li>
+<li>Return HTTP status 204 (NO CONTENT) with no response body (recommended).</li>
+</ol></li>
+<li>DELETE is idempotent - if deleting decrements a counter within the resource, then it is no longer so.</li>
+<li>On the other hand, usage statistics and measurements can be updated while considering the verb idempotent as long as they are not part of the resource.</li>
+<li>The previously mentioned <em>caveat</em> to DELETE’s idempotence is that after the 1st delete, the HTTP response returned is 404 (NOT FOUND), which makes it not idempotent
+<ul>
+<li>I don’t understand this. I thought that idempotence had to do with effect on the server side, rather than the response. Does this mean that only the representation is allowed to change but anything else in the response changing will result in idempotence?.</li>
+</ul></li>
+</ul>
+</div>
+<div id="head" class="section level3">
+<h3>HEAD</h3>
+<ul>
+<li>HEAD is exactly like GET; however instead of returning a response body, it only returns the response code and any headers associated with the request</li>
+</ul>
+</div>
+<div id="options" class="section level3">
+<h3>OPTIONS</h3>
+<ul>
+<li>OPTIONS is used to retrieve information about the communication options of a resource.</li>
+<li>It’s used to find out the capabilities of the server and resource without actually invoking any resource action or retrieval</li>
+</ul>
+</div>
+</div>
+<div id="resource-naming" class="section level2">
+<h2>Resource Naming</h2>
+<ul>
+<li>Probably the most debated and most important concept to grasp alongside using HTTP verbs appropriately.</li>
+<li>Proper naming makes for an understandable, easily leveraged web service that is intuitive and easy to use.</li>
+<li>Essentially, a RESTful API is a collection of URIs, HTTP calls to those URIs, and a response representation in the form of JSON or XML, often containing relational links.</li>
+<li>The RESTful principal of <strong>addressability</strong> is covered by URIs - each resource has its URI
+<ul>
+<li><strong>Addressability</strong> is the idea that every resource in the API service should be reachable by a unique identifier.</li>
+<li>This is managed through use of URIs</li>
+</ul></li>
+<li>The constraint of <strong>uniform interface</strong> is partially addressed by the combination of URIs and HTTP verbs - I’m assuming the <code>resource-based</code> principle of uniform interface, and maybe the <code>HATEOAS</code> principle?.
+<ul>
+<li>The idea behind a <strong>uniform, constrained interface</strong> is that you stick to the finite set of operations of the application protocol you want to distribute your service on. In this case, stick to the HTTP verbs.</li>
+</ul></li>
+<li>In deciding resource names, use <strong>nouns</strong> as opposed to <strong>verbs</strong>. As mentioned before, use HTTP verbs to specify the verb portion of the request.</li>
+<li>Each resource has at least one URI identifying it, so it’s best when that URI makes sense and adequatly describes it.</li>
+<li>URIs should follow a <strong>predictable</strong>, <strong>hierarchical</strong> structure to enhance understandability, and hence usability, of the service
+<ul>
+<li><strong>Predictable</strong> - should be consistent (what exactly does this mean)</li>
+<li><strong>Hierarchical</strong> - resources should have relationships. e.g the <code>users</code> collection is a parent of some <code>user</code> resources - www.api.example.com/users/user1234. Each user can then have some posts associated with it. - www.api.example.com/users/user1234/posts</li>
+<li>This isn’t a REST rule, but it enhances an API</li>
+</ul></li>
+<li>RESTful APIs are written for consumers - the name and structure of URIs should convey meaning to those consumers.</li>
+</ul>
+<div id="resource-naming-anti-patterns" class="section level3">
+<h3>Resource Naming Anti-Patterns</h3>
+<ul>
+<li><em>GET <a href="http://api.example.com/services?op=update_customer&amp;id=12345&amp;format=json" class="uri">http://api.example.com/services?op=update_customer&amp;id=12345&amp;format=json</a></em>
+<ul>
+<li>Having just one url for the service interface and using query-string parameters to specify the resource and requested operation/HTTP verb</li>
+<li>Here since there is only one url for all resources, there no sense of hierarchy and thus the service is not self-descriptive.</li>
+<li>The above request updates the resource, therefore making GET no longer idempotent.</li>
+<li>Below is another example of the same:</li>
+</ul></li>
+<li><em>GET <a href="http://api.example.com/update_customer/12345" class="uri">http://api.example.com/update_customer/12345</a></em> or <em>GET <a href="http://api.example.com/customers/12345/update" class="uri">http://api.example.com/customers/12345/update</a></em>
+<ul>
+<li>Again, GET should be implemented as an idempotent operation</li>
+<li>In this example verbs are used as resource names - it is more beneficial to use nouns and leave HTTP verbs to specify the verb portion of the request, as below:</li>
+</ul></li>
+<li><em>POST <a href="http://api.example.com/customers/12345" class="uri">http://api.example.com/customers/12345</a></em></li>
+</ul>
+</div>
+<div id="pluralization" class="section level3">
+<h3>Pluralization</h3>
+<ul>
+<li>In general, we use plural verbs for URI nodes. The reasoning is that the resource <em>users</em>, for example, is a collection within the service suite and the id represents one of the users within that collection.</li>
+<li>This also implies that you only really need 2 base URIs for each root resource. One for creating a new child resource under a collection and the other to read, update, or delete individual resources/
+<ul>
+<li><em>POST <a href="http://api.example.com/users" class="uri">http://api.example.com/users</a></em></li>
+<li><em>GET/PUT/DELETE <a href="http://api.example.com/users/1234" class="uri">http://api.example.com/users/1234</a></em></li>
+</ul></li>
+<li>Of course, in case there can only be one such resource in the service, it is acceptable to use singularized name.
+<em>GET/PUT/DELETE <a href="http://api.example.com/configuration" class="uri">http://api.example.com/configuration</a></em></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+</div>
+
+  </article>
+</section>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js" id="MathJax-script"></script>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [
+          ['$', '$'], ['\\(', '\\)']
+        ],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+      
+        ©
+        
+        2020
+         Desmond Tuiyot 
+      
+      
+         · 
+        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+      
+      
+    </section>
+  </footer>
+
+    </main>
+
+    
+
+    
+
+    
+
+  </body>
+
+</html>

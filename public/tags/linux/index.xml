@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>linux on Desmond Tuiyot</title>
+    <link>/tags/linux/</link>
+    <description>Recent content in linux on Desmond Tuiyot</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 07 Aug 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Linux Fundamentals</title>
+      <link>/notes/linux-fundamentals/</link>
+      <pubDate>Fri, 07 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/linux-fundamentals/</guid>
+      <description>Getting Started w/ the Linux Command Line Working w/ Linux Command Line: Basics Using Linux Help Resources
+ man wget is a command that takes another command as a parameter and displays a well organized reference showing its syntax, usage patterns, and command line arguments wget is a command that takes a link and downloads the file being identified by that url apt - I assume apt is just a command to install packages, and sudo allows privileged users to run single programs with admin privileges without running the whole shell session as root.</description>
+    </item>
+    
+  </channel>
+</rss>

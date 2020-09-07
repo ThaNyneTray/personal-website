@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>intl-scholars on Desmond Tuiyot</title>
+    <link>/tags/intl-scholars/</link>
+    <description>Recent content in intl-scholars on Desmond Tuiyot</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 10 Aug 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/intl-scholars/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>International Scholars Inc.</title>
+      <link>/notes/international-scholars-inc/</link>
+      <pubDate>Mon, 10 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/international-scholars-inc/</guid>
+      <description>The WhatsApp IntergrationFrom the example, it seems what we essentially need to do is create and deploy an app that would schedule and send reminders to complete an application to applicants.To send the reminders, we use Twilio, with Python &amp;amp; Flask. In this case, we don’t really need a webapp since we’re not planning to respond to any messages for now.We also need to somehow import data from the Excel sheet and add it to a database.</description>
+    </item>
+    
+  </channel>
+</rss>

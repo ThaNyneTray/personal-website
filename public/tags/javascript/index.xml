@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>javascript on Desmond Tuiyot</title>
+    <link>/tags/javascript/</link>
+    <description>Recent content in javascript on Desmond Tuiyot</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 18 Jul 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Javascript Core Language</title>
+      <link>/notes/javascript-core-language/</link>
+      <pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/javascript-core-language/</guid>
+      <description>Javascript: Getting Started1. Introduction to JavascriptOn managing packages.User npm install in the command line - this will check through the packages.json file and install any dependencies listed there.In this case the package lite-server is installed.npm is a package manager for Node.js environment. I’ll need to look into thisCTRL+` in vscode brings up the terminalFor safety reasons, or some such thing, always run npm install on the command prompt, outside of vscode - never using the terminal in the editorUse npm run start which starts up lite server.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+
+    <meta name="author" content="Desmond Tuiyot">
+    <meta name="description" content="The WhatsApp IntergrationFrom the example, it seems what we essentially need to do is create and deploy an app that would schedule and send reminders to complete an application to applicants.To send the reminders, we use Twilio, with Python &amp; Flask. In this case, we don’t really need a webapp since we’re not planning to respond to any messages for now.We also need to somehow import data from the Excel sheet and add it to a database.">
+    <meta name="keywords" content="blog, developer, personal, data analyst">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="International Scholars Inc."/>
+<meta name="twitter:description" content="The WhatsApp IntergrationFrom the example, it seems what we essentially need to do is create and deploy an app that would schedule and send reminders to complete an application to applicants.To send the reminders, we use Twilio, with Python &amp; Flask. In this case, we don’t really need a webapp since we’re not planning to respond to any messages for now.We also need to somehow import data from the Excel sheet and add it to a database."/>
+
+    <meta property="og:title" content="International Scholars Inc." />
+<meta property="og:description" content="The WhatsApp IntergrationFrom the example, it seems what we essentially need to do is create and deploy an app that would schedule and send reminders to complete an application to applicants.To send the reminders, we use Twilio, with Python &amp; Flask. In this case, we don’t really need a webapp since we’re not planning to respond to any messages for now.We also need to somehow import data from the Excel sheet and add it to a database." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/notes/international-scholars-inc/" />
+<meta property="article:published_time" content="2020-08-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-08-10T00:00:00+00:00" />
+
+
+    
+      <base href="/notes/international-scholars-inc/">
+    
+    <title>
+  International Scholars Inc. · Desmond Tuiyot
+</title>
+
+    
+      <link rel="canonical" href="/notes/international-scholars-inc/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/image/icons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/image/icons/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.72.0" />
+  </head>
+
+  
+  
+  <body class="colorscheme-light">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Desmond Tuiyot
+    </a>
+    
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/post/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/notes/">Notes On Everything</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/projects/">Projects</a>
+          </li>
+        
+      
+      
+    </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container page">
+  <article>
+    <header>
+      <h1>International Scholars Inc.</h1>
+    </header>
+
+    
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="the-whatsapp-intergration" class="section level2">
+<h2>The WhatsApp Intergration</h2>
+<ul>
+<li>From the example, it seems what we essentially need to do is create and deploy an app that would schedule and send reminders to complete an application to applicants.
+<ul>
+<li>To send the reminders, we use Twilio, with Python &amp; Flask. In this case, we don’t really need a webapp since we’re not planning to respond to any messages for now.</li>
+</ul></li>
+<li>We also need to somehow import data from the Excel sheet and add it to a database. After which we can simply step through all the records, and if there are NULL fields then we send a reminder to the person to actually finish the application.</li>
+</ul>
+</div>
+<div id="game-plan" class="section level2">
+<h2>Game plan</h2>
+<ol style="list-style-type: decimal">
+<li>Need to create the program/webapp to send the whatsapp messages</li>
+</ol>
+<ul>
+<li>I’m expecting a list of phone numbers to send reminders to</li>
+<li>Probably a list of missing documents for each phone number - things they haven’t submitted</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>Need to proces the data - messages are sent to WhatsApp conditionally. And the condition is whether someone has submitted the required documents.</li>
+</ol>
+<ul>
+<li>Clean the data</li>
+<li>Store it in SQL</li>
+<li>Query the SQL to decide if and when to send the data</li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>Data Aggregation</li>
+</ol>
+<p>Creating new rows
+Updating the values -</p>
+</div>
+<div id="important-things-to-do" class="section level2">
+<h2>Important Things to Do</h2>
+<ul>
+<li><strong>ngrok</strong> allows you to expose your local development server to the internet - but we can also just deploy on heroku and test there
+<ul>
+<li>For now we just need to silence the</li>
+</ul></li>
+</ul>
+</div>
+<div id="processing-the-data-plan" class="section level2">
+<h2>Processing the Data: plan</h2>
+<p><strong>Initial Pass</strong></p>
+<ol style="list-style-type: decimal">
+<li>Get phone numbers, and submission dates from <code>part1.csv</code> - eliminate duplicates by latest submission date</li>
+<li>Get docs from <code>part2.csv</code></li>
+</ol>
+<ul>
+<li><p>There are about 7 documents - passport, hs transcript, hs diploma, college transcript, college diploma, bank statement, and <em>others</em></p></li>
+<li><p>For the first 6, there are two possible fields I need to combine. So starting from column 3 to 14.</p></li>
+<li><p><strong>Transferring Data into SQL</strong></p></li>
+<li><p>There’s a submission date field, which is from part1.csv. We use this to add new phone numbers</p>
+<ul>
+<li>Essentially, include only the rows in the part1 dataframe that were submitted later than the most recent submission date in the database</li>
+</ul></li>
+<li><p><strong>Question:</strong> How should the part2 data be added? 2 ways</p>
+<ul>
+<li>Add it separately from the part1 data. <strong>How?</strong>
+<ul>
+<li>After updating the phone numbers, fetch the records with phone numbers that appear in part2. Then loop through that, updating the respective fields, and then commit after the for loop.</li>
+</ul></li>
+</ul></li>
+<li><p><strong>08/19/2020 Agenda</strong></p>
+<ul>
+<li>Add names to db models
+<ul>
+<li><strong>DONE</strong> - added <code>first_name</code> and <code>last_name</code> columns to the table.</li>
+<li>Migrations done as well.</li>
+</ul></li>
+<li>Modify data manager code to handle names as well - <strong>DONE</strong>
+<ul>
+<li>Modify the data processing functions - <strong>DONE</strong></li>
+</ul></li>
+<li>Find a way to verify the phone numbers</li>
+<li>Try to integrate this with the whatsapp code</li>
+</ul></li>
+<li><p><strong>Validating Phone Numbers</strong></p>
+<ul>
+<li><strong>Problems</strong>
+<ul>
+<li>The immediate problem is invalid phone numbers.
+<ul>
+<li>We need phone numbers with the country code prefixed. In order to validate this, I would need the country as well (or at least, it would help).</li>
+<li>There’s also some numbers prefixed with 0’s or with a minus sign.</li>
+</ul></li>
+<li>However, not all values in the <code>country</code> column are filled/correct.</li>
+<li>So I need a way to infer the country, to then use it to validate the phone number.</li>
+</ul></li>
+<li><strong>Solution</strong>
+<ul>
+<li><strong>main tool:</strong> pandas, twilio lookup</li>
+<li>First, I need to filter out the country names that are in fact correct</li>
+<li>For the remaining ones, I should manually check the city or the phone number to ascertain where it’s at</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+  </article>
+</section>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js" id="MathJax-script"></script>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [
+          ['$', '$'], ['\\(', '\\)']
+        ],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+      
+        ©
+        
+        2020
+         Desmond Tuiyot 
+      
+      
+         · 
+        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+      
+      
+    </section>
+  </footer>
+
+    </main>
+
+    
+
+    
+
+    
+
+  </body>
+
+</html>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>language fundamentals on Desmond Tuiyot</title>
+    <link>/tags/language-fundamentals/</link>
+    <description>Recent content in language fundamentals on Desmond Tuiyot</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 24 Jul 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/language-fundamentals/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Ruby Fundamentals</title>
+      <link>/notes/ruby-fundamentals/</link>
+      <pubDate>Fri, 24 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/ruby-fundamentals/</guid>
+      <description>1. Introduction to Ruby  Some characteristics of Ruby:  High level Interpreted - does not need a compiler to run Object-oriented Easy to use   Data Types: Numbers, Strings, Booleans - Things to note  Ruby is case sensitive Booleans are true, false (note capitalized) No line ending semi colons (or any other symbol for that matter)   Variables  Naming convention - snake_case, not camelCase like javascript.</description>
+    </item>
+    
+    <item>
+      <title>React Fundamentals</title>
+      <link>/notes/react-fundamentals/</link>
+      <pubDate>Tue, 21 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/react-fundamentals/</guid>
+      <description>1. Building Applications With React &amp;amp; Flux1.1 Introduction to ReactCore Tech includes:React: ComponentsReact Router: RoutingFlux: Data Flows / State Management?Node/npm: Packages &amp;amp; AutomationBabel: Transpile javascript code and componentsWebpack: Bundle up application for the browserESLint: Lint. Catch errors along the way1.2 Environment SetupWe set up so as to receive rapid feedback as we build the react appWe use:</description>
+    </item>
+    
+    <item>
+      <title>Javascript Core Language</title>
+      <link>/notes/javascript-core-language/</link>
+      <pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/javascript-core-language/</guid>
+      <description>Javascript: Getting Started1. Introduction to JavascriptOn managing packages.User npm install in the command line - this will check through the packages.json file and install any dependencies listed there.In this case the package lite-server is installed.npm is a package manager for Node.js environment. I’ll need to look into thisCTRL+` in vscode brings up the terminalFor safety reasons, or some such thing, always run npm install on the command prompt, outside of vscode - never using the terminal in the editorUse npm run start which starts up lite server.</description>
+    </item>
+    
+  </channel>
+</rss>

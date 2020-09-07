@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>bootstrap on Desmond Tuiyot</title>
+    <link>/tags/bootstrap/</link>
+    <description>Recent content in bootstrap on Desmond Tuiyot</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 23 Aug 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/bootstrap/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Bootstrap</title>
+      <link>/notes/bootstrap/</link>
+      <pubDate>Sun, 23 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/bootstrap/</guid>
+      <description>Forms  Start with a form tag. In it, you wanna have div tags representing each form control and its label. &amp;lt;div class=&amp;#34;form-group&amp;#34;&amp;gt; &amp;lt;label for=&amp;#34;inputEmail&amp;#34;&amp;gt;Email&amp;lt;/label&amp;gt; &amp;lt;input type=&amp;#34;email&amp;#34; class=&amp;#34;form-control&amp;#34; id=&amp;#34;inputEmail&amp;#34; placeholder=&amp;#34;Email&amp;#34;&amp;gt; &amp;lt;/div&amp;gt;  form-control is required for general styling and also sets the form controls to 100% width. For file inputs swap out form-control for form-control-file  To change width or use them inline, use predefined grid classes   For a button - this doesn&amp;rsquo;t need to be nested inside a div &amp;lt;button type=&amp;#34;submit&amp;#34; class=&amp;#34;btn btn-primary&amp;#34;&amp;gt;Submit&amp;lt;/buttom&amp;gt;    For horizontal forms - i.</description>
+    </item>
+    
+  </channel>
+</rss>

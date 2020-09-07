@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>problem solving on Desmond Tuiyot</title>
+    <link>/tags/problem-solving/</link>
+    <description>Recent content in problem solving on Desmond Tuiyot</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 10 Aug 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/problem-solving/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Coding Challenges</title>
+      <link>/notes/coding-challenges/</link>
+      <pubDate>Mon, 10 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/coding-challenges/</guid>
+      <description>Insights, Techniques, Concepts, etc238:Product of Array Except Self
+Here we come up with an approach by solving 2 simpler problems and combining them: get the product of all elements preceding the current element, and those succeeding the current element.Common Errors and Mistakes</description>
+    </item>
+    
+    <item>
+      <title>The Art &amp; Craft of Problem Solving</title>
+      <link>/notes/the-art-craft-of-problem-solving/</link>
+      <pubDate>Fri, 17 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/the-art-craft-of-problem-solving/</guid>
+      <description>These are my notes as I work through the book, The Art &amp;amp; Craft of Problem Solving (Zeitz 2017). From the preface, it seems like there will be a lot of problems to work through. In that case, I’ll prefer to work on paper. However, any definitions, insights, and other thoughts will appear here.
+1. What This Book Is About and How to Read It1.1 Problems vs Exercises.</description>
+    </item>
+    
+  </channel>
+</rss>

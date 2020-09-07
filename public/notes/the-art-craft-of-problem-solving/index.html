@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+
+    <meta name="author" content="Desmond Tuiyot">
+    <meta name="description" content="These are my notes as I work through the book, The Art &amp; Craft of Problem Solving (Zeitz 2017). From the preface, it seems like there will be a lot of problems to work through. In that case, I’ll prefer to work on paper. However, any definitions, insights, and other thoughts will appear here.
+1. What This Book Is About and How to Read It1.1 Problems vs Exercises.">
+    <meta name="keywords" content="blog, developer, personal, data analyst">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="The Art &amp; Craft of Problem Solving"/>
+<meta name="twitter:description" content="These are my notes as I work through the book, The Art &amp; Craft of Problem Solving (Zeitz 2017). From the preface, it seems like there will be a lot of problems to work through. In that case, I’ll prefer to work on paper. However, any definitions, insights, and other thoughts will appear here.
+1. What This Book Is About and How to Read It1.1 Problems vs Exercises."/>
+
+    <meta property="og:title" content="The Art &amp; Craft of Problem Solving" />
+<meta property="og:description" content="These are my notes as I work through the book, The Art &amp; Craft of Problem Solving (Zeitz 2017). From the preface, it seems like there will be a lot of problems to work through. In that case, I’ll prefer to work on paper. However, any definitions, insights, and other thoughts will appear here.
+1. What This Book Is About and How to Read It1.1 Problems vs Exercises." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/notes/the-art-craft-of-problem-solving/" />
+<meta property="article:published_time" content="2020-07-17T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-07-17T00:00:00+00:00" />
+
+
+    
+      <base href="/notes/the-art-craft-of-problem-solving/">
+    
+    <title>
+  The Art &amp; Craft of Problem Solving · Desmond Tuiyot
+</title>
+
+    
+      <link rel="canonical" href="/notes/the-art-craft-of-problem-solving/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/image/icons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/image/icons/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.72.0" />
+  </head>
+
+  
+  
+  <body class="colorscheme-light">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Desmond Tuiyot
+    </a>
+    
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/post/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/notes/">Notes On Everything</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/projects/">Projects</a>
+          </li>
+        
+      
+      
+    </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container page">
+  <article>
+    <header>
+      <h1>The Art &amp; Craft of Problem Solving</h1>
+    </header>
+
+    
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>These are my notes as I work through the book, The Art &amp; Craft of Problem Solving <span class="citation">(Zeitz 2017)</span>. From the preface, it seems like there will be a lot of problems to work through. In that case, I’ll prefer to work on paper. However, any definitions, insights, and other thoughts will appear here.</p>
+<div id="what-this-book-is-about-and-how-to-read-it" class="section level1">
+<h1>1. What This Book Is About and How to Read It</h1>
+<div id="problems-vs-exercises." class="section level2">
+<h2>1.1 Problems vs Exercises.</h2>
+<ul>
+<li><strong>Exercises</strong> are questions that one can solve immediately, mostly by applying specific techniques to it. The main point is that for exercises, not much thought on the approach is needed.</li>
+<li><strong>Problems</strong>, on the other hand, require more thought and resourcefulness in order to resolve.</li>
+<li>From what I gather, what is a <em>problem</em> to me can appear to be a trivial <em>exercise</em> for the more advanced problem solver.</li>
+<li>The experienced problem solver solves problems on three levels
+<ul>
+<li><strong>Strategy:</strong> Mathematical and psychological ideas for starting and pursuing problems.</li>
+<li><strong>Tactics:</strong> Diverse mathematical methods that work in many different settings.</li>
+<li><strong>Tools:</strong> Narrowly focused techniques and “tips” for specific situations.</li>
+</ul></li>
+</ul>
+</div>
+<div id="the-three-levels-of-problem-solving" class="section level2">
+<h2>1.2 The Three Levels of Problem Solving</h2>
+<div id="lessons-from-the-mountaineering-analogy" class="section level3">
+<h3>Lessons from the Mountaineering Analogy</h3>
+<ul>
+<li>Usually, you can’t use <em>tools</em> as summaries of your problem solving. Rather, the <em>strategic</em> and sometimes <em>tactical</em> ideas are often described in your summary of your problem solving.</li>
+<li>During problem solving, we’re bound to encounter obstacles. Some of these are just exercises, but some of them present a real challenge.</li>
+<li>Such an obstacle is called a <strong>key obstacle</strong>, and negotiating this key obstacle is called the <strong>crux move</strong>.</li>
+</ul>
+</div>
+<div id="from-mountaineering-to-math" class="section level3">
+<h3>From Mountaineering to Math</h3>
+<p>When approaching a problem, you must begin a process of <strong>investigation</strong>. I could just try anything that comes to mind, but as a beginner, I should cultivate a more organized approach</p>
+<ul>
+<li>First, think strategically - don’t try to solve the problem, but think about it on a less focused level
+<ul>
+<li>The goal is to come up with an approach that may barely have mathematical content but that “improves” our situation rather than necessarily solving the problem.</li>
+</ul></li>
+<li>Strategies help us start to solve a problem. But they remain just vague outlines of what needs to be done.</li>
+<li>The concrete tasks are done at the lower level of tactics and tools.</li>
+</ul>
+</div>
+<div id="lessons-from-the-example-1.2.1" class="section level3">
+<h3>Lessons from the example 1.2.1</h3>
+<ul>
+<li>This is on page 4 (21)</li>
+<li>The first step when encountering a problem is to <strong>orient yourself</strong> to the statement of the problem. Problems usually come in 2 flavors:
+<ul>
+<li>Those that ask you to <strong>prove</strong> something.</li>
+<li>Those that ask you to <strong>find</strong> something.</li>
+</ul></li>
+<li>In proof problems we want to first formulate the <strong>hypothesis</strong> (what is given) and the <strong>conclusion</strong> (what we want to prove)</li>
+<li><strong>Strategy 1:</strong> we might want to focus on the conclusion and ask this - what would we need to prove that would immediately lead to the conclusion of the problem?
+<ul>
+<li>This is called looking at the <strong>penultimate step</strong></li>
+<li>If we can’t think of an easy criteria for determining the penultimate step, then we might want to try a different strategy.</li>
+</ul></li>
+<li><strong>Strategy 2:</strong> Get your hands dirty. Try out some examples/plug in some numbers.
+<ul>
+<li>If we notice a pattern, we can then create some <strong>conjecture</strong>.</li>
+<li>Our new strategy would then be to prove that conjecture.</li>
+</ul></li>
+<li>To prove the conjecture we can make use of various tactics and tools. Those used in this problem include
+<ul>
+<li>Tactics - use of <strong>factorization</strong> and <strong>symmetry</strong></li>
+<li>Tool - recognizing a common factorization, specifically the <strong>difference of 2 squares</strong></li>
+</ul></li>
+<li>Other such tools and tactics could be
+<ul>
+<li>Tactics - <strong>substitution</strong></li>
+<li>Tools - the method of <strong>undetermined coefficients</strong> (look this up)</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="a-problem-sampler" class="section level2">
+<h2>A Problem Sampler</h2>
+<ul>
+<li>Problems are divided into 3 large families: <strong>recreational</strong>, <strong>contest</strong>, or <strong>open-ended</strong>.</li>
+<li>In each family, we have problems <strong>to find</strong> and problems <strong>to prove</strong>.
+<ul>
+<li>Problems to find ask for a specific piece of info</li>
+<li>Problems to prove require a more general argument.</li>
+</ul></li>
+<li><strong>Recreational Problems</strong> - a.k.a “brain teasers” - they require little formal mathematics, but instead rely on creative use of basic strategic principles</li>
+<li><strong>Contest Problems</strong> - usually problems written for formal exams with time limits, often requiring special tools and/or ingenuity to solve. They can be very challenging</li>
+<li><strong>Open-ended Problems</strong> - mathematical problems that are sometimes vaguely worded and that may have no actual solution.
+<ul>
+<li>They can be very exciting to work on, and a lot of times, partial solutions are all you can get.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="strategies-for-investigating-problems" class="section level1">
+<h1>2. Strategies for Investigating Problems</h1>
+<ul>
+<li>First, we start with some <strong>psychological strategies</strong> that will help me rapidly improve my ability to <em>work at a problem</em>.</li>
+<li>Then, we examine some strategies to help me <strong>begin investigations</strong>.</li>
+<li>The solution to any problem involves the <strong>investigation</strong>, in which you orient yourself and discover what is going on, and the <strong>argument</strong> in which you convince others of your solution. This chapter also examines the more common methods of formal argument.</li>
+</ul>
+<div id="psychological-strategies" class="section level2">
+<h2>2.1 Psychological Strategies</h2>
+<div id="mental-toughness-lessons-from-polyas-mouse" class="section level3">
+<h3>Mental Toughness: Lessons from Polya’s Mouse</h3>
+<ul>
+<li>In problem solving, we must try and try again and <em>vary our trials</em> in order to not miss the favorable possibilites that might be initially hidden from us.</li>
+<li>At the same time, an important part of problem solving is understanding when to give up. It is ok to give up on a problem, at least temporarily</li>
+<li>Maybe I give up too soon because I lack the <strong>mental toughness</strong> attributes of <strong>confidence</strong> and <strong>concentration</strong>
+<ul>
+<li>It is difficult to keep at a problem when I don’t think I can solve it</li>
+<li>It’s also impossible to keep working beyond my “frustration threshold”</li>
+</ul></li>
+<li>To build up confidence &amp; concentration, I have to start working on easy problems, i.e. those that I can solve after expending a modest amount of effort.</li>
+<li>By gradually increasing the intellectual load, I can also simultaneously increase my <em>frustration threshold</em></li>
+</ul>
+<div id="example-2.1.1" class="section level4">
+<h4>Example 2.1.1</h4>
+<ul>
+<li>Page 15 (32)</li>
+<li>The moral of the story is to resist the urge to immediately declare a hard problem impossible.</li>
+<li>Strategy: <strong>Make the problem easier strategy:</strong> this strategy involves <strong>wishful thinking</strong> - if the given problem is too hard, solve an easier one</li>
+<li>Tool: <strong>topological equivalence</strong> - get back to this one.</li>
+</ul>
+</div>
+</div>
+<div id="creativity" class="section level3">
+<h3>Creativity</h3>
+<ul>
+<li>The good problem solver is highly open and receptive to ideas that are floating around in plain view that might not be easy to see</li>
+<li>The trick here is to remain confident in the face of a beautiful, creative solution
+<ul>
+<li>Don’t think, “I could never come up with this.”</li>
+<li>Rather think, “Beautiful solution! Let’s put it to work”</li>
+<li><em>Learn to shamelessly appropriate new ideas and make them my own</em></li>
+</ul></li>
+<li>Always be on the lookout for new ideas; master them and use them in many different places.</li>
+<li>Every problem I encounter should be analyzed for its “novel idea” content as well.</li>
+<li>One way to heighten my perceptiveness is to stay “loose”.
+<ul>
+<li>At the start, try to look for ideas at the periphery</li>
+<li>Be on the lookout for turns and twists</li>
+<li>Don’t get locked onto one method</li>
+<li>Try to consciously break or bend the rules</li>
+</ul></li>
+</ul>
+<div id="refs" class="references hanging-indent">
+<div id="ref-zeitz_2017">
+<p>Zeitz, Paul. 2017. <em>The Art and Craft of Problem Solving</em>. John Wiley &amp; Sons.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+  </article>
+</section>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js" id="MathJax-script"></script>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [
+          ['$', '$'], ['\\(', '\\)']
+        ],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+      
+        ©
+        
+        2020
+         Desmond Tuiyot 
+      
+      
+         · 
+        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+      
+      
+    </section>
+  </footer>
+
+    </main>
+
+    
+
+    
+
+    
+
+  </body>
+
+</html>

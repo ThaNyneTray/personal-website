@@ -1,0 +1,158 @@
+---
+title: REST APIs - Theory
+author: Desmond Tuiyot
+date: '2020-07-16'
+slug: rest-apis-theory
+categories: []
+tags:
+  - rest api
+  - api
+bibliography: ref.bib
+---
+
+```{r include=FALSE}
+knitr::opts_chunk$set(warning=FALSE, message=FALSE)
+```
+
+# RESTful Service Best Practices
+
+## What is REST?
+
+## REST Quick Tips
+
+## Definitions
+### Idempotent  
+
+* An `idempotent` operation is one which produces the same result if executed one or multiple times.
+* In the case of methods and subroutine calls, it could mean that they have no side effects (see `Safety` definition below)
+* For those that have side effects, idempotence means that once the method is called initially and state changes, that modified state remains the same over repeated calls to it
+* In the context of RESTful services, clients can make the same call repeatedly, producing the same results/side effects. 
+* Note that idempotence applies to server side effects, and does not guarantee that the response will always be the same. For example, a resource's state might change in between request calls.
+* *PUT* & *DELETE* are idempotent (caveat w.r.t. DELETE)
+* *GET*, *HEAD*, *OPTIONS*, *TRACE* are considered `safe` and therefore are idempotent.
+
+### Safety
+
+* A `safe` method is one that does not cause any side effects when called, so clients can repeatedly make safe calls without worrying about the side effects on the server. 
+* These methods are meant for information retrieval and should not change the state of the server beyond harmless effects like logging, caching, incrementing a web counter, serving of banner adverts. 
+* A RESTful API service must therefore adhere to the safety definitions of *GET*, *HEAD*, *OPTIONS*, and *TRACE*.
+* If not, this can be confusing to the consumer as well as lead to unintended changes as a result of **web caching** (I don't get this one), search engines, and other automated agents **(?)**
+* By definition, safe operations are always idempotent.
+* However, this does not mean that they always result in the same response, as resource state can change between client requests.
+
+## HTTP Verbs
+HTTP Verbs are an important part of the `uniform interface` constraint, providing the verb counter-part to our noun-based resources.   
+Remember, RESTful services are resource-based, and these resources are accessed using HTTP methods/verbs.  
+The mainly used verbs are **POST**, **GET**, **PUT**, and **DELETE**, which correspond to the CRUD acronym.  
+There are other less often used verbs, but among those, **HEAD** and **OPTIONS** are the more commonly used. 
+
+### *GET*  
+
+* This verb is used to retrieve representations of resources. When used, two thing could happen:
+  1. The representation is returned in JSON or XML  format (or some other format), along with a response code 200.
+  2. An error occurs, in which an a response code of **404 (NOT FOUND)** or **400 (BAD REQUEST)** is most often returned.
+* GET, along with HEAD are used to only read data, not change it, so they should be implemented as such.
+* In that case, they are considered *safe* (no resource modification) and *idempotent* (same result)
+
+### *PUT*
+
+* PUT is used primarily for updates. This involes PUTting to a known resource URI with the request body holding the updated representation.
+* PUT can be used for resource creation when a non-existent resource URI is specified. However, this is not recommended. 
+* On success, return code 200, or 204 if not returning anything in the response body (201 in case it's used for creation - **Please don't**). A response body is optional - costs more bandwidth to provide one.
+* PUT is not a safe operation, but it is idempotent. 
+* In case PUT modifies say a counter on the resource, then it is no longer idempotent.
+
+### *POST*
+
+* POST is involved in the creation of new resources.
+* Specifally, it's involved in the creation of subordinate resources.
+* Therefore, creating a new resource involves POST-ing to a parent resource, and the service should take care of creating a new child resource, associating it to the parent resource, and assigning a resource ID, among other things.
+* On success, return HTTP status 201, along with a *Location* header containing a link to the newly created resource. 
+* POST is neither *safe* nor *idempotent*. 
+
+### PUT vs POST for Creation
+
+* In short, use POST for creation. 
+* Use PUT when the client is in charge of deciding which URI the new resource will have. 
+* Otherwise, use POST when the server is in charge of deciding the URI for the newly created resource
+
+### DELETE
+
+* DELETE is used to delete a resource identified by a URI
+* On successful deletion either:
+  1. Return HTTP status 200 (OK) along with a response body (too much bandwidth - not recommended), or a wrapped response (JSEND-style response - recommended).
+  2. Return HTTP status 204 (NO CONTENT) with no response body (recommended).
+* DELETE is idempotent - if deleting decrements a counter within the resource, then it is no longer so.
+* On the other hand, usage statistics and measurements can be updated while considering the verb idempotent as long as they are not part of the resource.
+* The previously mentioned *caveat* to DELETE's idempotence is that after the 1st delete, the HTTP response returned is 404 (NOT FOUND), which makes it not idempotent 
+  * I don't understand this. I thought that idempotence had to do with effect on the server side, rather than the response. Does this mean that only the representation is allowed to change but anything else in the response changing will result in idempotence?.
+  
+### HEAD
+
+* HEAD is exactly like GET; however instead of returning a response body, it only returns the response code and any headers associated with the request
+
+### OPTIONS
+
+* OPTIONS is used to retrieve information about the communication options of a resource.
+* It's used to find out the capabilities of the server and resource without actually invoking any resource action or retrieval
+
+## Resource Naming
+
+* Probably the most debated and most important concept to grasp alongside using HTTP verbs appropriately.
+* Proper naming makes for an understandable, easily leveraged web service that is intuitive and easy to use.
+* Essentially, a RESTful API is a collection of URIs, HTTP calls to those URIs, and a response representation in the form of JSON or XML, often containing relational links. 
+* The RESTful principal of **addressability** is covered by URIs - each resource has its URI
+  * **Addressability** is the idea that every resource in the API service should be reachable by a unique identifier.
+  * This is managed through use of URIs
+* The constraint of **uniform interface** is partially addressed by the combination of URIs and HTTP verbs - I'm assuming the `resource-based` principle of uniform interface, and maybe the `HATEOAS` principle?.
+  * The idea behind a **uniform, constrained interface** is that you stick to the finite set of operations of the application protocol you want to distribute your service on. In this case, stick to the HTTP verbs.
+* In deciding resource names, use **nouns** as opposed to **verbs**. As mentioned before, use HTTP verbs to specify the verb portion of the request.
+* Each resource has at least one URI identifying it, so it's best when that URI makes sense and adequatly describes it. 
+* URIs should follow a **predictable**, **hierarchical** structure to enhance understandability, and hence usability, of the service
+  * **Predictable** - should be consistent (what exactly does this mean)
+  * **Hierarchical** - resources should have relationships. e.g the `users` collection is a parent of some `user` resources - www.api.example.com/users/user1234. Each user can then have some posts associated with it. - www.api.example.com/users/user1234/posts
+  * This isn't a REST rule, but it enhances an API
+* RESTful APIs are written for consumers - the name and structure of URIs should convey meaning to those consumers. 
+
+### Resource Naming Anti-Patterns
+
+* *GET http://api.example.com/services?op=update_customer&id=12345&format=json*
+  * Having just one url for the service interface and using query-string parameters to specify the resource and requested operation/HTTP verb
+  * Here since there is only one url for all resources, there no sense of hierarchy and thus the service is not self-descriptive. 
+  * The above request updates the resource, therefore making GET no longer idempotent.
+  * Below is another example of the same:
+* *GET http://api.example.com/update_customer/12345* or *GET http://api.example.com/customers/12345/update*
+  * Again, GET should be implemented as an idempotent operation
+  * In this example verbs are used as resource names - it is more beneficial to use nouns and leave HTTP verbs to specify the verb portion of the request, as below:
+* *POST http://api.example.com/customers/12345*
+
+### Pluralization
+
+* In general, we use plural verbs for URI nodes. The reasoning is that the resource *users*, for example, is a collection within the service suite and the id represents one of the users within that collection.
+* This also implies that you only really need 2 base URIs for each root resource. One for creating a new child resource under a collection and the other to read, update, or delete individual resources/
+  * *POST http://api.example.com/users*
+  * *GET/PUT/DELETE http://api.example.com/users/1234*
+* Of course, in case there can only be one such resource in the service, it is acceptable to use singularized name. 
+  *GET/PUT/DELETE http://api.example.com/configuration*
+
+# References
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

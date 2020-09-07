@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Notes on Desmond Tuiyot</title>
+    <link>/notes/</link>
+    <description>Recent content in Notes on Desmond Tuiyot</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 03 Sep 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/notes/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Node.js Fundamentals</title>
+      <link>/notes/node-js-fundamentals/</link>
+      <pubDate>Thu, 03 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/node-js-fundamentals/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Web Design Principles</title>
+      <link>/notes/web-design-principles/</link>
+      <pubDate>Tue, 25 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/web-design-principles/</guid>
+      <description>User Experience for Web Design 1. What Makes a Good Web User Experience? Building a site for your visitors -</description>
+    </item>
+    
+    <item>
+      <title>Bootstrap</title>
+      <link>/notes/bootstrap/</link>
+      <pubDate>Sun, 23 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/bootstrap/</guid>
+      <description>Forms  Start with a form tag. In it, you wanna have div tags representing each form control and its label. &amp;lt;div class=&amp;#34;form-group&amp;#34;&amp;gt; &amp;lt;label for=&amp;#34;inputEmail&amp;#34;&amp;gt;Email&amp;lt;/label&amp;gt; &amp;lt;input type=&amp;#34;email&amp;#34; class=&amp;#34;form-control&amp;#34; id=&amp;#34;inputEmail&amp;#34; placeholder=&amp;#34;Email&amp;#34;&amp;gt; &amp;lt;/div&amp;gt;  form-control is required for general styling and also sets the form controls to 100% width. For file inputs swap out form-control for form-control-file  To change width or use them inline, use predefined grid classes   For a button - this doesn&amp;rsquo;t need to be nested inside a div &amp;lt;button type=&amp;#34;submit&amp;#34; class=&amp;#34;btn btn-primary&amp;#34;&amp;gt;Submit&amp;lt;/buttom&amp;gt;    For horizontal forms - i.</description>
+    </item>
+    
+    <item>
+      <title>Testing Code</title>
+      <link>/notes/testing-code/</link>
+      <pubDate>Wed, 19 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/testing-code/</guid>
+      <description>Real Python: TDD in PythonThe TDD RoadWrite a failing testMake it pass by doing the simplest thing possibleRefactor your code while keeping tests passingRepeat until your acceptance test is greenWhere to Write My TestsCreate a tests.py file in my top level folder - this is so that the tests file can import all other relevant files.If there file gets too big, you can split them into different modulesHow to Structure a TestFirst, decide:What will you be testing?</description>
+    </item>
+    
+    <item>
+      <title>Git Notes</title>
+      <link>/notes/git-notes/</link>
+      <pubDate>Thu, 13 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/git-notes/</guid>
+      <description>Git BranchesHow Git Stores Data (briefly)
+Git stores data as a series of snapshots.When you make a commit, git creates a commit object which contains:a pointer to the snapshot of the content you stageda pointer to any previous commit/commitsthe name and email of who made the commitThis commit object will not point directly to the snapshots of the staged contents.</description>
+    </item>
+    
+    <item>
+      <title>Coding Challenges</title>
+      <link>/notes/coding-challenges/</link>
+      <pubDate>Mon, 10 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/coding-challenges/</guid>
+      <description>Insights, Techniques, Concepts, etc238:Product of Array Except Self
+Here we come up with an approach by solving 2 simpler problems and combining them: get the product of all elements preceding the current element, and those succeeding the current element.Common Errors and Mistakes</description>
+    </item>
+    
+    <item>
+      <title>International Scholars Inc.</title>
+      <link>/notes/international-scholars-inc/</link>
+      <pubDate>Mon, 10 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/international-scholars-inc/</guid>
+      <description>The WhatsApp IntergrationFrom the example, it seems what we essentially need to do is create and deploy an app that would schedule and send reminders to complete an application to applicants.To send the reminders, we use Twilio, with Python &amp;amp; Flask. In this case, we don’t really need a webapp since we’re not planning to respond to any messages for now.We also need to somehow import data from the Excel sheet and add it to a database.</description>
+    </item>
+    
+    <item>
+      <title>Pandas Fundamentals</title>
+      <link>/notes/pandas-fundamentals/</link>
+      <pubDate>Mon, 10 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/pandas-fundamentals/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Bandwidth API</title>
+      <link>/notes/bandwidth-api/</link>
+      <pubDate>Sun, 09 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/bandwidth-api/</guid>
+      <description>Messaging 101About Bandwidth
+It is a CPaaS provider - this is short for Communications Platforms as a Service - and it is the only CPaaS provider with its own national CLEC?? networkBillions of messages every month and 52m numbers on their networkWhat is a text message?
+It’s not any of those received from WhatsApp, GroupMe, or Messenger, or any other app like that.</description>
+    </item>
+    
+    <item>
+      <title>Linux Fundamentals</title>
+      <link>/notes/linux-fundamentals/</link>
+      <pubDate>Fri, 07 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/linux-fundamentals/</guid>
+      <description>Getting Started w/ the Linux Command Line Working w/ Linux Command Line: Basics Using Linux Help Resources
+ man wget is a command that takes another command as a parameter and displays a well organized reference showing its syntax, usage patterns, and command line arguments wget is a command that takes a link and downloads the file being identified by that url apt - I assume apt is just a command to install packages, and sudo allows privileged users to run single programs with admin privileges without running the whole shell session as root.</description>
+    </item>
+    
+    <item>
+      <title>The Twilio API for WhatsApp</title>
+      <link>/notes/twilio-whatsapp-api/</link>
+      <pubDate>Tue, 04 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/twilio-whatsapp-api/</guid>
+      <description>Twilio API for WhatsApp Python QuickstartWe want to send and receive messages with WhatsApp using the Twilio API for WhatsAppWe’ll be usingTwilio Sandbox for WhatsAppPythonThe Twilio Python Twilio Helper LibraryFlaskSign Up for Twilio and Activate the SandboxFirst, sign up for a twilio account hereNext, sign into your account and activate the Twilio Sandbox for WhatsAppIn order to send messages in production, you have to wait for WhatsApp to approve your account.</description>
+    </item>
+    
+    <item>
+      <title>Apache Spark Fundamentals</title>
+      <link>/notes/apache-spark-fundamentals/</link>
+      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/apache-spark-fundamentals/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ruby Koans</title>
+      <link>/notes/ruby-koans/</link>
+      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/ruby-koans/</guid>
+      <description>1. About Asserts  assert - if the expression returns true, it passes and continues. If not, it fails. assert &amp;quot;add some message&amp;quot; - it&amp;rsquo;s probably a good idea to add a message next to the insert assert some_val == some_other_val - makes sense to compare reality against what is expected.  use assert_equal some_val, some_other_val instead. you can also have more than 2 values here. assert_equal some_val, other_val, again_val... is valid   assert_match(/ /, &amp;quot;.</description>
+    </item>
+    
+    <item>
+      <title>Ruby Fundamentals</title>
+      <link>/notes/ruby-fundamentals/</link>
+      <pubDate>Fri, 24 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/ruby-fundamentals/</guid>
+      <description>1. Introduction to Ruby  Some characteristics of Ruby:  High level Interpreted - does not need a compiler to run Object-oriented Easy to use   Data Types: Numbers, Strings, Booleans - Things to note  Ruby is case sensitive Booleans are true, false (note capitalized) No line ending semi colons (or any other symbol for that matter)   Variables  Naming convention - snake_case, not camelCase like javascript.</description>
+    </item>
+    
+    <item>
+      <title>SaaS - An Agile Approach to Cloud Computing</title>
+      <link>/notes/saas/</link>
+      <pubDate>Thu, 23 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/saas/</guid>
+      <description>1. Introduction to SaaS and Agile Development1.1 IntroductionProductivity mechanismsClarity via concisenessSynthesisReuseAutomation &amp;amp; Tools1.4 Service Oriented Architecture (SOA)The success of Agile is proven for mainly smaller projects. This success can be replicated for larger projects by using a software architecture designed to make composible services - SOASOA means that components of an application act as interoperable services, and can be used independently and recombined in different applications.</description>
+    </item>
+    
+    <item>
+      <title>React Fundamentals</title>
+      <link>/notes/react-fundamentals/</link>
+      <pubDate>Tue, 21 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/react-fundamentals/</guid>
+      <description>1. Building Applications With React &amp;amp; Flux1.1 Introduction to ReactCore Tech includes:React: ComponentsReact Router: RoutingFlux: Data Flows / State Management?Node/npm: Packages &amp;amp; AutomationBabel: Transpile javascript code and componentsWebpack: Bundle up application for the browserESLint: Lint. Catch errors along the way1.2 Environment SetupWe set up so as to receive rapid feedback as we build the react appWe use:</description>
+    </item>
+    
+    <item>
+      <title>Javascript Core Language</title>
+      <link>/notes/javascript-core-language/</link>
+      <pubDate>Sat, 18 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/javascript-core-language/</guid>
+      <description>Javascript: Getting Started1. Introduction to JavascriptOn managing packages.User npm install in the command line - this will check through the packages.json file and install any dependencies listed there.In this case the package lite-server is installed.npm is a package manager for Node.js environment. I’ll need to look into thisCTRL+` in vscode brings up the terminalFor safety reasons, or some such thing, always run npm install on the command prompt, outside of vscode - never using the terminal in the editorUse npm run start which starts up lite server.</description>
+    </item>
+    
+    <item>
+      <title>The Art &amp; Craft of Problem Solving</title>
+      <link>/notes/the-art-craft-of-problem-solving/</link>
+      <pubDate>Fri, 17 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/the-art-craft-of-problem-solving/</guid>
+      <description>These are my notes as I work through the book, The Art &amp;amp; Craft of Problem Solving (Zeitz 2017). From the preface, it seems like there will be a lot of problems to work through. In that case, I’ll prefer to work on paper. However, any definitions, insights, and other thoughts will appear here.
+1. What This Book Is About and How to Read It1.1 Problems vs Exercises.</description>
+    </item>
+    
+    <item>
+      <title>REST APIs - Theory</title>
+      <link>/notes/rest-apis-theory/</link>
+      <pubDate>Thu, 16 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/rest-apis-theory/</guid>
+      <description>RESTful Service Best PracticesWhat is REST?REST Quick TipsDefinitionsIdempotentAn idempotent operation is one which produces the same result if executed one or multiple times.In the case of methods and subroutine calls, it could mean that they have no side effects (see Safety definition below)For those that have side effects, idempotence means that once the method is called initially and state changes, that modified state remains the same over repeated calls to itIn the context of RESTful services, clients can make the same call repeatedly, producing the same results/side effects.</description>
+    </item>
+    
+    <item>
+      <title>Notes On Everything</title>
+      <link>/notes/notes-on-everything/</link>
+      <pubDate>Sun, 24 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/notes-on-everything/</guid>
+      <description>Disclaimer:These are my personal notes on things I learn. They are neither extensive nor comprehensive and will probably not be useful to you. There may be a lot of mistakes and errors because this space represents my attempts at understanding the things I learn.
+Jump to:JavascriptFront End LibrariesBootstrapjQuerylocalStorageStatisticsProbabilityMachine LearningAlgorithmsData StructuresPythonRShinyJavascriptBasic JavascriptVariablesBasic data types : undefined, null, object, symbol, string, boolean, numberDeclaring : var myVarname;The undefined data type - this is the initial data type of variables that have been declared and not initialized.</description>
+    </item>
+    
+  </channel>
+</rss>

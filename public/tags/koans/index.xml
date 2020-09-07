@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>koans on Desmond Tuiyot</title>
+    <link>/tags/koans/</link>
+    <description>Recent content in koans on Desmond Tuiyot</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 29 Jul 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/koans/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Ruby Koans</title>
+      <link>/notes/ruby-koans/</link>
+      <pubDate>Wed, 29 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/ruby-koans/</guid>
+      <description>1. About Asserts  assert - if the expression returns true, it passes and continues. If not, it fails. assert &amp;quot;add some message&amp;quot; - it&amp;rsquo;s probably a good idea to add a message next to the insert assert some_val == some_other_val - makes sense to compare reality against what is expected.  use assert_equal some_val, some_other_val instead. you can also have more than 2 values here. assert_equal some_val, other_val, again_val... is valid   assert_match(/ /, &amp;quot;.</description>
+    </item>
+    
+  </channel>
+</rss>

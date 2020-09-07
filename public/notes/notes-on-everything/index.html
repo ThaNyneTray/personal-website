@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+
+    <meta name="author" content="Desmond Tuiyot">
+    <meta name="description" content="Disclaimer:These are my personal notes on things I learn. They are neither extensive nor comprehensive and will probably not be useful to you. There may be a lot of mistakes and errors because this space represents my attempts at understanding the things I learn.
+Jump to:JavascriptFront End LibrariesBootstrapjQuerylocalStorageStatisticsProbabilityMachine LearningAlgorithmsData StructuresPythonRShinyJavascriptBasic JavascriptVariablesBasic data types : undefined, null, object, symbol, string, boolean, numberDeclaring : var myVarname;The undefined data type - this is the initial data type of variables that have been declared and not initialized.">
+    <meta name="keywords" content="blog, developer, personal, data analyst">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Notes On Everything"/>
+<meta name="twitter:description" content="Disclaimer:These are my personal notes on things I learn. They are neither extensive nor comprehensive and will probably not be useful to you. There may be a lot of mistakes and errors because this space represents my attempts at understanding the things I learn.
+Jump to:JavascriptFront End LibrariesBootstrapjQuerylocalStorageStatisticsProbabilityMachine LearningAlgorithmsData StructuresPythonRShinyJavascriptBasic JavascriptVariablesBasic data types : undefined, null, object, symbol, string, boolean, numberDeclaring : var myVarname;The undefined data type - this is the initial data type of variables that have been declared and not initialized."/>
+
+    <meta property="og:title" content="Notes On Everything" />
+<meta property="og:description" content="Disclaimer:These are my personal notes on things I learn. They are neither extensive nor comprehensive and will probably not be useful to you. There may be a lot of mistakes and errors because this space represents my attempts at understanding the things I learn.
+Jump to:JavascriptFront End LibrariesBootstrapjQuerylocalStorageStatisticsProbabilityMachine LearningAlgorithmsData StructuresPythonRShinyJavascriptBasic JavascriptVariablesBasic data types : undefined, null, object, symbol, string, boolean, numberDeclaring : var myVarname;The undefined data type - this is the initial data type of variables that have been declared and not initialized." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/notes/notes-on-everything/" />
+<meta property="article:published_time" content="2020-05-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-05-24T00:00:00+00:00" />
+
+
+    
+      <base href="/notes/notes-on-everything/">
+    
+    <title>
+  Notes On Everything · Desmond Tuiyot
+</title>
+
+    
+      <link rel="canonical" href="/notes/notes-on-everything/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/image/icons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/image/icons/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.72.0" />
+  </head>
+
+  
+  
+  <body class="colorscheme-light">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Desmond Tuiyot
+    </a>
+    
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/post/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/notes/">Notes On Everything</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/projects/">Projects</a>
+          </li>
+        
+      
+      
+    </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container page">
+  <article>
+    <header>
+      <h1>Notes On Everything</h1>
+    </header>
+
+    
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="disclaimer" class="section level2">
+<h2>Disclaimer:</h2>
+<p>These are my personal notes on things I learn. They are neither extensive nor comprehensive and will probably not be useful to you. There may be a lot of mistakes and errors because this space represents my attempts at understanding the things I learn.</p>
+<div id="jump-to" class="section level4">
+<h4>Jump to:</h4>
+<ul>
+<li><a href="#javascript">Javascript</a></li>
+<li><a href="#frontend">Front End Libraries</a>
+<ul>
+<li><a href="#bootstrap">Bootstrap</a></li>
+<li><a href="#jquery">jQuery</a></li>
+<li><a href="#local_storage">localStorage</a></li>
+</ul></li>
+<li><a href="#statistics">Statistics</a></li>
+<li><a href="#probability">Probability</a></li>
+<li><a href="#machine_learning">Machine Learning</a></li>
+<li><a href="#algos">Algorithms</a></li>
+<li><a href="data_structures">Data Structures</a></li>
+<li><a href="#python">Python</a></li>
+<li><a href="#rshiny">RShiny</a></li>
+</ul>
+</div>
+</div>
+<div id="javacsript" class="section level2">
+<h2>Javascript</h2>
+<div id="basic-javascript" class="section level3">
+<h3>Basic Javascript</h3>
+<div id="variables" class="section level4">
+<h4>Variables</h4>
+<ul>
+<li>Basic data types : <code>undefined</code>, <code>null</code>, <code>object</code>, <code>symbol</code>, <code>string</code>, <code>boolean</code>, <code>number</code></li>
+<li>Declaring : <code>var myVarname;</code></li>
+<li>The <code>undefined</code> data type - this is the initial data type of variables that have been declared and not initialized. Adding or concatenating to an <code>undefined</code> variable leads to <code>NaN</code>/<code>"undefined"</code>.</li>
+<li>Best practice -&gt; use camelCase for variable names</li>
+</ul>
+</div>
+<div id="numbers" class="section level4">
+<h4>Numbers</h4>
+<ul>
+<li>Arithmetic operators - the usual plus operators <code>i++</code> &amp; <code>i--</code>, <code>i+=someValue</code> (augmented addition), for each basic operator.</li>
+<li><code>Remainder</code> operator <code>%</code> is similar to the <code>modulus</code> operator but does not work with negative numbers</li>
+</ul>
+</div>
+<div id="strings" class="section level4">
+<h4>Strings</h4>
+<ul>
+<li>Escape sequences - per usual</li>
+<li>Concatenating Strings - use <code>+</code>, <code>+=</code></li>
+<li>Length of string - use <code>.length</code> property on the target string</li>
+<li>String indexing - <code>someString[0]</code></li>
+<li>String are immutable</li>
+<li>Indexing into last element - can’t use <code>someString[-1]</code> like in Python. How unfortunate</li>
+</ul>
+</div>
+<div id="arrays" class="section level4">
+<h4>Arrays</h4>
+<ul>
+<li>Declaration = <code>var myArray = [el1, el2, ...]</code>. Just like any other list, it can contain different data types, including other lists</li>
+<li>Mutable, indexing is same as Python</li>
+<li>Appending to array - <code>someArray.push(someVal)</code></li>
+<li>Removing from end of array - <code>someArray.pop()</code> - this also returns the popped element</li>
+<li>To remove from beginning of array - <code>someArray.shift()</code> - this is interesting.</li>
+<li>To add to beginning of array - <code>someArray.unshift(someVal)</code> - also interesting</li>
+</ul>
+</div>
+<div id="functions" class="section level4">
+<h4>Functions</h4>
+<ul>
+<li><p>Declaration</p>
+<pre><code>function functionName(){
+  console.log(&quot;This is a function&quot;)
+}</code></pre></li>
+<li><p>Parameter - pass by value or by reference?</p></li>
+<li><p>Scope</p>
+<ul>
+<li>Global scope - variables declared outside functions have Global scope. Variables declared inside functions without using the <code>var</code> keyword also get Global scope</li>
+<li>Local scope - variables declared within functions and function parameters</li>
+<li>Local scope is prioritized over Global scope</li>
+</ul></li>
+<li><p><code>return</code> keyword to return a value. Functions with no return value have <code>undefined</code> return value</p></li>
+</ul>
+</div>
+<div id="booleans-comparisons-if-statements" class="section level4">
+<h4>Booleans, Comparisons, If statements</h4>
+<ul>
+<li><p><code>true</code>,<code>false</code></p></li>
+<li><p><code>if</code> conditions</p>
+<pre><code>if (condition){
+  // statement
+}else if (condition){
+  // other statement
+}else {
+  // other other statement
+}</code></pre></li>
+<li><p><code>==</code> - equality operator. Javascript can compare 2 different data types - it coerces one type to another then compares them.<br />
+<code>!=</code> - inequality operator</p></li>
+<li><p><code>===</code> - strict equality operator - javascript does not convert the variables involved<br />
+<code>!==</code> - strict inequality operator</p></li>
+<li><p><code>&gt;</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;=</code> - these will also convert both variables to a common data type before comparison. No <code>strict</code> alternatives?</p></li>
+<li><p><code>condition &amp;&amp; condition</code> - Logical <code>and</code> operator</p></li>
+<li><p><code>condition || condition</code> - Logical <code>or</code> operator</p></li>
+</ul>
+</div>
+<div id="switch-statements" class="section level4">
+<h4>Switch Statements</h4>
+<ul>
+<li><p>Switch statements are evaluated using strict equality. Replace long <code>if-else if</code> chains with <code>switch</code> whenever appropriate.</p>
+<pre><code>switch(variable/value){
+  case option1:
+    // do sth
+    break;
+  case option2:
+    // do sth
+    break;
+  case option3:
+    // do sth
+    break;
+    ...
+    ...
+  default:
+    // do default thing
+    break
+}</code></pre></li>
+<li><p>You can omit the <code>break</code> statement to tie multiple cases to one output</p>
+<pre><code>switch(variable){
+  case 1:
+  case 2:
+  case 3:
+    // do sth
+    break;
+  case 4:
+    // do sth
+    break;
+  ...
+  ...
+  default:
+    // do sth
+    break;
+}</code></pre>
+<h4 id="return-values">Return values</h4></li>
+<li><p>Just like Python (and probably many other languages) you can use a comparison statement as a return value – <code>return a &lt; b</code></p></li>
+</ul>
+</div>
+<div id="javascript-objects" class="section level4">
+<h4>Javascript Objects</h4>
+<ul>
+<li><p>Are they just dictionaries? Also, non-string properties are automatically typecasted to string.</p>
+<pre><code>var me {
+  &quot;name&quot;:&quot;Desmond Tuiyot&quot;,
+  &quot;age&quot;:&quot;Over 20&quot;,
+  &quot;passions&quot;:[&quot;Dance&quot;, &quot;Software Dev&quot;, &quot;Data Science&quot;]
+}</code></pre></li>
+<li><p>Accessing properties of an object - Either dot notation, <code>object.prop1</code>, or square brackets, <code>object["prop"]</code>. With the bracket notation, you can store property name in a variable and use it to access the property.</p></li>
+<li><p>Updating and adding new properties - same syntax</p></li>
+<li><p>Deleting properties - <code>delete someObject.someProperty;</code></p></li>
+<li><p>Check for existence of properties - <code>someObject.hasOwnProperty(propName);</code></p></li>
+<li><p>Javascript object is a flexible data structure - allows for arbitrary combinations of strings, numbers, booleans, arrays, functions, and objects.</p></li>
+<li><p>JSON - Javascript Object Notation - makes sense</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="frontend" class="section level2">
+<h2>Front End Libraries</h2>
+<div id="bootstrap" class="section level3">
+<h3>Bootstrap</h3>
+<ul>
+<li>Boostrap figures out the width of your screen and respond by resizing it - hence responsive design.</li>
+<li>Wrap everything in <code>&lt;div class="fluid-container"&gt; ... &lt;/div&gt;</code>- bootstrap fluid containers?</li>
+<li>Making images responsive - <code>&lt;img class="img-responsive" src="..."&gt;</code></li>
+<li>Centering text - add <code>class="text-center"</code></li>
+<li>Button - <code>&lt;button class="btn btn-..."&gt;ButtonText&lt;/&gt;</code>
+<ul>
+<li>You can make the button stretch out to full horizontal page width by adding <code>btn-block</code> to the class</li>
+<li>Bootstrap button color rainbow - <code>btn-primary</code>,<code>btn-info</code> (highlight optional action?), <code>btn-danger</code></li>
+</ul></li>
+<li>Bootstrap uses a 12-column grid system. Makes it easy to arrange elements and specify relative width of them on the grid.
+<ul>
+<li>Most bootstrap classes can be applied to <code>div</code> elements</li>
+<li>Bootstrap has different column width properties that can be applied depending on screen width</li>
+<li><code>row</code> class + <code>col-..-..</code> family of classes to arrange elements.</li>
+</ul></li>
+<li><code>text-primary</code> - color of text</li>
+<li>You can use span to target inline elements, and even style several elements differently within the same line.</li>
+<li>Adding <strong>Font Awesome</strong> icons to buttons - they are either webfonts or vector graphics and are treated and can be styled just like text.
+<ul>
+<li>You can add it like this <code>&lt;i class="fas fa-info-circle"&gt;&lt;/i&gt;</code>. You can also use <code>span</code> for this.</li>
+</ul></li>
+<li>Responsively style radio buttons and checkboxes
+<ul>
+<li>Same idea as before - wrap the radio buttons with <code>div class="row"</code> then each individual radion button with <code>div class="col-..-.."</code></li>
+</ul></li>
+<li>Styling text inputs with <code>class="form-control"</code> makes them take up 100% width.</li>
+<li>Creating visual sense of depth - class <code>well</code></li>
+<li>Remember <code>ids</code> have to be unique for each element.</li>
+</ul>
+</div>
+<div id="jquery" class="section level3">
+<h3>jQuery</h3>
+<ul>
+<li><p><code>document ready</code> function ensures that all the html contents are loaded before the javascript function is run</p>
+<pre><code>$(document).ready(function(){
+  // some statements
+});</code></pre></li>
+<li><p>jQuery functions start with a <code>$</code> sign. It selects sth with a selector and does whatever to that element</p>
+<ul>
+<li>Targeting HTML elements using selectors - <code>$("button").addClass("animated bounce")</code></li>
+<li>Targeting by classes -&gt; <code>$(".className").doWhateverHere("...")</code></li>
+<li>Targeting by id -&gt; <code>$("#idName").doSumn("...")</code></li>
+</ul></li>
+<li><p>Adding/removing classes</p>
+<ul>
+<li><code>.addClass()</code> does what it says it does to elements</li>
+<li><code>.removeClass()</code> also does what it says</li>
+</ul></li>
+<li><p>Changing css of selected element -<code>.css("attribute", "value")</code></p></li>
+<li><p>Disable an element using jQuery - <code>.prop("disabled", true)</code> to adjust properties of elements</p></li>
+<li><p>Changing text -</p>
+<ul>
+<li>use <code>.html()</code> to set html tags and text inside an element. Previous content will be replaced.</li>
+<li>user <code>.text()</code> to add just text</li>
+</ul></li>
+<li><p>Removing an element - <code>.remove()</code></p></li>
+<li><p>Moving elements - <code>.appendTo()</code> - allows you to select elements and append them to another element</p></li>
+<li><p>Clone an element using <code>.clone()</code></p></li>
+<li><p>Also function chaining is a thing - <code>$("#target").clone().appendTo("#destination")</code></p></li>
+<li><p>Selecting parent/children - <code>.parent()</code>, <code>.children()</code></p></li>
+<li><p>Targeting nth child of a selected element</p>
+<ul>
+<li><code>$("target:nth-child(n)")</code>, where n is the nth child. <code>target</code> can’t be an id?</li>
+</ul></li>
+<li><p>Targeting odd and even elements - <code>$("target:odd/even")...</code></p></li>
+</ul>
+</div>
+<div id="local_storage" class="section level3">
+<h3>localStorage</h3>
+<ul>
+<li><p>Local Storage allows apps and sites to store data in the browser with no expiration date. So data is persistent across sessions, which is great.</p></li>
+<li><p>The main problem with HTTP as a transport layer is that it’s <code>stateless</code> - when you use a web app and close it, its state will be reset next time you open it</p></li>
+<li><p>Normally you would store data pertaining to your interface server side, but what if you don’t want to force your user to log in?</p></li>
+<li><p><strong>Cookie</strong> - text file stored in my pc and connected to the domain that my website runs on. I can store data pertaining to my domain</p>
+<ul>
+<li>They add to the load of every document in my domain</li>
+<li>Only allow for upto 4kb of storage</li>
+<li>It’s been used to spy on people before - so security conscious people turn it off and websites have to ask each time they wanna use it</li>
+</ul></li>
+<li><p>Five methods</p>
+<ul>
+<li><code>setItem</code> - <code>window.localStorage.setItem(key, value)</code>
+<ul>
+<li><code>localStorage</code> can only store strings. To store arrays or objects, we convert them to strings
+using <code>JSONStringify(array?/object)</code> before passing them in.</li>
+</ul></li>
+<li><code>getItem</code> - <code>window.localStorage.getItem(key, value)</code>
+<ul>
+<li>if we had stored an object, we can use <code>JSON.parse(object)</code> to convert it from string</li>
+</ul></li>
+<li><code>removeItem</code> - <code>window.localStorage.removeItem(key)</code></li>
+<li><code>clear</code> - <code>window.localStorage.clear()</code></li>
+<li><code>key</code> - pass an integer to retrieve nth key - <code>window.localStorage.key(idx)</code></li>
+</ul></li>
+<li><p>Checking for browser support</p>
+<pre><code>if (typeof(Storage) !== &quot;undefined&quot;){
+  // code for localStorage 
+}
+else {
+  // no web storage support? Or sessionStorage??
+}</code></pre></li>
+</ul>
+</div>
+</div>
+<div id="statistics" class="section level2">
+<h2>Statistics</h2>
+</div>
+<div id="probability" class="section level2">
+<h2>Probability</h2>
+</div>
+<div id="machine_learning" class="section level2">
+<h2>Machine Learning</h2>
+</div>
+<div id="algos" class="section level2">
+<h2>Algorithms</h2>
+<div id="dynamic-programming---patterns" class="section level3">
+<h3>Dynamic Programming - Patterns</h3>
+<ol style="list-style-type: decimal">
+<li>Minimum/Maximum path to reach a target<br />
+These are straightforward optimization questions. You have a target to reach and at each step, you have some number of possible paths to take. The approach:</li>
+</ol>
+<ul>
+<li>The subproblem is the minimum/maximum path to step <code>i</code>, where <code>0&lt;=i&lt;=n</code></li>
+<li>Choose the minimum/maximum path amongst all possible paths to reach the current state. Then add the value for the current state.</li>
+<li>Generate optimal solutions for all values leading up to and including the target, then return the value for the target.
+For each problem, I have to first think about the base cases, which I use to build the solution once I start iterating.<br />
+The subproblem in this family of problems seem to be primarily prefixes - At subproblem <code>DP(i)</code>, I’m assuming that all the subproblems <code>DP(i)</code> depends on are already solved.</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>Distinct Ways</li>
+</ol>
+<ul>
+<li><p><strong>Problem Statement:</strong> Find the number of distinct ways to get to a target.</p></li>
+<li><p><strong>Approach:</strong> Add up all the distinct ways to get to a state dp[i]</p>
+<pre class="python"><code>routes[i] = routes[i-1] + route[i-2] ... routes[i-k]</code></pre></li>
+<li><p>Generate sum for all values leading up to the target and return the value for the target</p>
+<pre class="python"><code>for i in range(1, target+1):
+  for j in range(len(ways)):
+    if ways[j] &lt; i: # this could be the number of steps you can take at a time 
+      dp[i] += dp[i-ways[j]] 
+return dp[target]</code></pre></li>
+<li><p>The <code>ways</code> array would be a list of routes to the current state.</p>
+<ul>
+<li>In the <code>coin change</code> problem, it is the number of coin denominations available to you.</li>
+<li>In the <code>climbing stairs</code> problem, it is the number of steps you can take at a time.</li>
+</ul></li>
+<li><p><code>dp[i-ways[j]]</code> represents the number of distinct ways to get to the spot that is ways[j] places behind the current state <code>dp[i]</code>.</p>
+<ul>
+<li><code>Coin change</code> problem - if my current state is the amount <code>amount = dp[i] = 20</code>, and one of the acceptable coin denominations, <code>ways[j] = 5</code>, then <code>dp[i-ways[j]]</code> is the number of distinct ways to get to state where <code>amount = 15</code>, which is already solved since we are using a bottoms up approach.</li>
+</ul></li>
+<li><p>Importantly, I shouldn’t add anything to the sum <code>dp[i] += dp[i-ways[j]]</code>. If I know there’s one way to get to <code>0</code>, and one way to get to <code>1</code>, then I know that there’s 2 ways to get to <code>2</code>.</p></li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>Merging Intervals</li>
+</ol>
+<ul>
+<li><p><strong>Problem Statement:</strong> Given a set of numbers find an optimal solution for a problem considering the current number and the optimal result from its left and right sides.</p></li>
+<li><p><strong>Approach:</strong> Find the optimal solution for the interval <code>i,j</code> and return the best possible answer. Do this for each interval <code>i, j</code></p>
+<pre class="python"><code>dp[i][j] = dp[i][k] + result[k] + dp[k+1][j]</code></pre></li>
+<li><p>Find the optimal solution from left and right sides and add a solution for the current position</p>
+<pre class="python"><code>for l in range(1, n):
+  for i in range(n-l):
+    j = i + l
+    for k in range(i, j):
+      dp[i][j] = max(dp[i][j], dp[i][k]+result[k]+dp[k+1][j])
+return dp[0][n-1]</code></pre></li>
+</ul>
+</div>
+<div id="greedy-algorithms" class="section level3">
+<h3>Greedy Algorithms</h3>
+<ul>
+<li><strong>The Greedy Paradigm:</strong> Construct a solution iteratively by making <code>myopic</code>/<code>locally optimal</code> decisions, and hope that everything works out.</li>
+</ul>
+<div id="themes-of-the-greedy-paradigmcontrast-with-divide-conquer" class="section level4">
+<h4>Themes of the Greedy Paradigm/Contrast with Divide &amp; Conquer</h4>
+<ul>
+<li>It’s easy to propose multiple greedy algorithms for many problems, as opposed to D&amp;C where decomposing a problem is harder.</li>
+<li>Easier running time analysis. For D&amp;C we had to work much harder, and develop tools like the Master Method in order to establish running time.
+<ul>
+<li>Many greedy algorithms often come down to sorting your input and then performing some linear computation. The running time would be O(n*lgn)</li>
+</ul></li>
+<li>Hard to establish correctness of a greedy algorithm. Contrast D&amp;C for which a straightforward inductive correctness proof can be done easily?
+<strong>DANGER:</strong> Many greedy algorithms are NOT correct, even if my intuition says otherwise.</li>
+</ul>
+</div>
+<div id="proofs-of-correctness" class="section level4">
+<h4>Proofs Of Correctness</h4>
+<p>How would you do it? – Proving correctness of greedy algorithms is more art than science. However, there are recurring themes to it, and we will see what those are.</p>
+<ul>
+<li><strong>Method 1: </strong> <code>Induction</code> - Greedy algorithms make a number of irrevocable decisions, and so the induction will be on the decisions made by the algorithm
+<ul>
+<li>AKA <code>greedy stays ahead</code> - you prove that the algorithm makes the corrrect decision iteration by iteration.</li>
+<li>We induct over the number of iterations?</li>
+</ul></li>
+<li><strong>Method 2: </strong> <code>Exchange Argument</code> - it has several flavors
+<ul>
+<li><code>Proof by contradiction:</code>Assume that the greedy algorithm is incorrect. Take an “optimal” solution then exchange 2 elements of that optimal solution to get a better solution, thereby contradicting the assumption that you started with an optimal solution. I’m assuming you do the exchange based on the greedy algorithm</li>
+<li>Gradually exchange an optimal solution into the one output by a greedy algorithm without making the algorithm worse. That would show that the algorithm is in fact correct. Formally, that’s done by inducting on the number of exchanges required to transfer an optimal solution into mine</li>
+</ul></li>
+<li><strong>Method 3: </strong>Whatever works.</li>
+</ul>
+</div>
+<div id="problem-1-a-scheduling-problem" class="section level4">
+<h4>Problem 1: A Scheduling Problem</h4>
+<p><strong>Problem Definition</strong></p>
+<ul>
+<li>The problem of scheduling involves how to schedule jobs on shared resources in order to accomplish some objective</li>
+<li><code>Setup:</code>
+<ul>
+<li>One shared resource (i.e. a processor).</li>
+<li>Many jobs to do (i.e. processes).</li>
+</ul></li>
+<li><code>Question:</code> In what order should we sequence these jobs?</li>
+<li><code>Parameters:</code> Assume each job j has a:
+<ul>
+<li><strong>weight w<sub>j</sub>:</strong> we can think of this as quantifying a job’s priority. Higher priority needs to be processed first.</li>
+<li><strong>length l<sub>j</sub>:</strong> how long it takes for the job to be processed</li>
+</ul></li>
+<li><code>Output:</code> A sequence of these jobs in some particular order</li>
+<li>So given all the above, What are we trying to optimize? In order to define our <code>objective function</code> we need to define <code>completion time</code>.
+<ul>
+<li><code>Completion time:</code> The completion time C<sub>j</sub> for a job j is the sum of the job lengths of all jobs upto and including job j. It is the amount of time taken until j is completely processed.</li>
+</ul></li>
+<li><code>Objective function:</code> minimize the weighted sum of completion times. <span class="math inline">\(min\sum_{j=1}^{n}C_j \cdot w_j\)</span></li>
+</ul>
+<p><strong>A Greedy Algorithm</strong></p>
+<ul>
+<li>We develop a greedy algorithm for solving the scheduling problem introduced above. However, I wanna pay attention to the process by which the greedy algorithm is developed.</li>
+<li>The process in summary is this:
+<ul>
+<li>We look at a special case of the problem, where it’s fairly intuitive what the optimal solution should be</li>
+<li>Looking at these special cases will then motivate a couple of greedy algorithms</li>
+<li>We then narrow it down to one greedy algorithm, which we then prove will always be correct</li>
+</ul></li>
+<li><code>Intuition For Algorithm:</code> Assume that a greedy algorithm for this problem does exist. How would we come up with that algorithm?</li>
+<li><strong>First</strong>, focus on a couple of special cases where it’s relatively clear how to proceed. In the scheduling problem, we have 2 cases:
+<ul>
+<li>With equal length jobs, should we schedule smaller or larger weight jobs first? – <strong>larger weights first</strong></li>
+<li>With equal weight jobs, should we schedule shorter or longer length jobs first? – <strong>lower length first</strong>. Scheduling a job at a certain position forces all other jobs to wait for that job to complete. So all else equal, you minimize the impact a particular assignment has on the rest of the jobs. That is, schedule a shorter job first, so the rest of them don’t have to wait as long.</li>
+</ul></li>
+<li><strong>Second</strong>, move beyond special cases which we understand well, to more general cases, which we don’t understand.
+<ul>
+<li>If we have two jobs such that both of our rules of thumb give the same advice, we’re good. That is, suppose job 1 has <span class="math inline">\(w_1=4\)</span>, <span class="math inline">\(C_1=3\)</span> and job 2 has <span class="math inline">\(w_1=2\)</span>, <span class="math inline">\(C_1=4\)</span>, then job 1 should go first. Larger weight, lower length jobs go first.</li>
+<li>However, if we have jobs that give conflicting advice, what do we do?</li>
+</ul></li>
+<li><code>Resolving Conflicting Advice</code>
+<ul>
+<li>We could think about aggregating the 2 parameters, weight and length into one <code>score</code> such that if we calculate that score and sort, we could find an optimal schedule.</li>
+<li>How do we aggregate the parameters? The formula to do this has to abide by our rules of thumb. That is, holding weight constant, if we feed in higher lengths, we should get a lower score. OTOH, holding length constant, if we feed in higher weights, we should get higher scores.
+<ul>
+<li><strong>Formula 1:</strong> GreedyDiff <span class="math inline">\(w_j - l_j\)</span></li>
+<li><strong>Formula 2:</strong> GreedyRatio <span class="math inline">\(\frac{w_j}{l_j}\)</span></li>
+</ul></li>
+</ul></li>
+<li><code>Breaking a Greedy Algorithm</code> - because these greedy algorithms don’t do the same thing, at most one of them is correct <strong>(is this always the case?)</strong>.
+<ul>
+<li>This is something I will likely encounter in designing greedy algorithms. We have proposed two greedy algorithms here, so we want to rule out one of them. We can do this by providing an example for which one of them will not always work.</li>
+<li>Come up with an example where the two algorithms provide different schedules, with different objective functions. The one that fares worse, then, is not always optimal.</li>
+<li>Example: job 1 <span class="math inline">\(l_1=5, w_1=3\)</span> and job 2 <span class="math inline">\(l_2=2, w_2=1\)</span>. GreedyRatio algorithm prioritizes job1 while GreedyDiff prioritizes job2 first. Turns out GreedyRatio works better in this case, and is in fact correct in the general case.</li>
+<li>Keep in mind, though, that just because we’ve eliminated GreedyDiff, doesn’t automatically mean that GreedyRatio is correct. In fact, it is entirely possible to come up with multiple incorrect greedy algorithms for a specific problem.</li>
+</ul></li>
+</ul>
+<p><strong>Proof of Correctness</strong></p>
+<ul>
+<li><code>Claim:</code> GreedyRatio Algorithm is always correct - i.e., ordering jobs in decreasing order of ratio <span class="math inline">\(w_j/l_j\)</span> is always correct</li>
+<li><code>Proof:</code> By an <strong>exchange argument</strong>. We make a simplifying assumption that there are no ties.</li>
+<li><code>Proof Plan:</code>
+<ul>
+<li>Fix an arbitrary input of n jobs. Why? Because we are trying to prove that this algorithm is always correct. Therefore, we try to prove it for an arbitrary instance of the problem.</li>
+<li>Proceed by contradiction. In general, we assume that our hypothesis is false, then proceed to derive something that is obviously false.</li>
+<li>In the case of the scheduling problem, we assume that our greedy algorithm does not in fact produce the optimal scheduling.</li>
+<li>Let <span class="math inline">\(\sigma=\)</span>greedy schedule and <span class="math inline">\(\sigma^*\)</span>=optimal schedule, with <span class="math inline">\(\sigma^*\)</span> being better</li>
+<li>The plan is to produce an even better scheduling than <span class="math inline">\(\sigma^*\)</span>, thereby contradicting our assumption that <span class="math inline">\(\sigma^*\)</span> was optimal.</li>
+</ul></li>
+<li><code>Assume:</code> All <span class="math inline">\(\frac{w_j}{l_j}\)</span> are distinct. This is with loss of generality and we have a separate proof for cases where there are ties.</li>
+<li><code>Assume:</code> We rename jobs such that <span class="math inline">\(\frac{w_1}{l_1}&gt;\frac{w_2}{l_2}&gt;\frac{w_3}{l_3}...\)</span>.</li>
+<li><code>Thus:</code> Our greedy algorithm schedules jobs such that the indices are in increasing order: <span class="math inline">\(1,2,3,4...,n\)</span></li>
+<li><code>Thus:</code> If <span class="math inline">\(\sigma^* \neq \sigma\)</span>, then there are 2 consecutive jobs <span class="math inline">\(i, j\)</span> such that <span class="math inline">\(i&gt;j\)</span>, i.e., i has a higher index than j. Why? Because the greedy schedule is the only schedule where the indices of the jobs will always increase.</li>
+<li><code>Thought experiment</code> - given our proof thus far, what would happen if we exchange the order of i and j?</li>
+<li><code>Cost Benefit Analysis</code>: How does the completion time of all the jobs change after making this exchange:
+<ul>
+<li>For other jobs: The completion time of jobs before i and j is unaffected. For jobs coming after i and j, the completion time remains the same. The completion time was the sum of all job lengths up to and including that job. The sum i + j = j + i.</li>
+<li>For job i, the completion time increases by exactly the length of j</li>
+<li>For job j, the completion time decreases by exactly the length of i</li>
+</ul></li>
+<li><code>Upshot:</code>
+<ul>
+<li>The cost of the exchange is <span class="math inline">\(w_i \cdot l_j\)</span>, since i has to wait for job j to complete.</li>
+<li>The benefit of the exchange is <span class="math inline">\(w_j \cdot l_i\)</span>, since job j no longer has to wait for job i to complete.</li>
+</ul></li>
+<li><code>Note:</code> Because of our renaming assumption, <span class="math inline">\(i&gt;j \rightarrow \frac{w_i}{l_i}&lt;\frac{w_j}{l_j} \rightarrow w_il_j &lt; w_jl_i \rightarrow \text{cost of exchange &lt; benefit of exchange}\)</span>.</li>
+<li><code>Thus:</code> The swap improves <span class="math inline">\(\sigma^*\)</span>, which contradicts the <span class="math inline">\(\sigma^*\)</span> optimality assumption.</li>
+</ul>
+<p><strong>Handling Ties</strong></p>
+<ul>
+<li><code>Claim:</code> GreedyRatio algorithm (ordering jobs in non-increasing order) is correct, even with ties.</li>
+<li><code>New Proof Plan:</code>
+<ul>
+<li>Fix arbitrary input of n jobs. Again, we want to prove the correctness for the general case</li>
+<li>Let <span class="math inline">\(\sigma=\)</span>the greedy schedule and <span class="math inline">\(\sigma^*=\)</span>any other optimal schedule</li>
+<li>Will show that <span class="math inline">\(\sigma\)</span> is at least as good as <span class="math inline">\(\sigma^*\)</span>. And since <span class="math inline">\(\sigma^*\)</span> was arbitrary, then the greedy schedule is at least as good as every other schedule, and therefore is optimal.</li>
+</ul></li>
+<li><code>Assume:</code> We rename jobs such that <span class="math inline">\(\frac{w_1}{l_1}&gt;\frac{w_2}{l_2}&gt;\frac{w_3}{l_3}...\)</span>.</li>
+<li><code>Consider</code> an arbitrary schedule <span class="math inline">\(\sigma^*\)</span>.</li>
+<li>If <span class="math inline">\(\sigma^*=\sigma\)</span>, we’re done. No further proof is needed.</li>
+<li>If <span class="math inline">\(\sigma^*\neq\sigma\)</span>, then <span class="math inline">\(\exists\)</span> consecutive jobs <span class="math inline">\(i,j\)</span> such that <span class="math inline">\(i &gt; j\)</span>.
+<ul>
+<li><code>Note:</code> From our renaming assumption, <span class="math inline">\(i&gt;j \rightarrow \frac{w_i}{l_i} \leq \frac{w_j}{l_j} \rightarrow w_il_j \leq w_jl_i\)</span>. Since there are ties, we use the weaker comparison of less than or equal to.</li>
+<li><code>Further note:</code> Exchanging i and j from <span class="math inline">\(\sigma^*\)</span> has a net benefit of <span class="math inline">\(w_jl_i - w_il_j \geq 0\)</span> since j no longer has to wait for i, while i has to now wait for j. This difference is either positive, if jobs i and j are not tied in their ratio, or equal if they are.</li>
+<li><code>Thus:</code> By inverting i and j, we don’t make <span class="math inline">\(\sigma^*\)</span> worse.</li>
+</ul></li>
+<li><code>Upshot:</code>
+<ul>
+<li>Exchanging <strong>adjacent inversions</strong> like i and j only makes <span class="math inline">\(\sigma^*\)</span> better</li>
+<li>The exchange decreases the number of <strong>inverted pairs</strong> - this is because when we exchange one such pair, we uninvert the inversion. And since they are adjacent, we don’t create new inversions. Thus, the number of inversions decreases by exactly one each time we do such an exchange</li>
+</ul></li>
+<li>In the previous proof, benefit from an exchange was enough to produce a contradiction, and we were done. In this proof, though, we simply repeatedly exchange inverted pairs until there are none left, ending up with a greedy schedule.</li>
+<li>Why can this not continue forever? There can only be at most <span class="math inline">\({n}\choose{2}\)</span> inversions. After at most that many inversions, we necessarily terminate with what becomes the greedy schedule.</li>
+<li>Since exchanging inversions can not make <span class="math inline">\(\sigma^*\)</span> worse, then <span class="math inline">\(\sigma\)</span> is at least as good as <span class="math inline">\(\sigma^*\)</span>.</li>
+<li>So greedy is optimal.</li>
+</ul>
+</div>
+<div id="problem-2-minimum-spanning-trees" class="section level4">
+<h4>Problem 2: Minimum Spanning Trees</h4>
+<p><strong>Overview</strong></p>
+<ul>
+<li><strong>Informal Goal: </strong>Connect a bunch of points together as cheaply as possible.</li>
+<li><strong>Applications: </strong>Clustering (more later), networking</li>
+<li>Boasts blazingly fast greedy algorithms:
+<ul>
+<li><code>Prim's algorithm</code> [1957, Djikstra 1959, Jarnick 1930]</li>
+<li><code>Kruskal's algorithms</code> [1956]</li>
+<li><span class="math inline">\(O(m \log n)\)</span>, where m = # of edges, n = # of vertices</li>
+<li>Using heap data structure (as in Djikstra’s), and Union find data structure</li>
+</ul></li>
+</ul>
+<p><strong>Problem Definition</strong></p>
+<ul>
+<li><strong>Input:</strong> undirected graphs <span class="math inline">\(G=(V,E)\)</span>, cost <span class="math inline">\(c_e\)</span> for each edge <span class="math inline">\(e \in E\)</span>
+<ul>
+<li>Assume adjacency list representation - we have an array of vertices, an array of edges, and pointers connecting vertices to their incident edges and connecting edges back to their two endpoints</li>
+<li>Ok if edge costs are negative</li>
+</ul></li>
+<li><strong>Output:</strong> minimum cost spanning tree <span class="math inline">\(T \in E\)</span> that spans all vertices. What does this mean?
+<ul>
+<li><code>Cost</code> is the sum of edge costs in T</li>
+<li>T should have no cycles, i.e. should be a <code>tree</code></li>
+<li>The subgraph <span class="math inline">\((V,T)\)</span> should be connected (should be a path between each pair of vertices), i.e <code>spans all vertices</code></li>
+</ul></li>
+<li><strong>Assumption #1:</strong> Input graph G is itself connected
+<ul>
+<li>If this assumption is violated, then the problem isn’t well defined. Since G is not connected, none of its subgraphs can be connected. Thus there is no MST</li>
+<li>Connectivity is easy to check in a preprocessing step using DFS or BFS</li>
+<li>If it’s not connected, you can define a general problem, the <code>minimum cost forest</code> which returns the minimum cost subgraph that spans the most vertices.</li>
+</ul></li>
+<li><strong>Assumption #2:</strong> edge costs are distinct
+<ul>
+<li>Both Prim and Kruskal’s algorithms remain correct if there are ties, regardless of how ties are broken</li>
+</ul></li>
+</ul>
+<p><strong>Prim’s MST Algorithm</strong></p>
+<ul>
+<li>Initialize <code>X=[s]</code>, for <span class="math inline">\(s\in V\)</span>, chosen arbitrarily</li>
+<li>Initialize <code>T=null</code>. An invariant is that the tree-so-far, T, will span X.</li>
+<li>While <code>X != V</code>
+<ul>
+<li>let <code>e=(u,v)</code> be the cheapest edge of G with <span class="math inline">\(u \in X, v \notin X\)</span></li>
+<li>Add e to T</li>
+<li>Add v to X</li>
+</ul></li>
+<li><strong>While loop</strong> increases the number of spanned vertices as cheaply as possible.</li>
+</ul>
+<p><strong>Correctness of Prim’s Algorithm: Plan</strong></p>
+<ul>
+<li><strong>Theorem:</strong> Prim’s algorithm always outputs an MST</li>
+<li><strong>Part 1:</strong> Prim’s computes a spanning tree <span class="math inline">\(T^*\)</span>. We’ll use basic properties of graphs and spanning trees.</li>
+<li><strong>Part 2:</strong> <span class="math inline">\(T^*\)</span> is an MST. We’ll use the <code>cut property</code>.</li>
+</ul>
+<p><strong>Correctness of Prim’s Algorithm: Part1 </strong></p>
+<ul>
+<li><p><strong>Claim</strong>: Prim’s algorithm produces a spanning tree<br />
+Let’s review some graph properties.</p></li>
+<li><p><strong>Cuts</strong></p>
+<ul>
+<li><strong>Definition:</strong> a cut of a graph is a partition of its vertices into 2 non-empty sets.</li>
+<li>Assume you have 2 partitions,A &amp; B. What are the characteristics of the edges with reference to these partitions?
+<ul>
+<li>Edges that have their endpoints in A</li>
+<li>Those that have their endpoints in B</li>
+<li><strong>Cut edges:</strong> Those that cross the cut; they have one endpoint in A, the other in B. We are interested in these edges.</li>
+<li>For a given cut of the graph, there can be many edges crossing it</li>
+<li>For a given edge in the graph, there can be many cuts that that edge crosses.</li>
+</ul></li>
+<li>For a graph with n vertices, roughly how many cuts does it have?
+<ul>
+<li>You can imagine making a binary choice for each vertex in the graph. Should we place it in partition A or B.</li>
+<li>So with n vertices, we have roughly <span class="math inline">\(2^n\)</span> cuts. It will be exactly <span class="math inline">\(2^{n-1}\)</span> cuts, since the partitions aren’t allowed to be empty.</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>Next, we prove 3 easy facts about cuts, and once we do, we’ll be in a position to prove that Prim’s algorithm produces a spanning tree.</p>
+<ul>
+<li><strong>Empty Cut Lemma:</strong> This lemma gives us a new characterization of the connectedness of a graph. In particular, we use it define when a graph is not connected
+<ul>
+<li>A graph G is not connected <span class="math inline">\(\iff \exists\)</span> a cut <span class="math inline">\((A,B)\)</span> with no crossing edges</li>
+<li>It’s an if and only if statement, so we have to prove both directions.</li>
+<li><strong>Proof:</strong> <span class="math inline">\((\Longleftarrow)\)</span> Assume RHS, i.e., assume there is a cut <span class="math inline">\((A,B)\)</span> such that no edge crosses it. Show that the graph is not connected.
+<ul>
+<li>Pick <span class="math inline">\(u\in A\)</span> and <span class="math inline">\(v \in B\)</span>.</li>
+<li>Since there is no edge crossing the cut, then there is no path <span class="math inline">\(u-v\)</span> in G.</li>
+<li>Therefore, G is not connected.</li>
+</ul></li>
+<li><strong>Proof:</strong><span class="math inline">\((\Longrightarrow)\)</span> Assume LHS - i.e., assume that the graph G is not connected. Show that there exists a cut such that no edge crosses it.
+<ul>
+<li>Since the graph is not connected, there has to be a pair of vertices u and v such that the path <span class="math inline">\(u-v\)</span> does not exist.</li>
+<li>Define partition A as <span class="math inline">\(A={\text{vertices reachable from u}}\)</span> - i.e u’s connected components.</li>
+<li>Define partition B as <span class="math inline">\(B={\text{all other vertices}}\)</span> - i.e. all the connected components other than the one that contains u</li>
+<li>By definition <span class="math inline">\(u \in A\)</span>, and by assumption u and v are not reachable from each other, so <span class="math inline">\(v \in B\)</span> - thus the cut <span class="math inline">\((A,B)\)</span> is a valid cut of G.</li>
+<li>Notice that there are no edges crossing this cut. Why is this true? Assume there is an edge crossing that cut. Since A by definition is the set of vertices reachable from u, then u has a path to the vertex that crosses the edge, and therefore has a path to partition B. But by definition, B is the set of vertices not reachable from u. So we have a contradiction.</li>
+</ul></li>
+</ul></li>
+<li><strong>Two Easy Facts</strong>
+<ul>
+<li><strong>Double-Crossing Lemma:</strong> Suppose the cycle <span class="math inline">\(C \in E\)</span> has an edge crossing the cut <span class="math inline">\((A,B)\)</span>. Then so does some other edge of C. In general, if there is a cycle with an edge crossing the cut, then the cycles can only cross it an even number of times.</li>
+<li><strong>Lonely Cut Corollary:</strong> If <span class="math inline">\(e\)</span> is the only edge crossing a cut <span class="math inline">\((A.B)\)</span>, then it cannot be in a cycle. <code>Proof:</code> If it were in a cycle, then some other edge would also cross the cut, therefore it would not be lonely.</li>
+</ul></li>
+</ul>
+<p><strong>Correctness Of Prim’s Algorithm: Part 1</strong></p>
+<ul>
+<li><strong>Claim:</strong> Prim’s algorithm produces a spanning tree</li>
+<li>The algorithm maintains an invariant that T (edges picked so far) always spans X (vertices picked so far). This can be proven by induction.</li>
+<li>To prove that we end up with a spanning tree, we have to prove 2 things. One is that there are no cycles in the resulting tree. Second is that the tree actually spans all the vertices.</li>
+<li></li>
+</ul>
+<p><strong>I will continue this proof later on. Right now it’s more important to know the algorithms instead.</strong></p>
+<p><strong>Fast Implentation of Prim’s Algorithm</strong></p>
+<ul>
+<li>Let’s revisit Prim’s algorithms
+<ul>
+<li>Initialize <code>X=[s]</code>, for <span class="math inline">\(s\in V\)</span>, chosen arbitrarily</li>
+<li>Initialize <code>T=null</code>. An invariant is that the tree-so-far, T, will span X.</li>
+<li>While <code>X != V</code>
+<ul>
+<li>let <code>e=(u,v)</code> be the cheapest edge of G with <span class="math inline">\(u \in X, v \notin X\)</span></li>
+<li>Add e to T</li>
+<li>Add v to X</li>
+</ul></li>
+<li><strong>While loop</strong> increases the number of spanned vertices as cheaply as possible.</li>
+</ul></li>
+<li>What would be the running time of a straightforward implementation?
+<ul>
+<li>The initialization step is constant time</li>
+<li>The while loop iterates n-1 times. Thus we have <span class="math inline">\(O(n)\)</span> where <span class="math inline">\(n=\)</span>the number of vertices.</li>
+<li>The work done inside each iteration is esssentially a bruteforce search for the cheapest edge that crosses the X, V-X cut. You can implement this in <span class="math inline">\(O(m)\)</span> time where <span class="math inline">\(m=\)</span> the number of edges.
+<ul>
+<li>You could have a boolean associated with each edge indicating whether it’s in X or not. So when you see an edge, you know whether it crosses the cut or not.</li>
+</ul></li>
+<li>Total <span class="math inline">\(O(mn)\)</span> time</li>
+</ul></li>
+<li>The speedup for this algorithm is through deploying a suitable data structure
+<ul>
+<li>What’s happening inside the the main loop is that we’re repeatedly looking for the cheapest edge, the minimum cost edge.</li>
+<li>The whole idea of using heaps is to speed up repeated minimum computations.</li>
+</ul></li>
+<li><strong>Heaps</strong>
+<ul>
+<li>A heap contains a set of elements, each with a key associated with it.</li>
+<li>Heap provides methods to <code>Insert</code>, <code>Extract-min</code>, and <code>Delete</code> elements, all in <span class="math inline">\(O(log n)\)</span> time</li>
+</ul></li>
+<li><strong>Natural Idea:</strong> Store edges in the heaps and use edges costs as keys.
+<ul>
+<li>This can be done and results in a running time of <span class="math inline">\(O(mlogn)\)</span></li>
+<li>Make sure that the edges stored in the heap are those which cross the frontier.</li>
+</ul></li>
+<li>We’re gonna look a cleverer method, which does not improve the running time, but it does give better constants.</li>
+<li>The key point is to instead store vertices in the heap instead of edges</li>
+<li>We maintain 2 invariants, one describing what the heap contains, the other describing the key values of those heap elements
+<ul>
+<li><strong>Invariant 1:</strong> elements in the heap = vertices in <span class="math inline">\(V-X\)</span></li>
+<li><strong>Invariant 2:</strong> for <span class="math inline">\(v \in V-X\)</span>, <span class="math inline">\(key[v]\)</span> = cheapest edge <span class="math inline">\((u,v)\)</span>, where <span class="math inline">\(u \in X\)</span>, or +inf if the v has no edge crossing the cut.</li>
+</ul></li>
+<li>Given these invariants, can we need to think/check 3 things
+<ol style="list-style-type: decimal">
+<li>Can we initialize the heap such that the invariants are satisfied at the beginning?</li>
+<li>Can we simulate Prim’s algorithm in each iteration of the while loop?</li>
+<li>Can we maintain the invariants after each iteration?</li>
+</ol></li>
+<li><strong>How do we set up the heap at the pre-processing step such that the invariants are satisfied?</strong>
+<ul>
+<li>At the start, <span class="math inline">\(X=\{s\}\)</span>, $V-X = $ all other vertices aside from X, and the key values for each vertex <span class="math inline">\(v \in V-X\)</span> is just the cost of cheapest edge to <span class="math inline">\(s\)</span> if there is one or +inf if not.</li>
+<li>We can initialize this heap in <span class="math inline">\(O(m+n\text{ }log\text{ }n) = O(m\text{ }log\text{ }n)\)</span> preprocessing where an edge scan to compute the key values of vertices to be inserted can be done in <span class="math inline">\(O(m)\)</span> time while the actual inserts of said vertices takes <span class="math inline">\(O(n\text{ }log\text{ }n)\)</span> time.</li>
+<li>Why <span class="math inline">\(O(m\text{ }log\text{ }n)\)</span>? First, we are interested in connected graphs, otherwise talk of spanning trees doesn’t make sense. Second, in a connected graph, <span class="math inline">\(m \geq n-1\)</span> always holds. In other words, m is always, asymptotically, at least as big as n. </li>
+</ul></li>
+<li><strong>How do we faithfully simulate each iteration of the while loop in Prim’s algorithm?</strong>
+<ul>
+<li>Since we set up our keys to be the cheapest edge incident to vertices in X, Extract-Min gives us the cheapest edge overall that crosses the cut. So the element returned by extract-min is the vertex we add to X, and its key is gives us the cheapest edge that we then add to T.</li>
+</ul></li>
+<li><strong>How do we maintain the invariants after each iteration?</strong>
+<ul>
+<li>The issue is that we would need to recompute some keys after each iteration.</li>
+<li>Once a new vertex v is extracted and added to X, the edge that was crossing the cut is now sucked into X, while (potentially) we now have new edges incident to v that are in <span class="math inline">\(V-X\)</span>. These edges are what we need to take care of</li>
+<li><strong>Pseudocode:</strong> When v is added to X:<br />
+for each edge <span class="math inline">\((v,w) \in E\)</span>:<br />
+if <span class="math inline">\(w \in V-X\)</span>: <code>only edges incident to w will cross the cut</code><br />
+delete w<br />
+recompute key[w]; key[w] = min(key[w], cost(v,w))<br />
+reinsert w into heap<br />
+</li>
+<li>A note on the delete operation: In a heap, it’s usually delete from a certain position in the heap.
+<ul>
+<li>The solution here is to do some additional bookkeeping to keep track of which vertex is at which position in the heap.</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>Runtime analysis of the above</strong></p>
+<ul>
+<li>Dominated by heap operations</li>
+<li><span class="math inline">\(n-1\)</span> inserts during preprocessing</li>
+<li><span class="math inline">\(n-1\)</span> iterations of the while loop</li>
+<li>Each edge in G only triggers an insertion-delete combo only once. Specifically, an edge <span class="math inline">\((u,v)\)</span> triggers those operations only when the first of those edges is extracted and added to X.(We only care about vertices in V-X).</li>
+<li>So we have <span class="math inline">\(O(m)\)</span> heap operations, where the heap operations take <span class="math inline">\(O(log\text{ }n)\)</span> time.</li>
+<li>Thus, we have overall running time of <span class="math inline">\(O(m\text{ }log\text{ }n)\)</span></li>
+<li>It’s one of the <strong>Four Free Primitives</strong></li>
+</ul>
+<p><strong>Kruskal’s Algorithm</strong></p>
+<ul>
+<li><strong>MST Review</strong>
+<ul>
+<li><strong>Input:</strong> an undirected graph <span class="math inline">\(G=(V,E)\)</span>, edge costs <span class="math inline">\(c_e\)</span></li>
+<li><strong>Output:</strong> minimum cost spanning tree (i.e, no cycles, connected)</li>
+<li><strong>Assumptions:</strong> G is connected, edge costs are distinct</li>
+<li><strong>Cut Property:</strong> If <span class="math inline">\(e\)</span> is the cheapest edge that crosses some cut <span class="math inline">\((A,B)\)</span>, then <span class="math inline">\(e\)</span> is in the MST.</li>
+</ul></li>
+<li>The idea in Kruskal’s algorithm is to pick the next cheapest edge, with the constraint that it does not create a cycle.</li>
+<li><strong>Pseudocode:</strong></li>
+<li>Sort edges in increasing order of edge costs. Rename the edges so that they conform to this sorted order. That is, <span class="math inline">\([1,2,3...m]\)</span> so that <span class="math inline">\(c_1&lt;c_2&lt;c_3...c_m\)</span></li>
+<li>Initialize our tree-so-far - <span class="math inline">\(T = null\)</span></li>
+<li>for <span class="math inline">\(i=1\text{ to }m\)</span>:
+<ul>
+<li>If <span class="math inline">\(T \cup {e_i}\)</span> does not form a cycle:
+<ul>
+<li>Add <span class="math inline">\(e_i\)</span> to T</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>Straightforward Implementation of the Algorithm</strong></p>
+<ul>
+<li><strong>Running time:</strong>
+<ul>
+<li>Sorting the edges - <span class="math inline">\(O(m\text{ }log\text{ }n)\)</span>- Why not <span class="math inline">\(m\text{ }log\text{ }m\)</span>??
+<ul>
+<li>Because log m and log n are interchangeable inside the Big-O notation.</li>
+<li>The number of edges m is at most quadratic the number of vertices, i.e at most <span class="math inline">\(O(n^2)\)</span>. Therefore <span class="math inline">\(O(log\text{ }m)\)</span> is at most <span class="math inline">\(O(2log\text{ }n)\)</span>, 2 is just a constant.</li>
+</ul></li>
+<li>Initializing T - <span class="math inline">\(O(1)\)</span></li>
+<li>The for loop iterates m times - <span class="math inline">\(O(m)\)</span>
+<ul>
+<li>Adding <span class="math inline">\(e_i\)</span> to T is constant time. Checking that <span class="math inline">\(e_i\)</span> doesn’t form a cycle though, is the issue. That can be done in <span class="math inline">\(O(n)\)</span> time.</li>
+<li>Checking if the new edge will add a cycle involves checking whether there exists a path in T between the endpoints of the new edge. If there is, we skip it, if there’s not we add it.
+*Use BFS or DFS</li>
+</ul></li>
+<li><strong>Total:</strong> <span class="math inline">\(O(m\text{ }log\text{ }n)+O(mn) = O(mn)\)</span></li>
+</ul></li>
+<li>Here the cycle check is what’s holding us back, since it takes <span class="math inline">\(O(n)\)</span> time to check for a cycle within a single iteration.</li>
+<li>Can we speed that up? Yes - using the <strong>Union-Find data structure</strong></li>
+</ul>
+<p><strong>The Union-Find Data Structure</strong></p>
+<ul>
+<li>The raison d’etre for a union-find data structure is to maintain partitions of a set of objects, e.g groups <span class="math inline">\(c_1, c_2, c_3..\)</span> of a set of objects</li>
+<li>We want this data structure to support 2 operations:
+<ul>
+<li><strong>FIND(x):</strong> return the name of the group to which x belongs to</li>
+<li><strong>UNION(<span class="math inline">\(c_i, c_j\)</span>):</strong> fuse the two groups <span class="math inline">\(c_i, c_j\)</span> into one</li>
+</ul></li>
+<li>Why is this useful for Kruskal’s algorithms?
+<ul>
+<li>Think of Kruskal’s as working conceptually like this: At the start, when T is empty, all the edges are separate and are therefore their own partitions. Adding an edge to T (as long as it doesn’t form a cycle) <strong>fuses</strong> two separate components/partitions into 1.</li>
+<li>If I want to add edge <span class="math inline">\((u,v)\)</span>, I should first check what component u and v belogn to, so FIND(u) and FIND(v). If both these belong in the same group, then they form a cycle. If they don’t, then I add <span class="math inline">\((u,v)\)</span> and then fuse the 2 components that u and v belong to</li>
+<li>objects = vertices</li>
+<li>groups = connected components of the currently chosesn edges in T</li>
+<li>adding new edge to T corresponds to fusing connected components of u and v</li>
+</ul></li>
+<li><strong>Union Find Basics</strong></li>
+<li><strong>Idea #1</strong> Maintain one linked structure per connected component - each vertex will have an extra pointer to it ?? <strong>I still don’t quite understand this part</strong>
+<ul>
+<li>Each connected component has an arbitrary leader vertex</li>
+<li><strong>Invariant:</strong> Each vertex points to the leader of it’s group/component. In effect, each vertex inherits the name of its leader. So we refer to a particular component and its vertices via the name of that component’s leader</li>
+<li><strong>Key Point:</strong> Given <span class="math inline">\((u,v)\)</span>, we can check if u and v are in the same component in <span class="math inline">\(O(1)\)</span> time. They are in the same component if and only if their leader names in the union-find structure match.</li>
+<li><strong>Note:</strong> When <span class="math inline">\((u,v)\)</span> doesn’t create a cycle, we have to add it to T, and thus we have to fuse the connected components of those 2 vertices. In that case, the leader names have to be updated</li>
+<li>At worst, <span class="math inline">\(O(n)\)</span> leader updates have to be made, which is a bummer.</li>
+</ul></li>
+<li><strong>Idea #2:</strong> When merging two components, have the smaller size component inherit its leader from the larger component.
+<ul>
+<li>How do we quickly check which component is bigger? You can just augment the objects further to maintain a size field which is updated any time two components merge. (new size = sum of the sizes of components being merged)</li>
+<li>However, the worst case running time for leader updates is still <span class="math inline">\(O(n)\)</span>. If at the end you have 2 components of size <span class="math inline">\(\frac{n}{2}\)</span>, then you’re still doing <span class="math inline">\(O(n)\)</span> amount of work in merging the two.</li>
+<li><strong>However, however: </strong> adopting a vertex-centric view, how many times does a single vertex have its leader pointer updated? - <span class="math inline">\(O(log\text{ }n)\)</span>
+<ul>
+<li><strong>WHY?</strong> Because everytime a vertex v has its leader updated, it’s because the other group is at least as big as v’s group. So v’s group essentially doubles. We started out with components each of size 1, so the doubling can only happen <span class="math inline">\(\leq log_2n\)</span> times.</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>Running time for fast implementation</strong></p>
+<ul>
+<li><span class="math inline">\(O(m\text{ }log\text{ }n)\)</span> for sorting</li>
+<li><span class="math inline">\(O(m)\)</span> time for cycle checks - <span class="math inline">\(O(1)\)</span> per iteration</li>
+<li><span class="math inline">\(O(n\text{ }log\text{ }n)\)</span> for maintaining the union-find invariant. Here we don’t bound the leader update operation per iteration, rather we do a global analysis of the total number of updates that a vertex will experience. Each vertex only experiences a maximum of <span class="math inline">\(log_2n\)</span> updates, therefore leader updates for all vertices are bound by <span class="math inline">\(O(n\text{ }log\text{ }n)\)</span></li>
+<li>Total running time is <span class="math inline">\(O(m\text{ }log\text{ }n)\)</span>, which is the new bottleneck of this algorithm (the sorting operation)</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="data_structures" class="section level2">
+<h2>Data Structures</h2>
+<div id="introduction" class="section level3">
+<h3>Introduction</h3>
+<ul>
+<li><strong>What’s the point of data structures?</strong> organize data so that it can be accessed quickly and usefully.</li>
+<li><strong>Examples:</strong> lists, queues, stacks, heaps, search trees, hash tables, bloom filters, union-find</li>
+<li>Different data structures support different sets of operations which are suitable for different tasks.</li>
+<li>Generally speaking, the fewer the operations that a data structure supports, the faster those operations are and the smaller a space overhead required by the data structure</li>
+<li><strong>Rule of thumb:</strong> Choose the minimal data structure with all the operations you need for your application, but no more.</li>
+<li><strong>Levels to this:</strong>
+<ul>
+<li><strong>Level 0:</strong> “What’s a data structure?” i.e, no knowledge of data structures</li>
+<li><strong>Level 1:</strong> Cocktail party level knowledge; the person is comfortable holding a conversation about them as well as basic operations but is shaky when it comes to implementing them in their application or in a technical interview context.</li>
+<li><strong>Level 2:</strong> They’re comfortable using them in their own applications and have good sense of which data structure is appropriate for which tasks.</li>
+<li><strong>Level 3:</strong> They have an understanding of the underlying implementations of these data structures.</li>
+</ul></li>
+</ul>
+</div>
+<div id="heaps-operations-applications" class="section level3">
+<h3>Heaps: Operations &amp; Applications</h3>
+<div id="supported-operations" class="section level4">
+<h4>Supported Operations</h4>
+<p>A heap is a container for objects, each with a key associated with it.<br />
+The basic operations are:</p>
+<ul>
+<li><strong>INSERT(H, x):</strong> Insert a new object x to the heap H
+<ul>
+<li>Running Time: <span class="math inline">\(O(log\text{ }n)\)</span></li>
+</ul></li>
+<li><strong>EXTRACT-MIN(H):</strong> Remove and return the object with the minimum key value from H (or a pointer to it)
+<ul>
+<li>Running Time: <span class="math inline">\(O(log\text{ }n)\)</span></li>
+<li>Here <strong>EXTRACT-MAX</strong> would work as well.</li>
+</ul></li>
+<li><strong>HEAPIFY:</strong> this operation performs n batched inserts in <span class="math inline">\(O(n)\)</span> time. (you could think of inserting the n objects one by one, which would take <span class="math inline">\(O(n\text{ }log\text{ }n)\)</span> time</li>
+<li><strong>DELETE:</strong> delete any object, not just the min, from the heap in <span class="math inline">\(O(log\text{ }n)\)</span> time.</li>
+</ul>
+</div>
+<div id="applications" class="section level4">
+<h4>Applications</h4>
+<p>First, consider the <strong>canonical use of a heap:</strong> When you notice that your application is doing repeated minimum computations, especially by exhaustive search. Heaps are a fast way to do these repeated minimum computations.</p>
+<p><strong>Application 1: Sorting</strong></p>
+<ul>
+<li>The <strong>selection sort</strong> runs in <span class="math inline">\(O(n^2)\)</span> time, and the way we actually sort is that we search for the minimum of the array, swap it out with the first element, then search for the minimum of the remaining unsorted portion, and swap it out etc.</li>
+<li>The <strong>repeated minimum computations</strong> and the exhaustive search should hint at a heap data structure. Using a heap, we get a sorting algorithm called:</li>
+<li><strong>Heapsort:</strong>
+<ol style="list-style-type: decimal">
+<li>Insert all elements of the unsorted array into the heap - <span class="math inline">\(O(n log\text{ }n)\)</span> or <span class="math inline">\(O(n)\)</span> depending on which operation you use for inserts.</li>
+<li>Repeatedly extract-min as you add them into the result array - <span class="math inline">\(O(log\text{ }n)\)</span></li>
+</ol>
+<ul>
+<li><strong>Running time:</strong> we have n number of inserts and extract-mins, so we have <span class="math inline">\(O(n\text{ }log\text{ }n)\)</span> time.</li>
+<li>Heap sort is a <strong>comparison-based</strong> sorting algorithm, and therefore is optimal (no comparison based algorithm can do better than <span class="math inline">\(O(log\text{ }n)\)</span>)</li>
+</ul></li>
+</ul>
+<p><strong>Application 2: Median Maintenance</strong></p>
+<ul>
+<li><strong>Input:</strong> a sequence of <span class="math inline">\(x_1, X_2...x_n\)</span> one by one.</li>
+<li>The task is to output at each step the median of the sequence thus far</li>
+<li><strong>Constraint:</strong> use <span class="math inline">\(O(log\text{ }i)\)</span> where i is the # of numbers passed thus far</li>
+<li><strong>Solution:</strong> maintain 2 heaps; <span class="math inline">\(\text{Heap}_{LOW}\)</span> and <span class="math inline">\(\text{Heap}_{HIGH}\)</span> supporting extraxt-max and extract-min respectively.</li>
+<li><strong>Key idea:</strong> maintain the invariant that that the lowest half of the elements so far are in <span class="math inline">\(\text{Heap}_{LOW}\)</span> and the highest half are in <span class="math inline">\(\text{Heap}_{HIGH}\)</span></li>
+<li><strong>2 realizations:</strong>
+<ul>
+<li>You gotta check that you can maintain this invariant in <span class="math inline">\(O(log\text{ }i)\)</span> time.</li>
+<li>Given the invariant, check that you can compute the median in <span class="math inline">\(O(log\text{ }i)\)</span> time as well.</li>
+</ul></li>
+</ul>
+</div>
+<div id="python-implementation" class="section level4">
+<h4>Python implementation</h4>
+<p><strong>Abstract Data Structure vs Concrete Data Structure</strong></p>
+<ul>
+<li>The python <strong>heapq</strong> module implements a min priority queue.</li>
+<li><strong>Note:</strong> the <code>heap</code> is a concrete data structure while the <code>heapq</code> is an abstract data structure.
+<ul>
+<li>An <strong>abstract data structure</strong> determines the interface - it specifies the operations that that data structure needs to support as well as the relationship between them.</li>
+<li>A <strong>concrete data structure</strong> implements the operations of an ADS and also provide performance guarantees.</li>
+</ul></li>
+<li>In general, the largest caveats of an ADS are less meaningful than the bottlenecks that plague its concrete implementation.</li>
+</ul>
+<p><strong>Implementation of Heaps as Complete Binary Trees</strong></p>
+<ul>
+<li>These are implemented using <strong>complete binary trees</strong>
+<ul>
+<li>Each node aside from the leaves has 2 child nodes, and each level except possibly the last one must be filled. If the last level isn’t filled, then we have nodes as far to the left as possible.</li>
+</ul></li>
+<li>The <strong>completeness</strong> property ensures that the height of the tree = <span class="math inline">\(log_2n\)</span> rounded up, where n is the number of elements.</li>
+<li>A priority queue maintains the <strong>heap property</strong>
+<ul>
+<li>The value of a node is always smaller than its children</li>
+</ul></li>
+</ul>
+<p><strong>Heaps as Lists in the Python heapq module</strong><br />
+Heaps are implemented as <code>lists</code> in the heapq module.<br />
+The relationship between elements are described by 3 rules. For the element at index k in the list</p>
+<ul>
+<li>first child is at index <span class="math inline">\(2\cdot k+1\)</span></li>
+<li>second child is at index <span class="math inline">\(2\cdot k + 2\)</span></li>
+<li>parent is at index <span class="math inline">\(k//2\)</span></li>
+</ul>
+<p>Keep in mind that an element might not have children. We can run the condition below for each element k (or at most half the list) to check whether the heap maintains the heap property. It should never evaluate to <code>False</code></p>
+<p>*<code>h[k] &lt;= h[2*k + 1] and h[k] &lt;= h[2*k + 2]</code></p>
+<ul>
+<li><strong>Basic Operations</strong>
+<ul>
+<li><p>The heapq module doesn’t implement a class, but rather it has functions that operate on lists directly.</p></li>
+<li><p>The <code>heapify</code> function turns a list into a heap
+<code>python     import heapq     a = [3,5,1,3,4,1,5]   import heapq   a = [3, 5, 1, 2, 6, 8, 7]   heapq.heapify(a)   a   [1, 2, 3, 5, 6, 8, 7]</code></p></li>
+<li><p>The <code>heappop</code> function removes and returns the highest priority element, while maintaining the heap property.</p>
+<pre class="python"><code>heapq.heappop(a)
+1</code></pre></li>
+<li><p>The <code>heappush</code> element inserts an element into the heap, maintaining the heap property</p>
+<pre><code>heapq.heappush(a,0)
+a
+[0,2,3,5,6,8,7]</code></pre></li>
+<li><p>Heap elements can be tuples as well - used in cases where the element itself does not determine its priority.</p></li>
+</ul>
+<pre class="python"><code>heapq.heappush(a, (1, some_object))
+heapq.heappush(b, (2, some_other_object))</code></pre>
+<ul>
+<li>The heapq module also defines 2 more operations
+<ul>
+<li><code>heapreplace()</code> = <code>heappop()</code> followed by <code>heappush</code></li>
+<li><code>heappushpop()</code> = <code>heappush()</code> followed by <code>heappop</code></li>
+</ul></li>
+</ul></li>
+<li><strong>A High-level Operation</strong>
+<ul>
+<li><p>Heaps are often used to merge 2 sorted sequences, therefore python has an implementation of merge as well.</p></li>
+<li><p>Merge assumes takes as input 2 iterables and assumes that they are sorted. It outputs an <strong>iterator</strong>, not a list</p>
+<pre class="python"><code>heapq.merge(list_a, list_b)</code></pre></li>
+</ul></li>
+</ul>
+<p><strong>Problems heaps can solve</strong></p>
+<ul>
+<li>We’ve looked at (have we?) merging sorted sequences, merging log files, scheduling periodic tasks.</li>
+<li>Heaps can also be used to get the top n or bottom n elements. The heapq module has high level functions for this.
+<ul>
+<li><code>heapq.nsmallest(n, iterable, key)</code></li>
+<li><code>heapq.nlargest(n, iterable, key)</code></li>
+</ul></li>
+</ul>
+<p><strong>How to identify problems</strong></p>
+<ul>
+<li>As mentioned earlier, the raison d’etre for heaps is repeatedly computing minimum computations quickly.</li>
+<li>It’s a good tool for solving problems involving extremes, like the largest or smallest of a given metric</li>
+<li></li>
+</ul>
+</div>
+</div>
+<div id="monotonic-queues" class="section level3">
+<h3>Monotonic Queues</h3>
+<ul>
+<li>A <code>monotonic queue</code> is a queue such that the elements in it are either monotonically increasing or decreasing. The idea is that if you repeatedly pop items from a monotonic queue, the extracted elements should form a sequence that is:
+<ul>
+<li>monotonically increasing/decreasing</li>
+<li>includes the last item added</li>
+</ul></li>
+<li><strong>Monotonic Increasing Queue</strong> - forms a monotonically increasing sequence when popping its elements</li>
+<li><strong>Monotonic Decreasing Queue</strong> - forms a monotonically decreasing sequence when popping its elements</li>
+<li>To push an element <code>e</code> to a monotic increasing queue, we start from the rear and pop all the elements <code>s</code> such that <code>s &gt;= e</code>.</li>
+<li>In the case of a monotonic decreasing queue, we start from the rear, and pop all the elements <code>s</code> where <code>s&lt;=e</code></li>
+<li>A monotonic queue should support the <code>add</code> and <code>delete</code> operations, from both the left and right sides.</li>
+<li></li>
+</ul>
+</div>
+</div>
+<div id="python" class="section level2">
+<h2>Python</h2>
+<ul>
+<li>Initializing a 2d list in this way: <code>l = [[None]*3]*3</code> will result in only one instance of the inner list, with 3 references to it. This is utterly interesting.</li>
+</ul>
+</div>
+<div id="rshiny" class="section level2">
+<h2>RShiny</h2>
+<div id="inputs-outputs" class="section level3">
+<h3>Inputs &amp; Outputs</h3>
+<div id="inputs" class="section level4">
+<h4>Inputs</h4>
+<p>textInput()<br />
+sliderInput()<br />
+selectInput()<br />
+numericalInput()<br />
+dateRangeInput()<br />
+all inputs have the format</p>
+<pre class="r"><code>__input(&quot;inputId&quot;,
+        &quot;label&quot;,
+        unique_param1, unique_param2, ...)</code></pre>
+</div>
+<div id="render-functions" class="section level4">
+<h4>Render Functions</h4>
+<p>Render functions are used to built outputs in the server based on
+inputs and possibly other stuff</p>
+<pre class="r"><code>renderText()
+renderTable()
+renderImage()
+renderPlot()</code></pre>
+</div>
+<div id="output-functions" class="section level4">
+<h4>Output Functions</h4>
+<p>Output functions are used in the ui to display the result built by
+render functions in the server</p>
+<pre class="r"><code>textOutput()
+plotOutput()
+tableOutput() or dataTableOutput()
+imageOutput()</code></pre>
+<div id="non-shiny-output-and-render-functions" class="section level5">
+<h5>Non-shiny output and render functions</h5>
+<p>DT, leaflet, and plotly -&gt; interactive data tables, maps, and plots as Shiny outputs<br />
+In order to add an output to a Shiny app, we need to:<br />
+1. Create the output -&gt; could be a plot, table, string, etc
+2. Render the output in the <code>server</code> function using appropriate <code>Render___</code> function.
+3. Assign this render to a variable name prefixed with <code>output$___</code>
+3. Use the corresponding <code>___Output</code> and pass in the variable name
+### Layouts and Themes
+#### Layouts
+1. Sidebar layouts</p>
+<pre class="r"><code>sidebarLayout(
+  sidebarPanel(insert input/output here),
+  mainPanel(insert input/output here)
+)</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Tab layouts</li>
+</ol>
+<pre class="r"><code>sidebarLayout(
+  sidebarPanel(insert input/output here),
+  mainPanel(
+    
+    tabsetPanel(
+      tabPanel(),
+      tabPanel()
+    )
+  )
+)</code></pre>
+</div>
+</div>
+<div id="themes" class="section level4">
+<h4>Themes</h4>
+<p>Add a theme selector to your Ui</p>
+<pre class="r"><code>shinythemes::themeSelector()</code></pre>
+<p>Then you can add it to your U<br />
+### Building The App: A Process<br />
+1. Add inputs to the <code>ui()</code>
+2. Add outputs to the <code>ui()</code>/<code>server()</code>
+3. Modify the app layout in the <code>ui()</code>
+4. Update the output in the <code>server()</code> to incorporate the input<br />
+## References {#references}</p>
+</div>
+</div>
+</div>
+
+  </article>
+</section>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js" id="MathJax-script"></script>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [
+          ['$', '$'], ['\\(', '\\)']
+        ],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+      
+        ©
+        
+        2020
+         Desmond Tuiyot 
+      
+      
+         · 
+        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+      
+      
+    </section>
+  </footer>
+
+    </main>
+
+    
+
+    
+
+    
+
+  </body>
+
+</html>

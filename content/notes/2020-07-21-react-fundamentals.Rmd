@@ -1,0 +1,1030 @@
+---
+title: React Fundamentals
+author: Desmond Tuiyot
+date: '2020-07-21'
+slug: react-fundamentals
+categories: []
+tags:
+  - react
+  - language fundamentals
+bibliography: ref.bib
+---
+
+# 1. Building Applications With React & Flux
+
+## 1.1 Introduction to React
+
+* *Core Tech* includes:
+  * **React:** Components
+  * **React Router:** Routing
+  * **Flux:** Data Flows / State Management?
+  * **Node/npm:** Packages & Automation
+  * **Babel:** Transpile javascript code and components
+  * **Webpack:** Bundle up application for the browser
+  * **ESLint:** Lint. Catch errors along the way
+
+## 1.2 Environment Setup
+
+We set up so as to receive rapid feedback as we build the react app
+We use:
+
+* **Node**
+* **VSCode**
+* **Prettier** - formats you code automatically. It's an extension on VSCode
+* **ESLint** - `linting` is the automatic checking of your source code for programmatic and stylistic errors. 
+  * ESLint outputs these errors to the terminal, and we use a VSCode extension to highlight these errors on our code editor.
+
+**Run create-react-app**: we do this using the command `npx create-react-app app-name`, where your app name is, well, your app name.
+
+* run `npm start` to start the react app  
+
+**The Project Structure**:
+
+* *package.json:* is the configuration file.
+  * lists project name, version, and sets our project to private so as not to accidentally publish it to npm.
+  * it lists out dependencies as well
+    * *react* - react package
+    * *react-dom* - allows us to render react to browser
+    * *react-scripts* - contains build scripts & configuration files. Contains scripts for the various technologies we'll use e.g Babel, Webpack, ESLint, and Jest
+  * scripts - these are `npm script` automate tasks
+    * *start* - starts up our local server and runs the application, for development - `npm start`
+    * *build* - creates a minified production build - `npm run start`
+    * *test* - runs automated tests via jest - `npm run test` / `npm test`
+    * *eject* - exposes the configuration files for babel, webpack, and other tools and allows you to have full control. But it can't be undone once done. 
+  * *eslintConfig:* reference to create-react-app's default eslint configuration
+  * *browserslist:* specifies what browsers we're supporting
+* *src* - our application's source code
+* Inside src - *index.js:* this is the app's entry point
+* ***What the hell is a progressive web app?***
+
+**Installing Flux, React Router, Bootstrap**
+
+* `npm install flux@3.1.3 react-router-dom@5.0.0 bootstrap@4.3.1`
+* `npm install package_name@version`
+
+**Importing bootstrap**
+
+* `import 'bootstrap/dist/css/bootstrap.min.css';`
+
+Finally, we set up a **Mock API**.
+
+* Instead of a real API, we make a mock API that simulates making async calls to a server.
+* Why a Mock API?
+  1. Allows you to start development even if the APIs you need to consume haven't been created yet.
+  2. *Independence* - can move independently when a separate team is handling the API development.
+      + *Rule of coding to an interface rather than an implementation*
+  3. *Backup plan* if the API happens to be down or broken at any time
+  4. *Ultra-fast:* all responses are instantaneous
+  5. *Test slowness:* You can control the speed of the responses hence you can test how the application runs when API is slow.
+  6. *Aids testing:* since the data is local, therefore fast and reliable. You don't have to mock calls since the API is already a mock.
+  7. *Easily Point to the real API* later using an environment variable
+* We'll use `JSON server` as our mock API.
+
+**Create a Mock API**
+
+* First, we install a few more packages
+  * `npm install -D cross-env@5.2.0 npm-run-all@4.1.5 json-server@0.15.0`
+  * The `-D` flag lists these packages under dev dependencies when they are written to *packages.json*, since they are all development tools.
+  * `cross-env` - for setting environment variables
+  * `npm-run-all` allows for running multiple scripts all at once
+  * `json-server` will serve our mock data
+* We copy over the `tools` folder which contains the mock api files. 
+  * `apiServer` - serves the api that we'll use
+    * Uses `Express` with `json-server` to host a mock api and simulate a database using a json file.
+  * `createMockDb` - read our mock data and write it to our json file and will recreate our mock DB each time we start the app
+  * `mockData.js` - contains our mock data and will populate our mockDb
+* We add 2 new scripts to our `packages.json` file
+  * `"prestart:api": "node tools/createMockDb.js"`, - recreates our mockDB everytime we start the app
+  * `"start:api": "node tools/apiServer.js"` - I assume this starts the server
+  * by convention the first one will run first because it has the prefix `pre` in its name.
+* If you accidentally corrupt the mockDb data for some reason, hit `CTRL+C` to kill the app, then re-run `npm start` 
+* Use `npm runs start:api` to start the api server - this creates the `db.json` file.
+* In the `projects.json` file, we want to add a line in `scripts` to run both the api server and our application.
+  * `"start": "run-p start:dev start:api"`
+* When setting up our api we should also include a few javascript files that make it easy to make calls to our API.
+  * `authorApi.js` contains functions that will get, save, and delete authors
+  * `coursesApi.js` contains functions that will get, save, &  delete courses
+  * `apiUtils.js` centralizes handling of our API responses
+* We use `fetch` to make API calls. 
+  * It's built into modern browsers, so we can make API calls without needing to install other libraries
+  * Has a `promised based` API, with promises that the `then` function is called when the promises are complete and if an error occurs, the `catch` function is called????
+* We set up an environment variable for our app using `cross-env` in the `script` object in our packages.json file
+  `... cross-env REACT_APP_API_UR=http://localhost:3001`
+* You can only run one instance of app at once. IF not you'll get  `EADDRINUSE`
+
+## 1.3 React Core Concepts
+
+**React vs MVC**
+
+* React doesn't specify how to handle routing, data flow, and other concerns, but focuses on being a composable, component based library
+* React is often considered the 'V' in `MVC`, but in fact, react can fulfil all 3
+  * React supports `local component state` which acts like a model
+  * React components can focus just on logic, which is much like the controller in MVC. This pattern is called `controller views`.
+  * This is a fancy term for react components that handle data concerns and compose other dumb components together
+  * This separation is also called Smart/Dumb or Container/Presentation components - controller views promote reuse of components and separation of concerns
+
+**JSX Introduction**
+
+* This is how React handles markup
+* React supports an optional XML-like syntax which you can use to handle your markup
+* It looks almost identical to HTML, but there are differences
+* JSX is compiled down to javascript using `Babel` (handles transpiling)
+* Examples:
+  * Create a function that returns the text `About` between `h1` tags. 
+    ```{js echo=F}
+    import React from "react";
+    function About() {
+      return <h1 className="about">About</h1>;
+    }
+    ```
+    * Babel transpiles this code to javascript that actually creates this element
+    * One difference is that you use `className` as opposed to `class` to add classes to an element. 
+* Advantages
+  * It's easier to read
+  * It's easier to write
+  * It's more friendly to designers
+* Inline styles are supported as well. This is done by passing JS objects to the style attribute
+  ```{js}
+  function About(){
+    return <h1 style={{color:"white",
+                        backgroundColor:"black",
+                        height:10}}>
+              About
+           </h1>
+  }
+  ```
+  * The first curly brace indicates "I'm about to start writing JS in JSX", while the second one creates an object literal
+    * style properties are written in camelCase
+    * size in pixels is inferred
+  * Inline styles are optional; in fact it is recommended to use sparingly
+  * You can use CSS with JSX
+* Some differences  between JSX and HTML
+  * class -> className
+  * for -> htmlFor
+  * attributes are camelCased
+* JSX also tells you what line number an error occurred.
+* HTML fails slow. JSX fails fast and fails loudly
+
+**The Virtual DOM**
+
+* Essentially, updating DOM is slow and expensive (didn't know this)
+* React's Virtual DOM makes this more efficient by comparing the current DOM to its desired state and then determining the most efficient way to update the DOM.
+* Traditional two-way binding approaches  blindly and immediately update the DOM as soon as state changes to reflect it.
+* In comparison, the virtual DOM monitors the values of each component state, and when state changes, React compares the current DOM state to the desired DOM state and determines the most efficient/least expensive way to update the DOM.
+  * Avoids *layout thrashing* - this is when a browser has to recalculate the position of everything when a DOM element changes
+* The virtual DOM is more than just performance
+  * `Synthetic Events` - these abstract away browser-specific event quirks and allow React to optimize the performance of attaching event handlers for you bts.
+    * For example, you can attach event handlers to each row in a table and React will automatically attach the event handler at the highest level for performance reasons.
+  * `Isomorphic Support` - allows rendering on the server, where no DOM exists
+  * `React Native` - Because the DOM is abstracted away, React can be used for building components in native applications using React Native.
+* Essentially - **perfomance** and **flexibility**
+
+**Rethinking Separation of Concerns**
+
+* Doesn't putting together JS and HTML ignore *separation of concerns*?
+  * No. Many popular javascript frameworks effectively put JS in HTML in some form. This is in order to enhance HTML to support logic, data binding and looping semantics.
+  * React, OTOH, puts "HTML" in "JS" -  effectively, it allows you to write markup using Javascript
+* HTML and Javascript aren't really separate anyways.
+  * One is a markup language, the other a programming language, but they must both be kept carefully in sync, else they might fail in horrible, unpredictable and hard-to-debug ways.
+  * There is no explicit interface to connect these 2
+* React acknowledges that the fundamental concern is a single feature in our UI (the `component`) - a date picker, a text box, a list - do these work correctly?
+* Putting JS, CSS, HTML in different files does not really separate concerns, because at the end of the day you have to combine these for the benefit of the component. 
+
+**Four Common Ways to Create Components**
+
+* *createClass*, *ES Class*, *Function components*, and *Arrow function*
+* `createClass Component`
+  * It was the original way to do it when React was first created and worked well in ES5. Still works fine but most developers today use a different method.
+    ```{js}
+    var helloWorld = React.createClass({
+      render: function() {
+        return (
+          <h1>Hello World</h1>;
+        );
+      }
+    });
+    ```
+* `JS Class Component`
+  * These days, javascript comes with classes
+    ```{js}
+    class HelloWorld extends React.Component {
+      constructor(props){
+        super(props); // can initialize state here in the constructor
+      }
+      
+      render() {
+        return (
+          <h1>Hello World</h1>
+        );
+      }
+    }
+    ```
+* `Function Component`
+  * Has a simpler syntax and assumes that your return statement is the render function
+    ```{js echo=F}
+    Function Component(props) {
+      return ( <h1>Hello World</h1> )
+    }
+    ```
+* `Arrow Function`
+  * Here you can omit the return keyword if the expression on the right hand side is a single expression
+    ```{js}
+    const HelloWorld = (props) => <h1>Hello World</h1>
+    ```
+
+**Class vs Function Components**
+
+  * It's recommended to use function components as opposed to class components whenever possible. 
+  * Function Component Benefits
+    * Easier to understand - eliminate class related fluff like extends keyword and the constructor.
+    * Avoid `this` keyword and its quirks
+    * They transpile smaller than class components
+    * High signal to noise ratio, because they require less code (great code maximizes this ratio)
+    * Enhanced code completion & Intellisense - if you destructure your props in a functional component, then all the data that you use is now specified as a simple function argument. Thus, you get improved code completion support compared to class components.
+    * Bloated components are obvious - when you use destructuring in your function component, the argument list conveys your component's dependencies, so it's easy to spot components that need attention
+    * Easy to test - since function components are pure functions, test assertions are simple - given these values for prop, I expect them to return this markup
+    * Improved performance as well - as of React 16, there's no instance created to wrap them. 
+    * Classes may be removed in the future from React's core - with React hooks, function components can handle virtually all use cases.
+  * Use function components virtually everywhere.
+    
+    
+## 1.4 Creating React Components
+
+**Creating a Function Component - the Home Page**
+
+* We create a new folder under `src` to hold our components (call it `components`)
+* We use *ES import syntax* - native js imports were added in 2015
+  ```{js eval=F}
+  import React from 'react'
+  ```
+  * This line says: import an npm package called `React` and set it to a variable called `react`??
+* We can create components using as either classes or functions. We prefer function components
+  * Both function and class names for React components are in PascalCase; for 2 reasons
+    1. React components are instantiated. The JS convention is that functions (and classes) that are instantiated are labeled in PascalCase.
+    2. React assumes that elements in JSX that start with an uppercase letter are React components, while those that don't are native HTML elements.
+  ```{js eval=F}
+  function HomePage(){
+      return (
+        <div className="jumbotron">
+          <h1>Pluralsight Course</h1>
+          <p>React, React Router, and Flux ftw!!</p>
+        </div>
+      );
+  }
+  ```
+  * React renders whatever JSX is returned from these functions
+* We need to export our component, since everything inside a certain module is private by default
+  * Why is this so? React is configured to use ES modules, and here everything inside a module is private by default.
+  ```{js eval=F}
+  export default HomePage
+  ```
+  * The keyword `default` here is used traditionally when exporting a single item (it is optional)
+  * 2 advantages of using it is that the exported item takes less code to import and the importing module can rename the item.
+
+**Creating an App Entry Point**
+  
+* To render our app, we use *ReactDOM* - this is specific to webapps. You could use *ReactNative* if you were targeting mobile. 
+* `create-react-app` is configured to check `index.js` first in order to determine what else makes our application - this is our app entry point
+* Inside `index.js`, we import the modules we'll need in order to render our component.
+  * *named imports* - it is a shortcut to getting a reference to a specific method/function inside the module we are importing. 
+    ```{js eval=F}
+    import { render } from "react-dom";
+    
+    # is equivalent to 
+    import React-DOM from "react-dom";
+    const.render = ReactDOM.render;
+    ```
+  * We import react, the react-dom render function, as well as our component
+  * We render our component as below
+    ```{js eval=F}
+    import HomePage from "./components/HomePage";
+    render(<Homepage />, document.getElementById("root"));
+    # render(<ComponentName />, DOM_element_to_target)
+    ```
+
+**Creating a Class Component - the About Page**
+
+* The basic syntax is this
+  ```{js eval=F}
+  class AboutPage extends React.Component {
+      render() {
+          return <h2>About</h2>
+      }
+      
+  }
+  ```
+  * Class components need to `extend` the `React.Component` class in order to be considered a component. 
+  * They only need to implement the `render()` method.
+* **ReactFragments**
+  * JSX is compiled down to nested function calls. There can only be one top level element (and thus function) in JSX.
+  * This means that if we want to return adjacent elements in one component, we need to wrap it in a `div`. However, this just makes it so that we are rendering an extra div that we don't want to.
+  * React fragments are a fix for this. They allow us to wrap adjacent elements but they don't actually get rendered. 
+    ```{js eval=F}
+    ...
+      render(){
+        return (
+          <React.Fragment> # empty tags also work <> ... </>
+            <h2>..</h2>
+            <p>..</p>
+          </React.Fragment>
+        )
+      }
+    ...
+    ```
+
+**Simple Routing**
+
+* Later we use `React Router`, but in this case, we use a simple routing solution.
+* We create a new App component in `App.js` which will have job of deciding which component to render. * `window.location.pathname` - this is essentially the url of the current window
+
+**Common components**
+
+  * We create a sub folder of *components* called *common*. 
+  * Here we create a header that will be shared by our pages, and potentially hold navigation links
+  * In order for javascript to be read as javascript within JSX, we put the js code inside curly braces
+
+## 1.5 Props, State, Lifecycle Methods, and Keys
+
+**Intro: Dynamic Components** - using the above concepts, we wanna create more dynamic components
+
+* *Props* allow you to pass data to your components 
+* *State* allow you to declare local data in your component that can change over time  
+* *Lifecycle Methods* allow you to initialize *class* components and attach specific behaviors at specific points in time
+* *Keys* - we handle dynamic child components by assigning *keys* to elements
+
+**Props and State**
+
+* Data for a React component is held in *props* and *state*
+* **Props**
+  * Short for *properties*
+  * The are data passed down from parent components to child components
+  * Look like HTML attributes
+    ```{js eval=F} 
+    function Avatar(props) {
+      return <img src={ "images/" + props.username }/> ;
+    }
+    ```
+  * Access is done using `props.propName` or `this.props.propName` in a class component
+  * To pass a username to an Avatar component,   
+    ```{js eval=F}
+    <Avatar username="Desmond" />;
+
+    # or create a 'username' variable
+    <Avatar username={username} />;
+    ```
+  * They are immutable
+    * this is because they are passed down from the parent, hence are effectively owned by the parent
+* **State**
+  * Holds *mutable* data - it's great for holding data that your component needs to change over time
+  * However, you don't change state directly. 
+    * *Class components* - call `setState`
+    * *Function components* - use `useState` or `useReducer` hooks
+  * For access, use `state.stateName` in a function component or `this.state.stateName` in a class component
+  
+**Lifecycle Methods**
+
+* Each React *class component* has a lifecycle and there is a list of functions that allow you to run code at specific parts of that component's life cycle.
+* The same can be done for function components with use of *Hooks*
+* Next we cover a few of the most commonly used ***lifecycle methods***
+* `constructor` - this is called before the component mounts, thus making it a great spot to **initialize state** and **bind event methods**
+  * Although, using class fields to initialize state is more concise.
+* `render` - this is called anytime that state or props change. 
+  * Usually the render function returns JSX. But it can also return arrays, numbers, strings, booelans, null.
+  * These should be pure functions in the sense that they should not modify state or interact directly with the browser.
+* `componentDidMount` - this is called immediately after the component is mounted
+  * Great place to access DOM, set up subscriptions, intergrate with frameworks, set timers, make HTTP calls
+  * Can safely call setState
+* `componentDidUpdate` - Called immediately after the component's updates are flushed to the DOM. THis allows you to work on the DOM after components have been updated and re-rendered on the DOM
+* `componentWillUnmount` - runs just before a component is unmounted from the DOM.
+  * Great place to clean up by destroying any resources, subscriptions, or DOM elements that were created when the component was mounted
+  
+**Demo: LC Methods & State - random shit**
+
+* You can use `import statement` to first fill out the module to import from, and click `Tab` to then fill out the left hand side - this time you get autocomplete support because the source was specificed first.
+* We can create state within a class as a class field. After which we `set state` when the page loads
+  * The proper time to make an API call is the component is mounted - so we use the `componentDidMount` lifecycle method.
+* Inside that method, we want to call `getCourses`
+  * `getCOurses` uses `fetch` which is a promise based API. Promises are built into javascript and represent future values - they are used to handle async calls.
+  * We use `.then(fn)` when to resolve/handle results from promise based APIs/functions/method - this calls the function `fn` once the API call has been completed
+* In this case, `fn` is simply a function to set state. Importantly, you don't wanna modify state directly. Rather you want to use `setState` to do it
+  ```{js eval=F}
+  ...
+  this.setState({courses:courses})
+  ...
+  ```
+* Arrow functions provide more concise syntax
+  ```{js eval=F}
+  // regular function
+  let fn = function(courses){
+    console.log(courses);
+  }
+  // arrow function
+  let fn2 = courses => console.log(courses);
+  ```
+  
+**Demo: Display Array in a Table via Map**
+
+* First, the html/jsx for creating a table element
+  ```{html eval=F}
+  <table>
+    <thead> <tr> <th></th> .. <th></th> </tr></thead>
+    <tbody>
+      <tr> <td></td> ... <td></td></tr>
+      <tr> <td></td> ... <td></td></tr>
+      <tr> <td></td> ... <td></td></tr>
+    </tbody>
+  </table>
+  ```
+* If we have an array that we want to display in a table, as is the case, we can use the `map` function, which iterates over an array and returns resultant new array with new values created by applying some function to the old array values. 
+  ```
+  my_array = [1,2,3,4];
+  my_array2 = my_array.map(function(item){
+      return item * 2;
+  })
+  // more concisely
+  my_array.map(item => item * 2);
+  console.log(my_array2) // returns [2,4,6,8]
+  ```
+* Using arrow functions has 2 advantages:
+  1. It is more concise than a regular function
+  2. It automatically inherits `this` context from the enclosing scope, since it has no `this` context of its own. That's why I was getting an error earlier when trying to reference `this.State`
+* In JSX, `{ }` means that we want to write some javascript
+
+**Keys**
+
+* For child components that are dynamically created, as they are added or removed, react uses **keys** to properly keep track of, reorder, or properly destroy components. 
+* The key is usuall the primary key of the corresponding record in the database, but it doesn't have to be.
+* The key only has to be unique within that array, not globally unique.
+* Importantly, the key shouldn't change once assigned - this is why it is not advisable to use to a counter or the index from map to assign a key, since these change as child components are added or removed.
+    
+    
+## 1.6 Hooks, Component Compositions, and PropTypes
+
+**Introduction**
+
+* **Hooks** serve a similar function to lifecycle methods, but only work with function componenets
+* **Component Compositions** - here we look at separating our logic from our markup using the controller view pattern.
+* **Prop validation via PropTypes** - we explore this to learn how to properly convey the data that we need to pass in to child components. 
+
+**Hooks**
+
+* Hooks are the modern way of creating components. 
+* **Why Use Hooks?**
+  1. They can be used for almost any scenario
+  2. Avoiding *"this"* confusion
+  3. They use the same concepts as class components - like state, props, keys, so it's easy to pickup
+  4. Their design better models how React works internally and this helps to foster a mental map that makes React easier to work with.
+    * They are easier to use and you're less likely to make mistakes
+  5. You can share logic between components by creating custom hooks
+* React has about 10 hooks, but there's 3 that are often used
+  * `useState` for handling state
+  * `useEffect` for handling side effects
+  * `useContext` for consuming data in context (using React's context?)
+* `useState` example
+  ```{js eval=F}
+  import React, { useState } from 'react';
+  
+  function Example() {
+    const [email, setEmail] = useState("");
+    
+    return <input type="text" value={email} 
+                  onChange={ event => setState(event.target.value) }>
+  }
+  ```
+  * the `const...` line declares a state *email* and its setter *setEmail* 
+    * The `useState()` function accepts a parameter (a default value), which we've set to the empty string
+    * This function returns the state and its setter, so it's up to us to assign those values to appropriate variable names
+  * You can declare multiple `useState` calls per components, to hold different states.
+  * You can also use whatever value you want as a default - numbers, strings, or even objects
+* `useEffect` example
+  ```{js eval=F}
+  import React, { useState, useEffect } from "react";
+  
+  function Example(){
+    const [count, setCount] = useState(0);
+    
+    useEffect( () => {
+      document.title = `Button has been clicked ${count} times`
+    }, [count])
+    
+    return (
+        <div>
+          <p>You clicked {count} times</p>
+          <button onClick={()=>setCount(count+1)}>Click me</button>
+        </div>
+    )
+  }
+  ```
+  * By default, this runs immediately after each render. Which is perfect because it allows you to handle side effects that occur each time React renders
+  * The document title is updated every time the button is clicked. 
+  * The second parameter of `useEffect` is the **dependency array**
+    * This is the list of states and props that our effect references.
+    * **Why is it important?** Having that makes sure that the effect only runs when the values listed in the dependency array change. 
+    * If you don't have that array, your effect will rerun after every render, leading to performance issues
+  * You can also run code when the component is unmounted by returning a function from `useEffect`
+  * In essence, `useEffect` = `componentDidMount` + `componentDidUpdate` + `componentWillUnmount`. You can run code when your component mounts, everytime it re-renders and when it is unmounted.
+* Sharing logic between components was another benefit of Hooks
+  * Essentially all you need to do is copy and paste the hook from one function component to another
+  * However, you need to follow the rules of Hooks
+    * Hooks can only be called from inside **react components** or from your own **custom hooks**
+    * Hooks must be declared at the top level and must not be wrapped in if statements, funcs, or loops
+      * If you want your hook to run conditionally, use the conditional inside the hook
+      * **Why is this important?** This has to do with how React hooks work bts. 
+      * React tracks each hook call by storing them in an array in the order in which they're called.
+      * This is how React is able to maintain state over time. 
+      * Each time the component re-renders, React notes the order in which the hooks are called and retrieves the appropriate value from state behind the scenes
+      * ***I NEED TO COME BACK TO THIS POINT LATER. HOW DO REACT HOOKS WORK  BEHIND THE SCENES?***
+
+**Insights from Demo: Hooks**
+
+* **Infinite Loop**
+  * calling `setCourses` causes the component to re-render, which in turn re-runs `useEffect`, during which `setCourses` is called again, and thus causing an infinite loop
+  * an empty dependency array effectively tells React to run the effect only once. 
+
+**Composing Components**
+
+* **Composing components is ridiculously easy**
+  * Say you have 2 components, `ProfilePic` and `ProfileLink`, which both take a **username** prop. You compose them as below
+    ```{eval=F}
+    function Avatar(props){
+      return (
+        <div>
+          <ProfilePic username={props.username}/>
+          <ProfileLink username={props.username}/>
+        </div>
+      );
+    }
+    ```
+    * The Avatar component **owns** the *ProfilePic* and *ProfileLink* component - as in it is setting the props for those components. As mentioned earlier in the module, props are immutable and remain the same as whatever the owner passed in
+* **Controller Views** are top level components that have child components; they control the data flows of their child components by setting props on them.
+  * They also interact with flux stores. 
+* **Controller Views: Related terms**
+  * *Smart vs Dumb* and *Container vs Presentation* dichotomy - creating separate components for logic and markup can make your components easier to manage and reuse.
+  
+**PropTypes and Default Props**
+
+* We use **PropTypes** to document the type of data and functions that a child component accepts.
+  ```{eval=F}
+  import PropTypes from "prop-types";
+  CoursePage.propTypes = {
+    author: PropTypes.object.isRequired,
+    onSave: PropTypes.func.isRequired,
+    validate: PropTypes.func,
+    errors: PropTypes.object
+  };
+  ```
+  * We use a lowercase `p` in `propTypes` because that is a property that is being declared on the function
+  * They are declared as an object, traditionally below your component. 
+  * With PropTypes, you specify a validation function for each property, and any errors are printed out to console - the validation is the right hand side in that object
+* PropTypes only run in development mode
+* *For optional props*, it may be useful to declare **default props**
+  ```{eval=F}
+  CoursePage.defualtProps = {
+    errors: {}
+  }
+  ```
+  
+## 1.7 React Router
+
+**Overview: Key components**
+
+* This is the most popular routing library for React apps
+* Here, we declare routes via React components - we specify the component to load for a given url
+* **Router component** - we wrap our app with a **router** component - the choice of which router component to use depends on the kind of app we're building and the structure of our urls
+  * **BrowserRouter** - this is used for most webapps. It uses HTML5's **History API** to create clean urls. 
+* **Route component** - we declare our routes using this component. It accepts **props** so we can declare which components to load for which urls
+* **Link components** - we use these to create anchors. These link components will be handled by React router so we aren't posting back to the browser during navigation.
+* **Some Routers**
+  * **HashRouter** - `#about`
+  * **BrowserRouter** - `/about` - Uses HTML5's *History API* to provide clean routes
+  * **MemoryRouter** - No URL - it stores the urls in memory and doesn't post anything to the address bar. Ideal for automated testing and non-browser environments like React native apps
+
+**Demo: Key Components**
+
+* `import { BrowserRouter as Router } from "react-router-dom"`
+  * Notice the aliasing
+* Next, we wrap our App component in the Router component, which allows us declare routes on all of our app's components.
+
+**Demo: Declaring Routes**
+
+* In the App.js file, we import `Route` from `react-route-dom`. 
+* The `Route` component takes 2 props: the **path** which is the url that Route will look for and **component** which specifies which component to load if the path matches 
+  ```{eval=F}
+  <Route path="/" component={HomePage}/>
+  ```
+* `shift+alt+down` or `shift+alt+up` to copy line down or up
+* React router allows multiple routes to match - thus if you have your homepage url with path `/`, all the other links with `/` will match. We fix this by adding another prop: **exact**
+
+**Links and NavLinks**
+
+* **Links** provide an abstraction over an **Anchor** - it creates anchors for us and allows us to specify the path we'd like to link to as well as any props. 
+* For example, to create an anchor to target the url `user/1`, we:
+  * Create a Route `<Route path="user/:userId" />`. 
+  * Then we create a Link that matches this `<Link to="user/1">Desmond's Tales</Link>`
+  * The JSX will be transpiled to: `<a href="user/1"></a>`
+  * Clicks to this anchor are captured by React Router so that navigation can occur client side, without having to post back to the browser
+* **NavLinks** work much like Links but allow you to specify classes when the link is active, so that you can style your links
+  `<NavLink to="user/1" activeClassName="active">Desmond's best tales</NavLink>`
+
+**Demo: NavLinks**
+
+* In React, we can optionally declare styles using objects.
+* `activeStyle` prop takes an object that specifies what style the link should have when active
+
+**Switch and 404s**
+
+* The route `<Route component={NotFoundPage} />` matches any route since the path is not specified. 
+* We can nest our Route components inside a `Switch` component, which behaves much like a switch statement. That is, React finds the first component with a matching path and stops looking.
+  ```{eval=F}
+  <Switch>
+    <Route path="/" exact component={HomePage} />
+    <Route path="/courses" component={CoursePages} />
+    <Route path="/about" component={AboutPage} />
+    <Route component={NotFoundPage}/>
+  </Switch>
+  ```
+
+**Redirects**
+
+* To programatically change the url, we use **Redirects** -
+  ```{eval=F}
+  <Redirect to="/users" />
+  ```
+* When this is run in render, React Router will immediately redirect the moment the component is routed. We can use state to redirect after a certain event occurs.
+  ```{eval=F}
+  { this.state.redirectToUsers && <Redirect to="/users" />  }
+  ```
+* Changing urls over time
+  ```{eval=F}
+  <Redirect from="/old-path" to="/new-path" />
+  ```
+* Using the history object - any routes loaded using React Router receives a history object on props, which you can use to redirect to a different page
+  ```{eval=F}
+  props.history.push('/new-path')
+  ```
+
+**URL Parameters and Query Strings**
+
+* React Router adds url query string parameters to props automatically under **params** and **location**.
+* The example is as below
+  ```{eval=F}
+  // Given a route like below:
+  <Route path="/courses/:slug" component={Course} />
+  
+  // and a url like:
+  "my_app/courses/clean-code?module=3"
+  
+  // the props will be populated as such
+  function Course(props){
+    props.match.params.slug // clean-code
+    props.location.query    // { module: 3 }
+    props.location.pathname // /courses/clean-code?module=3
+  }
+  ```
+  
+**Demo: URL Parameters & Query Strings**
+
+* Any Route loaded using React Router has a variety of props injected automatically
+
+**Prompt on Transition**
+  ```{js eval=F}
+  <Prompt 
+    when={isBlocking}
+    message="Are you sure you wanna navigate away?"
+    />
+  ```
+
+## 1.8 Forms
+
+**A few concerns** - here we'll be handling these concerns
+
+* Validation
+* Reusable inputs
+* Save and population on load - I assume this is when you haven't completed your form?
+* Redirects
+* User notifications
+
+**Create Add Course Button** - to navigate to Manage Course Page
+
+* It's important to place more specific routes on top of less specific ones.
+
+**Create Course Form**
+
+* Goal here is to create a separate component that handles markup - this upholds the smart/dumb components separation. 
+* We create it and import it to the ManageCoursePage file. 
+* However, on trying to type anything, nothing changes. Why? Let's talk about **Controlled Components**
+
+**Controlled Components**
+
+* Any input with a value set is a *controlled component* - i.e. it's value is controlled by React.
+* The element's value will always match the value of the assigned prop.
+* React automatically redraws the UI when data changes, so if the data doesn't change (and it won't change given that it's controlled), then the UI won't reflect anything.
+* Essentially, we must assign change handlers to these elements in order for keystrokes to register. 
+* If the value attribute of an input is not set, then the component is uncontrolled. 
+
+**Form State and Change Handlers**
+
+* Adding a **value** prop automatically makes it a *controlled component*
+* In order to type into the field and also change state, we need to:
+  1. Add change handlers for each input
+  2. Add state for each input
+* We declare state using `useState` and pass it down as props to our `CourseForm`.
+* Another difference between JSX and HTML
+  * For select input types, we declare the value as a prop on the value attribute rather than using *select* attribute on the options.
+* Now we provide change handlers
+  * We want a function to change state in the parent component - by convention we prefix it with **handle__Change**
+  * We pass it in as a prop to the form, and for this prop, we provide a prefix of **on__Change**
+
+**Declaring State Change Handlers**
+
+* We want to create a single change handler for each form, not for each input(which would be annoying)
+* Javascript's **computed property** notation will help us do this
+  * The notation: 
+    ```{js eval=F}
+    [event.target.name]
+    ```
+  * tells Javascript to access the property `name` that is part of `event.target`.
+* In addition, we want to have meaningful names for our inputs, so that we can match the name in state to it and use the *computed property* notation to set the state. 
+* Aside: Destructuring an argument, let's say `{target}` from an object `event`, is essentially the same as `const target = event.target`
+
+**Creating Reusable Components**
+
+* For TextInputs, we have some duplication
+  * Keeping the label and the input in sync
+  * Providing the same class name for bootstrap styling
+  * Adding value, placeholder text, a consistent spot for displaying errors 
+* **Aside - JS ES6** - Javascript logical *AND* operator - `&&`
+  * This runs the code on the right if the condition on the left evaluates to true
+    ```{js eval=F}
+    { prop.errors && console.log("There are errors") };
+    ```
+* **Aside - Bootstrap** - If the input is in an error state, we want to set a `has-error` class on the `form-group` wrapper. This will add a red line around the input to draw attention to it. You can handle dynamic classes with variables and if statements. 
+* Anytime we create reusable components, we want to add **PropTypes** so that people understand what kind of data to pass to the component, and to get warnings whenever that data isn't passed. 
+
+
+**Saving Data**
+
+* We declare a function on the parent component to save the submission
+* We want to handle this client-side and want to prevent the submit button from posting to the server, so we use `event.preventDefault`
+* In order to save, we make a call to our API to save the course. 
+* We pass in the function as a prop. We declare the `onSubmit` on the form itself rather than the button for accessibility reasons - user can either click the submit button or press Enter to do submit the form.
+
+**Programmatic Redirects w/ React Router**
+
+* Different approach to Redirects
+  * Since the current component was arrived at via React Router's Route Component, we have access to React Router's history object on props. So we use that to redirect
+    ```{js eval=F}
+    props.history.push("/courses");
+    ```
+
+**Notifications via a 3rd party component**
+
+* We use **React-toastify**
+
+**Input Validation and PropTypes**
+
+* see in-code pattern for validation. We essentially a new state to represent errors, and we have a function to check that the required input values are provided. 
+
+**Populate via the URL**
+
+## 1.9 Flux
+
+**Introduction**
+
+* We use flux to handle data flow - it is a state management pattern that was popularized by Facebook. Concepts we'll touch on
+  * **Actions** to enscapulate events
+  * **Stores** to store state
+  * **Dispatcher** that acts as a central hub
+  
+**What is Flux**
+
+* It is an architectural pattern that has unidirectional data flows and a centralized dispatcher. 
+* The problem that this pattern tries to solve is the complexity that arises when an app with the traditional 2 way binding pattern grows. This kind of app devolves into essentially a lot of *models* and *views* that need to interact with each other, and working with this using *two-way binding* grows increasingly complex.
+* And so FB fixes this with unidirectional data flows, and with flux specifically, where data flows in only one direction. That is, the user interacts with a **react component**, which triggers and **action**, which then alerts the **dispatcher**. The dispatcher alerts any relevant **data stores** that are registed, and any components that are listening are re-rendered when the store changes.
+* It does require a bit more code than the two-way binding approach, but at the benefit of:
+  * Clarity
+  * Testability
+  * Scalability
+  * Predictability
+
+**Three Core Flux Concepts**
+
+* **Action** - this is an interaction in a React component by the user. 
+* **Dispatcher** - A centralized list of callback functions - these notify relevant stores that an action has occurred.
+* **Store** - stores our application state and logic. 
+
+**Action**
+
+* Actions enscapulate events that occur in my app.
+* A dispatcher exposes a method that allows me to send a dispatch to relevant stores as well as a payload of data (which is the action, or at least part of it)
+* **Action Creator Methods** are helper functions, let's say, to the dispatcher in that
+  * They describe the actions that are possible in our app
+  * They are what trigger the dispatch - and they include an `actionType` which helps the dispatcher handle the action properly and update the relevant stores.
+* The **payload** is just an object that has a **type** and **data** property - which contains what it describes. 
+* Actions are triggered by interactions by users with the UI or by the server when certain events such as `onload()` happen.
+
+**Dispatcher**
+
+* This is a centralized hub that distributes actions to stores.
+* Stores register with the dispatcher in order to be notified whenever an action is triggered.
+* When an action is triggered, the dispatcher broadcasts this to all the callbacks and sends the action to stores.  
+* So essentially, the dispatcher stores a bunch of callbacks and triggers them as appropriate.
+* **Constants** - we store our action types in a constant file 
+  * It is a high level view of what our app does
+  * Keeps things organized by having a central place where all the constants we use in our app are stored
+  
+**Stores**
+
+* **Intro**
+  * Stores hold our app's data, logic, and data retrieval methods. 
+  * They are not models, rather, they *contain* models.
+  * They register with the dispatcher in order to be notified whenever an action is triggered. 
+  * They use Node's *EventEmitter* to both listen to and emit event changes - this allows stores to be notified whenever an action is triggered and to notify React components whenever data changes. 
+  * React components listen to the stores in will receive a signal when this happens.
+  *Stores are the only part of Flux that can update data - and they have no direct setter methods and only perform updates through the callback methods registered with the dispatcher. 
+* **Structure of a Store** - all stores have a similar interface
+  1. extend **EventEmitter** to allow the store to emit event changes to React components that are listening for these changes
+  2. expose methods to add and remove ChangeListeners for the React components
+  3. a method to **emit** the event/changes
+* **Multiple stores** - what's the flow like?
+  * The dispatcher will send a payload to all the stores that have registered a particular callback in order to notify these stores of any action that might potentially change their data.
+* **Managing Dependencies**
+  * If stores have dependencies, Flux allows you to explicitly define an order in which to update the stores, such that those that have dependencies wait for the relevant stores to finish updating first. This is especially important as the app grows.
+  
+**Controller Views**
+
+* These are top-level components that compose other components (those focused on presentation), and they are the ones that should interact with data stores.
+* Controller views hold data in state and pass data to child components via *props* - they receive updates from stores and pass this data down to children via props.
+* **Recommendation:** One controller view per page, or per major portion of the page. Nesting is not ideal since it might lead to triggering React's update method multiple times, hurting performance. It's also useful to be able to pass one object down as a prop in order to prevent having to update data in multiple places when more properties are added as the app grows.
+
+**Flux API**
+
+* **5 Core Methods**
+  * `register(callback)` - Store tells dispatcher to run this callback when an action is triggered
+  * `unregister(string id)` - Store calls this to tell the dispatcher to stop worrying about the callback specified by this string id
+  * `waitFor(arr<string id>)` - Store calls this for a particular callback so that it waits for one or more other callbacks to finish executing first.
+  * `dispatch(object payload)` - Action calls this to notify the dispatcher that an action's been triggered
+  * `isDispatching()` - a boolean that's true when the dispatcher is busy dispatching. 
+* **Like the Publisher-Subscribe pattern, but not quite**
+  1. The flux pattern is different in that no callbacks are registered to specific events - every payload is dispatched to every callback. 
+  2. Callbacks can be deferred in whole or in part until other callbacks have been executed.
+  
+**Flux Demos**
+
+* **Actions** 
+  * Created an `appDispatcher.js` which creates an instance of `dispatcher` that will be used by the app
+  * Created an `actions` folder that will hold various action js files as well as an `actionTypes.js` that will hold the constants used by our app
+  * We created a `courseActions.js` file to hold actions to save, update, and delete courses. 
+  * These hold action creator functions for the specified actions above, and call the API to save(or delete or update) the course, and calls  `dispatch()`, passing in the action type and data. 
+  * We return the promise so as to notify the calling function when the api call is done and handled. 
+* **Stores: Change Listeners**
+  * Here we create a new folder, `stores`, within which we create a `courseStore.js` file
+  * Inside, we create a class `CourseStore` that extends `EventEmitter`.
+  * We define 3 methods - `addChangeListener(callback)`, `removeChangeListener(callback)`, `emitChange()` that wrap around EventEmitter's methods of `.on(event, callback)`, `.removeListener(event, callback)`, and `.emit()`.
+  * We then instantiate the class and export it. 
+* **Stores: Registration w/ Dispatcher**
+  * We import `Dispatcher` to the `CourseStore` and call `Dispatcher.register()`, which takes in a function that has `action` as a parameter. This function is what's called every time that an action occurs. 
+  * Every store that registers with the dispatcher gets notified whenever an action is done - so we use a switch statement on the `action.actionType` to determine how to deal with actions of different types. 
+* **Stores: Private Storage**
+  * We declare a private array to hold `courses`, and inside our register function (this is a callback registered with the dispatcher) we add a case for `CREATE_COURSE`. Here we push to the private `courses` array and call `emit()`. So each component that's listening to the Store gets notified.
+  * We declare methods on the Store class that help us access data as required.
+* **Stores: Interactions**
+  * Here we want to update `ManageCoursePage` and `CoursesPage` to use our data store instead of calling the API directly. 
+  * We change both our `useEffect` and `handleSubmit` functions to interact with the data store
+* **Stores: Initialization**
+  * So we're almost done. Here we want to make sure that the store pulls data from the api.
+  * We create a new `LOAD_COURSES` constant, and a `loadCourses` action which calls `getCourses` from the api.
+  * We add a case for load courses to our data store to handle that action
+  * In CoursesPage, we modify our `useEffect` primarily
+    * We want to add a change listener to an `onChange` function, whose job is to `setCourses` when it's called. So it sets courses to the result of `store.getCourses()`
+    * We also want to load courses if it's the first time - so we check to see if courses have been loaded, i.e. if the data store `getCourses` returns an empty array. If so, we call `loadCourses` action. 
+    * We also initialize the state to `getCourses`
+  * **Aside:** For `useEffect`, if we want to run execute some code on `unMount`, we return a function which does whatever we want to execute.
+* **Update Course Flow w/ Flux**
+  * Here we add a new `UPDATE_COURSE` constant, as well as extend the `saveCourse` action to accomodate this. We add a new case to our store.
+* **Adding Store Listeners**
+  * When we select a course to view, and then reload that course page, we get an error. That's because React asks for a course by slug, but there is no functionality to populate our data store, so the course we get back is an `undefined`.
+  * To fix this, we implement the same pattern we did in CoursesPage
+  * We create a `courses` state, which we initialize to `.getCourses()`
+  * In `useEffect`, we add a change listener to a function `onChange`, which will be called to `setCourses` whenever the store data changes. We also add a `removeChangeListener` as well during unmount.
+  * Then we add a condition to check of the courses have been populated. If they have not, then we call `loadCourses`. This will change the data store, which will cause `length` of the courses array to change, triggering `useEffect` which then checks for a slug. 
+* **Delete Course via Flux**
+  * This I did myself. 
+  * One interesting thing is that I can specify an arrow function inside onClick and pass in a parameter as needed. I wonder why this is so. This is probably just a pattern that I don't know about.
+* **Challenges**
+  * Show 404 for bogus slug
+  * Display author name on CoursesPage
+  * Populate author dropdown via API
+  * Create a reusable author dropdown component
+  * Add author management
+  * 
+
+
+
+
+
+
+
+# 2 Building a Full Stack App w/ React and Express
+
+## 2.1 Structure of a Full Stack App
+
+**Why Businesses Need Full Stack Apps**
+
+* Users want to see a clean UI that is fast, easy, fun, and intuitive to interact with, hence a business looking to, say, sell a product, needs a **dedicated frontend**
+* Users like to see data that they've entered on the wesbite to actually be there when they leave and come back. Hence, we need **data persistence**
+* The business needs to store and process, and validate the user (and their payment) information in order to actually generate revenue. 
+
+**What is a Full Stack Application**
+
+* It is an application that can be viewed on a web browser that has a means of persisting data and working with private information that exists on a server. 
+* **Front End (client)** - this is the client-facing side of a full stack app
+  * When it comes down to it, it consists of pages, forms, and buttons for users to interact with. 
+  * Primarily concerned with design, polish, user experience, and speed.
+  * *Reactivity* - they look different depending on the type of device.
+  * Almost primarily built with JS, CSS, and HTML
+  * **Some limitations:**
+    * They can't persist data (aside from local storage, which goes away if cache is cleared)
+    * Can't hide private information from a user
+    * You have no control over the user's hardware - could be shitty
+* **Back End (server)** - this works behind the scenes to:
+  * Persist data in a database
+  * Store and protect confidential information - could be user data, business secrets, etc
+  * Communicate w/ 3rd Party APIs.
+  * **So why do we need frontend?**
+    * Without it, our app is just a terminal, and without technical knowledge, we can't use it
+    * Web pages allow for images, animation, and styling, which provide a fluid user experience and makes the business more favorable to users. 
+  * *What comprises a backend?**
+    * Database
+    * Server - can execute logic. Provides a place to store business logic and authorization, and communicates with the database, 
+    
+**Javascript and Full Stack Applications**
+
+* **What are the advantages of it?**
+  * Developers can be hired more flexibly - they can work on both the frontend and the backend since both are in JS
+  * It is possible to share logic between the frontend and backend as needed
+  * Server can pre-render pages more easily and help with computations since the data format is the same. 
+* **What are the disadvantages of it?**
+  * Sluggish processing and limited mathematical capabilities (virtually non-existent?)
+  * Greater selection of certain kinds of libraries in different languages, i.e. data science and Python.
+  * Typically more difficult and expensive to deploy than, say Java or PHP
+  
+**Security Considerations** - Some code must not be visible to users. 
+**A look at the final app**
+
+* Front end - React and redux
+* Back end - MongoDB, Express to serve a static HTML page to the app, and we use a REST API to communicate with the database. 
+
+## 2.2 Configuring the Development Environment with Webpack and Babel
+
+**View Layer Goals, Limitations and Roadmap**
+
+* We'll be creating a front end using React and Redux, but no backend. Therefore, for now, the data won't persist. 
+* We'll set up webpack which compiles ES6 javascript and JSX to Javascript that a particular browser can run.
+
+**Setting Up Webpack To Compile Our Application**
+
+* Webpack does the following:
+  * Uses **babel** to transpile ES6 and JSX code into Javascript
+  * Bundles up our files that are connected via *import* statements into 1 file. 
+  * Uses *webpack dev server* plugin to create a fast, convenient development environment.
+  ```{bash eval=F}
+  npm init --yes // creates new package.json file w/ default config
+  npm i --save-dev webpack@4.17.2 // --save-dev adds webpack to the dev dependencies
+  npm i --save-dev webpack-cli@3.1.2 webpack-dev-server@3.1.7
+  npm i --save-dev @babel/core@7.0.0
+  ```
+* Next we create a new file, `.babelrc`, which is a JSON file that babel checks for automatically to determine how it should run.
+* Next we create a new file, `webpack.config.json`, which will determine how our app should be bundles.
+* Next, we create stubs for `index.html` and `index.js`, which will form the basis for our app
+    
+## 2.3 Implementing React Components and Redux State
+
+**Managing Application State w/ Redux**
+
+* Redux essentially manages our underlying state data
+* It is easy to get the state data, but changing it is not as easy - it is only possible via *actions*
+* But we use a library called **React-Redux** to connect React and Redux in order to (sort of) make our app automatically mirror its state
+* So, first we create a default application state as a JSON file for development.
+* 
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+# References    
+
+
+
+
+# References    

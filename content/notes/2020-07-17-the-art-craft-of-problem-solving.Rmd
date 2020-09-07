@@ -1,0 +1,126 @@
+---
+title: The Art & Craft of Problem Solving
+author: Desmond Tuiyot
+date: '2020-07-17'
+slug: the-art-craft-of-problem-solving
+categories: []
+tags:
+  - problem solving
+bibliography: ref.bib
+---
+
+These are my notes as I work through the book, The Art & Craft of Problem Solving [@zeitz_2017]. From the preface, it seems like there will be a lot of problems to work through. In that case, I'll prefer to work on paper. However, any definitions, insights, and other thoughts will appear here.
+
+# 1. What This Book Is About and How to Read It 
+
+## 1.1 Problems vs Exercises.
+* **Exercises** are questions that one can solve immediately, mostly by applying specific techniques to it. The main point is that for exercises, not much thought on the approach is needed. 
+* **Problems**, on the other hand, require more thought and resourcefulness in order to resolve.
+* From what I gather, what is a *problem* to me can appear to be a trivial *exercise* for the more advanced problem solver.
+* The experienced problem solver solves problems on three levels
+  * **Strategy:** Mathematical and psychological ideas for starting and pursuing problems.
+  * **Tactics:** Diverse mathematical methods that work in many different settings.
+  * **Tools:** Narrowly focused techniques and "tips" for specific situations. 
+
+## 1.2 The Three Levels of Problem Solving  
+
+### Lessons from the Mountaineering Analogy
+
+* Usually, you can't use *tools* as summaries of your problem solving. Rather, the *strategic* and sometimes *tactical* ideas are often described in your summary of your problem solving.
+* During problem solving, we're bound to encounter obstacles. Some of these are just exercises, but some of them present a real challenge.
+* Such an obstacle is called a **key obstacle**, and negotiating this key obstacle is called the **crux move**.
+
+### From Mountaineering to Math
+
+When approaching a problem, you must begin a process of **investigation**. I could just try anything that comes to mind, but as a beginner, I should cultivate a more organized approach
+
+* First, think strategically - don't try to solve the problem, but think about it on a less focused level
+  * The goal is to come up with an approach that may barely have mathematical content but that "improves" our situation rather than necessarily solving the problem. 
+* Strategies help us start to solve a problem. But they remain just vague outlines of what needs to be done.
+* The concrete tasks are done at the lower level of tactics and tools.
+
+### Lessons from the example 1.2.1
+
+* This is on page 4 (21)
+* The first step when encountering a problem is to **orient yourself** to the statement of the problem. Problems usually come in 2 flavors:
+  * Those that ask you to **prove** something.
+  * Those that ask you to **find** something.
+* In proof problems we want to first formulate the **hypothesis** (what is given) and the **conclusion** (what we want to prove)
+* **Strategy 1:** we might want to focus on the conclusion and ask this - what would we need to prove that would immediately lead to the conclusion of the problem?
+  * This is called looking at the **penultimate step**
+  * If we can't think of an easy criteria for determining the penultimate step, then we might want to try a different strategy.
+* **Strategy 2:** Get your hands dirty. Try out some examples/plug in some numbers.
+  * If we notice a pattern, we can then create some **conjecture**.
+  * Our new strategy would then be to prove that conjecture.
+* To prove the conjecture we can make use of various tactics and tools. Those used in this problem include
+  * Tactics - use of **factorization** and **symmetry** 
+  * Tool - recognizing a common factorization, specifically the **difference of 2 squares**
+* Other such tools and tactics could be
+  * Tactics - **substitution**
+  * Tools - the method of **undetermined coefficients** (look this up)
+
+## A Problem Sampler
+
+* Problems are divided into 3 large families: **recreational**, **contest**, or **open-ended**.
+* In each family, we have problems **to find** and problems **to prove**.
+  * Problems to find ask for a specific piece of info
+  * Problems to prove require a more general argument.
+
+* **Recreational Problems** - a.k.a "brain teasers" - they require little formal mathematics, but instead rely on creative use of basic strategic principles
+* **Contest Problems** - usually problems written for formal exams with time limits, often requiring special tools and/or ingenuity to solve. They can be very challenging
+* **Open-ended Problems** - mathematical problems that are sometimes vaguely worded and that may have no actual solution.
+  * They can be very exciting to work on, and a lot of times, partial solutions are all you can get.
+
+
+# 2. Strategies for Investigating Problems 
+
+* First, we start with some **psychological strategies** that will help me rapidly improve my ability to *work at a problem*.
+* Then, we examine some strategies to help me **begin investigations**.
+* The solution to any problem involves the **investigation**, in which you orient yourself and discover what is going on, and the **argument** in which you convince others of your solution. This chapter also examines the more common methods of formal argument.
+
+## 2.1 Psychological Strategies
+
+### Mental Toughness: Lessons from Polya's Mouse
+
+* In problem solving, we must try and try again and *vary our trials* in order to not miss the favorable possibilites that might be initially hidden from us.
+* At the same time, an important part of problem solving is understanding when to give up. It is ok to give up on a problem, at least temporarily
+* Maybe I give up too soon because I lack the **mental toughness** attributes of **confidence** and **concentration**
+  * It is difficult to keep at a problem when I don't think I can solve it
+  * It's also impossible to keep working beyond my "frustration threshold"
+* To build up confidence & concentration, I have to start working on easy problems, i.e. those that I can solve after expending a modest amount of effort. 
+* By gradually increasing the intellectual load, I can also simultaneously increase my *frustration threshold*
+
+#### Example 2.1.1
+
+* Page 15 (32)
+* The moral of the story is to resist the urge to immediately declare a hard problem impossible.
+* Strategy: **Make the problem easier strategy:** this strategy involves **wishful thinking** - if the given problem is too hard, solve an easier one 
+* Tool: **topological equivalence** - get back to this one.
+
+### Creativity
+
+* The good problem solver is highly open and receptive to ideas that are floating around in plain view that might not be easy to see
+* The trick here is to remain confident in the face of a beautiful, creative solution
+  * Don't think, "I could never come up with this." 
+  * Rather think, "Beautiful solution! Let's put it to work"
+  * *Learn to shamelessly appropriate new ideas and make them my own*
+* Always be on the lookout for new ideas; master them and use them in many different places.
+* Every problem I encounter should be analyzed for its "novel idea" content as well. 
+* One way to heighten my perceptiveness is to stay "loose". 
+  * At the start, try to look for ideas at the periphery
+  * Be on the lookout for turns and twists
+  * Don't get locked onto one method
+  * Try to consciously break or bend the rules
+
+
+
+
+
+
+
+
+
+
+
+
+

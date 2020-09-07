@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>testing on Desmond Tuiyot</title>
+    <link>/tags/testing/</link>
+    <description>Recent content in testing on Desmond Tuiyot</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 19 Aug 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/testing/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Testing Code</title>
+      <link>/notes/testing-code/</link>
+      <pubDate>Wed, 19 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/testing-code/</guid>
+      <description>Real Python: TDD in PythonThe TDD RoadWrite a failing testMake it pass by doing the simplest thing possibleRefactor your code while keeping tests passingRepeat until your acceptance test is greenWhere to Write My TestsCreate a tests.py file in my top level folder - this is so that the tests file can import all other relevant files.If there file gets too big, you can split them into different modulesHow to Structure a TestFirst, decide:What will you be testing?</description>
+    </item>
+    
+  </channel>
+</rss>

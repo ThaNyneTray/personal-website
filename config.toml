@@ -29,7 +29,10 @@ disqusShortname = "https-desmondtuiyot-com"
 [[menu.main]]
     name = "Projects"
     url  = "/projects/"
-    
+
+[[menu.main]]
+    name = "Notes On Everything"
+    url = "/notes/"
     
 [params]
     author = "Desmond Tuiyot"

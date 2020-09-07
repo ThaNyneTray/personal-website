@@ -1,0 +1,113 @@
+---
+title: International Scholars Inc.
+author: Desmond Tuiyot
+date: '2020-08-10'
+slug: international-scholars-inc
+categories: []
+tags:
+  - plan
+  - intl-scholars
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="the-whatsapp-intergration" class="section level2">
+<h2>The WhatsApp Intergration</h2>
+<ul>
+<li>From the example, it seems what we essentially need to do is create and deploy an app that would schedule and send reminders to complete an application to applicants.
+<ul>
+<li>To send the reminders, we use Twilio, with Python &amp; Flask. In this case, we don’t really need a webapp since we’re not planning to respond to any messages for now.</li>
+</ul></li>
+<li>We also need to somehow import data from the Excel sheet and add it to a database. After which we can simply step through all the records, and if there are NULL fields then we send a reminder to the person to actually finish the application.</li>
+</ul>
+</div>
+<div id="game-plan" class="section level2">
+<h2>Game plan</h2>
+<ol style="list-style-type: decimal">
+<li>Need to create the program/webapp to send the whatsapp messages</li>
+</ol>
+<ul>
+<li>I’m expecting a list of phone numbers to send reminders to</li>
+<li>Probably a list of missing documents for each phone number - things they haven’t submitted</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>Need to proces the data - messages are sent to WhatsApp conditionally. And the condition is whether someone has submitted the required documents.</li>
+</ol>
+<ul>
+<li>Clean the data</li>
+<li>Store it in SQL</li>
+<li>Query the SQL to decide if and when to send the data</li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>Data Aggregation</li>
+</ol>
+<p>Creating new rows
+Updating the values -</p>
+</div>
+<div id="important-things-to-do" class="section level2">
+<h2>Important Things to Do</h2>
+<ul>
+<li><strong>ngrok</strong> allows you to expose your local development server to the internet - but we can also just deploy on heroku and test there
+<ul>
+<li>For now we just need to silence the</li>
+</ul></li>
+</ul>
+</div>
+<div id="processing-the-data-plan" class="section level2">
+<h2>Processing the Data: plan</h2>
+<p><strong>Initial Pass</strong></p>
+<ol style="list-style-type: decimal">
+<li>Get phone numbers, and submission dates from <code>part1.csv</code> - eliminate duplicates by latest submission date</li>
+<li>Get docs from <code>part2.csv</code></li>
+</ol>
+<ul>
+<li><p>There are about 7 documents - passport, hs transcript, hs diploma, college transcript, college diploma, bank statement, and <em>others</em></p></li>
+<li><p>For the first 6, there are two possible fields I need to combine. So starting from column 3 to 14.</p></li>
+<li><p><strong>Transferring Data into SQL</strong></p></li>
+<li><p>There’s a submission date field, which is from part1.csv. We use this to add new phone numbers</p>
+<ul>
+<li>Essentially, include only the rows in the part1 dataframe that were submitted later than the most recent submission date in the database</li>
+</ul></li>
+<li><p><strong>Question:</strong> How should the part2 data be added? 2 ways</p>
+<ul>
+<li>Add it separately from the part1 data. <strong>How?</strong>
+<ul>
+<li>After updating the phone numbers, fetch the records with phone numbers that appear in part2. Then loop through that, updating the respective fields, and then commit after the for loop.</li>
+</ul></li>
+</ul></li>
+<li><p><strong>08/19/2020 Agenda</strong></p>
+<ul>
+<li>Add names to db models
+<ul>
+<li><strong>DONE</strong> - added <code>first_name</code> and <code>last_name</code> columns to the table.</li>
+<li>Migrations done as well.</li>
+</ul></li>
+<li>Modify data manager code to handle names as well - <strong>DONE</strong>
+<ul>
+<li>Modify the data processing functions - <strong>DONE</strong></li>
+</ul></li>
+<li>Find a way to verify the phone numbers</li>
+<li>Try to integrate this with the whatsapp code</li>
+</ul></li>
+<li><p><strong>Validating Phone Numbers</strong></p>
+<ul>
+<li><strong>Problems</strong>
+<ul>
+<li>The immediate problem is invalid phone numbers.
+<ul>
+<li>We need phone numbers with the country code prefixed. In order to validate this, I would need the country as well (or at least, it would help).</li>
+<li>There’s also some numbers prefixed with 0’s or with a minus sign.</li>
+</ul></li>
+<li>However, not all values in the <code>country</code> column are filled/correct.</li>
+<li>So I need a way to infer the country, to then use it to validate the phone number.</li>
+</ul></li>
+<li><strong>Solution</strong>
+<ul>
+<li><strong>main tool:</strong> pandas, twilio lookup</li>
+<li>First, I need to filter out the country names that are in fact correct</li>
+<li>For the remaining ones, I should manually check the city or the phone number to ascertain where it’s at</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>

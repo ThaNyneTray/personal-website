@@ -1,0 +1,10 @@
+"0","freq_by_rank %>%
+  ggplot(aes(rank, `term frequency`, color=album))+
+  geom_line(size=1.1, alpha=0.8, show.legend=FALSE)+
+  scale_x_log10() +
+  scale_y_log10() +
+  theme_bw()
+"
+"2","Error in freq_by_rank %>% ggplot(aes(rank, `term frequency`, color = album)) : 
+  could not find function ""%>%""
+"

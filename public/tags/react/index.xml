@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>react on Desmond Tuiyot</title>
+    <link>/tags/react/</link>
+    <description>Recent content in react on Desmond Tuiyot</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 21 Jul 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/react/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>React Fundamentals</title>
+      <link>/notes/react-fundamentals/</link>
+      <pubDate>Tue, 21 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/react-fundamentals/</guid>
+      <description>1. Building Applications With React &amp;amp; Flux1.1 Introduction to ReactCore Tech includes:React: ComponentsReact Router: RoutingFlux: Data Flows / State Management?Node/npm: Packages &amp;amp; AutomationBabel: Transpile javascript code and componentsWebpack: Bundle up application for the browserESLint: Lint. Catch errors along the way1.2 Environment SetupWe set up so as to receive rapid feedback as we build the react appWe use:</description>
+    </item>
+    
+  </channel>
+</rss>

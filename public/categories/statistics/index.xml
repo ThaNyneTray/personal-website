@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Statistics on Desmond Tuiyot</title>
+    <link>/categories/statistics/</link>
+    <description>Recent content in Statistics on Desmond Tuiyot</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 24 May 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/statistics/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Notes On Everything</title>
+      <link>/notes/notes-on-everything/</link>
+      <pubDate>Sun, 24 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/notes-on-everything/</guid>
+      <description>Disclaimer:These are my personal notes on things I learn. They are neither extensive nor comprehensive and will probably not be useful to you. There may be a lot of mistakes and errors because this space represents my attempts at understanding the things I learn.
+Jump to:JavascriptFront End LibrariesBootstrapjQuerylocalStorageStatisticsProbabilityMachine LearningAlgorithmsData StructuresPythonRShinyJavascriptBasic JavascriptVariablesBasic data types : undefined, null, object, symbol, string, boolean, numberDeclaring : var myVarname;The undefined data type - this is the initial data type of variables that have been declared and not initialized.</description>
+    </item>
+    
+    <item>
+      <title>Notes On Everything</title>
+      <link>/2020/05/24/notes-on-everything/</link>
+      <pubDate>Sun, 24 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/05/24/notes-on-everything/</guid>
+      <description>Disclaimer:These are my personal notes on things I learn. They are neither extensive nor comprehensive and will probably not be useful to you. There may be a lot of mistakes and errors because this space represents my attempts at understanding the things I learn.
+Jump to:JavascriptFront End LibrariesBootstrapjQuerylocalStorageStatisticsProbabilityMachine LearningAlgorithmsData StructuresPythonRShinyJavascriptBasic JavascriptVariablesBasic data types : undefined, null, object, symbol, string, boolean, numberDeclaring : var myVarname;The undefined data type - this is the initial data type of variables that have been declared and not initialized.</description>
+    </item>
+    
+  </channel>
+</rss>

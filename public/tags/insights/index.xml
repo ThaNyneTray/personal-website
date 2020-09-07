@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>insights on Desmond Tuiyot</title>
+    <link>/tags/insights/</link>
+    <description>Recent content in insights on Desmond Tuiyot</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 10 Aug 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/insights/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Coding Challenges</title>
+      <link>/notes/coding-challenges/</link>
+      <pubDate>Mon, 10 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/coding-challenges/</guid>
+      <description>Insights, Techniques, Concepts, etc238:Product of Array Except Self
+Here we come up with an approach by solving 2 simpler problems and combining them: get the product of all elements preceding the current element, and those succeeding the current element.Common Errors and Mistakes</description>
+    </item>
+    
+  </channel>
+</rss>

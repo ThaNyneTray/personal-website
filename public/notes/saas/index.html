@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+
+    <meta name="author" content="Desmond Tuiyot">
+    <meta name="description" content="1. Introduction to SaaS and Agile Development1.1 IntroductionProductivity mechanismsClarity via concisenessSynthesisReuseAutomation &amp; Tools1.4 Service Oriented Architecture (SOA)The success of Agile is proven for mainly smaller projects. This success can be replicated for larger projects by using a software architecture designed to make composible services - SOASOA means that components of an application act as interoperable services, and can be used independently and recombined in different applications.">
+    <meta name="keywords" content="blog, developer, personal, data analyst">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="SaaS - An Agile Approach to Cloud Computing"/>
+<meta name="twitter:description" content="1. Introduction to SaaS and Agile Development1.1 IntroductionProductivity mechanismsClarity via concisenessSynthesisReuseAutomation &amp; Tools1.4 Service Oriented Architecture (SOA)The success of Agile is proven for mainly smaller projects. This success can be replicated for larger projects by using a software architecture designed to make composible services - SOASOA means that components of an application act as interoperable services, and can be used independently and recombined in different applications."/>
+
+    <meta property="og:title" content="SaaS - An Agile Approach to Cloud Computing" />
+<meta property="og:description" content="1. Introduction to SaaS and Agile Development1.1 IntroductionProductivity mechanismsClarity via concisenessSynthesisReuseAutomation &amp; Tools1.4 Service Oriented Architecture (SOA)The success of Agile is proven for mainly smaller projects. This success can be replicated for larger projects by using a software architecture designed to make composible services - SOASOA means that components of an application act as interoperable services, and can be used independently and recombined in different applications." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/notes/saas/" />
+<meta property="article:published_time" content="2020-07-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-07-23T00:00:00+00:00" />
+
+
+    
+      <base href="/notes/saas/">
+    
+    <title>
+  SaaS - An Agile Approach to Cloud Computing · Desmond Tuiyot
+</title>
+
+    
+      <link rel="canonical" href="/notes/saas/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/image/icons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/image/icons/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.72.0" />
+  </head>
+
+  
+  
+  <body class="colorscheme-light">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Desmond Tuiyot
+    </a>
+    
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/post/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/notes/">Notes On Everything</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/projects/">Projects</a>
+          </li>
+        
+      
+      
+    </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container page">
+  <article>
+    <header>
+      <h1>SaaS - An Agile Approach to Cloud Computing</h1>
+    </header>
+
+    
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="introduction-to-saas-and-agile-development" class="section level1">
+<h1>1. Introduction to SaaS and Agile Development</h1>
+<div id="introduction" class="section level2">
+<h2>1.1 Introduction</h2>
+<ul>
+<li>Productivity mechanisms
+<ul>
+<li>Clarity via conciseness</li>
+<li>Synthesis</li>
+<li>Reuse</li>
+<li>Automation &amp; Tools</li>
+</ul></li>
+</ul>
+</div>
+<div id="service-oriented-architecture-soa" class="section level2">
+<h2>1.4 Service Oriented Architecture (SOA)</h2>
+<ul>
+<li>The success of Agile is proven for mainly smaller projects. This success can be replicated for larger projects by using a software architecture designed to make composible services - SOA</li>
+<li>SOA means that components of an application act as interoperable services, and can be used independently and recombined in different applications.</li>
+<li>The critical distinction of SOA from siloed software is that no service/components can name or access another service’s data, it can only access it through APIs</li>
+<li>It may take a bit more work to make compared to silos, but there’s huge payback in <em>reusability</em></li>
+<li>The explicit APIs also makes testing easier</li>
+<li>2 widely accepted downsides:
+<ol style="list-style-type: decimal">
+<li>Invocation of a service involves communicating through a network interface, which results in a performance hit for SOAs</li>
+<li>Dependability planning (?) is a bit more challenging since developers now have to deal with the sticky issue of partial failures.</li>
+</ol></li>
+<li>The upside is that we successfully built smaller services, which allowed use of Agile (or partly due to use of Agile), and composed them to larger services.</li>
+<li>SOA best exemplifies the productivity mechanism of <strong><em>reuse</em></strong> - by making services available as APIs, other developers can stand on the shoulders of those who did it before.</li>
+</ul>
+</div>
+<div id="software-as-a-service" class="section level2">
+<h2>1.5 Software as a Service</h2>
+<ul>
+<li>This is a special case of SOA</li>
+<li>It delivers the sofware and data as a service over the internet, usually via a thin wrapper like a browser that runs on the local client device, as opposed to an application binary that must be installed and runs wholly on that device.</li>
+<li><strong>Advantages</strong>
+<ol style="list-style-type: decimal">
+<li><em>To customers:</em> they don’t need to install the application, therefore don’t need to worry about whether their hardware can support it or whether they have the correct version of the operating system.</li>
+<li><em>To customers:</em> the data associated with the service lives with the service, so the customer doesn’t need to worry about making backups, or losing their data due to hardware malfunction or due to loss of the device</li>
+<li>When a group of users want to collectively interact with some data, SaaS is a natural vehicle(?)</li>
+<li>When data is large and/or updated frequently, it may make more sense to centralize it and provide remote access as SaaS</li>
+<li>Only a single copy of the service runs on a uniform and tightly controlled hardware and operating system environment specified by a developer, who thus doesn’t need to worry about compatibility issues of distributing software binary that has to run on different hardware and OS.</li>
+</ol>
+<ul>
+<li>Developers can test new versions of software on a small portion of the customers, without disturbing the majority.</li>
+</ul>
+<ol start="6" style="list-style-type: decimal">
+<li>Because only developers have a copy of the software, they can upgrade software and underlying hardware frequently as long as they don’t violate the external API, and they also don’t have to bother the customers with endless upgrade requests.</li>
+</ol></li>
+</ul>
+</div>
+<div id="cloud-computing" class="section level2">
+<h2>1.6 Cloud Computing</h2>
+<ul>
+<li>What’s the ideal hardware for SaaS? First, let’s look at requirements. SaaS places 3 demands on our IT infrastructure
+<ol style="list-style-type: decimal">
+<li><em>Communication:</em> to allow any customer to interact with the service</li>
+<li><em>Scalability:</em> the central facility running the service has to deal with fluctuations in demand during the day, during peak hours and periods of the year</li>
+<li><em>Availability:</em> both the service and the communication vehicle must be continuously available</li>
+</ol></li>
+<li>The hardware that people ended up using are <strong><em>clusters.</em></strong>
+<ul>
+<li><em>Clusters</em> involve connecting a bunch of commodity computers with commodity ethernet switches and basically dedicating these to the service
+<ol style="list-style-type: decimal">
+<li>More scalable than conventional servers</li>
+<li>Much cheaper than conventional servers - by about a factor of 22</li>
+<li>Dependability via redundancy - if you can get it for cheap you can afford to have duplicates or even more copies - the parts aren’t as dependable but you make up for it in redundancy</li>
+<li>A few operators can handle thousands of servers - if we have identical hw and sw for these servers. Virtual machines simplify operations as well</li>
+</ol></li>
+</ul></li>
+</ul>
+</div>
+<div id="legacy-code-vs-beautiful-code" class="section level2">
+<h2>1.7 Legacy Code vs Beautiful Code</h2>
+<ul>
+<li><em>Who cares what it looks like?</em> is the motto of <code>legacy code</code></li>
+<li><strong>Legacy Code</strong> - software that does keep meeting customer needs but is hard to evolve because of design inelegance and antiquated code
+<ul>
+<li>60% of software maintenance costs is adding new functionality to legacy code vs 17% spent of fixing bugs</li>
+</ul></li>
+<li><strong>Beautiful Code</strong> - does meet the customer needs AND is easy to evolve</li>
+<li>Apparently, legacy code is vital but often ignored in software eng classes</li>
+</ul>
+</div>
+<div id="software-quality-assurance" class="section level2">
+<h2>1.8 Software Quality Assurance</h2>
+<ul>
+<li>Questions to think about here
+<ul>
+<li>What is software quality? How do we assure it?</li>
+<li>What si V &amp; V: Verification &amp; Validation - what’s the difference?</li>
+</ul></li>
+<li><strong>Product Quality</strong> - In business, and in general, <em>Product Quality</em> is the “fitness of use”
+<ul>
+<li>This means business value for the <em>customer</em> and <em>manufacturer</em></li>
+<li><em>Quality Assurance</em> is processes/standards that result in high quality and that improve the manufacturing process</li>
+</ul></li>
+<li><strong>Software Quality</strong>
+<ul>
+<li>Satisfies the customer needs - easy to use, gets correct answers, doesn’t crash</li>
+<li>Easy for the developer to debug and enhance</li>
+<li>Therefore, <em>Software QA</em> ensures the quality of the product and improves processes in an SW organization.</li>
+</ul></li>
+<li><strong>Quality Assurance</strong> usually involves
+<ul>
+<li><em>Verification</em> - did you build the thing <strong>right</strong>?
+<ul>
+<li>i.e. did you meet customer specifications?</li>
+</ul></li>
+<li><em>Validation</em> - did you build the <strong>right</strong> thing?
+<ul>
+<li>Are those the specifications correct</li>
+<li>Is that what the customer wants?</li>
+</ul></li>
+<li>HW focus is usually on verification, since people usually have a good idea of the specifications they want.</li>
+<li>SW, on the other hand, focuses mainly on validation, since customers often don’t have a clue what they want, and often get the idea once they start to see a product</li>
+</ul></li>
+<li><strong>Testing</strong>
+<ul>
+<li>This is how we ensure software quality</li>
+<li>Exhaustive testing is infeasible</li>
+<li>Generally, testing is done in different phases of software development, and at different levels. Upper levels don’t redo the tests of the lower level.
+<ul>
+<li><em>Unit Testing</em> - testing that a single method does what it should</li>
+<li><em>Module/Functional Testing</em> - testing across individual units like methods/classes</li>
+<li><em>Intergration Testing</em> - putting higher level units together and checking that interfaces between units have consistent assumptions and communicate properlyy</li>
+<li><em>System/Acceptance Testing</em> - testing that the customer is satisfied with the product</li>
+</ul></li>
+<li><strong>Black Box</strong> vs <em>White Box</em> testing
+<ul>
+<li><em>Black Box</em> testing just looks at the specs</li>
+<li><em>White Box</em> testing looks at the implementation</li>
+</ul></li>
+<li><strong>Test coverage</strong> - percentage of code paths covered</li>
+<li><strong>Regression Testing</strong> - automatically re-run old tests so changes don’t break old code</li>
+<li><strong>Continuous Integration Testing</strong> - continuous regression testing on each code check-in rather than in a later testing phase</li>
+</ul></li>
+</ul>
+</div>
+<div id="productivity" class="section level2">
+<h2>1.9 Productivity</h2>
+<ul>
+<li><strong>Clarity via Conciseness</strong> - banking on concise code. Write small amounts of code that gets transformed into large amounts of information.
+<ol style="list-style-type: decimal">
+<li>Syntax: shorter and easier to read</li>
+</ol>
+<pre class="ruby"><code>assert_greater_than_or_equal_to(a, 7)
+a.should be &gt;= 7</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Raise the level of abstraction</li>
+</ol>
+<ul>
+<li>It’s why high level languages were built - vs assembly</li>
+<li>Ideas like automatic memory management (Java vs C) - turns out there’s lots more bugs if you manage memory manually</li>
+<li>Scripting languages like R have these ideas like <em>metaprogramming</em> and <em>reflection</em> that raise the level of abstraction.</li>
+</ul></li>
+<li><strong>(Code) Synthesis</strong> - basically generated code.
+<ul>
+<li>This involves generating the code you’ll use rather than write it yourself
+<ul>
+<li>An example is BitBlt which generates code to fit the situation rather than have conditional tests.</li>
+<li>Programming by example - Excel generating a macro from an example you give it</li>
+</ul></li>
+</ul></li>
+<li><strong>Reuse</strong> - reusing code that’s been written before
+<ul>
+<li>The idea is to reuse old code vs write new code</li>
+<li>Techniques we’ve used in historical order
+<ol style="list-style-type: decimal">
+<li>Procedures and Functions</li>
+<li>Standardized Libraries</li>
+<li>OOP</li>
+<li>Design Patterns - strategy to reuse even if implementation varies.</li>
+</ol></li>
+</ul></li>
+<li><strong>Automation &amp; Tools</strong>
+<ul>
+<li>This involves building tools to automate tedious manual tasks, improving accuracy</li>
+<li><strong>Concerns</strong> with new tools - Are they Dependable? Good UI? Picking one from several</li>
+<li>SE dooms you to lifetime learning.</li>
+</ul></li>
+<li><strong>DRY</strong> - Don’t Repeat Yourself
+<ul>
+<li><em>“Every piece of knowledge must have a single, unambiguous, authoritative representation within a system”</em>
+<ul>
+<li>Andy Hunt and Dave Thomas, 1999</li>
+</ul></li>
+<li>So Don’t Repeat Yourself</li>
+<li>Refactor code so that</li>
+</ul></li>
+</ul>
+</div>
+<div id="sw-development-processes-plan-document" class="section level2">
+<h2>1.2, 10.7 SW Development Processes: Plan &amp; Document</h2>
+<ul>
+<li>These processes included <strong>Waterfall</strong>, <strong>Spiral</strong>, and <strong>RUP</strong>.</li>
+<li>The term of bringing <em>engineering discipline</em> to software development came about after some infamous software failures. The idea was to try and make software engineering as predictable and dependable as civil engineering, for example.
+<ul>
+<li>The term <strong>software engineering</strong> was first coined in 1979</li>
+</ul></li>
+<li><strong>Plan &amp; Document</strong> - this is the initial approach
+<ul>
+<li>Before coding, project manager makes a plan</li>
+<li>Write detailed documentation of all phases of the plan</li>
+<li>Progress is measured against the plan</li>
+<li>Changes to the project must be reflected in the documentation and possibly the plan</li>
+</ul></li>
+<li><strong>1st Development Process: Waterfall (1970)</strong> -
+<ul>
+<li>There were 5 phases of the waterfall <em>cycle</em>
+<ol style="list-style-type: decimal">
+<li>Requirements analysis and specification - analyze requirements and codify that into specifications</li>
+<li>Architectural Design</li>
+<li>Implementation &amp; Intergration - actually making the software and putting the different pieces together.</li>
+<li>Verification - making sure that the software does what the specifications dictate</li>
+<li>Operation &amp; Maintenance</li>
+</ol></li>
+<li>The idea was to complete one stage before moving on to the next one
+<ul>
+<li>Finding bugs in earlier stages is much cheaper</li>
+</ul></li>
+<li>Since the development process took so long, the extensive documentation was for new engineers coming onto the project to quickly catch up</li>
+<li><strong>How well does it work?</strong>
+<ul>
+<li>The customer specifications change frequently on seeing the product
+<ul>
+<li><em>And the users exclaimed with a laugh and a taunt: “It’s just what we asked for, but it’s not what we want”</em>
+<em>- Anonymous</em></li>
+</ul></li>
+<li>Often after building the first implementation, developers learn how they should build it better
+<ul>
+<li><em>“Plan to throw one [implementation] away; you will, anyhow.”</em>
+<em>- Fred Brooks Jr (1999 Turing Award Winner)</em></li>
+</ul></li>
+</ul></li>
+<li>These disadvantages inspired the next approach</li>
+</ul></li>
+<li><strong>2nd Development Process: Spiral (1986)</strong>
+<ul>
+<li>This one aimed to combine the <em>Plan and Document</em> approach with <em>prototypes</em></li>
+<li>The idea was, rather than plan and document all requirements first, do this for each iteration of the prototype as needed and let it evolve the project</li>
+<li>For each iteration, the process was as such:
+<ol style="list-style-type: decimal">
+<li>Determine objectives &amp; constraints</li>
+<li>Evaluate alternatives (to what?) and identify any risks to the project and how to resolve it.</li>
+<li>Develop the prototype and verify it with the customers</li>
+<li>Plan next iteration based on feedback from the customers as well as what was gleaned from that iteration</li>
+</ol></li>
+<li><strong>What’s the good?</strong>
+<ul>
+<li>Iterations involve the customers before the product is completed, therefore there was a lower chance of misunderstandings.</li>
+<li>Risk management is part of the development lifecycle</li>
+<li>Project monitoring is easy (is it?)</li>
+<li>Schedule and cost estimates become more realistic over time.</li>
+</ul></li>
+<li><strong>What’s the bad?</strong>
+<ul>
+<li>Iterations could be anywhere beteen 6 to 24 months, which is plenty of time for customers to change minds</li>
+<li>Lots of documentation for each iteration - during each one, you have to write new sets of documentation</li>
+<li>Lots of rules to follow for the whole project</li>
+<li>Cost of process is high because of the documentation and building the prototypes</li>
+<li>Pretty hard to meet the budget and schedule targets.</li>
+</ul></li>
+</ul></li>
+<li><strong>3rd Development Process: Rational Unified Proces (RUP - 2003)</strong>
+<ul>
+<li>There’s 2 ideas interacting here - one consists of the <em>RUP phases</em>, and the other includes the <em>engineering requirements/disciplines</em></li>
+<li><strong>Four Phases</strong>
+<ol style="list-style-type: decimal">
+<li><strong>Inception</strong></li>
+</ol>
+<ul>
+<li>We make a business case for the software - why make that investment and what would be the ROI</li>
+<li>Set the schedule and the budget</li>
+<li>Perform a risk assessment and try to ameliorate them</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>Elaboration</strong></li>
+</ol>
+<ul>
+<li>Develop the use cases of the app</li>
+<li>Start to develop the software architecture</li>
+<li>Build the first basic prototype</li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>Construction</strong></li>
+</ol>
+<ul>
+<li>Coding, testing and the first product release</li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
+<li><strong>Transition</strong></li>
+</ol>
+<ul>
+<li>Move to the real environment where the sw should be running</li>
+<li>Get customer acceptance</li>
+</ul></li>
+<li><strong>Engineering Disciplines</strong> - these you’ll need over the course of the lifecycle - the importance of each varies across phases
+<ol style="list-style-type: decimal">
+<li>Business Modelling</li>
+<li>Requirements</li>
+<li>Analysis &amp; Design</li>
+<li>Implementation</li>
+<li>Test</li>
+<li>Deployment</li>
+</ol></li>
+<li><strong>What’s the good?</strong>
+<ul>
+<li>The first phase ties the business practices more closely to the development process</li>
+<li>Lots of tools called <em>Computer Aided Software Engineering Case Tools</em> from Rational, which has now been bought out by IBM.</li>
+<li>The tools support gradual improvement of the project over time</li>
+</ul></li>
+<li><strong>What’s the bad?</strong>
+<ul>
+<li>The tools are very expensive and there is no open source version</li>
+<li>There’s so many options to tailor RUP to a company, so one may end up not using all the tools</li>
+<li>Tends to be only good for medium to large scale projects since there’s a lot of overhead and is expensive</li>
+<li>It’s up to the manager to decide how long an iteration within one of the phases will be.</li>
+</ul></li>
+</ul></li>
+<li><strong>P&amp;D Project Manager: Processes Expect a Strong Project Manager</strong>
+<ul>
+<li>Writes the contract to win the project from the customer</li>
+<li>Recruits the development team</li>
+<li>Evaluate software engineering performance, which affects the salary</li>
+<li>Estimate costs, maintaining schedule, evaluating risks and how to overcome them</li>
+<li>Document all of this in the document plan</li>
+<li>Gets credit for success and blame if it goes over budget or is late.</li>
+</ul></li>
+<li><strong>P&amp;D Team Size</strong>
+<ul>
+<li>Teams tend to get bigger primarily through expansion (how else?)
+<em>“Adding manpower to a late project makes it later” - Fred Brooks, Jr.</em></li>
+<li>It takes time for people to learn new projects</li>
+<li>Communication time grows with the team size, leaving less room for work</li>
+<li>These teams tend to be of about 4-9 people, but hierarchically composed for larger projects</li>
+</ul></li>
+</ul>
+</div>
+<div id="sw-development-processes-the-agile-manifesto" class="section level2">
+<h2>1.3 SW Development Processes: The Agile Manifesto</h2>
+<ul>
+<li>The <strong>Agile Manifesto</strong> in 2001 was perhaps the “Reformation moment” in Software development, where the Agile Alliance declared:<br />
+"<em>We are uncovering better ways of developing software by doing it and helping others do it. Through this work we have come to value:</em>
+<ul>
+<li><em><strong>Individuals and interactions</strong> over processes &amp; tool</em></li>
+<li><em><strong>Working software</strong> over comprehensive documentation</em></li>
+<li><em><strong>Customer collaboration</strong> over contract negotiation</em></li>
+<li><em><strong>Responding to change</strong> over following a plan</em><br />
+<em>That is, while we value the items on the right, we value the items on the left more</em>"</li>
+</ul></li>
+<li>The <em>Extreme Programming (XP)</em> flavor of Agile - essentially, if a certain thing is good, lean into it even more
+<ul>
+<li>If short iterations are good, make them as short as possible (weeks vs years)</li>
+<li>If simplicity is good, always do the simplest thing that could possibly work
+<ul>
+<li>Don’t anticipate complexity, but do the minimum you have to to get done</li>
+</ul></li>
+<li>If testing is good, test all the time. In fact, go ahead and write the test before writing any code</li>
+<li>If code reviews are good, review code continuously by programming in pairs, taking turns and constantly looking over each other’s shoulders.</li>
+</ul></li>
+<li><strong>Agile lifecycle</strong> - Agile embraces change as a fact of life.</li>
+<li>Developers focus on improving working but incomplete prototypes, with the customer giving feedback at each iteration until the customers are happy. It emphasizes:
+<ul>
+<li><strong>TDD</strong> to reduce mistakes by writing the tests before the code</li>
+<li><strong>User Stories</strong> to reach an agreement and validate the customer’s requirements
+<ul>
+<li>Documentation is primarily through user stories &amp; test cases</li>
+</ul></li>
+<li><strong>Velocity</strong> to measure progress - this is the rate that a project completes features</li>
+</ul></li>
+<li>Iterations and prototypes are put out pretty quickly - it may take a week or 2.</li>
+<li><strong>Book Organization</strong>
+<ul>
+<li>Parts 2-6 - SaaS</li>
+<li>Parts 7-12 - Agile</li>
+</ul></li>
+<li><strong>Agile Iteration</strong>
+<ol style="list-style-type: decimal">
+<li>Talk to “Customer”</li>
+<li>Behavior Driven Design: User Stories</li>
+<li>Test Driven Development: Unit Tests</li>
+<li>Measure Velocity</li>
+<li>Deploy to Cloud</li>
+</ol>
+<ul>
+<li>Design Patterns</li>
+<li>Legacy Code</li>
+</ul></li>
+<li><strong>Agile (No) vs P&amp;D (Yes) checklist</strong>
+<ol style="list-style-type: decimal">
+<li>Is specification required?</li>
+<li>Are customers unavailable?</li>
+<li>Is the system to be built large?</li>
+<li>Is the system to be build complex?</li>
+<li>Will it have a long product lifetime?</li>
+<li>Are you using poor software tools?</li>
+<li>Is the project team geographically distributed?</li>
+<li>Is the team part of a document-oriented culture?</li>
+<li>Does the team have poor programming skills?</li>
+<li>Is the system to be built subject to regulation?</li>
+</ol></li>
+</ul>
+</div>
+<div id="fallacies-pitfalls" class="section level2">
+<h2>1.12/13 Fallacies &amp; Pitfalls</h2>
+<ul>
+<li><em>Fallacy:</em> Agile is best for SW development.
+<ul>
+<li>It’s good for SaaS, but not for some software, like government regulated software for example</li>
+<li>Per topic, will practice the Agile way, but will see the P&amp;D perspective.</li>
+</ul></li>
+<li><em>Pitfall:</em> Ignoring the cost of software design
+<ul>
+<li>Since manufacturing cost is 0 for software, might believe it’s also 0 to remanufacture how the customer wants</li>
+<li>This also ignores the cost of design and test</li>
+</ul></li>
+</ul>
+</div>
+<div id="size-scrum" class="section level2">
+<h2>10.1 Size &amp; Scrum</h2>
+</div>
+<div id="pair-programming" class="section level2">
+<h2>10.2 Pair Programming</h2>
+</div>
+</div>
+<div id="saas-framework-introduction-to-ruby" class="section level1">
+<h1>3. SaaS Framework: Introduction to Ruby</h1>
+<div id="overview-three-pillars-of-ruby" class="section level2">
+<h2>3.1 Overview &amp; Three Pillars of Ruby</h2>
+<ul>
+<li>Let’s start with this laundry list: Ruby is:
+<ul>
+<li>An <strong><em>interpreted language</em></strong> - so you don’t have to compile it</li>
+<li>It’s <strong><em>object oriented</em></strong>
+<ul>
+<li><em>Everything<strong> is an </strong></em>object***</li>
+<li>Every operation is a *<strong>method</strong> called on some object</li>
+</ul></li>
+<li>It’s <strong><em>dynamically typed</em></strong>: objects have types but variables don’t</li>
+<li>It’s a <strong><em>dynamic language</em></strong>
+<ul>
+<li>allows you to add &amp; modify code at runtime <strong><em>(metaprogramming)</em></strong></li>
+<li>can ask objects about themseles <strong><em>(reflection)</em></strong></li>
+<li>in a sense <em>all</em> programming is <em>metaprogramming</em></li>
+</ul></li>
+</ul></li>
+<li><em>symbols</em> vs <em>strings</em> use case
+<ul>
+<li>Symbols denote specialness. Whenever a method takes in a symbol, it could imply that that symbol is one of a small number of inputs that that method could understand, and it is not prepared to deal with arbitrary strings.</li>
+</ul></li>
+<li><strong>Methods</strong>
+<ul>
+<li>Everything except fixnums(integers) is passed by reference</li>
+<li>When a method returns an array of stuff, you can call it and assign it to a single variable, which will then be an array, or you can assign it to a list of variables.</li>
+</ul></li>
+<li><strong>Basic Constructs</strong>
+<ul>
+<li>Statements can end with a new line or a semi colon - but prefer to use newline if parsing is unambiguous
+<ul>
+<li><p>Below we have 2 duplicate statements, but one of them is wrong because of where the line break is placed.</p>
+<pre class="ruby"><code># correct linebreak
+raise(&#39;Boom&#39;) unless
+  ship_stable
+
+# incorrect linebreak
+raise (&#39;Boom&#39;)
+  unless ship_stable</code></pre></li>
+<li><p>Essentially, <code>raise('Boom')</code> is a valid ruby statement, so it evaluates it on its own because of the newline. Don’t make this mistake</p></li>
+</ul></li>
+<li>Basic comparisons and Operators
+<ul>
+<li><code>=~</code>, <code>!~</code> - are used in regular expressions.</li>
+</ul></li>
+</ul></li>
+<li><strong>Strings and Regular Expressions</strong>
+<ul>
+<li><p><code>"string"</code>,<code>%Q{string}</code>,<code>'string'</code>,<code>%q{string}</code></p>
+<ul>
+<li>The advantage of the %Q/q representation is you can then add double quotes/single quotes without having to escape the string.</li>
+</ul></li>
+<li><p>With double quoted strings, you can interpolate an <em>expression</em> into the string. With single quoted strings, though, you can’t.</p></li>
+<li><p>matching a string with a regexp:</p>
+<pre class="ruby"><code>&quot;dtuiyot@colgate.edu&quot; =~ /(.*)@(.*)\.edu/i
+
+#OR
+
+/(.*)@(.*)\.edu/i =~ &quot;dtuiyot@colgate.edu&quot;</code></pre>
+<ul>
+<li>These expressions will return true.</li>
+<li>If no match, value is false</li>
+<li>If it’s a match, value is non-false, and <code>$1, $2, ... $n</code> capture parenthesized groups - $1 =&gt; “dtuiyot”, $2 =&gt; "colgate</li>
+</ul></li>
+<li><p>The slashes <code>/ ... /</code> are the most common idiom for writing regular expressions. You can also use <code>%r{(.*)$}i</code> or <code>Regexp.new('(.*)$', Regexp::IGNORECASE)</code></p></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="everything-is-an-object-every-operation-is-a-method-call" class="section level1">
+<h1>3.2/3 Everything is an Object, Every Operation is a Method Call</h1>
+<ul>
+<li><p>Even the lowly integer and nil are objects and the only way to get shit done is to call methods on these objects.</p>
+<pre class="ruby"><code>5.days.ago # will get you how many seconds since from 5 days ago
+50.methods # will ask how what kind of methods the number can respons to
+34.respond_to?(:to_sym) # ask if a number responds to that method specifically</code></pre></li>
+<li><p>Essentially, all the operations or methods are just syntactic sugar around the <code>send</code> language primitive. This says <em>“take this <code>method</code> and send it to the <code>receiver</code> (the object).”</em></p></li>
+<li><p>Here ruby only cares about whether this receiver knows how to handle that method.</p>
+<pre class="ruby"><code>1 + 2 # =&gt; 1.send(:+, 2)
+my_str.length       =&gt; my_str.send(:length)
+my_array[4]         =&gt; my_array.send(:[], 4)
+my_array[3] = &#39;foo&#39; =&gt; my_array.send(:[]=, 3, &quot;foo&quot;)
+if (var==2)...      =&gt; var.send(:==, 2)
+my_func(z)          =&gt; self.send(:my_func, z)</code></pre>
+<ul>
+<li><code>self</code> here is an implicit receiver.</li>
+</ul></li>
+<li><p><strong><em>REMEMBER</em></strong></p>
+<ul>
+<li><strong>a.b</strong> means: method call <strong>b</strong> on object <strong>a</strong>
+<ul>
+<li><strong>a</strong> is the <em>receiever</em> to which you <em>send</em> that method, assuming that <strong>a</strong> can/will <em>respond to</em> that method</li>
+</ul></li>
+<li><strong>a.b</strong> does not mean:
+<ul>
+<li><strong>b</strong> is an instance variable of <strong>a</strong></li>
+<li><strong>a</strong> is a data structure and <strong>b</strong> is a member</li>
+</ul></li>
+</ul></li>
+<li><p><strong>Poetry Mode in Action</strong></p>
+<ul>
+<li>It’ll get more natural and intuitive to figure out when to leave out parenthesis and/or braces. If the parser doesn’t get confused, it’s fine to do it and then it’ll read just like English.</li>
+<li>When parenthesis are optional, i.e. when the parsing is clear, Ruby allows us to omit parenthesis</li>
+<li>When the context is unambiguous, we can also omit braces around hashes.</li>
+</ul></li>
+</ul>
+</div>
+<div id="ruby-oop" class="section level1">
+<h1>3.4 Ruby OOP</h1>
+<p>Some clarifications
+* There is no notion of a public instance/class variable - to access this you need to define a <em>setter</em>.</p>
+<pre class="ruby"><code>...
+# For class variables
+@@bank_name = &quot;NBT&quot;
+def self.bank_name
+  @@bank_name
+end
+
+# OR
+def NameOfClass.bank_name
+  @@bank_name
+end
+
+@balance = 4
+def balance
+  @balance
+end
+...</code></pre>
+<ul>
+<li>Shortcut to the getters/setters is the <code>attr_accessor</code> method - which simplifies that code. This method uses <em>metaprogramming</em> - when you call <code>attr_accessor</code>, you are essentially asking for Ruby to create those two methods that you replaced.</li>
+</ul>
+<p><strong>Review: Ruby’s Distinguishing Features</strong>
+* Highly Object Oriented
+* everything is an object
+* class, instance variables are invisible outside class (use getters/setters)
+* no multiple inheritance - instead, <em>mixins</em> are used
+* Everything is a method call
+* usually only care whether receiver responds to that call
+* most “operators” are really just instance methods
+* dynamically typed: objects have types, variables don’t
+* Expression-orinted: most methods nondestructive
+* e.g. [array] + [array] returns new object
+* Exceptions - <code>&lt;&lt;</code>, some destructive methods (<code>sort</code> vs <code>sort!</code>)
+* Evidently, you <strong>CAN</strong> add methods to an in built object</p>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+</div>
+
+  </article>
+</section>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js" id="MathJax-script"></script>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [
+          ['$', '$'], ['\\(', '\\)']
+        ],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+      
+        ©
+        
+        2020
+         Desmond Tuiyot 
+      
+      
+         · 
+        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+      
+      
+    </section>
+  </footer>
+
+    </main>
+
+    
+
+    
+
+    
+
+  </body>
+
+</html>

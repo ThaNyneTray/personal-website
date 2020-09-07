@@ -1,0 +1,54 @@
+---
+title: Git Notes
+author: Desmond Tuiyot
+date: '2020-08-13'
+slug: git-notes
+categories: []
+tags:
+  - git
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="git-branches" class="section level2">
+<h2>Git Branches</h2>
+<p><strong>How Git Stores Data (briefly)</strong></p>
+<ul>
+<li>Git stores data as a series of <strong>snapshots</strong>.</li>
+<li>When you make a commit, git creates a <strong>commit object</strong> which contains:
+<ul>
+<li>a pointer to the snapshot of the content you staged</li>
+<li>a pointer to any previous commit/commits</li>
+<li>the name and email of who made the commit</li>
+</ul></li>
+<li>This commit object will not point directly to the snapshots of the staged contents. Rather, running a commit checksums the subdirectories (if any) and creates a <strong>tree object</strong> that lists the contents of the directory.</li>
+<li>The commit oject points to this tree object.</li>
+</ul>
+<p><strong>How branches work</strong></p>
+<ul>
+<li>A branch is essentially just a pointer to these commit objects.</li>
+<li>The default branch happens to be <strong>master</strong>, which is created when running <code>git init</code> and is no different from any other branch.</li>
+<li>Creating a new branch - <code>git branch &lt;branch-name&gt;</code></li>
+<li>Switching to the new branch - <code>git checkout &lt;branch-name&gt;</code></li>
+<li>Shorthand for the above - <code>git checkout -b &lt;branch-name&gt;</code></li>
+<li>Showing the commit history of the current branch - <code>git log</code>
+<ul>
+<li>of a specific branch - <code>git log &lt;branch-name&gt;</code></li>
+<li>of all branches - <code>git log --all</code></li>
+<li>of all branches, with more info - <code>git log --oneline --decorate --graph --all</code></li>
+</ul></li>
+<li>Merging current branch to specific other branche - <code>git merge &lt;branch-to-merge&gt;</code></li>
+<li>Deleting a branch that you no longer need - <code>git branch -d &lt;branch-name&gt;</code></li>
+<li>Sometimes you get conflicts while merging
+<ul>
+<li>Run <code>git status</code> to see what files are unmerged and have conflict</li>
+<li>You can choose one file over the other, or just modify them to look the same in both branches, then merge.</li>
+<li><code>git add</code> marks them as resolved on git</li>
+<li><code>git mergetool</code> is a graphical tool for resolving conflicts</li>
+</ul></li>
+</ul>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+</div>

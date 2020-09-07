@@ -1,0 +1,24 @@
+---
+title: Coding Challenges
+author: Desmond Tuiyot
+date: '2020-08-10'
+slug: coding-challenges
+categories: []
+tags:
+  - insights
+  - errors
+  - algorithms
+  - coding challenges
+  - leetcode
+  - problem solving
+---
+
+## Insights, Techniques, Concepts, etc
+
+**238:Product of Array Except Self**
+
+* Here we come up with an approach by solving 2 simpler problems and combining them: get the product of all elements preceding the current element, and those succeeding the current element.
+
+  
+  
+## Common Errors and Mistakes

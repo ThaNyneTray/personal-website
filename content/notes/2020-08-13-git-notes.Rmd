@@ -1,0 +1,49 @@
+---
+title: Git Notes
+author: Desmond Tuiyot
+date: '2020-08-13'
+slug: git-notes
+categories: []
+tags:
+  - git
+---
+
+## Git Branches
+
+**How Git Stores Data (briefly)**
+
+* Git stores data as a series of **snapshots**.
+* When you make a commit, git creates a **commit object** which contains:
+  * a pointer to the snapshot of the content you staged
+  * a pointer to any previous commit/commits
+  * the name and email of who made the commit
+* This commit object will not point directly to the snapshots of the staged contents. Rather, running a commit checksums the subdirectories (if any) and creates a **tree object** that lists the contents of the directory.
+* The commit oject points to this tree object.
+
+**How branches work**
+
+* A branch is essentially just a pointer to these commit objects. 
+* The default branch happens to be **master**, which is created when running `git init` and is no different from any other branch.
+* Creating a new branch - `git branch <branch-name>`
+* Switching to the new branch - `git checkout <branch-name>`
+* Shorthand for the above - `git checkout -b <branch-name>`
+* Showing the commit history of the current branch - `git log`
+  * of a specific branch - `git log <branch-name>`
+  * of all branches - `git log --all`
+  * of all branches, with more info - `git log --oneline --decorate --graph --all`
+* Merging current branch to specific other branche - `git merge <branch-to-merge>`
+* Deleting a branch that you no longer need - `git branch -d <branch-name>`
+* Sometimes you get conflicts while merging
+  * Run `git status` to see what files are unmerged and have conflict
+  * You can choose one file over the other, or just modify them to look the same in both branches, then merge.
+  * `git add` marks them as resolved on git
+  * `git mergetool` is a graphical tool for resolving conflicts
+
+
+
+
+
+
+
+
+# References

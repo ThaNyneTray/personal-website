@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+
+    <meta name="author" content="Desmond Tuiyot">
+    <meta name="description" content="Real Python: TDD in PythonThe TDD RoadWrite a failing testMake it pass by doing the simplest thing possibleRefactor your code while keeping tests passingRepeat until your acceptance test is greenWhere to Write My TestsCreate a tests.py file in my top level folder - this is so that the tests file can import all other relevant files.If there file gets too big, you can split them into different modulesHow to Structure a TestFirst, decide:What will you be testing?">
+    <meta name="keywords" content="blog, developer, personal, data analyst">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Testing Code"/>
+<meta name="twitter:description" content="Real Python: TDD in PythonThe TDD RoadWrite a failing testMake it pass by doing the simplest thing possibleRefactor your code while keeping tests passingRepeat until your acceptance test is greenWhere to Write My TestsCreate a tests.py file in my top level folder - this is so that the tests file can import all other relevant files.If there file gets too big, you can split them into different modulesHow to Structure a TestFirst, decide:What will you be testing?"/>
+
+    <meta property="og:title" content="Testing Code" />
+<meta property="og:description" content="Real Python: TDD in PythonThe TDD RoadWrite a failing testMake it pass by doing the simplest thing possibleRefactor your code while keeping tests passingRepeat until your acceptance test is greenWhere to Write My TestsCreate a tests.py file in my top level folder - this is so that the tests file can import all other relevant files.If there file gets too big, you can split them into different modulesHow to Structure a TestFirst, decide:What will you be testing?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/notes/testing-code/" />
+<meta property="article:published_time" content="2020-08-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-08-19T00:00:00+00:00" />
+
+
+    
+      <base href="/notes/testing-code/">
+    
+    <title>
+  Testing Code · Desmond Tuiyot
+</title>
+
+    
+      <link rel="canonical" href="/notes/testing-code/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/image/icons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/image/icons/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.72.0" />
+  </head>
+
+  
+  
+  <body class="colorscheme-light">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Desmond Tuiyot
+    </a>
+    
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/post/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/notes/">Notes On Everything</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/projects/">Projects</a>
+          </li>
+        
+      
+      
+    </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container page">
+  <article>
+    <header>
+      <h1>Testing Code</h1>
+    </header>
+
+    
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="real-python-tdd-in-python" class="section level2">
+<h2>Real Python: TDD in Python</h2>
+<ul>
+<li><strong>The TDD Road</strong>
+<ol style="list-style-type: decimal">
+<li>Write a failing test</li>
+<li>Make it pass by doing the simplest thing possible</li>
+<li>Refactor your code while keeping tests passing</li>
+<li>Repeat until your acceptance test is green</li>
+</ol></li>
+<li><strong>Where to Write My Tests</strong>
+<ul>
+<li>Create a <code>tests.py</code> file in my top level folder - this is so that the tests file can import all other relevant files.</li>
+<li>If there file gets too big, you can split them into different modules</li>
+</ul></li>
+<li><strong>How to Structure a Test</strong>
+<ul>
+<li>First, decide:
+<ol style="list-style-type: decimal">
+<li>What will you be testing?</li>
+<li>Are you writing a unit test or an integration test?</li>
+</ol></li>
+<li>Then the structure, loosely, should be
+<ol style="list-style-type: decimal">
+<li>Create my inputs</li>
+<li>Execute the code being tested, capturing the output</li>
+<li>Compare the output with the desired result</li>
+</ol></li>
+</ul></li>
+<li><strong>How to Write Assertions</strong>
+<ul>
+<li>An <strong>assertion</strong> is a test that validates an output against a known response.</li>
+<li>General best practices when it comes to assertions:
+<ul>
+<li>Make sure the tests are repeatable; i.e. they produce the same result every time</li>
+<li>Try and assert the results that relate to my input data</li>
+</ul></li>
+</ul></li>
+<li><strong>Side Effects</strong>
+<ul>
+<li>Side effects are changes to the environment made when some code is executed - could be change in attributes of a class, or updating a database</li>
+<li>Decide if the side effect is being tested</li>
+<li>If the unit of code I intend to test has many side effects, I might be breaking the <em>Single Responsibility Principle</em>.
+<ul>
+<li>This means that the piece of code is doing too much and needs to be refactored</li>
+</ul></li>
+<li>Adhering to the <em>SRP</em> makes us write code for which good tests can be made, and ultimately leads to better applications.</li>
+</ul></li>
+<li><strong>See original page for code samples</strong></li>
+<li><strong>Testing flask applications</strong>
+<ul>
+<li>Flask requires that the app is imported and set in test mode
+<ul>
+<li>Essentially, you can instantiate a test client to make any requests to any routes in my app</li>
+</ul></li>
+<li>All client instantiation is done in the <code>setUp</code> method</li>
+</ul></li>
+<li><strong>Handling Expected Failures</strong>
+<ul>
+<li>What happens when a bad value is provided? - use <code>.assertRaises(&lt;TypeOfError&gt;)</code> as a context manager. Then inside the <code>with</code> block execute the test steps</li>
+</ul></li>
+<li><strong>Isolating Behaviors in My Application</strong>
+<ul>
+<li>There are some simple techniques that can allow me to test parts of the application that have too many side effects
+<ul>
+<li>Refactoring so that my app is more in line with Single Responsibility Principle</li>
+<li>Mock out the relevant method and functions so that they have no side effects.</li>
+<li>Write intergration tests instead of unit tests</li>
+</ul></li>
+</ul></li>
+<li><strong>Writing Integration Tests</strong>
+<ul>
+<li>This is the testing of multiple components to ascertain that they work together correctly</li>
+<li>It might require acting like a consumer by:
+<ul>
+<li>Calling a HTTP REST API</li>
+<li>Calling a Python API</li>
+<li>Calling a web service</li>
+<li>Running a command line</li>
+</ul></li>
+<li>Each of these integration tests can be written by following the same structure as that of a unit test: Create Inputs -&gt; Execute Code, Capturing Output -&gt; Check Output Against Desired Reslts: This is the <strong>Input</strong>, <strong>Execute</strong>, <strong>Assert</strong> pattern.</li>
+<li>The difference between the 2 types is that integration tests will often have more side effects and require more <strong>fixtures</strong> (the inputs I create)</li>
+<li>You can separate these 2 tests by storing them in different folders under the <code>tests</code> package</li>
+</ul></li>
+<li><strong>Testing Data Driven Applications</strong>
+<ul>
+<li>These applications will depend on certain fixtures that represent data stores in order to be repeatable and predictable.</li>
+<li>You can store this test data in a <strong>fixtures</strong> folder under your <strong>integration</strong> folder.</li>
+</ul></li>
+</ul>
+</div>
+<div id="flask-book-on-testing" class="section level2">
+<h2>Flask Book on Testing</h2>
+<ul>
+<li><strong>2 Important Reasons for TDD</strong>
+<ul>
+<li>Used to confirm that new code is working as expected</li>
+<li>Also used to make sure that code doesn’t <em>regress</em> when modified - i.e. it still does the job as before</li>
+</ul></li>
+<li><strong>Obtaining Code Coverage Reports</strong>
+<ul>
+<li><strong>Code coverage</strong> tools measure how much of my app is covered by unit tests and can provide a detailed report of what aspects of my code are not being unit tested.</li>
+<li></li>
+</ul></li>
+</ul>
+</div>
+<div id="references" class="section level2">
+<h2>References</h2>
+</div>
+
+  </article>
+</section>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js" id="MathJax-script"></script>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [
+          ['$', '$'], ['\\(', '\\)']
+        ],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+      
+        ©
+        
+        2020
+         Desmond Tuiyot 
+      
+      
+         · 
+        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+      
+      
+    </section>
+  </footer>
+
+    </main>
+
+    
+
+    
+
+    
+
+  </body>
+
+</html>

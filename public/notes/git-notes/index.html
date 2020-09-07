@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+
+    <meta name="author" content="Desmond Tuiyot">
+    <meta name="description" content="Git BranchesHow Git Stores Data (briefly)
+Git stores data as a series of snapshots.When you make a commit, git creates a commit object which contains:a pointer to the snapshot of the content you stageda pointer to any previous commit/commitsthe name and email of who made the commitThis commit object will not point directly to the snapshots of the staged contents.">
+    <meta name="keywords" content="blog, developer, personal, data analyst">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Git Notes"/>
+<meta name="twitter:description" content="Git BranchesHow Git Stores Data (briefly)
+Git stores data as a series of snapshots.When you make a commit, git creates a commit object which contains:a pointer to the snapshot of the content you stageda pointer to any previous commit/commitsthe name and email of who made the commitThis commit object will not point directly to the snapshots of the staged contents."/>
+
+    <meta property="og:title" content="Git Notes" />
+<meta property="og:description" content="Git BranchesHow Git Stores Data (briefly)
+Git stores data as a series of snapshots.When you make a commit, git creates a commit object which contains:a pointer to the snapshot of the content you stageda pointer to any previous commit/commitsthe name and email of who made the commitThis commit object will not point directly to the snapshots of the staged contents." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/notes/git-notes/" />
+<meta property="article:published_time" content="2020-08-13T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-08-13T00:00:00+00:00" />
+
+
+    
+      <base href="/notes/git-notes/">
+    
+    <title>
+  Git Notes · Desmond Tuiyot
+</title>
+
+    
+      <link rel="canonical" href="/notes/git-notes/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/image/icons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/image/icons/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.72.0" />
+  </head>
+
+  
+  
+  <body class="colorscheme-light">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Desmond Tuiyot
+    </a>
+    
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/post/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/notes/">Notes On Everything</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/projects/">Projects</a>
+          </li>
+        
+      
+      
+    </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container page">
+  <article>
+    <header>
+      <h1>Git Notes</h1>
+    </header>
+
+    
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="git-branches" class="section level2">
+<h2>Git Branches</h2>
+<p><strong>How Git Stores Data (briefly)</strong></p>
+<ul>
+<li>Git stores data as a series of <strong>snapshots</strong>.</li>
+<li>When you make a commit, git creates a <strong>commit object</strong> which contains:
+<ul>
+<li>a pointer to the snapshot of the content you staged</li>
+<li>a pointer to any previous commit/commits</li>
+<li>the name and email of who made the commit</li>
+</ul></li>
+<li>This commit object will not point directly to the snapshots of the staged contents. Rather, running a commit checksums the subdirectories (if any) and creates a <strong>tree object</strong> that lists the contents of the directory.</li>
+<li>The commit oject points to this tree object.</li>
+</ul>
+<p><strong>How branches work</strong></p>
+<ul>
+<li>A branch is essentially just a pointer to these commit objects.</li>
+<li>The default branch happens to be <strong>master</strong>, which is created when running <code>git init</code> and is no different from any other branch.</li>
+<li>Creating a new branch - <code>git branch &lt;branch-name&gt;</code></li>
+<li>Switching to the new branch - <code>git checkout &lt;branch-name&gt;</code></li>
+<li>Shorthand for the above - <code>git checkout -b &lt;branch-name&gt;</code></li>
+<li>Showing the commit history of the current branch - <code>git log</code>
+<ul>
+<li>of a specific branch - <code>git log &lt;branch-name&gt;</code></li>
+<li>of all branches - <code>git log --all</code></li>
+<li>of all branches, with more info - <code>git log --oneline --decorate --graph --all</code></li>
+</ul></li>
+<li>Merging current branch to specific other branche - <code>git merge &lt;branch-to-merge&gt;</code></li>
+<li>Deleting a branch that you no longer need - <code>git branch -d &lt;branch-name&gt;</code></li>
+<li>Sometimes you get conflicts while merging
+<ul>
+<li>Run <code>git status</code> to see what files are unmerged and have conflict</li>
+<li>You can choose one file over the other, or just modify them to look the same in both branches, then merge.</li>
+<li><code>git add</code> marks them as resolved on git</li>
+<li><code>git mergetool</code> is a graphical tool for resolving conflicts</li>
+</ul></li>
+</ul>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+</div>
+
+  </article>
+</section>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js" id="MathJax-script"></script>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [
+          ['$', '$'], ['\\(', '\\)']
+        ],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+      
+        ©
+        
+        2020
+         Desmond Tuiyot 
+      
+      
+         · 
+        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+      
+      
+    </section>
+  </footer>
+
+    </main>
+
+    
+
+    
+
+    
+
+  </body>
+
+</html>

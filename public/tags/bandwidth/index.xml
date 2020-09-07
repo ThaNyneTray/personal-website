@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>bandwidth on Desmond Tuiyot</title>
+    <link>/tags/bandwidth/</link>
+    <description>Recent content in bandwidth on Desmond Tuiyot</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 09 Aug 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/bandwidth/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Bandwidth API</title>
+      <link>/notes/bandwidth-api/</link>
+      <pubDate>Sun, 09 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/bandwidth-api/</guid>
+      <description>Messaging 101About Bandwidth
+It is a CPaaS provider - this is short for Communications Platforms as a Service - and it is the only CPaaS provider with its own national CLEC?? networkBillions of messages every month and 52m numbers on their networkWhat is a text message?
+It’s not any of those received from WhatsApp, GroupMe, or Messenger, or any other app like that.</description>
+    </item>
+    
+  </channel>
+</rss>

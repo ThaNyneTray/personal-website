@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1599186320188.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "6A3592AD",
+    "lastKnownWriteTime" : 1599186264,
+    "last_content_update" : 1599186264,
+    "path" : "~/DataScience/Personal Website/content/notes/2020-09-03-node-js-fundamentals.Rmd",
+    "project_path" : "content/notes/2020-09-03-node-js-fundamentals.Rmd",
+    "properties" : {
+        "cursorPosition" : "9,0",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

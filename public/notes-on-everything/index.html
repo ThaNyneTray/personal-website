@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="en">
+
+    <meta name="author" content="Desmond Tuiyot">
+    <meta name="description" content="Disclaimer:These are my personal notes on things I learn. They are neither extensive nor comprehensive and will probably not be useful to you. There may be a lot of mistakes and errors because this space represents my attempts at understanding the things I learn.
+StatisticsProbabilityMachine LearningAlgorithms &amp; Data StructuresDynamic Programming - PatternsMinimum/Maximum path to reach a target
+These are straightforward optimization questions.">
+    <meta name="keywords" content="blog, developer, personal, data analyst">
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Notes On Everything"/>
+<meta name="twitter:description" content="Disclaimer:These are my personal notes on things I learn. They are neither extensive nor comprehensive and will probably not be useful to you. There may be a lot of mistakes and errors because this space represents my attempts at understanding the things I learn.
+StatisticsProbabilityMachine LearningAlgorithms &amp; Data StructuresDynamic Programming - PatternsMinimum/Maximum path to reach a target
+These are straightforward optimization questions."/>
+
+    <meta property="og:title" content="Notes On Everything" />
+<meta property="og:description" content="Disclaimer:These are my personal notes on things I learn. They are neither extensive nor comprehensive and will probably not be useful to you. There may be a lot of mistakes and errors because this space represents my attempts at understanding the things I learn.
+StatisticsProbabilityMachine LearningAlgorithms &amp; Data StructuresDynamic Programming - PatternsMinimum/Maximum path to reach a target
+These are straightforward optimization questions." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/notes-on-everything/" />
+<meta property="article:published_time" content="2020-05-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-05-24T00:00:00+00:00" />
+
+
+    
+      <base href="/notes-on-everything/">
+    
+    <title>
+  Notes On Everything · Desmond Tuiyot
+</title>
+
+    
+      <link rel="canonical" href="/notes-on-everything/">
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather:300,700%7CSource+Code+Pro:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="/css/coder.min.a4f332213a21ce8eb521670c614470c58923aaaf385e2a73982c31dd7642decb.css" integrity="sha256-pPMyITohzo61IWcMYURwxYkjqq84XipzmCwx3XZC3ss=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="/image/icons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/image/icons/favicon-16x16.png" sizes="16x16">
+
+    <meta name="generator" content="Hugo 0.72.0" />
+  </head>
+
+  
+  
+  <body class="colorscheme-light">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      Desmond Tuiyot
+    </a>
+    
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/post/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/notes/">Notes On Everything</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="/projects/">Projects</a>
+          </li>
+        
+      
+      
+    </ul>
+    
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container page">
+  <article>
+    <header>
+      <h1>Notes On Everything</h1>
+    </header>
+
+    
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="disclaimer" class="section level2">
+<h2>Disclaimer:</h2>
+<p>These are my personal notes on things I learn. They are neither extensive nor comprehensive and will probably not be useful to you. There may be a lot of mistakes and errors because this space represents my attempts at understanding the things I learn.</p>
+</div>
+<div id="statistics" class="section level2">
+<h2>Statistics</h2>
+</div>
+<div id="probability" class="section level2">
+<h2>Probability</h2>
+</div>
+<div id="machine_learning" class="section level2">
+<h2>Machine Learning</h2>
+</div>
+<div id="algos_data_structures" class="section level2">
+<h2>Algorithms &amp; Data Structures</h2>
+<div id="dynamic-programming---patterns" class="section level3">
+<h3>Dynamic Programming - Patterns</h3>
+<ol style="list-style-type: decimal">
+<li>Minimum/Maximum path to reach a target<br />
+These are straightforward optimization questions. You have a target to reach and at each step, you have some number of possible paths to take. The approach:</li>
+</ol>
+<ul>
+<li>The subproblem is the minimum/maximum path to step <code>i</code>, where <code>0&lt;=i&lt;=n</code></li>
+<li>Choose the minimum/maximum path amongst all possible paths to reach the current state. Then add the value for the current state.</li>
+<li>Generate optimal solutions for all values leading up to and including the target, then return the value for the target.
+For each problem, I have to first think about the base cases, which I use to build the solution once I start iterating.<br />
+The subproblem in this family of problems seem to be primarily prefixes - At subproblem <code>DP(i)</code>, I’m assuming that all the subproblems <code>DP(i)</code> depends on are already solved.</li>
+</ul>
+</div>
+</div>
+<div id="python" class="section level2">
+<h2>Python</h2>
+</div>
+<div id="rshiny" class="section level2">
+<h2>RShiny</h2>
+<div id="inputs-outputs" class="section level3">
+<h3>Inputs &amp; Outputs</h3>
+<div id="inputs" class="section level4">
+<h4>Inputs</h4>
+<p>textInput()<br />
+sliderInput()<br />
+selectInput()<br />
+numericalInput()<br />
+dateRangeInput()<br />
+all inputs have the format</p>
+<pre class="r"><code>__input(&quot;inputId&quot;,
+        &quot;label&quot;,
+        unique_param1, unique_param2, ...)</code></pre>
+</div>
+<div id="render-functions" class="section level4">
+<h4>Render Functions</h4>
+<p>Render functions are used to built outputs in the server based on
+inputs and possibly other stuff</p>
+<pre class="r"><code>renderText()
+renderTable()
+renderImage()
+renderPlot()</code></pre>
+</div>
+<div id="output-functions" class="section level4">
+<h4>Output Functions</h4>
+<p>Output functions are used in the ui to display the result built by
+render functions in the server</p>
+<pre class="r"><code>textOutput()
+plotOutput()
+tableOutput() or dataTableOutput()
+imageOutput()</code></pre>
+<div id="non-shiny-output-and-render-functions" class="section level5">
+<h5>Non-shiny output and render functions</h5>
+<p>DT, leaflet, and plotly -&gt; interactive data tables, maps, and plots as Shiny outputs<br />
+In order to add an output to a Shiny app, we need to:<br />
+1. Create the output -&gt; could be a plot, table, string, etc
+2. Render the output in the <code>server</code> function using appropriate <code>Render___</code> function.
+3. Assign this render to a variable name prefixed with <code>output$___</code>
+3. Use the corresponding <code>___Output</code> and pass in the variable name
+### Layouts and Themes
+#### Layouts
+1. Sidebar layouts</p>
+<pre class="r"><code>sidebarLayout(
+  sidebarPanel(insert input/output here),
+  mainPanel(insert input/output here)
+)</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Tab layouts</li>
+</ol>
+<pre class="r"><code>sidebarLayout(
+  sidebarPanel(insert input/output here),
+  mainPanel(
+    
+    tabsetPanel(
+      tabPanel(),
+      tabPanel()
+    )
+  )
+)</code></pre>
+</div>
+</div>
+<div id="themes" class="section level4">
+<h4>Themes</h4>
+<p>Add a theme selector to your Ui</p>
+<pre class="r"><code>shinythemes::themeSelector()</code></pre>
+<p>Then you can add it to your U<br />
+### Building The App: A Process<br />
+1. Add inputs to the <code>ui()</code>
+2. Add outputs to the <code>ui()</code>/<code>server()</code>
+3. Modify the app layout in the <code>ui()</code>
+4. Update the output in the <code>server()</code> to incorporate the input<br />
+## References {#references}</p>
+</div>
+</div>
+</div>
+
+  </article>
+</section>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js" id="MathJax-script"></script>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [
+          ['$', '$'], ['\\(', '\\)']
+        ],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+
+      </div>
+
+      
+  <footer class="footer">
+    <section class="container">
+      
+      
+        ©
+        
+        2020
+         Desmond Tuiyot 
+      
+      
+         · 
+        Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+      
+      
+    </section>
+  </footer>
+
+    </main>
+
+    
+
+    
+
+    
+
+  </body>
+
+</html>

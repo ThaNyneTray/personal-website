@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>git on Desmond Tuiyot</title>
+    <link>/tags/git/</link>
+    <description>Recent content in git on Desmond Tuiyot</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 13 Aug 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Git Notes</title>
+      <link>/notes/git-notes/</link>
+      <pubDate>Thu, 13 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/git-notes/</guid>
+      <description>Git BranchesHow Git Stores Data (briefly)
+Git stores data as a series of snapshots.When you make a commit, git creates a commit object which contains:a pointer to the snapshot of the content you stageda pointer to any previous commit/commitsthe name and email of who made the commitThis commit object will not point directly to the snapshots of the staged contents.</description>
+    </item>
+    
+  </channel>
+</rss>

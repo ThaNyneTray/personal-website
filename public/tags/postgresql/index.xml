@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>postgresql on Desmond Tuiyot</title>
+    <link>/tags/postgresql/</link>
+    <description>Recent content in postgresql on Desmond Tuiyot</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 17 Aug 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/postgresql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SQLAlchemy - the basics</title>
+      <link>/2020/08/17/sqlalchemy-the-basics/</link>
+      <pubDate>Mon, 17 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/08/17/sqlalchemy-the-basics/</guid>
+      <description>Introduction to SQLAlchemysQLAlchemyThere’s 3 ways of interacting with database data in SQLAlchemy:Raw SQLSQL Expression LanguageORMSQLAlchemy allows developers to use pure sql, unlike other ORMs.The SQL Expression API allows us to build sql queries using Python objects and operators - it is an abstraction over pure sql and abstracts away various implementation differences between databases.The SQLAlchemy ORM is built on SQL Expression Language and allows us to associate Python classes to database tables.</description>
+    </item>
+    
+  </channel>
+</rss>

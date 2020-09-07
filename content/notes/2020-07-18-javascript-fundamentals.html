@@ -1,0 +1,1792 @@
+---
+title: Javascript Core Language
+author: Desmond Tuiyot
+date: '2020-07-18'
+slug: javascript-core-language
+categories: []
+tags:
+  - javascript
+  - language fundamentals
+bibliography: ref.bib
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="javascript-getting-started" class="section level1">
+<h1>Javascript: Getting Started</h1>
+<div id="introduction-to-javascript" class="section level2">
+<h2>1. Introduction to Javascript</h2>
+<ul>
+<li>On managing packages.
+<ul>
+<li>User <code>npm install</code> in the command line - this will check through the <strong>packages.json</strong> file and install any dependencies listed there.</li>
+<li>In this case the package <code>lite-server</code> is installed.</li>
+<li><code>npm</code> is a package manager for Node.js environment. I’ll need to look into this</li>
+</ul></li>
+<li><em>CTRL+`</em> in vscode brings up the terminal</li>
+<li>For safety reasons, or some such thing, always run <code>npm install</code> on the command prompt, outside of vscode - never using the terminal in the editor</li>
+<li>Use <code>npm run start</code> which starts up lite server. One of the advantages of lite server is that my site automatically refreshes once I make changes and save.</li>
+</ul>
+</div>
+<div id="javascript-beginnings" class="section level2">
+<h2>2. Javascript Beginnings</h2>
+<ul>
+<li><strong>Adding Javascript Code to an HTML doc:</strong>
+<ul>
+<li>We can place javascript code between script tags at the bottom of our html document.
+<ul>
+<li><code>alert('yo_message')</code> - it’s a function that displays its input string as a pop up on the web page</li>
+</ul></li>
+<li>It’s really much better to separate the javascript code from the html code.
+<ul>
+<li>Import the script with <code>&lt;script src="./filename.js"&gt;&lt;\\script&gt;</code></li>
+<li><em>Aside</em> - <code>&lt;script ... /&gt;</code> is wrong HTML, even though it is correct XML</li>
+</ul></li>
+<li>Write code to change text content of an html element
+<ul>
+<li><code>document.getElementById('element_id').textContent = 'some text'</code></li>
+</ul></li>
+</ul></li>
+<li><strong>Formatting Code</strong> - this has to do with white spaces. Turns out javascript ignores a lot of white space including spaces, tabs, newlines, and keeps code working. Interesting!</li>
+<li><strong>Detecting &amp; Fixing Errors</strong>
+<ul>
+<li>You can find javascript errors <code>Inspect</code>ing the page and clicking on console.</li>
+<li>You could also print out stuff to the console using <code>console.log(some_message)</code>. This is useful in debugging as well as other scenarios as well.</li>
+</ul></li>
+<li><strong>Case Sensitivity</strong>
+<ul>
+<li>Javascript is case sensitive</li>
+<li>Concerning naming of variables/objects/functions - use camelCase</li>
+</ul></li>
+<li><strong>Comments</strong>
+<ul>
+<li><code>//</code> - single line comment</li>
+<li><code>/*...*/</code> - multi line comment</li>
+</ul></li>
+</ul>
+</div>
+<div id="variables-constants" class="section level2">
+<h2>3. Variables &amp; Constants</h2>
+<ul>
+<li><strong>Declaring Variables</strong>
+<ul>
+<li><p>use keyword <code>let</code> when declaring variables</p>
+<pre class="javascript"><code>let word = &#39;hehe&#39;;
+let num = 1234;
+let done = true;</code></pre></li>
+<li><p>When declaring multiple variables, the best practice is to have one <code>let</code> and assign the variable names, separated by commas:</p>
+<pre class="javascript"><code>let word = &#39;hehe&#39;,
+    num = 1234,
+    done = true;</code></pre></li>
+<li><p>You can declare a variable without actually initializing it - in this case it will have the <code>undefined</code> type.</p>
+<pre class="javascript"><code>let word;
+word = &#39;hehe&#39;</code></pre></li>
+</ul></li>
+<li><strong>Naming Variables: Rules</strong>
+<ul>
+<li>Start with one of <code>_</code>, <code>$</code>, <code>letter</code></li>
+<li>Followed by one or more <code>_</code>, <code>$</code>, <code>letter</code>, or <code>number</code></li>
+<li>Why is it the case in most languages that you can’t start a variable name with a number?</li>
+<li>Use camelCase for variables</li>
+<li><code>_accountName</code> - the initial underscore indicates that the variable will be private in some way</li>
+<li><code>__proto__</code> - the double underscores are usually used for indicating non-standard features?</li>
+<li><code>$accountNumber</code> - the dollar sign start is usually reserved for automatically generated code. It’s generally discouraged as a naming practice</li>
+<li><code>_123</code>, <code>a</code> - these are non-descriptive. Try to use variable names that describe the data you are storing.</li>
+</ul></li>
+<li><strong>Constants</strong>
+<ul>
+<li><code>const price = 99.99</code></li>
+<li>In the case of a constant, you have to initialize it on declaration.</li>
+</ul></li>
+<li><strong>The Old Way: the <code>var</code> Keyword</strong>
+<ul>
+<li><code>var price = 2;</code></li>
+<li>The var keyword has a problem, though: when there are errors, you don’t get the error message you expect. For example:
+<ul>
+<li>Trying to use a variable before declaration doesn’t show any error messages</li>
+<li>Trying to print a variable to console before declaration prints out <code>undefined</code>, when really the variable shouldn’t exist.</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="types-operators" class="section level2">
+<h2>4. Types &amp; Operators</h2>
+<ul>
+<li><strong>Numbers</strong>
+<ul>
+<li><p><code>typeof</code> - this is an operator that returns the type of the specified variable</p>
+<pre class="javascript"><code>let price = 999;
+showMessage(typeof price);
+&gt;&gt;&gt; number</code></pre></li>
+<li><p>There’s all the normal mathematical operators - <code>+</code>,<code>-</code>,<code>/</code>,<code>*</code>,<code>%</code></p></li>
+<li><p>In updating a variable, you can use the <code>+=</code> pattern, for all the mathematical operators</p></li>
+<li><p>There is also the <code>++</code>(increment) and <code>--</code>(decrement) operators</p>
+<ul>
+<li>These can either come before or after the variable and are a common source of errors in javascript.</li>
+<li><code>console.log(++price)</code> will increment price <em>before</em> printing to console.</li>
+<li><code>console.log(price++)</code> will increment price <em>after</em> printing to console.</li>
+<li>So in general, these operators come after the variable, then they will only increment once the statement that the variable is a part of is executed.</li>
+</ul></li>
+</ul></li>
+<li><strong>Operator Precedence</strong>
+<ul>
+<li>The precedence is as such:
+<ul>
+<li>First is <em>multiplication</em>, <em>division</em>, and <em>modulus</em>,</li>
+<li>Then we have <em>addition</em> and <em>subtraction</em> after</li>
+<li>Operators of the same precedence are evaluated left to right</li>
+<li>Use parenthesis to group variables and specify precedence</li>
+</ul></li>
+</ul></li>
+<li><strong>Number Precision</strong>
+<ul>
+<li>Javascript uses floating point numbers - these are not always precise.</li>
+<li>The addition <code>1.1 + 1.3</code> returns a floating point number of <code>2.4000000000000004</code></li>
+<li><strong>Why though?</strong></li>
+</ul></li>
+<li><strong>Negative Numbers</strong>
+<ul>
+<li>They work pretty much the same as positive numbers save for a few things</li>
+<li><code>2--2</code> This is wrong. When subtracting a negative number, you want to leave a space in between the minus sign and the negative number.</li>
+<li>Best practice is to use a parenthesis around the negative number to make your intention clear.
+<code>2 - (-2)</code></li>
+</ul></li>
+<li><strong>Strings</strong>
+<ul>
+<li><p>Both single quotes and double quotes are fine.</p></li>
+<li><p>Escape characters - as per any other language</p></li>
+<li><p>The interesting way to declare variables is through using a backtick</p></li>
+<li><p>First, you can insert variables inside strings initialized with backticks.</p></li>
+<li><p>You can also add newlines within the string. Remember though, that HTML essentially reduces any whitespace it finds into a single space, so this might not show on the webpage. But it’ll show on the console.</p>
+<pre class="javascript"><code>let someVar = &quot;Desmond&quot;
+let someString = `Hey ${someVar}`
+let newLines = `Hello World`</code></pre></li>
+</ul></li>
+<li><strong>Manipulating Strings</strong>
+<ul>
+<li><code>Concatenation</code> - use the <code>+</code> operator.</li>
+<li><code>myString.toLowerCase()</code>, <code>myString.toUpperCase()</code></li>
+<li><code>myString.substring(begin, end)</code> or <code>myString.substring(begin, end)</code> - here the <em>end</em> is non-inclusive.</li>
+<li>A common property <code>myString.length</code></li>
+<li>When adding a string and a number, javascript converts the number to string first, then concatenates it in any string.</li>
+</ul></li>
+<li><strong>Converting Strings &amp; Numbers</strong>
+<ul>
+<li>To convert from number to string, use <code>toString()</code> method.</li>
+<li>To convert from string to number:
+<ul>
+<li><code>let amount = Number.parseFloat("123.2)</code></li>
+<li>If <code>amount</code> wasn’t a string, then the function returns NaN. If <code>amount</code> starts with a number and includes non-numeric characters as well, then <code>parseFloat()/parseInt()</code> will convert those initially encountered numbers.</li>
+</ul></li>
+</ul></li>
+<li><strong>Boolean Variables</strong>
+<ul>
+<li><p><code>true</code> or <code>false</code></p></li>
+<li><p>We can also flip booleans</p>
+<pre><code>let saved = true;
+saved = !saved</code></pre></li>
+</ul></li>
+<li><strong>null and undefined types</strong>
+<ul>
+<li><code>undefined</code> is assigned by JS when variables that are declared but not initialized</li>
+<li><code>null</code> is assigned by a developer when they want to wipe out its previous value</li>
+<li>This is just best practice - we could just as easily set a variable to undefined</li>
+</ul></li>
+<li><strong>Objects &amp; Symbols</strong>
+<ul>
+<li><p>Objects are used to store related information together. Objects have variables in them that we call <code>properties</code>.</p>
+<pre class="javascript"><code>let person = {
+  firstName: &#39;Desmond&#39;,
+  lastName: &#39;Tuiyot&#39;
+};</code></pre></li>
+<li><p>Objects can have <code>methods</code> as well, in addition to properties.</p></li>
+<li><p>Symbols can be used as properties in an object, but it’s hidden.</p></li>
+</ul></li>
+</ul>
+<div id="more-on-symbols" class="section level3">
+<h3>4.1 More on Symbols</h3>
+<ul>
+<li><strong>Introduction</strong>
+<ul>
+<li><p>Again, this is a primitive</p></li>
+<li><p>The original goal was to provide globally unique variables that were kept private and for internal use only. However, the final implementation dropped the privacy aspect, but still kept the uniqueness side of it.</p>
+<pre class="js"><code>const sym1 = Symbol(&#39;1&#39;);
+const sym2 = Symbol(&#39;2&#39;);
+
+console.log(sym1 == sym2); //False</code></pre></li>
+<li><p>The string argument passed in do not actually affect the value of the symbol, rather they are useful for debugging purposes as nothing but a label for reference.</p></li>
+<li><p>The notation <code>Symbol()</code> isn’t a constructor, but a function.</p></li>
+<li><p>Since symbols are primitives, so like other primitives, they are immutable.</p>
+<pre class="js"><code>Symbol(&#39;2&#39;) = Symbol(&#39;4&#39;); 
+// you get a Reference Error here: invalid left hand side assignment</code></pre></li>
+<li><p>However, unlike other primitives which are often equal to other primitives of equivalent value, symbols always have their own unique identity. In this way, they behave just like objects.</p></li>
+</ul></li>
+<li><strong>So, what’s the deal with privacy?</strong>
+<ul>
+<li>Initially, they were to be unique, private values, but they are no longer private. Importantly, though, is that they can be accessed only in certain ways.
+<ul>
+<li>If an object has a symbol(s), you can see them when printing out the object to the console or using the method <code>Object.getOwnPropertySymbols()</code> on the object.</li>
+<li>They are not visible however, in a <code>for</code> loop. They also don’t appear as keys when using <code>Object.getOwnPropertyNames()</code> or <code>Object.keys()</code>. They also don’t appear when converting the object to JSON string.</li>
+</ul></li>
+</ul></li>
+<li><strong>When and how are they used?</strong>
+<ol style="list-style-type: decimal">
+<li>Unique property values that you don’t want the user to overwrite by mistake</li>
+<li>Unique keys for identifying object properties</li>
+</ol></li>
+<li><strong>Symbols are unique, until they aren’t</strong>
+<ul>
+<li>If you declare a new <code>Symbol()</code>, it creates a unique value for sure. However, you can also create one using <code>Symbol.for(key)</code> which creates a new value in the global symbol registry</li>
+<li>If it already exists, the symbol can be retrieved by calling <code>Symbol.for(key)</code> - if you declare two variables assigned to these 2, they are not actually unique</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="program-flow" class="section level2">
+<h2>5. Program Flow</h2>
+<ul>
+<li><p><strong>Conditionals using <code>if</code></strong></p>
+<pre class="javascript"><code>if (5===5){
+  // some code
+}</code></pre>
+<ul>
+<li><em>Code block</em> - code that exists between opening &amp; closing parenthesis</li>
+<li>use <code>===</code>, <code>!==</code> for strict equality/inequality - <code>'55'==55</code> evaluates to <code>true</code>, even though they are of different types.</li>
+</ul></li>
+<li><p><strong>Truthy &amp; Falsy Expressions</strong></p>
+<ul>
+<li>What is considered <code>falsy</code>? - <code>false</code>, <code>0</code>, the empty string <code>"", ''</code>, <code>null</code>, <code>undefined</code>, <code>NaN</code>.</li>
+<li>Everything else is <code>truthy</code> - the string <code>"0"</code> is also truthy, since it is a string, not a number. As a number, it is evaluates to false.</li>
+<li><code>+("2")</code> - simple way to convert a string to a number</li>
+<li><code>(1.1+1.3).toFixed(2)</code> would return <code>2.40</code> - 2 specifies that there should be 2 digits after the decimal. This function returns a string, not a number.
+<ul>
+<li>You always need to do this when comparing floating point numbers to a literal number.</li>
+</ul></li>
+<li><em>Remember that floating point arithmetic in javascript is not always accurate</em> - ** <em>WHY?</em> **</li>
+</ul></li>
+<li><p><strong>if … else</strong></p>
+<pre class="javascript"><code>if (cond1){
+  ...
+}
+else if (cond2) {
+  ...
+}
+else {
+  ...
+}</code></pre>
+<ul>
+<li>Best practice to always use curly braces to enclose blocks of code, even if they are only one line of code.</li>
+</ul></li>
+<li><p><strong>Comparing === and ==</strong> - with <code>==</code>, javascript attempts to convert types before comparing.</p></li>
+<li><p><strong>Ternary Operator</strong></p>
+<ul>
+<li><code>(condition) ? true-statement: false-statement;</code></li>
+<li>You can use this to assign a variable - <code>let message = price &gt; 5 "&gt; than 5": "&lt; than 5"?</code></li>
+<li>Any other code statement can work as well.</li>
+</ul></li>
+<li><p><strong>Block scope using let</strong></p>
+<ul>
+<li>Variables declared with <code>let</code> inside a code block can only be accessed within that block.</li>
+<li>On the other hand, <code>var</code> allows for the variable to be accessed outside that code block, which can be very confusing.</li>
+<li>Another reason why <code>let</code> is best practice</li>
+</ul></li>
+<li><p><strong>Looping with for()</strong></p>
+<pre class="javascript"><code>for (let i = 0; i &lt; 3; i++){
+  console.log(i);
+}
+// 0 1 2</code></pre></li>
+<li><p><strong>Looping with while()</strong> - check condition first, then execute</p>
+<pre class="javascript"><code>let count = 0;
+while (count &lt; 5){
+  console.log(count);
+  count ++;
+}
+
+// 0 1 2 3 4</code></pre></li>
+<li><p><strong>Looping with do .. while()</strong> - execute first, then check condition. Guarantees that the body of the loop executes at least once.</p>
+<pre class="javascript"><code>let count = 0;
+do {
+  console.log(count);
+  count ++;
+}
+while (count&lt;5)</code></pre></li>
+</ul>
+</div>
+<div id="functions" class="section level2">
+<h2>Functions</h2>
+<ul>
+<li><p><strong>Function Basics</strong> - basic function declaration</p>
+<ul>
+<li><p>If we have code we want to execute multiple times, we put it in a function</p>
+<pre class="javascript"><code>function showMessage(){
+  // body of function
+}
+showMessage()</code></pre></li>
+</ul></li>
+<li><p><strong>Function Expressions</strong> - it’s just assigning a function declaration to a variable</p>
+<pre class="javascript"><code>let fn = function showMessage(){
+  // body of function
+}
+fn()</code></pre>
+<ul>
+<li>The name of the function is optional - however, it can be useful during debugging since the name will show up in the stack trace (won’t the variable name show up?)</li>
+<li>However, you can’t call a function expression by its function name. You have to use the variable name that its assigned to.</li>
+</ul></li>
+<li><p><strong>Passing Information to Functions</strong></p>
+<ul>
+<li>basic function parameter &amp; argument schtick</li>
+<li>One caveat - if you don’t supply an argument to a function where its required, that parameter will be initialized to <code>undefined</code> - careful</li>
+</ul></li>
+<li><p><strong>Function Return Values</strong></p>
+<ul>
+<li>use <code>return</code> keyword</li>
+<li>without a return statement, it implicitly returns <code>undefined</code></li>
+</ul></li>
+<li><p><strong>Function Scope</strong></p>
+<ul>
+<li>Functions have their own local scope - its parameters and local variables only exist within that function and its subfunctions.</li>
+<li>nesting functions is common in javascript as well - just declare them as expressions.</li>
+<li>If you run into a naming conflict, a function will always pick the closest scope variable</li>
+</ul></li>
+</ul>
+</div>
+<div id="objects-the-dom" class="section level2">
+<h2>Objects &amp; the DOM</h2>
+<ul>
+<li><strong>Introduction</strong>
+<ul>
+<li><code>DOM</code> - <code>Document Object Model</code></li>
+<li>When modifying a web page with javascript, the primary object we work with is a <code>document</code>.</li>
+<li>DOM refers to that document along with other supporting objects and features.</li>
+</ul></li>
+<li><strong>Object Properties</strong>
+<ul>
+<li><p>These are values that rest inside an object’s curly braces - they are members of that object, let’s say.</p></li>
+<li><p>An object declaration and property access is done as below:</p>
+<pre class="javascript"><code>let person = {
+  name: &#39;John&#39;,
+  age: 40,
+  partTime: false
+};
+console.log(person.name); // John
+console.log(person[&#39;age&#39;]); // 40 - note the square bracket notation.
+console.log(person.partTime); // false</code></pre></li>
+<li><p>Note that when you try to access a property that does not exist, javascript returns <code>undefined</code>, not an error (javascript is starting to become annoying.)</p></li>
+<li><p>The <code>symbol</code> type - this can be used to hide information within an object; info that should only be accessed by specific people?</p>
+<ul>
+<li><p>Essentially, only code that has access to the symbol variable can access the symbol property</p>
+<pre class="javascript"><code>let mySymbol = Symbol();
+let person = {
+  name: &#39;John&#39;,
+  age: 40,
+  partTime: false,
+  [mySymbol] = &#39;secret info&#39;
+};</code></pre></li>
+</ul></li>
+</ul></li>
+<li><strong>Object Methods</strong>
+<ul>
+<li><p>Just declare a function like you would normally.</p>
+<pre class="javascript"><code>let person = {
+  name: &#39;John&#39;,
+  age: 40,
+  partTime: false
+  showInfo: function(){
+    console.log(&#39;In show info&#39;);
+  }
+};
+person.showInfo()</code></pre></li>
+<li><p>Often we’d want to access the data within the object - in this case we have to qualify the property name with the <code>this</code> keyword.</p></li>
+</ul>
+<pre class="javascript"><code>let person = {
+  ...
+    showMessage(this.name)
+  ...
+}</code></pre></li>
+<li><strong>Passing Objects to Functions</strong>
+<ul>
+<li>The good old <code>pass by value</code> vs <code>pass by reference</code> problem.</li>
+<li>Built in type such as strings, numbers, booleans are passed by value</li>
+<li>Objects are passed by reference</li>
+</ul></li>
+<li><strong>Standard Built-in Objects</strong>
+<ul>
+<li><p><code>Array</code>, <code>Date</code></p></li>
+<li><p>To get the current date, use <code>Date()</code> function</p>
+<pre class="javascript"><code>let now = new Date();
+showMessage( now.toDateString() );</code></pre></li>
+<li><p><code>Math</code>, <code>Number</code>, <code>String</code> objects</p></li>
+</ul></li>
+<li><strong>The Document Object Model (DOM)</strong>
+<ul>
+<li>Programming the DOM - modifying the web page &amp; getting events from the web page through user action</li>
+<li><code>Document</code> is the built in object that refers to the web page. We can use <code>document.getElementById('elem_id')</code> to get a reference to a a<code>HTMLElement</code> object.</li>
+</ul></li>
+<li><strong>Styling DOM Elements</strong>
+<ul>
+<li><p>Once you get a reference to an element object, you can style it and change its css by using the <code>style</code> property</p>
+<pre class="javascript"><code>const header = document.getElementById(&#39;message&#39;);
+header.style.color = &#39;red&#39;;
+header.style.fontWeight = &#39;800&#39;;</code></pre></li>
+<li><p>Essentially, as long as you know the css style you want to modify, you can do it using the <code>style</code> property.</p></li>
+</ul></li>
+<li><strong>Detecting Button Clicks</strong>
+<ul>
+<li><p>Here the <code>addEventListener()</code> method comes into play</p>
+<pre class="javascript"><code>const button = document.getElementById(&#39;see-review&#39;);
+button.addEventListener(&#39;click&#39;, function(){
+    console.log(&#39;click&#39;);
+})</code></pre></li>
+</ul></li>
+<li><strong>Showing &amp; Hiding DOM Elements</strong>
+<ul>
+<li><code>d-none</code> is an acronym for display-none and is a bootstrap class that hides an element.</li>
+<li>To access and modify classes of an element, use the property <code>classList</code> –&gt; <code>element.classList.add/remove('className')</code></li>
+<li>To check if a certain element contains a specific class, use <code>elementName.classList.contains('class-name')</code></li>
+</ul></li>
+</ul>
+</div>
+<div id="arrays" class="section level2">
+<h2>Arrays</h2>
+<ul>
+<li><strong>Creating &amp; Initializing Arrays</strong>
+<ul>
+<li><p>Initializing an array</p>
+<pre class="javascript"><code>let values = [1,2,3];
+let values2 = Array.of(1,2,3);</code></pre></li>
+<li><p>Checking if a certain object is an Array: <code>Array.isArray(values)</code></p></li>
+</ul></li>
+<li><strong>Accessing Array Items</strong>
+<ul>
+<li><p>Just like python and many other languages, we use square brackets:</p>
+<pre class="javascript"><code>values[0]; // 1
+values[0] = 45;</code></pre></li>
+<li><p>Annoyingly, <code>values[3]</code>, which is outside the array’s index range, returns <code>undefined</code>, not an error.</p></li>
+</ul></li>
+<li><strong>Manipulating Arrays</strong>
+<ul>
+<li><p>adding &amp; removing elements from start of arrays - pop removes <strong>and</strong> return these elements.</p>
+<pre class="javascript"><code>values.push(4,5,6); // values = [1,2,3,4,5,6] - can push one or more elements
+values.pop(); // values  = [1,2,3,4,5]</code></pre></li>
+<li><p>adding &amp; removing from start of the arrays</p>
+<pre class="javascript"><code>values.shift(); // values = [2,3,4,5]
+values.unshift(4); // values = [4,2,3,4,5]  - can add one or more elements</code></pre></li>
+</ul></li>
+<li><strong>slice() &amp; splice()</strong>
+<ul>
+<li><p><code>slice</code> creates a new array that is a subarray of the old array: <code>array.slice(begin, end)</code> - rememmber that <code>end</code> is exclusive.</p>
+<pre class="javascript"><code>let newSlice = values.slice(1,3); // 2,3</code></pre></li>
+<li><p>To make a copy of the array - <code>values.slice()</code></p></li>
+<li><p><code>splice</code> inserts or deletes elements from somewhere inside the array, not just beginning or end. The syntax is: <code>array.splice(beginIdx, numToDelete, value1, value2...)</code>. You can add as many values as you want.</p>
+<pre class="javascript"><code>values.splice(2,2); // values = [4,2,5]
+values.splice(3,0, 6); // values = [4,2,5,6]
+values.splice(1,0,6,5,3) // values = [4,6,5,3,2,5,6]</code></pre></li>
+</ul></li>
+<li><strong>Array Searching &amp; Looping</strong>
+<ul>
+<li><p><code>indexOf</code> - does what it says. If the element does not exist, it returns -1</p>
+<pre class="javascript"><code>values.indexOf(6) // 1
+values.indexOf(12) // -1</code></pre></li>
+<li><p><code>filter</code> - this loops over the old array and creates a new array that contains elements that fit a certain criteria. <code>filter()</code> takes a function as a parameter, which gets called for each of the element in the original array.</p>
+<pre class="javascript"><code>const values = [1,2,3,4,5];
+const filtered = values.filter(function(item){
+  return item&gt;2;
+})
+// filtered = [3,4,5]</code></pre></li>
+<li><p><code>find()</code> is a similar function to <code>filter()</code> but returns the first element to meet a certain criteria, rather than all elements.</p>
+<pre class="javascript"><code>const found = values.find(function(item){
+  return item&gt;2;
+})
+// found = 3</code></pre></li>
+<li><p><code>forEach</code> is also similar to <code>filter</code> - it executes a function for each element in the given array, and doesn’t return any output.</p>
+<pre class="javascript"><code>values.forEach(function(item){
+  console.log(item);
+});</code></pre></li>
+</ul></li>
+<li><strong>Arrays in the DOM</strong>
+<ul>
+<li>You can get a list of elements containing a particular class using <code>document.getElementsByClassName('class-name');</code></li>
+<li>This returns an <code>HTMLCollection</code> object, which is not officially an array but acts very much like one</li>
+</ul></li>
+</ul>
+</div>
+<div id="scope-hoisting" class="section level2">
+<h2>Scope &amp; Hoisting</h2>
+<ul>
+<li><strong>Global Scope</strong>
+<ul>
+<li><p>Mainly 2 scopes in js - global and function scope</p></li>
+<li><p>It not only includes your current js file, but the sum total of all the js files you have.</p></li>
+<li><p>Because of this, there arises a concept called <code>polluting the global namespace</code> which happens when you declare too many global variables and functions across your js files, leading to name collission.</p></li>
+<li><p>Many js developers create just one global variable, which is an object, and all other global variables are made into its members.</p>
+<pre class="javascript"><code>const app = {
+  var1: 333,
+  var2: &#39;John&#39;
+  ...
+};</code></pre></li>
+</ul></li>
+<li><strong>Function Scope</strong> - nothing new</li>
+<li><strong>var and Hoisting</strong>
+<ul>
+<li>Hoisting allows you to use a variable before it’s declared.</li>
+<li>It’s the same mechanism that allows you to call a function in a line that’s earlier than where it’s been declared.</li>
+<li>Javascript executes the code in 2 passes. First pass notices that there is a function/functions and hoists them. On the second pass, code is actually executed, and any code that is hoisted can be executed before its physically declared.
+<ul>
+<li>I assume that when using <code>var</code>, variables are assigned to undefined on the first pass and hoisted.</li>
+</ul></li>
+</ul></li>
+<li><strong>Undeclared Variables &amp; Strict Mode</strong>
+<ul>
+<li><p>The code below executes properly, even though we haven’t declared the variable</p>
+<pre class="javascript"><code>productId = 1234
+console.log(productId) // 1234</code></pre></li>
+<li><p>What’s happening is that <code>productId</code> is being declared on an object called <code>window</code> which historically meant the window you’re working out of.</p>
+<pre class="javascript"><code>console.log(window.productId) // 1234</code></pre></li>
+<li><p>To avoid getting away with undeclared variables, you can use <code>strict mode</code> which involves adding a string at the top of your js file - <code>'use strict';</code></p></li>
+<li><p>This forces you to declare your variables - when a variable is not declared, it is created in global scope. This restriction avoids the situation in which accidentally undeclared statements are created in global scope.</p></li>
+<li><p><code>'use strict'</code> also has a couple other effects</p>
+<ul>
+<li>You can’t use reserved words as variables</li>
+<li>You can’t delete variables or functions</li>
+</ul></li>
+<li><p><code>'use strict'</code> is ignored by older browsers.</p></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="javascript-syntax-operators" class="section level1">
+<h1>Javascript Syntax &amp; Operators</h1>
+<div id="all-about-switch-statements" class="section level2">
+<h2>2.1 All About Switch Statements</h2>
+<ul>
+<li><p><strong>Basic Syntax for Switch Statements</strong></p>
+<pre class="javascript"><code>switch (expr){
+  case &lt;expr&gt;:
+    //statements
+    break;
+  case &lt;expr&gt;:
+    //statements
+    break;
+  ...
+  ...
+  default:
+    //statement
+    break;
+}</code></pre></li>
+<li><p><strong>Multiple Case Statements</strong></p>
+<ul>
+<li>It is possible to have multiple case statements before a break, so that if the expression matches any case, then the statement(s) get exceuted.</li>
+</ul>
+<pre class="javascript"><code>let productId = 8;
+switch (productId) {
+  case 1:
+  case 2:
+  case 3:
+    console.log(&quot;early iteration&quot;);
+    break;
+  case 4:
+  case 5:
+    console.log(&quot;mature old iteration&quot;);
+    break;
+  default:
+    console.log(&quot;revamped edition&quot;);
+    break;
+}</code></pre>
+<ul>
+<li>If you forget to add a break after a case that ends up passing, javascript will continue executing the code in the cases that follow (even if those cases fail) until it encounters a break.</li>
+</ul></li>
+<li><p><strong>Switch Uses Strict Comparison…</strong></p>
+<ul>
+<li>… which is great news, knowing Javascript</li>
+</ul></li>
+<li><p><strong>Block Level Scope Issue w/ Switch Statements</strong></p>
+<ul>
+<li>Basically, the switch statement is a block, but each case statement is <strong>NOT</strong> a block.</li>
+<li>Something interesting - surrounding a block of code with parenthesis makes it a block. Therefore, any variables declared within those parenthesis are only accessible within that block.</li>
+</ul></li>
+</ul>
+</div>
+<div id="difference-between-forin-and-forof" class="section level2">
+<h2>2.2 Difference Between for/in and for/of</h2>
+<ul>
+<li><strong>for/in statement</strong>
+<ul>
+<li><p>This loops through the elements of an object (properties &amp; methods), then returns the method/property name (key), which you can then use to access the values stored in the object.</p>
+<pre class="javascript"><code>// let person be some object with name, age, education... etc
+
+for (const key in person){
+  console.log(person[key])
+}</code></pre></li>
+</ul></li>
+<li><strong>for/of statement</strong>
+<ul>
+<li><p>This iterates over values for any iterable object (e.g. a string or array) then returns an object for each iteration.</p>
+<pre class="javascript"><code>let name = &quot;Desmond Kipkoech Tuiyot&quot;;
+
+for (const char of name){
+  console.log(char);
+}</code></pre></li>
+</ul></li>
+<li><strong>for/in vs for/of</strong>
+<ul>
+<li><code>for/in</code> returns the list of keys of the object being iterated while <code>for/of</code> returns the list of <em>values</em> of the numeric properties (<em>indices</em>) of the object being iterated (mostly iterables, string, list)</li>
+<li><code>for/in</code> can iterate over any object while <code>for/of</code> is primarily concerned with values of iterable objects.</li>
+</ul></li>
+<li><strong>break and continue</strong> - same function as other languages</li>
+<li><strong>Labeled Statement</strong>
+<ul>
+<li>Define a location to <em>goto</em> - it was a bad idea back then (why?) and still is a bad idea in javascript.</li>
+<li>Apparently it leads to spaghetti code.</li>
+</ul></li>
+</ul>
+</div>
+<div id="using-math-comparison-operators" class="section level2">
+<h2>2.3 Using Math &amp; Comparison Operators</h2>
+<ul>
+<li><strong>This is just review from first course</strong></li>
+</ul>
+</div>
+<div id="working-with-logical-operators-and-short-circuit-evaluation" class="section level2">
+<h2>2.4 Working with Logical Operators and Short-circuit evaluation</h2>
+<ul>
+<li><strong>Logical Operators</strong>
+<ul>
+<li><code>&amp;&amp;</code> - <em>AND</em> operator: <code>price&gt;10 &amp;&amp; price&lt;20</code></li>
+<li><code>||</code> - <em>OR</em> operator</li>
+<li><code>!</code> - <em>NOT</em> operator</li>
+</ul></li>
+<li><strong>Short-circuiting</strong>
+<ul>
+<li>This is an optimization for logical expressions. It allows javascript to bypass subsequent expressions in AND or OR conditions based on truthy or falsy</li>
+<li>This is not something I do, rather its how the <code>&amp;&amp;</code> and <code>||</code> operators are implemented.</li>
+<li>For example, in <code>price&gt;10 &amp;&amp; price&lt;20</code> - if price is less than 10, then there’s no point in checking the second condition.</li>
+<li>Likewise, in <code>price&gt;10 || price&lt;20</code>, if price is greater than 10, then the condition evaluates to true. There is no need for further evaluation.</li>
+</ul></li>
+</ul>
+</div>
+<div id="utilizing-javascript-exception-handling" class="section level2">
+<h2>2.5 Utilizing Javascript Exception Handling</h2>
+<ul>
+<li><strong>try, catch, and finally blocks</strong>
+<ul>
+<li><p>Exception basic syntax</p>
+<pre class="javascript"><code>try {
+  // code that might fail
+}
+catch (error){
+  // this gets excecuted if there&#39;s an error
+}
+finally {
+  // this code always runs. This block is optional
+}</code></pre></li>
+</ul></li>
+<li><strong>Throw a Custom Error Object</strong>
+<ul>
+<li><p>You can throw, and probably want to throw, your own custom error objects</p></li>
+<li><p>Create an object with at least two properties: <em>message</em> and <em>name</em></p>
+<pre class="javascript"><code>try {
+  // code that might fail
+}
+catch (error){
+  throw {
+    &quot;message&quot;: &quot;Some description of error&quot; + error.message,
+    &quot;name&quot;: &quot;CustomError&quot;
+  }
+}</code></pre></li>
+</ul></li>
+<li><strong>Determine Error Type</strong>
+<ul>
+<li>These are some common errors that get thrown by Javascript:</li>
+<li><code>ReferenceError</code> - when a non-existent variable is referenced</li>
+<li><code>RangeError</code> - when a value is not in the set or range of allowed values</li>
+<li><code>TypeError</code>- when an operation is attempted on a value that is not of the expected/allowed type</li>
+<li><code>URIError</code> - when a global URI handling function was used in the wrong way.
+<ul>
+<li>E.g. when you try to decode a uri that contains invalid characters</li>
+</ul></li>
+<li><code>SyntaxError</code> - used instead of EvalError below - happens when trying to interpret syntactically invalid code.</li>
+<li><code>EvalError *</code>
+<ul>
+<li><code>EvalError</code> is for backward compatibilty purposes only</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="determining-javascript-variable-data-types" class="section level2">
+<h2>2.6 Determining Javascript Variable Data Types</h2>
+<ul>
+<li><strong>Data Types &amp; Detection Methods</strong>
+<ul>
+<li><strong>Primitive data types</strong> in javascript include: boolean. null, undefined, number, string.</li>
+<li><strong>Object data types</strong> include: Array, Error, Function, Object, RegExp, Date</li>
+<li>There are also object equivalnets to boolean, number, and string - Boolean, Number, String</li>
+<li>Use the primitives whenever possible, since the object equivalents take up more memory space and take longer to access.</li>
+</ul></li>
+<li><strong>The typeOf Operator</strong> - as in the first course</li>
+<li><strong>Object Data Type / Constructors</strong>
+<ul>
+<li><p>All object types inherit from <code>Object</code> (not the primitives), which has a <code>constructor property</code> that returns a reference to the object itself.</p>
+<pre class="javascript"><code>let date = new Date();
+let string = &quot;I am Desmond&quot;;
+console.log(date.constructor.toString()); // function Date() { [native code] }
+console.log(string.constructor.toString()) // function String() { [native code] }</code></pre></li>
+<li><p>Object literals and primitives are cast to their Object equivalents first, before displaying.</p></li>
+<li><p>The idea is that calling toString() on an object’s constructor returns the internal representation of that object.</p></li>
+</ul></li>
+<li><strong>Helper Functions for the Constructor Property</strong>
+<ul>
+<li><p>Something interesting - <code>indexOf()</code> can be used on a string to search for not only a character, but a string as well.</p>
+<pre class="javascript"><code>let hello = &quot;Hello World&quot;;
+console.log(hello.indexOf(&#39;ello&#39;)) // =1</code></pre></li>
+<li><p>You can use this to create helper functions for constructor properties that check the data type of an object and returns true or false depending.</p>
+<pre class="javascript"><code>isArray(value){
+  return value.constructor.toString().indexOf(&quot;Array&quot;) &gt; -1;
+}
+isDate(value){
+  return value.constructor.toString().indexOf(&quot;Date&quot;) &gt; -1;
+}
+isNullOrUndefined(value) {
+  return value == undefined || value == null;
+}</code></pre></li>
+<li><p>The pattern is exactly the same for all other data types as well.</p></li>
+</ul></li>
+<li><strong>instanceOf Operator</strong>
+<ul>
+<li><p><code>instanceOf</code> tests if a specific object inherits from an Object data type - everything aside from primitives inherits from Object.</p></li>
+<li><p>It tests for a specific type of object or for Object itself.</p>
+<pre class="javascript"><code>let dt = new Date();
+let string = new String(&quot;Prod Name&quot;);
+let value = &quot;nnnn&quot;;
+
+console.log(dt instanceOf Date) // true
+console.log(dt instanceOf Object) // true
+console.log(string instanceOf String) // true
+console.log(string instanceOf Object) // true
+console.log(value instanceOf String) // false
+console.log(value instanceOf Object) // false</code></pre></li>
+</ul></li>
+</ul>
+</div>
+<div id="understanding-this-in-javascript" class="section level2">
+<h2>2.7 Understanding <code>this</code> in Javascript</h2>
+<ul>
+<li><strong>What is <code>this</code>?</strong>
+<ul>
+<li><code>this</code> often refers to the object in which the current code is running, although there are some exceptions to this.</li>
+<li>First, all javascript code at the global scope level runs in the global <em>window object</em>.</li>
+<li>When used in an object, <code>this</code> refers to that specific object. When in a constructor function, <code>this</code> would refer to that specific instance of the object?</li>
+<li>As mentioned before, <code>this</code> can evaluate to different values based on execution context. Specifically:
+<ul>
+<li><em>In a method</em>: the owner object of the method</li>
+<li><em>In a function in global scope</em>: global window</li>
+<li><em>In an event</em>: the element that received the event</li>
+<li><em>In call() or apply() methods</em>: refers to the object that’s passed in</li>
+<li><em>‘use strict’</em> can also affect <code>this</code></li>
+</ul></li>
+</ul></li>
+<li><strong><code>this</code> in Global &amp; Function Scope</strong>
+<ul>
+<li><p>At the global scope, or in a function in global scope, <code>this</code> will refer to the global/window object.</p>
+<pre class="javascript"><code>// &#39;use strict&#39;
+console.log(this.toString());
+
+function checkThis(){
+    console.log(this.toString());
+}
+checkThis();</code></pre></li>
+<li><p>Both will print out <code>[object Window]</code> to indicate the window object as it should.</p></li>
+<li><p>However, uncommenting <code>'use strict'</code> results in an error for <code>this.toString()</code> inside the function. Specifically, <code>this</code> becomes undefined.</p>
+<ul>
+<li>Basically, javascript complains that “I haven’t declared anything called ‘this’, so I have no idea what you’re talking about, fam.”</li>
+<li>If you want to access the global object from inside a function, use <code>window</code> instead.</li>
+</ul></li>
+</ul></li>
+<li><strong><code>this</code> in Event Handlers</strong>
+<ul>
+<li>In this context, it refers to the html element that is attached to that specific event.</li>
+</ul></li>
+<li><strong><code>this</code> in an Object literal</strong>
+<ul>
+<li><p>In this context, it always refers to that specific object - it refers to its properties or methods.</p>
+<pre class="javascript"><code>let person = {
+  name: &quot;desmond&quot;,
+  age: 24,
+  school: &quot;Colgate University&quot;,
+  returnInfo: function(){
+     return (this.name + &quot; &quot; + this.age.toString() + &quot; &quot; + this.school);
+  }
+};
+console.log(person.returnInfo); // desmond 24 Colgate University</code></pre></li>
+</ul></li>
+<li><strong><code>this</code> in call() and apply()</strong>
+<ul>
+<li><p><code>call()</code> allows for a function/method belonging to one object to be assigned and called for another one.</p>
+<ul>
+<li>It essentially provides a new value for <code>this</code> to the function/method, and allows it to be inherited by another object, without having to rewrite that method.</li>
+</ul></li>
+<li><p><code>apply()</code> is very similar to <code>call()</code>, except that it supports parameters in the form of array literals or objects, as opposed to <code>call()</code> which accepts a list of arguments.</p></li>
+<li><p><code>this</code> in this context refers to the object that’s passed in to the call or apply functions. It calls the function using reference to that object’s properties.</p>
+<pre class="javascript"><code>// using person object from before
+let person2 = {
+  name: &quot;mike&quot;,
+  age: 25,
+  school: &quot;Havard University&quot;
+};
+console.log(person.returnInfo.call(person2));
+console.log(person.returnInfo.apply(person2));</code></pre></li>
+</ul></li>
+<li><strong><code>this</code> in Constructor Functions</strong>
+<ul>
+<li><p><code>this</code> in this context is a placeholder for the specific object to be created and would reflect as such would have different values for different objects</p>
+<pre class="javascript"><code>function Person(name, age, school){
+  this.name = name;
+  this.age = age;
+  this.school = school;
+  this.returnInfo = function() {
+    return (this.name + &quot; &quot; + this.age.toString() + &quot; &quot; + this.school);
+  }
+}
+
+console.log(new Person(&quot;brenda&quot;, 23, &quot;Colgate&quot;).returnInfo());
+console.log(new Person(&quot;dario&quot;, 24, &quot;Amherst&quot;).returnInfo());</code></pre></li>
+</ul></li>
+</ul>
+</div>
+<div id="using-the-powerful-spread-operator" class="section level2">
+<h2>2.8 Using the Powerful Spread Operator</h2>
+<ul>
+<li><strong>the Spread Operator</strong>
+<ul>
+<li>It expands any iterable object such as a string or array into an array (or another array).</li>
+<li>It allows one to pass multiple arguments into a method</li>
+<li>It uses the ellipsis (…) symbol and is always on the right hand side of an operator</li>
+<li><strong>NOTE:</strong> IE and Edge do not currently suport the spread operator</li>
+</ul></li>
+<li><strong>Copy a String to an Array using Spread</strong>
+<ul>
+<li><p>A string is really just an array of characters. To convert a string to an array, do as below:</p>
+<pre class="javascript"><code>let string = &quot;Hi, my name is (What?), my name is (who?), my name is chka chka Slim Shady&quot;;
+let stringArr = [...string];</code></pre></li>
+</ul></li>
+<li><strong>Copy an Array of Primitives</strong>
+<ul>
+<li><p>This is done as below - it does result in a deep copy, so the original and the copy point to different objects.</p>
+<pre class="javascript"><code>let arr1 = [1,2,3,4];
+let arr2 = [...arr1];
+
+arr2.push(9);
+arr2[0] = 99;
+
+console.log(arr1); // [1,2,3,4]
+console.log(arr2); // [99,2,3,4,9]</code></pre></li>
+</ul></li>
+<li><strong>Copy an Array of Objects</strong>
+<ul>
+<li>In this case, it copies the content of the original array into the new array</li>
+<li>However, since the array contains objects, what is being copied over are not the object literals themselves, but rather the pointer to to where those objects reside in memory.</li>
+<li>Changes the properties/methods on those objects will end up being reflected in the original array as well.</li>
+</ul></li>
+<li><strong>Concatenate Arrays</strong>
+<ul>
+<li><p>You can combined two or more arrays using this operator as well.</p></li>
+<li><p>The old way:</p>
+<pre class="python"><code>// using arr1 and arr2 from previous code sample
+let combined1 = arr1.concat(arr2);
+console.log(combined1); // [1,2,3,4,99,2,3,4,9]</code></pre></li>
+<li><p>The spread way:</p>
+<pre><code>let combined2 = [...arr1, ...arr2];
+console.log(combined2); // [1,2,3,4,99,2,3,4,9]</code></pre></li>
+</ul></li>
+<li><strong>Passing Multiple Parameters to the Constructor</strong>
+<ul>
+<li><p>Works like <code>**</code> in Python</p>
+<pre class="javascript"><code>// usual creation of a Date object
+let dt = new Date(2020, 7, 21); // 21st July, 2020
+
+// spread way
+params = [2020, 7, 21];
+let dt2 = new Date(...params);</code></pre></li>
+</ul></li>
+<li><strong>Passing Arguments to Functions</strong>
+<ul>
+<li><p>Just like constructor function above, you can pass arguments to functions as well.</p>
+<pre class="javascript"><code>let multArgs = function(arg1, arg2, arg3){
+  console.log(arg1);
+  console.log(arg2);
+  console.log(arg3);
+}
+let args = [1,2,3];
+multArgs(...args);</code></pre></li>
+</ul></li>
+<li><strong>Perform Shallow Copy on Object Literals</strong>
+<ul>
+<li><p>This is done as below:</p>
+<pre class="js"><code>let person = {
+  name: &quot;desmond&quot;,
+  age: 24,
+  school: &quot;Colgate University&quot;,
+  returnInfo: function(){
+     return (this.name + &quot; &quot; + this.age.toString() + &quot; &quot; + this.school);
+  }
+};
+
+// for shallow copy, you would do:
+let person2 = Object.assign({}, person);
+
+// the spread way
+let person3 = {...person};
+
+person3.name = &quot;Desmond&quot;;
+console.log(person1);
+console.log(person3);</code></pre>
+<script type="text/javascript">
+let person = {
+  name: "desmond",
+  age: 24,
+  school: "Colgate University",
+  returnInfo: function(){
+     return (this.name + " " + this.age.toString() + " " + this.school);
+  }
+};
+
+// for shallow copy, you would do:
+let person2 = Object.assign({}, person);
+
+// the spread way
+let person3 = {...person};
+
+person3.name = "Desmond";
+console.log(person1);
+console.log(person3);
+</script></li>
+<li><p>Importantly, a <strong>shallow copy</strong> copies over the primitives by value, and the objects by reference.</p></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="javascript-variables-types" class="section level1">
+<h1>Javascript Variables &amp; Types</h1>
+</div>
+<div id="javascript-arrays-collections" class="section level1">
+<h1>Javascript Arrays &amp; Collections</h1>
+</div>
+<div id="javascript-generators-iterators" class="section level1">
+<h1>Javascript Generators &amp; Iterators</h1>
+</div>
+<div id="working-with-javascript-modules" class="section level1">
+<h1>Working with Javascript Modules</h1>
+</div>
+<div id="javascript-objects-prototypes-classes" class="section level1">
+<h1>7. Javascript Objects, Prototypes &amp; Classes</h1>
+<div id="creating-javascript-objects" class="section level2">
+<h2>7.1 Creating Javascript Objects</h2>
+<ul>
+<li>There’s 3 ways of creating JS objects:
+<ul>
+<li>Object literals</li>
+<li>Constructor functions</li>
+<li>Classes</li>
+</ul></li>
+<li><strong>Using object literals</strong> - just directly define the properties and methods you want to be in the object.</li>
+<li><strong>The Dynamic Nature of Javascript</strong>
+<ul>
+<li>Essentially, this means that you don’t have to specify types for variables before assigning to them and using them in code</li>
+<li>One of the features of a dynamically typed language like JS is that you can change the shape of an object post-creation.
+<ul>
+<li>Honestly, I’ve been using Python so my perspective is completely from a dynamically typed language. It’s not too much of a surprise.</li>
+</ul></li>
+</ul></li>
+<li><strong>Adding Functions to Objects</strong> - nothing new</li>
+<li><strong>Object Literal Property Shorthand</strong>
+<ul>
+<li><p>You can create javascript objects using variables as property names</p>
+<pre class="js"><code>function createPerson(firstName, lastName){
+  let person = {
+    firstName: firstName,
+    lastName: lastName
+  }
+  display(person)
+}</code></pre></li>
+<li><p>However, that assignment is a bit redundant, since the keys have the same names as the variables that determines their property values. A shorthand for this is:</p>
+<pre class="js"><code>function createPerson(firstName, lastName){
+  let person = {
+    firstName,
+    lastName
+  }
+  display(person)
+}</code></pre></li>
+</ul></li>
+<li><strong>Object Literal Method Declaration Shorthand</strong>
+<ul>
+<li><p>Consider the object below</p>
+<pre class="js"><code>let person = {
+  ...
+  age: 21,
+  isAdult: function() { return this.age &gt;= 18 }
+}</code></pre></li>
+<li><p>The method declaration can be shortened to:</p>
+<pre class="js"><code>let person = {
+  ...
+  age: 21,
+  isAdult() { return this.age &gt;= 18 }
+}</code></pre></li>
+</ul></li>
+<li><strong>Inspecting Object Properties w/ <code>Object.keys()</code> and <code>for...in</code></strong>
+<ul>
+<li><p><code>Object.keys(&lt;object_name&gt;)</code> takes in an object and returns an array of the object’s property and method names</p></li>
+<li><p><code>for...in</code> does pretty much the same thing - its syntax looks like this:</p>
+<pre class="js"><code>for (let propertyName in person) {
+  console.log(propertyName);
+}</code></pre></li>
+</ul></li>
+<li><strong>Object Equality and <code>Object.is()</code> Function</strong>
+<ul>
+<li>Javascript has 3 equality operators (that I know of so far) that can be used to compare objects and/or primitives
+<ul>
+<li><code>==</code> - should be mostly avoided, since it’s not type safe</li>
+<li><code>===</code> - should be used in most cases</li>
+<li><code>Object.is(obj1, obj2)</code> - like <code>===</code> but with a few mathematical differences</li>
+</ul></li>
+<li><code>===</code> and <code>Object.is()</code> are both type-safe and since <code>===</code> is more concise, you should almost always use it in equality tests. However, they are different in this respect:
+<ul>
+<li>For <code>===</code> to NaN numbers are not equal, while they are equal when tested with <code>Object.is()</code>.</li>
+<li>However, for <code>===</code> <strong>+0</strong> and <strong>-0</strong> are equal, while that isn’t the case with <code>Object.is()</code></li>
+</ul></li>
+<li>But really what I should have written first is that with all these operators, comparisons between 2 objects always returns <code>false</code>.</li>
+</ul></li>
+<li><strong>Object Assign and Immutability</strong>
+<ul>
+<li><p>I knew that the <code>Object.assign()</code> method can be used to copy the contents of one object to another object. But when the object being copied to also has it’s own objects, then this method merges the two objects.</p></li>
+<li><p>This function is weird in the sense that it mutates its first parameter <strong>AND</strong> returns a new, merged object.</p></li>
+<li><p>Thankfully, to avoid mutation, there’s an easy fix. <code>Object.assign()</code> takes in an unlimited number of objects as parameters and merges all of them to first parameter. All we need to do is add an empty object <code>{}</code> as its first parameter, and we’ll be good.</p>
+<pre class="js"><code>Object.assign(person, healthStats);     // modifies person
+Object.assign({}, person, healthStats)  // does not modify any of the relevant objects</code></pre></li>
+</ul></li>
+<li><strong>Using Constructor Functions to Create Objects</strong>
+<ul>
+<li><p>We can use this if we want to create multiple objects that all have the same structure. The syntax is as below:</p>
+<pre class="js"><code>function Person(firstName, lastName, age) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+  this.age = age;
+  this.isAdult = function () {
+    this.age &gt;= 18;
+  };
+}
+
+let kimia = new Person(&quot;Kimia&quot;, &quot;Rahmannia&quot;, 21);
+let desmond = new Person(&quot;Desmond&quot;, &quot;Tuiyot&quot;, 24);</code></pre></li>
+</ul></li>
+<li><strong>Using Object.create()</strong> - both approaches so far for creating objects essentially are using <code>Object.create()</code> behind the scenes. However, the syntax for creating object using this function is a bit verbose, and thus no one really uses it.</li>
+</ul>
+</div>
+<div id="javacript-object-properties" class="section level2">
+<h2>7.2 Javacript Object Properties</h2>
+<ul>
+<li><strong>Using Bracket Notation to Access Properties</strong> - When is the bracket notation preferred over the dot notation for access?
+<ol style="list-style-type: decimal">
+<li>When you have a key that is not a valid identifier; e.g. it has a space in it. This isn’t as common.</li>
+<li>This is the more common (but still rare) scenario - when you have a variable that holds a property name whose value you want to access.</li>
+</ol>
+<pre class="js"><code>for (let propertyName in person){
+  display(person[propertyName]);
+}</code></pre></li>
+<li><strong>Modifying Properties w/ Property Descriptors</strong>
+<ul>
+<li>A property is more than just the name and its value - each property has a property descriptor which we can use to view its attributes.</li>
+<li>We use <code>Object.getOwnPropertyDescriptors(&lt;object-name&gt;, "&lt;property-name&gt;")</code> to get these attributes</li>
+<li>These are covered in the next 3 bullet points.</li>
+</ul></li>
+<li><strong>The Writable Attribute</strong>
+<ul>
+<li><p>The <strong>Writable</strong> attribute defines whether a property’s value can be changed from its initial value. This can be modified as follows:</p>
+<pre class="js"><code>// assume you have a person object, with attribute firstName
+Object.defineProperty(person, &quot;firstName&quot;, {writable: false});</code></pre></li>
+<li><p>Trying to modify <code>firstName</code> would result in an error. On the other hand, if the property being modified is an object, then what is really being made non-writable is a pointer to an object. That is, you cannot set the property to a new value, but you can modify the property’s properties.</p></li>
+<li><p>You can prevent this using <code>Object.freeze(&lt;object.propertyName&gt;)</code></p></li>
+</ul></li>
+<li><strong>The Enumerable Attribute</strong>
+<ul>
+<li><p>This attribute allows for property names to be enumerated over in <code>for...in</code> loops and to be displayed in <code>Object.keys()</code> output. It also affects the JSON serialization of the object. That is, if set to false, the property can’t be accessed through any of the above functions.</p></li>
+<li><p>We can change this in the same way we did the <strong>writable</strong> attribute above.</p>
+<pre class="js"><code>Object.defineProperty(person, &quot;fName&quot;, { enumerable: false });</code></pre></li>
+</ul></li>
+<li><strong>The Configurable Attribute</strong>
+<ul>
+<li>When set to <code>false</code>, the <strong>configurable</strong> attribute locks down the property such that:
+<ul>
+<li>You can’t delete the property.</li>
+<li>You can’t change it’s <strong>enumerable</strong> or <strong>configurable</strong> attribute, but for some reason, you can change <strong>writable</strong> attribute.</li>
+</ul>
+<pre class="js"><code>Object.defineProperty(person, &quot;fName&quot;, { configurable:false} );</code></pre></li>
+<li><strong>Aside</strong>: use <code>delete &lt;objectName&gt;.&lt;propertyName&gt;</code> to delete a property from an object</li>
+</ul></li>
+<li><strong>Creating Property Getters and Setters</strong>
+<ul>
+<li><p>This is actually pretty cool. We use <code>Object.defineProperty()</code> to create setters and getters as below:</p>
+<pre class="js"><code>let person = {
+  fName: &quot;Desmond&quot;,
+  lName: &quot;Tuiyot&quot;,
+  age: 21,
+  isAge() {
+    return this.age &gt;= 18;
+  },
+};
+
+Object.defineProperty(person, &quot;fullName&quot;, {
+  get: function () {
+    return `${this.fName} ${this.lName}`;
+  },
+  set: function (value) {
+    let names = value.split(&quot; &quot;);
+    this.fName = names[0];
+    this.lName = names[1];
+  },
+});
+
+// to get fullName
+display(person.fullName);
+
+// to set fName and lName via fullName
+person.fullName = &quot;Kimia Rahmannia&quot;;
+display(person.fullName);</code></pre></li>
+</ul></li>
+</ul>
+</div>
+<div id="javascript-prototypes-and-interfaces" class="section level2">
+<h2>7.3 Javascript Prototypes and Interfaces</h2>
+<ul>
+<li><strong>What is a Prototype?</strong>
+<ul>
+<li><p>For starters, this is an object that exists on every function and every object in javascript. Objects however, do not have a <strong>prototype</strong> property, while functions do.</p>
+<pre class="js"><code>  let person = {
+  fName: &quot;Kimia&quot;,
+};
+
+let fn = function () {
+  return true;
+};
+display(fn.prototype);
+display(person.__proto__);</code></pre></li>
+<li><p>However a function’s prototype and an object’s prototype are used differently</p></li>
+<li><p>A <strong>function’s prototype</strong> is the object <strong>instance</strong> that will become the prototype for all objects created using this function as a constructor.</p>
+<ul>
+<li>When a function is created, a prototype object is instantiated and attached to the function behind the scenes.</li>
+<li>If that function is then used as a constructor function to create an object, then that object will have a <strong><strong>proto</strong></strong> property that points to that same prototype.</li>
+</ul>
+<pre class="js"><code>let Person(firstName, lastName){
+  this.firstName = firstName;
+  this.lastName =  lastName;
+}
+let him = new Person(&quot;him&quot;, &quot;hom&quot;);
+console.log(Person.prototype); // Person {}
+console.log(him.__proto__);    // Person {}
+console.log(Person.prototype === him.__proto__);  // true
+
+// adding properties to prototypes
+Person.prototype.age = 29;
+him.__proto__.school= &quot;UWollongnon&quot;;</code></pre></li>
+<li><p>An <strong>object’s prototype</strong> is the object <strong>instance</strong> from which the object is inherited.</p></li>
+</ul></li>
+<li><strong>Instance vs Prototype Properties</strong>
+<ul>
+<li>First, if an object’s prototype has a certain property, then that property can be accessed by that object using the normal <code>object.&lt;propertyName&gt;</code> notation.
+<ul>
+<li>Here, JS will look for the requested property in the object itself, i.e. it looks for the <strong>instance property</strong>.</li>
+<li>If this fails, it checks in the object’s prototype, i.e. it looks for the <strong>prototype property</strong> and upon finding a property of that same name, returns it.</li>
+<li>Additionally, in terms of access, instance properties are priortized prototype properties. That is, if both exist, then the instance property is returned</li>
+</ul></li>
+</ul></li>
+<li><strong>Changing a Function’s Prototype</strong>
+<ul>
+<li><p>Essentially, it is possible to set the prototype of a function to a different object.</p>
+<pre class="js"><code>// take the Person constructor function
+Person.prototype = { age:18 }</code></pre></li>
+</ul></li>
+<li><strong>Multiple Levels of Inheritance</strong>
+<ul>
+<li>Essentially, our Person objects so far have been inheriting from their prototype object.</li>
+<li>All objects in JS inherit from <strong>Object</strong>, which has no prototype, i.e. calling <code>__proto__</code> on an Object data type returns <strong>null</strong>.</li>
+<li>You can have multiple levels of inheritance.</li>
+</ul></li>
+<li><strong>Creating my own Prototypal Chains</strong>
+<ul>
+<li><p><strong>Premise:</strong> we have two constructor functions, <code>Student</code> and <code>Person</code> and we want Student to inherit from Person. Essentially, we want to create our own prototype inheritance chain.</p></li>
+<li><p>We need 3 lines - the first is shown below. The right hand side creates a new object with <code>Person.prototype</code> as its prototype.</p>
+<pre class="js"><code>Student.prototype = Object.new(Person.prototype);</code></pre></li>
+<li><p>The second line is shown below. Here we need to understand that all prototypes have a constructor property that points to the function that was used to create it. Without the line below, <code>Student.prototype</code> will have a constructor property of <code>Person</code>.</p>
+<pre class="js"><code>Student.prototype.constructor = Student;</code></pre></li>
+<li><p>This actually creates the Person object when the Student object is being created. By passing the context of <code>this</code>, the properties and methods of <code>Person</code> will be instantiated and be part of <code>Student</code>.</p>
+<pre class="js"><code>// inside the Student constructor
+function Student(firstName, lastName, age){
+...
+Person.call(this, firstName, lastName, age);
+...
+}</code></pre></li>
+</ul></li>
+</ul>
+</div>
+<div id="javascript-classes" class="section level2">
+<h2>7.4 Javascript Classes</h2>
+<ul>
+<li><p>Classes are essentially syntactic sugar for objects - we can do with classes everything that we can with objects, only much easier.</p></li>
+<li><p><strong>Creating Objects w/ Classes</strong> - basic syntax</p>
+<pre class="js"><code>class Person() {
+  constructor(firstName, lastName, age) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.age = age;
+  }
+}</code></pre></li>
+<li><p><strong>Getters and Setters</strong> - much much simpler</p>
+<pre class="js"><code>// with the class Person defined above
+...
+  get fullName() {
+    return this.firstName + &#39; &#39; + this.lastName;
+  }
+
+  set fullName(fullName) {
+    let names = fullName.split(&#39; &#39;);
+    this.firstName = names[0];
+    this.lastName = names[1];
+  }
+...
+// to display
+desmond = new Person(&quot;Desmond&quot;, &quot;Tuiyot&quot;, 23);
+console.log(desmond.fullName);
+// to set
+desmond.fullName = &quot;Desmond Kipkoech&quot;</code></pre>
+<ul>
+<li>This code will create a <code>fullName</code> property and attach it to the Person object, backed by the function. Likewise, it will create a setter function that takes in the fullName and modifies the first and last name variables appropriately.</li>
+</ul></li>
+<li><p><strong>Adding Functions to Classes</strong></p>
+<ul>
+<li><p>Just write the function directly - no <code>this</code> qualifier or the keyword <code>function()</code></p>
+<pre class="js"><code>// continuing the class Person created above
+...
+  isAdult() {
+    return this.age &gt;= 18;
+  }
+...</code></pre></li>
+</ul></li>
+<li><p><strong>Modifying Property Descriptors of Classes</strong></p>
+<ul>
+<li><p>By default, getters and setters are created with their <strong>enumerable</strong> attribute set to false.</p></li>
+<li><p>We can make them enumerable by resorting to our <code>Object.defineProperty()</code> method.</p></li>
+<li><p>Importantly, getters and setters are defined as properties of the class prototype, so the object whose descriptors we’re modifying is not that class, but rather its prototype</p>
+<pre class="js"><code>Object.defineProperty(Person.prototype, &#39;fullName&#39;, {enumerable: true});</code></pre></li>
+</ul></li>
+<li><p><strong>Inheritance w/ Classes</strong></p>
+<ul>
+<li><p>We use the <code>extends</code> keyword along with the <code>super()</code> function as below:</p>
+<pre class="js"><code>// with a Person class and a Student class that we
+//  want to inherit from Student:
+
+class Student extends Person {
+  constructor(firstName, lastName, age){
+    super(firstName, lastName, age);
+    // other statements
+  }
+  // other methods / variables
+}</code></pre></li>
+</ul></li>
+<li><p><strong>Using Static and Property Methods</strong></p>
+<ul>
+<li>Static methods and properties are items of a class that you can access without having to create an instance of the class first.</li>
+<li>In order to declare static properties or methods, just use qualify it with the <code>static</code> keyword.</li>
+</ul></li>
+</ul>
+</div>
+<div id="using-built-in-javascript-objects" class="section level2">
+<h2>7.5 Using Built-In Javascript Objects</h2>
+<ul>
+<li><p><strong>The Math Object</strong></p>
+<ul>
+<li>The Math object contains some math constants as well as a lot of static methods for various mathematical calculations.</li>
+<li>All the properties and methods in the Math class are static.</li>
+<li>Just look up the docs to find anything that you might want to use</li>
+</ul></li>
+<li><p><strong>The Date Object</strong></p>
+<pre class="js"><code>let dt = new Date();   // current date and time
+let dt1 = new Date(0);  // no of ms since January 1970 universal time</code></pre>
+<ul>
+<li><p>Why January 1st, 1970 - this is what’s known as <strong>Unix epoch time</strong>?</p></li>
+<li><p>The constructor can also take in an ISO 8601 string - however, different browsers might handle this string inconsistently.</p></li>
+<li><p>The best constructor is the one that takes in the various date/time parts as integer inputs</p>
+<pre class="js"><code>let dt = new Date(2020, 08, 15, 2, 11, 00, 50)
+// in order: YYYY, MM, DD, H, M, S, mS</code></pre></li>
+<li><p>For some unholy reason, the <code>month</code> parameter is <strong>0 based</strong>, while everything else is <strong>1 based</strong></p></li>
+<li><p>Each date instance has a family of getters and setters available.</p>
+<pre class="js"><code>let dt = new Date();
+dt.getFullYear();
+dt.getMonth();
+dt.getSeconds();
+// and so on
+
+dt.setFullYear();
+dt.setMonth();
+dt.setSeconds();
+// and so on</code></pre></li>
+<li><p>The above return and set time to the local machine time zone. There are UTC versions of this:</p>
+<pre class="js"><code>dt.getUTCFullYear();
+dt.getUTCMonth();
+dt.getUTCSeconds();
+// and so on
+
+dt.setUTCFullYear();
+dt.setUTCMonth();
+dt.setUTCSeconds();
+// and so on</code></pre></li>
+<li><p>You can also subtract two date objects to find the number of milliseconds between the two.</p></li>
+</ul></li>
+<li><p><strong>Validating String w/ RegExp.test() function</strong></p>
+<ul>
+<li><p>The basic syntax for using this is:</p>
+<pre class="js"><code>let regex = new RegExp(&#39;&lt;regular expression to pattern match&gt;&#39;, &#39;&lt;regex flags&gt;&#39;);
+regex.test(&lt;string to be matched&gt;);</code></pre></li>
+<li><p>Notice the second parameter, which is a string containing the regex flags</p>
+<ul>
+<li>An example is <code>'gi'</code>, which instructs to <em>search globally (g)</em> and <em>ignore case (i)</em>.</li>
+</ul></li>
+<li><p>Using the above construction is all fine and dandy, but any backlash has to also be escaped. In order to avoid doing this, there is a shorthand for creating RegExp objects. We put the regular expression, not in quotes, between 2 front slashes.</p>
+<pre class="js"><code>let regex = / &lt;regular expression here&gt; /</code></pre></li>
+</ul></li>
+<li><p><strong>Searching Strings w/ the RegExp.exec() function</strong></p>
+<ul>
+<li><p>The syntax is as below:</p>
+<pre class="js"><code>let regex = / &lt;some reg expression&gt; /
+regex.exec(&lt;some-string&gt;)</code></pre></li>
+<li><p>The output is an array, with the additional properties <code>index</code> which represents the where the string being searched starts and <code>input</code>, which is just the input string.</p></li>
+<li><p>The first element of that array is the string that matches our regex.</p></li>
+<li><p>Interesting - arrays are just objects, where the indices are essentially just numeric property names. In addition, you can add properties to arrays.</p></li>
+<li><p>A few questions</p></li>
+<li><p><em>Why does the array return the exact string we searched for</em></p>
+<ul>
+<li>For more complex regex expressions, the output will be more useful</li>
+</ul></li>
+<li><p><em>What if there was more than one error in the string? How would we find them?</em></p>
+<ul>
+<li>Here the <code>exec()</code> function <strong>WILL NOT</strong> return multiple outputs. It will still return the first one.</li>
+<li>To work around this, we first need to understand that the RegExp object is stateful, thus it keeps tracks of how many times we call <code>exec</code>.</li>
+<li>By default, the regex object will search only until the first match and will stop searching. We can use the global flag <code>g</code> to make sure it continues searching.</li>
+<li>Therefore, when we call <code>exec</code> the second, it finds the second match (if any)</li>
+</ul></li>
+<li><p><em>What else can appear in that array?</em></p>
+<ul>
+<li><p>Regex capture groups. If you have capture groups in your regular expressions, they will appear in the array starting from the index 1. The first element will still the string that was matched.</p></li>
+<li><p>To find every string that matches, you can use a while loop and keep calling <code>.exec()</code> until there’s a match.</p>
+<pre class="js"><code>  let regex = / &lt;some regex&gt; /g;
+  let result = regex.exec(string);
+  while(result != null){
+    console.log(result[1]);
+    console.log(result[2]);
+    console.log(&#39;---------------------&#39;);
+    result = regex.exec(string);
+  }</code></pre></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="javascript-functions" class="section level1">
+<h1>Javascript Functions</h1>
+</div>
+<div id="javascript-promises-async-programming" class="section level1">
+<h1>9. Javascript Promises &amp; Async Programming</h1>
+<div id="understanding-promises" class="section level2">
+<h2>9.1 Understanding Promises</h2>
+<ul>
+<li>When executing a request that depends on the results of another async request, then you run into a problem when the results aren’t returned in time.</li>
+<li>One way to solve this problem is by nesting the dependent request inside the first request. This way, we don’t even attempt to execute the dependent before the first is done. This is a <strong>callback pyramid</strong></li>
+<li>What problems are there with this pyramid? This is often called the <strong>callback pyramid of doom</strong> - for 2 reasons:
+<ul>
+<li>It makes for utterly dirty code, especially when nesting too many callbacks/requests/code blocks.</li>
+<li>Handling errors gets complicated. It can make your code more messy, and you might end up handling errors that occured at the innermost level being handled in code that succeeded.</li>
+</ul></li>
+<li>So how do we solve this problem? We use a <strong>Promise</strong></li>
+<li><strong>Promise</strong> - an object that represents the eventual completion (or failure) of an asynchronous operation and its resulting value. It allows developers to write readable asynchronous code.</li>
+<li>Promises can have 3 states:
+<ul>
+<li><strong>Pending:</strong> The initial state - this is while the call is happening</li>
+<li><strong>Fulfilled:</strong> When the async call has complete successfully.</li>
+<li><strong>Rejected:</strong> when the async call fails. Much like the <em>catch</em> block, we get a message that explains why the async call failed</li>
+<li><strong>Resolved/Settled:</strong> these refer to the same thing - essentially when the call is no longer pending and it’s either fulfilled or rejected.</li>
+</ul></li>
+<li>Promises are <strong>NOT</strong> lazy; they are evaluated readily.</li>
+</ul>
+</div>
+<div id="consuming-promises" class="section level2">
+<h2>9.2 Consuming Promises</h2>
+<ul>
+<li><p><strong>Axios</strong> is a js library that is an abstraction over the XMLHttpRequest library - one of the abstractions is that it’s promise based.</p></li>
+<li><p>Get request.</p>
+<pre class="js"><code>axios.get(&quot;http://localhost:3000/orders/1&quot;);</code></pre>
+<script type="text/javascript">
+  axios.get("http://localhost:3000/orders/1");
+  </script></li>
+<li><p>Remember, we had pending, fulfilled, and rejected states. We want to handle the fulfilled and rejected states</p>
+<pre class="js"><code>axios.get(&quot;http://localhost:3000/orders/1&quot;)
+.then(({ data }) =&gt; {
+  setText(JSON.stringify(data));
+});  </code></pre>
+<script type="text/javascript">
+  axios.get("http://localhost:3000/orders/1")
+  .then(({ data }) => {
+    setText(JSON.stringify(data));
+  });  
+  </script></li>
+<li><p><strong>Handling Errors with Promises</strong></p>
+<ul>
+<li><p>When an error occurs, the promise enters a <em>rejected</em> state, and that needs to be handled.</p>
+<pre class="js"><code>axios
+  .get(&quot;http://localhost:3000/orders/123&quot;)
+  .then(({ data }) =&gt; {
+    setText(JSON.stringify(data));
+  })
+  .catch((err) =&gt; setText(err));</code></pre>
+<script type="text/javascript">
+axios
+  .get("http://localhost:3000/orders/123")
+  .then(({ data }) => {
+    setText(JSON.stringify(data));
+  })
+  .catch((err) => setText(err));
+</script></li>
+</ul></li>
+<li><p><strong>Chaining Promises</strong></p>
+<ul>
+<li><p>Promises return promises: the <em>settle</em> functions, <em>then</em> and <em>catch</em>, return promises, meaning you can chain them.</p></li>
+<li><p>You can include an <em>axios</em> call in the first <em>then</em> and subsequently return this - it’ll get wrapped in a promise which you can then settle using another <em>then</em></p>
+<pre class="js"><code>axios
+  .get(&quot;http://localhost:3000/orders/1&quot;)
+  .then(({ data }) =&gt; {
+    return axios.get(
+      `http://localhost:3000/addresses/${data.shippingAddress}`
+    );
+  })
+  .then(({ data }) =&gt; {
+    setText(`City: ${data.city}`);
+  });</code></pre>
+<script type="text/javascript">
+axios
+  .get("http://localhost:3000/orders/1")
+  .then(({ data }) => {
+    return axios.get(
+      `http://localhost:3000/addresses/${data.shippingAddress}`
+    );
+  })
+  .then(({ data }) => {
+    setText(`City: ${data.city}`);
+  });
+</script></li>
+</ul></li>
+<li><p><strong>Catching Errors in a Chain</strong></p>
+<ul>
+<li>Most of the times, I’ll be using one <em>catch</em> statement to catch all the errors in the stack. But I can use a catch in between <em>then</em> statements for finer-grained control - just make sure to return an object with <strong>data</strong> property to make sure that the subsequent <em>then</em> functions will not throw an error. Essentially make sure to handle any of the catch functions thoroughly.</li>
+</ul></li>
+<li><p><strong>Performing One Last Operation</strong> - what if you want to execute some code after the async call is settled, regardless of whether it succeeded or not?</p>
+<ul>
+<li><p>Use the <code>finally</code> function</p>
+<pre class="js"><code>  showWaiting();
+  axios
+    .get(&quot;http://localhost:3000/orders/1&quot;)
+    .then(({ data }) =&gt; {
+        ...
+    })
+    .then(({ data }) =&gt; {
+      ...
+    })
+    .catch((err) =&gt; setText(err))
+    .finally(() =&gt; {
+      setTimeout(() =&gt; {
+        hideWaiting();
+      }, 1500);
+      appendText(&quot;-- Completely Done&quot;);
+    });</code></pre>
+<script type="text/javascript">
+  showWaiting();
+  axios
+    .get("http://localhost:3000/orders/1")
+    .then(({ data }) => {
+        ...
+    })
+    .then(({ data }) => {
+      ...
+    })
+    .catch((err) => setText(err))
+    .finally(() => {
+      setTimeout(() => {
+        hideWaiting();
+      }, 1500);
+      appendText("-- Completely Done");
+    });
+</script></li>
+</ul></li>
+</ul>
+</div>
+<div id="creating-and-queuing-promises" class="section level2">
+<h2>9.3 Creating and Queuing Promises</h2>
+<ul>
+<li><p><strong>Creating Promises</strong> - remember that a <strong>promise</strong> is an <em>object</em> that represents the eventual completion or failure of an asynchronous operation, and its resulting value.</p>
+<pre class="js"><code>// remember, it is an object
+let temp = new Promise();</code></pre>
+<script type="text/javascript">
+  // remember, it is an object
+  let temp = new Promise();
+  </script>
+<ul>
+<li>When creating promises, we need to consider the 3 states: <em>Pending</em>, <em>Fulfilled</em>, and <em>Rejected</em>.
+<ul>
+<li>Pending state is easy, because a promise starts out that way until you tell it to move to the next state.</li>
+<li>In order to be able to move it to a settled state, we need to first understand that a Promise takes one thing as a parameter - an <strong>executor</strong> function. Here we put in the code that our promise needs to complete.</li>
+<li>The executor function takes a parameter, <strong>resolve</strong> that can be called to resolve/settle the promise and move it to a fulfilled state.</li>
+</ul>
+<pre class="js"><code>const wait = new Promise((resolve) =&gt; {
+  setTimeout(() =&gt; {
+    resolve(&quot;Timeout!&quot;);
+  }, 1500);
+});
+wait.then((text) =&gt; setText(text));</code></pre>
+<script type="text/javascript">
+const wait = new Promise((resolve) => {
+  setTimeout(() => {
+    resolve("Timeout!");
+  }, 1500);
+});
+wait.then((text) => setText(text));
+</script></li>
+</ul></li>
+<li><p><strong>Understanding Promise States</strong></p>
+<ul>
+<li><p><strong>setInterval</strong> calls the specified function multiple times after the specified interval.</p></li>
+<li><p>Consider the code below</p>
+<pre class="js"><code>let counter = 0;
+const wait = new Promise((resolve) =&gt; {
+  setInterval(() =&gt; {
+    console.log(&quot;INTERVAL&quot;);
+    resolve(`Timeout!: ${++counter}`);
+   }, 1500);
+   });
+
+wait
+  .then((text) =&gt; setText(text))
+  .finally(() =&gt; appendText(` -- DONE - ${counter}`));</code></pre>
+<script type="text/javascript">
+let counter = 0;
+const wait = new Promise((resolve) => {
+  setInterval(() => {
+    console.log("INTERVAL");
+    resolve(`Timeout!: ${++counter}`);
+   }, 1500);
+   });
+
+wait
+  .then((text) => setText(text))
+  .finally(() => appendText(` -- DONE - ${counter}`));
+</script></li>
+<li><p>We expect that the output will change as the function is called multiple times and the counter increases</p></li>
+<li><p>But, once a promise is resolved, either to a value, a rejection, or another promise, then the <strong>resolve</strong> method does nothing.</p></li>
+<li><p><code>clearInterval()</code> stops an interval calling again.</p></li>
+</ul></li>
+<li><p><strong>Rejecting Promises</strong></p>
+<ul>
+<li>Here, we use an additional parameter that a Promise’s executor function takes, <strong>.reject</strong></li>
+</ul></li>
+<li><p><strong>Waiting for All Promises to Resolve</strong></p>
+<ul>
+<li>Promises are useful for when we want to wait for a number of calls to complete, and these calls are independent of each other. So instead of lining up the calls sequentially, we can just execute them asynchronously and use promises to wait for all of them to complete.</li>
+<li>We use <code>Promises.all()</code> for this.</li>
+<li>The <code>all</code> function will wait until either <em>all</em> promises are fulfilled, or until the <em>first</em> is rejected. This is useful when all the promises you’re waiting for are important. But what if you don’t care that some promises fail, and you still want to wait until they’re resolved?</li>
+</ul></li>
+<li><p><strong>Settling All Promises</strong></p>
+<ul>
+<li>We use the <code>Promise.allSettled()</code> function. It is similar to <code>.all()</code>, but different in this way:
+<ul>
+<li>Different data passed back. The <code>all()</code> function returns a promise’s response object as part of an array. The <code>.allSettled()</code>, though, returns an object with 2 keys
+<ul>
+<li><strong>resolved</strong> – status (=“fulfilled”), and value</li>
+<li><strong>rejected</strong> – status (=“rejected”), and reason</li>
+</ul></li>
+<li>So <code>allSettled()</code> will return all promises, even if the request is rejected.</li>
+<li>A catch block here is not needed, but is still recommended.</li>
+</ul></li>
+</ul></li>
+<li><p><strong>Racing Promises</strong></p>
+<ul>
+<li>If you have the same data stored at multiple endpoints and you’d like to access it, you only need to access the fastest endpoint and don’t care about the rest.</li>
+<li>You use <code>.race()</code> function, which takes in an array of request promises and returns as soon as the first promise settles. Note, however, that if there is an error, the <code>.race()</code> will return an error and you won’t get your data.</li>
+<li><code>race</code> is a rare function.</li>
+</ul></li>
+</ul>
+</div>
+<div id="iterating-w-asyncawait" class="section level2">
+<h2>9.4 Iterating w/ Async/Await</h2>
+<ul>
+<li>The truth is, javascript promises are kinda old, and have been replaced by <strong>Async/Await</strong></li>
+<li><strong>What’s the point?</strong> To make it easier to use promises in a synchronous fashion? - Basically just syntactic sugar for promises.</li>
+<li>Two keywords
+<ul>
+<li><p><strong>async</strong> - it is used in function declarations to designate that a function is asynchronous; such functions return implicit promises</p>
+<pre class="js"><code>// traditional declaration
+async function getNames(){
+  return [];
+}
+// fat arrow declaration
+const getNames = async () =&gt; {
+  return [];
+}</code></pre>
+<script type="text/javascript">
+// traditional declaration
+async function getNames(){
+  return [];
+}
+// fat arrow declaration
+const getNames = async () => {
+  return [];
+}
+</script>
+<ul>
+<li>Essentially, whatever is returned is wrapped in a promise - that’s what <em>implicit</em> promise means</li>
+</ul></li>
+<li><p><strong>await</strong> - pauses the execution of an async function while waiting for the promise to be fulfilled. There are some important facts about await:</p>
+<ul>
+<li>It can only be used inside the async function and not outside of it.</li>
+<li>It only blocks the current function, but does not block the calling function.</li>
+</ul></li>
+</ul></li>
+<li><strong>Awaiting a call</strong>
+<ul>
+<li><p>You can use await on functions that return promises.</p>
+<pre class="js"><code>export async function get() {
+  const { data } = await axios.get(&quot;http://localhost:3000/orders/1&quot;);
+  setText(JSON.stringify(data));
+}</code></pre>
+<script type="text/javascript">
+export async function get() {
+  const { data } = await axios.get("http://localhost:3000/orders/1");
+  setText(JSON.stringify(data));
+}
+</script></li>
+</ul></li>
+<li><strong>Handling errors in async/await</strong>
+<ul>
+<li><p>We simply use the usual <code>try ... catch</code> block for this.</p>
+<pre class="js"><code>export async function getCatch() {
+  try {
+    const { data } = await axios.get(&quot;http://localhost:3000/orders/123&quot;);
+    setText(JSON.stringify(data));
+  } catch (err) {
+    setText(err);
+  }
+}</code></pre>
+<script type="text/javascript">
+export async function getCatch() {
+  try {
+    const { data } = await axios.get("http://localhost:3000/orders/123");
+    setText(JSON.stringify(data));
+  } catch (err) {
+    setText(err);
+  }
+}
+</script></li>
+</ul></li>
+<li><strong>Chaining async calls</strong>
+<ul>
+<li><p>This is accomplished by just laying out the async calls sequentially like you would synchronous calls.</p>
+<pre class="js"><code>export async function chain() {
+  try {
+    const { data } = await axios.get(&quot;http://localhost:3000/orders/1&quot;);
+    const { data: address } = await axios.get(
+      `http://localhost:3000/addresses/${data.shippingAddress}`
+    );
+    setText(`City: ${address.city}`);
+  } catch (err) {
+    setText(err);
+  }
+}</code></pre>
+<script type="text/javascript">
+export async function chain() {
+  try {
+    const { data } = await axios.get("http://localhost:3000/orders/1");
+    const { data: address } = await axios.get(
+      `http://localhost:3000/addresses/${data.shippingAddress}`
+    );
+    setText(`City: ${address.city}`);
+  } catch (err) {
+    setText(err);
+  }
+}
+</script></li>
+</ul></li>
+<li><strong>How to make calls concurrent instead of sequential</strong>
+<ul>
+<li><p>Here, we first declare the async functions without the <em>await</em> keyword. Because the async functions are not lazy, evaluation kicks off immediately.</p></li>
+<li><p>We call <em>await</em> on those async functions in order to wait for them.</p>
+<pre class="js"><code>export async function concurrent() {
+  const orderStatus = axios.get(&quot;http://localhost:3000/orderStatuses&quot;);
+  const orders = axios.get(&quot;http://localhost:3000/orders&quot;);
+
+  setText(&quot;&quot;);
+
+  const { data: statuses } = await orderStatus;
+  const { data: order } = await orders;
+
+  appendText(JSON.stringify(statuses));
+  appendText(JSON.stringify(order));
+}</code></pre>
+<script type="text/javascript">
+export async function concurrent() {
+  const orderStatus = axios.get("http://localhost:3000/orderStatuses");
+  const orders = axios.get("http://localhost:3000/orders");
+
+  setText("");
+
+  const { data: statuses } = await orderStatus;
+  const { data: order } = await orders;
+
+  appendText(JSON.stringify(statuses));
+  appendText(JSON.stringify(order));
+}
+</script></li>
+</ul></li>
+<li><strong>Awaiting Parallel Calls</strong>
+<ul>
+<li><p>We can combine <em>async/await</em> with <em>promises</em> to achieve this - essentially to wait for multiple async calls but return/print results in the order that the calls are finished</p>
+<pre class="js"><code>export async function parallel() {
+  setText(&quot;&quot;);
+
+  await Promise.all([
+    (async () =&gt; {
+      const { data } = await axios.get(&quot;http://localhost:3000/orderStatuses&quot;);
+      appendText(JSON.stringify(data));
+    })(),
+    (async () =&gt; {
+      const { data } = await axios.get(&quot;http://localhost:3000/orders&quot;);
+      appendText(JSON.stringify(data));
+    })(),
+  ]);
+}</code></pre>
+<script type="text/javascript">
+export async function parallel() {
+  setText("");
+
+  await Promise.all([
+    (async () => {
+      const { data } = await axios.get("http://localhost:3000/orderStatuses");
+      appendText(JSON.stringify(data));
+    })(),
+    (async () => {
+      const { data } = await axios.get("http://localhost:3000/orders");
+      appendText(JSON.stringify(data));
+    })(),
+  ]);
+}
+</script></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+</div>

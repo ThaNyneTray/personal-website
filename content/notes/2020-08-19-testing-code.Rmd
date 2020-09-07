@@ -1,0 +1,88 @@
+---
+title: Testing Code
+author: Desmond Tuiyot
+date: '2020-08-19'
+slug: testing-code
+categories: []
+tags:
+  - testing
+  - unit tests
+---
+
+## Real Python: TDD in Python
+
+* **The TDD Road**
+  1. Write a failing test
+  2. Make it pass by doing the simplest thing possible
+  3. Refactor your code while keeping tests passing 
+  4. Repeat until your acceptance test is green
+* **Where to Write My Tests**
+  * Create a `tests.py` file in my top level folder - this is so that the tests file can import all other relevant files.
+  * If there file gets too big, you can split them into different modules
+* **How to Structure a Test**
+  * First, decide:
+    1. What will you be testing?
+    2. Are you writing a unit test or an integration test?
+  * Then the structure, loosely, should be
+    1. Create my inputs
+    2. Execute the code being tested, capturing the output
+    3. Compare the output with the desired result
+* **How to Write Assertions**
+  * An **assertion** is a test that validates an output against a known response. 
+  * General best practices when it comes to assertions:
+    * Make sure the tests are repeatable; i.e. they produce the same result every time 
+    * Try and assert the results that relate to my input data
+* **Side Effects**
+  * Side effects are changes to the environment made when some code is executed - could be change in attributes of a class, or updating a database
+  * Decide if the side effect is being tested
+  * If the unit of code I intend to test has many side effects, I might be breaking the *Single Responsibility Principle*.
+    * This means that the piece of code is doing too much and needs to be refactored
+  * Adhering to the *SRP* makes us write code for which good tests can be made, and ultimately leads to better applications.
+* **See original page for code samples**
+* **Testing flask applications**
+  * Flask requires that the app is imported and set in test mode
+    * Essentially, you can instantiate a test client to make any requests to any routes in my app
+  * All client instantiation is done in the `setUp` method
+* **Handling Expected Failures**
+  * What happens when a bad value is provided? -  use `.assertRaises(<TypeOfError>)` as a context manager. Then inside the `with` block execute the test steps
+* **Isolating Behaviors in My Application**
+  * There are some simple techniques that can allow me to test parts of the application that have too many side effects
+    * Refactoring so that my app is more in line with Single Responsibility Principle
+    * Mock out the relevant method and functions so that they have no side effects. 
+    * Write intergration tests instead of unit tests
+* **Writing Integration Tests**
+  * This is the testing of multiple components to ascertain that they work together correctly
+  * It might require acting like a consumer by:
+    * Calling a HTTP REST API
+    * Calling a Python API
+    * Calling a web service
+    * Running a command line
+  * Each of these integration tests can be written by following the same structure as that of a unit test: Create Inputs -> Execute Code, Capturing Output -> Check Output Against Desired Reslts: This is the **Input**, **Execute**, **Assert** pattern. 
+  * The difference between the 2 types is that integration tests will often have more side effects and require more **fixtures** (the inputs I create)
+  * You can separate these 2 tests by storing them in different folders under the `tests` package
+* **Testing Data Driven Applications**
+  * These applications will depend on certain fixtures that represent data stores in order to be repeatable and predictable.
+  * You can store this test data in a **fixtures** folder under your **integration** folder.
+  
+  
+## Flask Book on Testing
+
+* **2 Important Reasons for TDD**
+  * Used to confirm that new code is working as expected
+  * Also used to make sure that code doesn't *regress* when modified - i.e. it still does the job as before
+* **Obtaining Code Coverage Reports**
+  * **Code coverage** tools measure how much of my app is covered by unit tests and can provide a detailed report of what aspects of my code are not being unit tested.
+  * 
+
+
+
+
+
+
+
+
+
+
+
+## References
+  
